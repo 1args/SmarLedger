@@ -1,7 +1,7 @@
-﻿using SmartLedger.Common.Applications.AppServices.Specification.Abstractions;
-using SmartLedger.Common.Applications.AppServices.Specification;
-using SmartLedger.Common.Applications.AppServices.Visitors;
+﻿using SmartLedger.Common.Applications.AppServices.Visitors;
 using System.Linq.Expressions;
+using SmartLedger.Common.Applications.AppServices.Specifications;
+using SmartLedger.Common.Applications.AppServices.Specifications.Abstractions;
 
 namespace SmartLedger.Common.Applications.AppServices.Extensions;
 

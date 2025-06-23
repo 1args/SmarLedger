@@ -5,6 +5,6 @@
 /// </summary>
 public interface IDateTimeProvider
 {
-    /// <summary>Current date and time</summary>
+    /// <summary>Current date and time.</summary>
     DateTime UtcNow { get; }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using SmartLedger.Common.Applications.AppServices.Specification.Abstractions;
+using SmartLedger.Common.Applications.AppServices.Specifications.Abstractions;
 
-namespace SmartLedger.Common.Applications.AppServices.Specification;
+namespace SmartLedger.Common.Applications.AppServices.Specifications;
 
 /// <summary>
 /// Base class that implements the specification.

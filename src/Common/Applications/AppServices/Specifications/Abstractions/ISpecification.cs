@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace SmartLedger.Common.Applications.AppServices.Specification.Abstractions;
+namespace SmartLedger.Common.Applications.AppServices.Specifications.Abstractions;
 
 /// <summary>
 /// Interface that defines the specification.

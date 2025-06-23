@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace SmartLedger.Common.Infrastructure.Repositories;
 
 /// <inheritdoc/>
-public class Repository<TEntity> : IRepository<TEntity>
+public sealed class Repository<TEntity> : IRepository<TEntity>
     where TEntity : class
 {
     /// <summary>

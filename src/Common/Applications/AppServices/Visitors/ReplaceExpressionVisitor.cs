@@ -11,7 +11,7 @@ namespace SmartLedger.Common.Applications.AppServices.Visitors;
 /// </remarks>
 /// <param name="oldValue">Expression to be replaced.</param>
 /// <param name="newValue">Expression to replace with.</param>
-public class ReplaceExpressionVisitor(
+public sealed class ReplaceExpressionVisitor(
     Expression oldValue, Expression newValue) : ExpressionVisitor
 {
     /// <summary>

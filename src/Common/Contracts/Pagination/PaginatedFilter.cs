@@ -5,7 +5,9 @@
 /// </summary>
 public sealed class PaginatedFilter
 {
-    private const int MaxPageSize = 100;
+    public const int MaxPageSize = 100;
+
+    public const int MinPageSize = 0;
 
     private int _pageNumber = 1;
 
@@ -15,14 +17,14 @@ public sealed class PaginatedFilter
     public int PageNumber
     {
         get => _pageNumber;
-        set => _pageNumber = value > 0 ? value : 1;
+        set => _pageNumber = value > MinPageSize ? value : 1;
     }
 
     /// <summary>Page size (number of items per page).</summary>
     public int PageSize
     {
         get => _pageSize;
-        set => _pageSize = value is > 0 and <= MaxPageSize ? value : 10;
+        set => _pageSize = value is > MinPageSize and <= MaxPageSize ? value : 10;
     }
 
     /// <summary>
