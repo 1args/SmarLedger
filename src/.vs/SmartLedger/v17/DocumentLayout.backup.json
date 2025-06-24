@@ -3,6 +3,329 @@
   "WorkspaceRootPath": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{533C8D62-454C-4398-9173-4777FA889CC9}|\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0440\u0435\u0448\u0435\u043D\u0438\u044F{533C8D62-454C-4398-9173-4777FA889CC9}|C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\docker\\docker-compose.yaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\contexts\\write\\configurations\\accountconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\contexts\\write\\configurations\\accountconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\configurators\\transactionswritedbcontextconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\configurators\\transactionswritedbcontextconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\contexts\\write\\custommodelbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\contexts\\write\\custommodelbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurators\\basedbconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurators\\basedbconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\contexts\\write\\transactionswritedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\contexts\\write\\transactionswritedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\contexts\\write\\configurations\\transactioncategoryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\contexts\\write\\configurations\\transactioncategoryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\contexts\\write\\configurations\\transactionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\contexts\\write\\configurations\\transactionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\accounts\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\accounts\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\transactions\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\transactions\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\updateamountmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\updateamountmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\createtransaction\\createtransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\createtransaction\\createtransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\categorizetransaction\\categorizetransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\categorizetransaction\\categorizetransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\categorizetransaction\\categorizetransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\categorizetransaction\\categorizetransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\addtransaction\\addtransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\addtransaction\\addtransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\createtransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\createtransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\categorizetransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\categorizetransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\createaccount\\createaccountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\createaccount\\createaccountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\createaccount\\createaccountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\createaccount\\createaccountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\accounts\\models\\createaccountmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\accounts\\models\\createaccountmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\appservices\\extensions\\specificationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\appservices\\extensions\\specificationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\infrastucture\\smartledger.modules.transactions.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{87D3633B-423B-44CB-AD98-9F147347C431}|Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj|solutionrelative:modules\\transactions\\infrastucture\\smartledger.modules.transactions.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\removetransaction\\removetransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\removetransaction\\removetransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\addtransaction\\addtransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\addtransaction\\addtransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\removetransaction\\removetransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\removetransaction\\removetransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\addtransaction\\addtransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\addtransaction\\addtransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\removetransaction\\removetransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\removetransaction\\removetransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\deleteaccount\\deleteaccountcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\deleteaccount\\deleteaccountcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\createaccount\\createaccountcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\createaccount\\createaccountcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\updateamount\\updateamountcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\updateamount\\updateamountcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\deletetransaction\\deletetransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\deletetransaction\\deletetransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\createtransaction\\createtransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\createtransaction\\createtransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\categorizetransaction\\categorizetransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\categorizetransaction\\categorizetransactioncommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\updateamount\\updateamountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\updateamount\\updateamountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\deleteaccount\\deleteaccountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\deleteaccount\\deleteaccountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\accounts\\models\\addremovetransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\accounts\\models\\addremovetransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\deleteaccount\\deleteaccountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\accounts\\commands\\deleteaccount\\deleteaccountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\valueobjects\\accountname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\valueobjects\\accountname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\deletetransaction\\deletetransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\deletetransaction\\deletetransactioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\updateamount\\updateamountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\updateamount\\updateamountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\accounts\\abstractions\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\accounts\\abstractions\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\deletetransaction\\deletetransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\deletetransaction\\deletetransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\createtransaction\\createtransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\handlers\\contexts\\transactions\\commands\\createtransaction\\createtransactioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\valueobjects\\transactiondescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\valueobjects\\transactiondescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\valueobjects\\transactioncategoryname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\valueobjects\\transactioncategoryname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\valueobjects\\money.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\valueobjects\\money.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\accounts\\models\\idonlymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\accounts\\models\\idonlymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\idonlymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\transactions\\models\\idonlymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\aggregates\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\aggregates\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\aggregates\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\aggregates\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\applications\\appservices\\contexts\\transactions\\abstractions\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7B955AA-47D8-43EE-B4BA-45A970C405F9}|Modules\\Transactions\\Applications\\SmartLedger.Modules.Transactions.Applications.csproj|solutionrelative:modules\\transactions\\applications\\appservices\\contexts\\transactions\\abstractions\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\events\\eventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\events\\eventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\abstractions\\ieventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\abstractions\\ieventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\entities\\transactioncategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\entities\\transactioncategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\enums\\transactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\enums\\transactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\exceptions\\accountnotallowedoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\exceptions\\accountnotallowedoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\modules\\transactions\\domain\\enums\\transactioncategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A35EB4A2-83E2-483F-8490-3675A5CE36A0}|Modules\\Transactions\\Domain\\SmartLedger.Modules.Transactions.Domain.csproj|solutionrelative:modules\\transactions\\domain\\enums\\transactioncategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF80E38-770E-4E23-8DD3-F14B8D9F2637}|Common\\Hosts\\Migrations\\SmartLedger.Hosts.Migrations.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\hosts\\migrations\\abstractions\\iseedexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF80E38-770E-4E23-8DD3-F14B8D9F2637}|Common\\Hosts\\Migrations\\SmartLedger.Hosts.Migrations.csproj|solutionrelative:common\\hosts\\migrations\\abstractions\\iseedexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF80E38-770E-4E23-8DD3-F14B8D9F2637}|Common\\Hosts\\Migrations\\SmartLedger.Hosts.Migrations.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\hosts\\migrations\\abstractions\\iseed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF80E38-770E-4E23-8DD3-F14B8D9F2637}|Common\\Hosts\\Migrations\\SmartLedger.Hosts.Migrations.csproj|solutionrelative:common\\hosts\\migrations\\abstractions\\iseed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF80E38-770E-4E23-8DD3-F14B8D9F2637}|Common\\Hosts\\Migrations\\SmartLedger.Hosts.Migrations.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\hosts\\migrations\\executors\\seedexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF80E38-770E-4E23-8DD3-F14B8D9F2637}|Common\\Hosts\\Migrations\\SmartLedger.Hosts.Migrations.csproj|solutionrelative:common\\hosts\\migrations\\executors\\seedexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\abstractions\\ieventconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\abstractions\\ieventconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\abstractions\\ievent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\abstractions\\ievent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\abstractions\\icommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\abstractions\\icommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\abstractions\\iquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\abstractions\\iquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurations\\idbcontextoptionsconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurations\\idbcontextoptionsconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\cqrs\\queries\\paginatedqueryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|solutionrelative:common\\cqrs\\queries\\paginatedqueryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\cqrs\\queries\\paginatedquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|solutionrelative:common\\cqrs\\queries\\paginatedquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\cqrs\\queries\\abstractions\\ipaginatedquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|solutionrelative:common\\cqrs\\queries\\abstractions\\ipaginatedquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\cqrs\\extensions\\decoratorextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|solutionrelative:common\\cqrs\\extensions\\decoratorextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\cqrs\\decorators\\requestvalidationdecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93AF502E-EEC0-414C-876A-36FBF0053E78}|Common\\Cqrs\\SmartLedger.Common.Cqrs.csproj|solutionrelative:common\\cqrs\\decorators\\requestvalidationdecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\pagination\\paginatedfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\pagination\\paginatedfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\extensions\\handlerregistrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\extensions\\handlerregistrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\pagination\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\pagination\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\abstractions\\icommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\abstractions\\icommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\options\\rabitmqoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\options\\rabitmqoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\extensions\\typeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\extensions\\typeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\abstractions\\iqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\abstractions\\iqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\extensions\\dataaccessextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\extensions\\dataaccessextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurators\\propertybuilderhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurators\\propertybuilderhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\domain\\exceptions\\domainvalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|solutionrelative:common\\domain\\exceptions\\domainvalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\appservices\\visitors\\replaceexpressionvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\appservices\\visitors\\replaceexpressionvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +334,8 @@
       "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\appservices\\specifications\\abstractions\\ispecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\extensions\\handlerregistrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\extensions\\handlerregistrationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\appservices\\extensions\\appservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\appservices\\extensions\\appservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\appservices\\extensions\\specificationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\appservices\\extensions\\specificationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\appservices\\specifications\\specification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,40 +350,12 @@
       "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\appservices\\services\\datetimeprovider\\datetimeprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\abstractions\\icommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\abstractions\\icommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\extensions\\typeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\extensions\\typeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\extensions\\dataaccessextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\extensions\\dataaccessextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\extensions\\messagebrokerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\extensions\\messagebrokerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\abstractions\\iqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\abstractions\\iqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\applications\\handlers\\abstractions\\ieventconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1E6068-6A17-45A0-96BF-6C1A2E20059D}|Common\\Applications\\SmartLedger.Common.Applications.csproj|solutionrelative:common\\applications\\handlers\\abstractions\\ieventconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\options\\rabitmqoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\options\\rabitmqoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\smartledger.common.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\smartledger.common.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\domain\\exceptions\\domainvalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|solutionrelative:common\\domain\\exceptions\\domainvalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\abstractions\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,28 +366,8 @@
       "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\exceptions\\readableexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\domain\\events\\idomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|solutionrelative:common\\domain\\events\\idomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurators\\basedbconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurators\\basedbconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurators\\propertybuilderhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurators\\propertybuilderhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurations\\modelbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurations\\modelbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurations\\idbcontextoptionsconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|solutionrelative:common\\infrastructure\\configurations\\idbcontextoptionsconfigurator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{43E01262-4AF9-4964-ABD4-230C17D044A1}|Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\infrastructure\\configurations\\convertors\\datetimekindvalueconvertor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -113,26 +380,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\exceptions\\conflictexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\exceptions\\conflictexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\abstractions\\iquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\abstractions\\iquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\abstractions\\ievent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\abstractions\\ievent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\abstractions\\icommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\abstractions\\icommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\pagination\\paginatedfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\pagination\\paginatedfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\contracts\\pagination\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0149A41-9BC0-4704-AC3B-C8118F95E09A}|Common\\Contracts\\SmartLedger.Common.Contracts.csproj|solutionrelative:common\\contracts\\pagination\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{15742129-14DE-4D4C-B1A1-0BF39F1455E6}|Common\\Domain\\SmartLedger.Common.Domain.csproj|c:\\users\\incrysteer 1args\\source\\repos\\smartledger\\src\\common\\domain\\primitives\\aggregateroot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -178,8 +425,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "docker-compose.yaml",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\docker\\docker-compose.yaml",
+              "RelativeDocumentMoniker": "..\\docker\\docker-compose.yaml",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\docker\\docker-compose.yaml",
+              "RelativeToolTip": "..\\docker\\docker-compose.yaml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADwAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-06-24T19:43:27.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransactionsWriteDbContextConfigurator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Configurators\\TransactionsWriteDbContextConfigurator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\Configurators\\TransactionsWriteDbContextConfigurator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Configurators\\TransactionsWriteDbContextConfigurator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\Configurators\\TransactionsWriteDbContextConfigurator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:52:49.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomModelBuilder.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\CustomModelBuilder.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\CustomModelBuilder.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\CustomModelBuilder.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\CustomModelBuilder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:43:58.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TransactionCategoryConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionCategoryConfiguration.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionCategoryConfiguration.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionCategoryConfiguration.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionCategoryConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:41:44.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\AccountConfiguration.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\AccountConfiguration.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\AccountConfiguration.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\AccountConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:41:18.964Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -190,19 +502,1021 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Specification.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Specifications\\Specification.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Specifications\\Specification.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Specifications\\Specification.cs",
-              "RelativeToolTip": "Common\\Applications\\AppServices\\Specifications\\Specification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "BaseDbConfigurator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAqwBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:39:10.499Z"
+              "WhenOpened": "2025-06-22T14:25:21.179Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
+              "Title": "TransactionConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionConfiguration.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionConfiguration.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionConfiguration.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\Configurations\\TransactionConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:41:30.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TransactionsWriteDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\TransactionsWriteDbContext.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\TransactionsWriteDbContext.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\Contexts\\Write\\TransactionsWriteDbContext.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\Contexts\\Write\\TransactionsWriteDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:39:47.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "SmartLedger.Modules.Transactions.Infrastructure",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj",
+              "RelativeToolTip": "Modules\\Transactions\\Infrastucture\\SmartLedger.Modules.Transactions.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-24T15:09:06.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CategorizeTransactionCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:24:07.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateTransactionCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:50:36.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\TransactionService.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\TransactionService.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\TransactionService.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\TransactionService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:10:44.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\AccountService.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\AccountService.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\AccountService.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\AccountService.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:10:51.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UpdateAmountModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\UpdateAmountModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\UpdateAmountModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\UpdateAmountModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\UpdateAmountModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:25:53.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CategorizeTransactionCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:23:20.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AddTransactionCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:59:44.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CreateTransactionModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CreateTransactionModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CreateTransactionModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CreateTransactionModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CreateTransactionModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:24:29.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CategorizeTransactionModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CategorizeTransactionModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CategorizeTransactionModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CategorizeTransactionModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\CategorizeTransactionModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:26:26.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CreateAccountCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:40:42.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CreateAccountCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:39:34.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CreateAccountModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\CreateAccountModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\CreateAccountModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\CreateAccountModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\CreateAccountModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:39:21.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "RemoveTransactionCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:08:22.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AddTransactionCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:04:39.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "SpecificationExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
+              "RelativeToolTip": "Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T18:55:18.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "RemoveTransactionCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:07:49.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "RemoveTransactionCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\RemoveTransaction\\RemoveTransactionCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:07:27.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DeleteAccountCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:56:18.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AddTransactionCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\AddTransaction\\AddTransactionCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:02:14.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CreateAccountCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\CreateAccount\\CreateAccountCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:43:59.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "UpdateAmountCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:17:32.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DeleteTransactionCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:06:42.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "CreateTransactionCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:54:51.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CategorizeTransactionCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandValidator.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandValidator.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CategorizeTransaction\\CategorizeTransactionCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:29:06.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "UpdateAmountCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:13:32.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AddRemoveTransactionModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\AddRemoveTransactionModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\AddRemoveTransactionModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\AddRemoveTransactionModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\AddRemoveTransactionModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:42:13.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "DeleteAccountCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:51:54.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "DeleteAccountCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Accounts\\Commands\\DeleteAccount\\DeleteAccountCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:53:19.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "AccountName.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\AccountName.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\ValueObjects\\AccountName.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\AccountName.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\ValueObjects\\AccountName.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:56:44.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "DeleteTransactionCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandHandler.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandHandler.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:04:19.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "UpdateAmountCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\UpdateAmount\\UpdateAmountCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:09:10.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IAccountService.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Abstractions\\IAccountService.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Abstractions\\IAccountService.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Abstractions\\IAccountService.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Abstractions\\IAccountService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:19:19.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "DeleteTransactionCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\DeleteTransaction\\DeleteTransactionCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:03:49.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "CreateTransactionCommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommand.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommand.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\Handlers\\Contexts\\Transactions\\Commands\\CreateTransaction\\CreateTransactionCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:47:04.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "TransactionDescription.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\TransactionDescription.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\ValueObjects\\TransactionDescription.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\TransactionDescription.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\ValueObjects\\TransactionDescription.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAACAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:09:44.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "TransactionCategoryName.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\TransactionCategoryName.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\ValueObjects\\TransactionCategoryName.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\TransactionCategoryName.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\ValueObjects\\TransactionCategoryName.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:59:58.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Money.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\Money.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\ValueObjects\\Money.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\ValueObjects\\Money.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\ValueObjects\\Money.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:56:24.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "IdOnlyModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\IdOnlyModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\IdOnlyModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\IdOnlyModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Accounts\\Models\\IdOnlyModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:44:07.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "IdOnlyModel.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\IdOnlyModel.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\IdOnlyModel.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\IdOnlyModel.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Models\\IdOnlyModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:26:44.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "EventBus.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Events\\EventBus.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Events\\EventBus.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Events\\EventBus.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Events\\EventBus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:31:44.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "ITransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Abstractions\\ITransactionService.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Abstractions\\ITransactionService.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Abstractions\\ITransactionService.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Applications\\AppServices\\Contexts\\Transactions\\Abstractions\\ITransactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:15:26.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "IEventBus.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Abstractions\\IEventBus.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Abstractions\\IEventBus.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Abstractions\\IEventBus.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Abstractions\\IEventBus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:31:53.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Aggregates\\Transaction.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\Aggregates\\Transaction.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Aggregates\\Transaction.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\Aggregates\\Transaction.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:55:01.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Account.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Aggregates\\Account.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\Aggregates\\Account.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Aggregates\\Account.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\Aggregates\\Account.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:55:07.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "AccountNotAllowedOperation.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Exceptions\\AccountNotAllowedOperation.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\Exceptions\\AccountNotAllowedOperation.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Exceptions\\AccountNotAllowedOperation.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\Exceptions\\AccountNotAllowedOperation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:57:03.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "TransactionType.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Enums\\TransactionType.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\Enums\\TransactionType.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Enums\\TransactionType.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\Enums\\TransactionType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:57:37.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "TransactionCategory.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Entities\\TransactionCategory.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\Entities\\TransactionCategory.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Entities\\TransactionCategory.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\Entities\\TransactionCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:55:15.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "TransactionCategory.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Enums\\TransactionCategory.cs",
+              "RelativeDocumentMoniker": "Modules\\Transactions\\Domain\\Enums\\TransactionCategory.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Modules\\Transactions\\Domain\\Enums\\TransactionCategory.cs",
+              "RelativeToolTip": "Modules\\Transactions\\Domain\\Enums\\TransactionCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T13:06:20.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "SeedExecutor.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Hosts\\Migrations\\Executors\\SeedExecutor.cs",
+              "RelativeDocumentMoniker": "Common\\Hosts\\Migrations\\Executors\\SeedExecutor.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Hosts\\Migrations\\Executors\\SeedExecutor.cs",
+              "RelativeToolTip": "Common\\Hosts\\Migrations\\Executors\\SeedExecutor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:14:25.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ISeedExecutor.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Hosts\\Migrations\\Abstractions\\ISeedExecutor.cs",
+              "RelativeDocumentMoniker": "Common\\Hosts\\Migrations\\Abstractions\\ISeedExecutor.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Hosts\\Migrations\\Abstractions\\ISeedExecutor.cs",
+              "RelativeToolTip": "Common\\Hosts\\Migrations\\Abstractions\\ISeedExecutor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:13:46.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "ISeed.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Hosts\\Migrations\\Abstractions\\ISeed.cs",
+              "RelativeDocumentMoniker": "Common\\Hosts\\Migrations\\Abstractions\\ISeed.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Hosts\\Migrations\\Abstractions\\ISeed.cs",
+              "RelativeToolTip": "Common\\Hosts\\Migrations\\Abstractions\\ISeed.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:13:34.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "IDbContextOptionsConfigurator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T14:23:58.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "IEvent.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IEvent.cs",
+              "RelativeDocumentMoniker": "Common\\Contracts\\Abstractions\\IEvent.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IEvent.cs",
+              "RelativeToolTip": "Common\\Contracts\\Abstractions\\IEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:09:56.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "IQuery.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IQuery.cs",
+              "RelativeDocumentMoniker": "Common\\Contracts\\Abstractions\\IQuery.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IQuery.cs",
+              "RelativeToolTip": "Common\\Contracts\\Abstractions\\IQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T12:10:03.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "ICommand.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\ICommand.cs",
+              "RelativeDocumentMoniker": "Common\\Contracts\\Abstractions\\ICommand.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\ICommand.cs",
+              "RelativeToolTip": "Common\\Contracts\\Abstractions\\ICommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T12:08:39.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "IEventConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
+              "RelativeToolTip": "Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T13:10:56.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "PaginatedQuery.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Queries\\PaginatedQuery.cs",
+              "RelativeDocumentMoniker": "Common\\Cqrs\\Queries\\PaginatedQuery.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Queries\\PaginatedQuery.cs",
+              "RelativeToolTip": "Common\\Cqrs\\Queries\\PaginatedQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T23:02:13.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "IPaginatedQuery.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Queries\\Abstractions\\IPaginatedQuery.cs",
+              "RelativeDocumentMoniker": "Common\\Cqrs\\Queries\\Abstractions\\IPaginatedQuery.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Queries\\Abstractions\\IPaginatedQuery.cs",
+              "RelativeToolTip": "Common\\Cqrs\\Queries\\Abstractions\\IPaginatedQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T23:01:55.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "DecoratorExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Extensions\\DecoratorExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Cqrs\\Extensions\\DecoratorExtensions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Extensions\\DecoratorExtensions.cs",
+              "RelativeToolTip": "Common\\Cqrs\\Extensions\\DecoratorExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T22:03:36.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "RequestValidationDecorator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Decorators\\RequestValidationDecorator.cs",
+              "RelativeDocumentMoniker": "Common\\Cqrs\\Decorators\\RequestValidationDecorator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Decorators\\RequestValidationDecorator.cs",
+              "RelativeToolTip": "Common\\Cqrs\\Decorators\\RequestValidationDecorator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T22:01:02.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "PaginatedQueryValidator.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Queries\\PaginatedQueryValidator.cs",
+              "RelativeDocumentMoniker": "Common\\Cqrs\\Queries\\PaginatedQueryValidator.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\Queries\\PaginatedQueryValidator.cs",
+              "RelativeToolTip": "Common\\Cqrs\\Queries\\PaginatedQueryValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T22:47:02.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "HandlerRegistrationExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
+              "RelativeToolTip": "Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAABFwCYAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T16:16:19.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "PaginatedFilter.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedFilter.cs",
+              "RelativeDocumentMoniker": "Common\\Contracts\\Pagination\\PaginatedFilter.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedFilter.cs",
+              "RelativeToolTip": "Common\\Contracts\\Pagination\\PaginatedFilter.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAABFwCAAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T15:14:10.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "PaginatedList.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedList.cs",
+              "RelativeDocumentMoniker": "Common\\Contracts\\Pagination\\PaginatedList.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedList.cs",
+              "RelativeToolTip": "Common\\Contracts\\Pagination\\PaginatedList.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAABFwBAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T15:14:23.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "ICommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
+              "RelativeToolTip": "Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAgwBUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T12:11:27.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "TypeExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
+              "RelativeToolTip": "Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T16:28:29.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "RabitMqOptions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Options\\RabitMqOptions.cs",
+              "RelativeDocumentMoniker": "Common\\Contracts\\Options\\RabitMqOptions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Options\\RabitMqOptions.cs",
+              "RelativeToolTip": "Common\\Contracts\\Options\\RabitMqOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T15:28:04.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "IQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
+              "RelativeToolTip": "Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T13:06:36.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Repositories\\Repository.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Repositories\\Repository.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Repositories\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T13:56:43.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "DataAccessExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T14:27:42.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "PropertyBuilderHelper.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
+              "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
+              "RelativeToolTip": "Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T14:26:19.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "DomainValidationException.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Exceptions\\DomainValidationException.cs",
+              "RelativeDocumentMoniker": "Common\\Domain\\Exceptions\\DomainValidationException.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Exceptions\\DomainValidationException.cs",
+              "RelativeToolTip": "Common\\Domain\\Exceptions\\DomainValidationException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T13:46:35.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "ReplaceExpressionVisitor.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
+              "RelativeToolTip": "Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAABFwA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T18:06:31.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "AppServicesExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
+              "RelativeToolTip": "Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T17:31:52.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
               "Title": "ISpecification.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Specifications\\Abstractions\\ISpecification.cs",
               "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Specifications\\Abstractions\\ISpecification.cs",
@@ -215,57 +1529,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SpecificationExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
-              "RelativeToolTip": "Common\\Applications\\AppServices\\Extensions\\SpecificationExtensions.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
+              "DocumentIndex": 84,
+              "Title": "Specification.cs",
+              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Specifications\\Specification.cs",
+              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Specifications\\Specification.cs",
+              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Specifications\\Specification.cs",
+              "RelativeToolTip": "Common\\Applications\\AppServices\\Specifications\\Specification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T18:55:18.86Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppServicesExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
-              "RelativeToolTip": "Common\\Applications\\AppServices\\Extensions\\AppServicesExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T17:31:52.136Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReplaceExpressionVisitor.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
-              "RelativeToolTip": "Common\\Applications\\AppServices\\Visitors\\ReplaceExpressionVisitor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T18:06:31.448Z",
+              "WhenOpened": "2025-06-22T13:39:10.499Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HandlerRegistrationExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
-              "RelativeToolTip": "Common\\Applications\\Handlers\\Extensions\\HandlerRegistrationExtensions.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:16:19.793Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 85,
               "Title": "IDateTimeProvider.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Services\\DateTimeProvider\\Abstractions\\IDateTimeProvider.cs",
               "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Services\\DateTimeProvider\\Abstractions\\IDateTimeProvider.cs",
@@ -273,11 +1550,12 @@
               "RelativeToolTip": "Common\\Applications\\AppServices\\Services\\DateTimeProvider\\Abstractions\\IDateTimeProvider.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:41:15.613Z"
+              "WhenOpened": "2025-06-22T13:41:15.613Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 86,
               "Title": "DateTimeProvider.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\AppServices\\Services\\DateTimeProvider\\DateTimeProvider.cs",
               "RelativeDocumentMoniker": "Common\\Applications\\AppServices\\Services\\DateTimeProvider\\DateTimeProvider.cs",
@@ -285,35 +1563,12 @@
               "RelativeToolTip": "Common\\Applications\\AppServices\\Services\\DateTimeProvider\\DateTimeProvider.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:42:15.235Z"
+              "WhenOpened": "2025-06-22T13:42:15.235Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "TypeExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
-              "RelativeToolTip": "Common\\Applications\\Handlers\\Extensions\\TypeExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:28:29.359Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ICommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
-              "RelativeToolTip": "Common\\Applications\\Handlers\\Abstractions\\ICommandHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T12:11:27.305Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 87,
               "Title": "MessageBrokerExtensions.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Extensions\\MessageBrokerExtensions.cs",
               "RelativeDocumentMoniker": "Common\\Infrastructure\\Extensions\\MessageBrokerExtensions.cs",
@@ -321,59 +1576,12 @@
               "RelativeToolTip": "Common\\Infrastructure\\Extensions\\MessageBrokerExtensions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T15:33:25.143Z"
+              "WhenOpened": "2025-06-22T15:33:25.143Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DataAccessExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
-              "RelativeDocumentMoniker": "Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
-              "RelativeToolTip": "Common\\Infrastructure\\Extensions\\DataAccessExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T14:27:42.357Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "IEventConsumer.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
-              "RelativeToolTip": "Common\\Applications\\Handlers\\Abstractions\\IEventConsumer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:10:56.698Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "RabitMqOptions.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Options\\RabitMqOptions.cs",
-              "RelativeDocumentMoniker": "Common\\Contracts\\Options\\RabitMqOptions.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Options\\RabitMqOptions.cs",
-              "RelativeToolTip": "Common\\Contracts\\Options\\RabitMqOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T15:28:04.923Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "IQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
-              "RelativeDocumentMoniker": "Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
-              "RelativeToolTip": "Common\\Applications\\Handlers\\Abstractions\\IQueryHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:06:36.206Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 88,
               "Title": "SmartLedger.Common.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj",
@@ -381,35 +1589,12 @@
               "RelativeToolTip": "Common\\Infrastructure\\SmartLedger.Common.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-22T15:27:42.401Z"
+              "WhenOpened": "2025-06-22T15:27:42.401Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "DomainValidationException.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Exceptions\\DomainValidationException.cs",
-              "RelativeDocumentMoniker": "Common\\Domain\\Exceptions\\DomainValidationException.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Exceptions\\DomainValidationException.cs",
-              "RelativeToolTip": "Common\\Domain\\Exceptions\\DomainValidationException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:46:35.56Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "IDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Events\\IDomainEvent.cs",
-              "RelativeDocumentMoniker": "Common\\Domain\\Events\\IDomainEvent.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Events\\IDomainEvent.cs",
-              "RelativeToolTip": "Common\\Domain\\Events\\IDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:59:02.732Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 90,
               "Title": "ReadableException.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Exceptions\\ReadableException.cs",
               "RelativeDocumentMoniker": "Common\\Contracts\\Exceptions\\ReadableException.cs",
@@ -417,23 +1602,12 @@
               "RelativeToolTip": "Common\\Contracts\\Exceptions\\ReadableException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:44:32.356Z"
+              "WhenOpened": "2025-06-22T13:44:32.356Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Repository.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Repositories\\Repository.cs",
-              "RelativeDocumentMoniker": "Common\\Infrastructure\\Repositories\\Repository.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Repositories\\Repository.cs",
-              "RelativeToolTip": "Common\\Infrastructure\\Repositories\\Repository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:56:43.299Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 89,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Abstractions\\IRepository.cs",
               "RelativeDocumentMoniker": "Common\\Infrastructure\\Abstractions\\IRepository.cs",
@@ -441,35 +1615,12 @@
               "RelativeToolTip": "Common\\Infrastructure\\Abstractions\\IRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:56:27.151Z"
+              "WhenOpened": "2025-06-22T13:56:27.151Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "BaseDbConfigurator.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
-              "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
-              "RelativeToolTip": "Common\\Infrastructure\\Configurators\\BaseDbConfigurator.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAqwB0AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T14:25:21.179Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "PropertyBuilderHelper.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
-              "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
-              "RelativeToolTip": "Common\\Infrastructure\\Configurators\\PropertyBuilderHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T14:26:19.12Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 91,
               "Title": "ModelBuilderExtensions.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurations\\ModelBuilderExtensions.cs",
               "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurations\\ModelBuilderExtensions.cs",
@@ -477,23 +1628,12 @@
               "RelativeToolTip": "Common\\Infrastructure\\Configurations\\ModelBuilderExtensions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T14:23:38.68Z"
+              "WhenOpened": "2025-06-22T14:23:38.68Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "IDbContextOptionsConfigurator.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
-              "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
-              "RelativeToolTip": "Common\\Infrastructure\\Configurations\\IDbContextOptionsConfigurator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T14:23:58.657Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 92,
               "Title": "DateTimeKindValueConvertor.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Infrastructure\\Configurations\\Convertors\\DateTimeKindValueConvertor.cs",
               "RelativeDocumentMoniker": "Common\\Infrastructure\\Configurations\\Convertors\\DateTimeKindValueConvertor.cs",
@@ -501,11 +1641,12 @@
               "RelativeToolTip": "Common\\Infrastructure\\Configurations\\Convertors\\DateTimeKindValueConvertor.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAqwB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T14:22:00.757Z"
+              "WhenOpened": "2025-06-22T14:22:00.757Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 93,
               "Title": "NotFoundException.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Exceptions\\NotFoundException.cs",
               "RelativeDocumentMoniker": "Common\\Contracts\\Exceptions\\NotFoundException.cs",
@@ -513,11 +1654,12 @@
               "RelativeToolTip": "Common\\Contracts\\Exceptions\\NotFoundException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:44:23.674Z"
+              "WhenOpened": "2025-06-22T13:44:23.674Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 94,
               "Title": "ConflictException.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Exceptions\\ConflictException.cs",
               "RelativeDocumentMoniker": "Common\\Contracts\\Exceptions\\ConflictException.cs",
@@ -525,71 +1667,12 @@
               "RelativeToolTip": "Common\\Contracts\\Exceptions\\ConflictException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:44:52.097Z"
+              "WhenOpened": "2025-06-22T13:44:52.097Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "IQuery.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IQuery.cs",
-              "RelativeDocumentMoniker": "Common\\Contracts\\Abstractions\\IQuery.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IQuery.cs",
-              "RelativeToolTip": "Common\\Contracts\\Abstractions\\IQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T12:10:03.219Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "IEvent.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IEvent.cs",
-              "RelativeDocumentMoniker": "Common\\Contracts\\Abstractions\\IEvent.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\IEvent.cs",
-              "RelativeToolTip": "Common\\Contracts\\Abstractions\\IEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T12:10:10.011Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "ICommand.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\ICommand.cs",
-              "RelativeDocumentMoniker": "Common\\Contracts\\Abstractions\\ICommand.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Abstractions\\ICommand.cs",
-              "RelativeToolTip": "Common\\Contracts\\Abstractions\\ICommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T12:08:39.633Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "PaginatedFilter.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedFilter.cs",
-              "RelativeDocumentMoniker": "Common\\Contracts\\Pagination\\PaginatedFilter.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedFilter.cs",
-              "RelativeToolTip": "Common\\Contracts\\Pagination\\PaginatedFilter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T15:14:10.493Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "PaginatedList.cs",
-              "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedList.cs",
-              "RelativeDocumentMoniker": "Common\\Contracts\\Pagination\\PaginatedList.cs",
-              "ToolTip": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\Pagination\\PaginatedList.cs",
-              "RelativeToolTip": "Common\\Contracts\\Pagination\\PaginatedList.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T15:14:23.803Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 95,
               "Title": "AggregateRoot.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Primitives\\AggregateRoot.cs",
               "RelativeDocumentMoniker": "Common\\Domain\\Primitives\\AggregateRoot.cs",
@@ -597,11 +1680,12 @@
               "RelativeToolTip": "Common\\Domain\\Primitives\\AggregateRoot.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:52:18.593Z"
+              "WhenOpened": "2025-06-22T13:52:18.593Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 97,
               "Title": "ValueObject.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Primitives\\ValueObject.cs",
               "RelativeDocumentMoniker": "Common\\Domain\\Primitives\\ValueObject.cs",
@@ -609,11 +1693,12 @@
               "RelativeToolTip": "Common\\Domain\\Primitives\\ValueObject.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:52:25.819Z"
+              "WhenOpened": "2025-06-22T13:52:25.819Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 96,
               "Title": "Entity.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Primitives\\Entity.cs",
               "RelativeDocumentMoniker": "Common\\Domain\\Primitives\\Entity.cs",
@@ -621,11 +1706,12 @@
               "RelativeToolTip": "Common\\Domain\\Primitives\\Entity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T13:52:11.955Z"
+              "WhenOpened": "2025-06-22T13:52:11.955Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 98,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Cqrs\\SmartLedger.Common.Cqrs\\Class1.cs",
               "RelativeDocumentMoniker": "Common\\Cqrs\\SmartLedger.Common.Cqrs\\Class1.cs",
@@ -636,7 +1722,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 102,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Contracts\\SmartLedger.Common.Contracts\\Class1.cs",
               "RelativeDocumentMoniker": "Common\\Contracts\\SmartLedger.Common.Contracts\\Class1.cs",
@@ -647,7 +1733,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 103,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Applications\\SmartLedger.Common.Applications\\Class1.cs",
               "RelativeDocumentMoniker": "Common\\Applications\\SmartLedger.Common.Applications\\Class1.cs",
@@ -658,7 +1744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 99,
               "Title": "SmartLedger.Common.Domain.csproj",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\SmartLedger.Common.Domain.csproj",
               "RelativeDocumentMoniker": "Common\\Domain\\SmartLedger.Common.Domain.csproj",
@@ -666,11 +1752,12 @@
               "RelativeToolTip": "Common\\Domain\\SmartLedger.Common.Domain.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-21T22:57:15.991Z"
+              "WhenOpened": "2025-06-21T22:57:15.991Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 100,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\SmartLedger.Commmon.Domain\\Class1.cs",
               "RelativeDocumentMoniker": "Common\\SmartLedger.Commmon.Domain\\Class1.cs",
@@ -681,7 +1768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 101,
               "Title": "Common.Domain.csproj",
               "DocumentMoniker": "C:\\Users\\incrysteer 1args\\source\\repos\\SmartLedger\\src\\Common\\Domain\\Common.Domain\\Common.Domain.csproj",
               "RelativeDocumentMoniker": "Common\\Domain\\Common.Domain\\Common.Domain.csproj",

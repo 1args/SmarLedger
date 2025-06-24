@@ -2,7 +2,7 @@
 using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Common.Cqrs.Query.Abstractions;
 
-namespace SmartLedger.Common.Cqrs.Query;
+namespace SmartLedger.Common.Cqrs.Queries;
 
 /// <summary>
 /// Base validator for paginated queries.

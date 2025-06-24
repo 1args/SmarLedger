@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\Contexts\Accounts\Queries\" />
+    <Folder Include="Handlers\Contexts\Accounts\Events\" />
+    <Folder Include="Handlers\Contexts\Transactions\Events\" />
+    <Folder Include="Handlers\Contexts\Transactions\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Applications\SmartLedger.Common.Applications.csproj" />
+    <ProjectReference Include="..\..\..\Common\Infrastructure\SmartLedger.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Domain\SmartLedger.Modules.Transactions.Domain.csproj" />
+    <ProjectReference Include="..\Events\SmartLedger.Modules.Transactions.Events.csproj" />
+  </ItemGroup>
+
+</Project>

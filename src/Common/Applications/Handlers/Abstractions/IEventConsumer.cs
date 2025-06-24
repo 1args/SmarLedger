@@ -1,6 +1,5 @@
 ﻿using MassTransit;
 using SmartLedger.Common.Contracts.Abstractions;
-using SmartLedger.Common.Domain.Events;
 
 namespace SmartLedger.Common.Applications.Handlers.Abstractions;
 
@@ -9,7 +8,7 @@ namespace SmartLedger.Common.Applications.Handlers.Abstractions;
 /// </summary>
 /// <typeparam name="TEvent">Event type.</typeparam>
 public interface IEventConsumer<in TEvent> : IConsumer<TEvent>
-    where TEvent : class, IMessage
+    where TEvent : class, IEvent
 {
     /// <summary>
     /// Consumes the event.
@@ -24,17 +23,3 @@ public interface IEventConsumer<in TEvent> : IConsumer<TEvent>
         await ConsumeAsync(context.Message, context.CancellationToken);
     }
 }
-
-/// <summary>
-/// Domain event consumer.
-/// </summary>
-/// <typeparam name="TEvent">Event type.</typeparam>
-public interface IDomainEventConsumer<in TEvent> : IEventConsumer<TEvent> 
-    where TEvent : class, IDomainEvent;
-
-/// <summary>
-/// Integration event consumer.
-/// </summary>
-/// <typeparam name="TEvent">Event type.</typeparam>
-public interface IIntegrationEventConsumer<in TEvent> : IEventConsumer<TEvent>
-    where TEvent : class, IIntegrationEvent;

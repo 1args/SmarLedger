@@ -1,0 +1,94 @@
+services:
+
+  # PostgreSQL Read Database
+  postgres-read:
+    image: postgres:16
+    container_name: smartledger-read-db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: p4ssw0rd
+      POSTGRES_DB: smartledger_read_db
+    ports:
+      - 5433:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_read_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-read-data:/var/lib/postgresql/data
+    networks:
+      - smartledger-network
+
+  # PostgreSQL Write Database
+  postgres-write:
+    image: postgres:16
+    container_name: smartledger-write-db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: p4ssw0rd
+      POSTGRES_DB: smartledger_write_db
+    ports:
+      - 5434:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_write_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-write-data:/var/lib/postgresql/data
+    networks:
+      - smartledger-network
+
+  # PgAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: smart-ledger-pgadmin
+    restart: on-failure
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@smartledger.com
+      PGADMIN_DEFAULT_PASSWORD: adminp4ss
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - 5050:80
+    user: "5050:5050"
+    depends_on:
+      - postgres-read
+      - postgres-write
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - smartledger-network
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: smart-ledger-rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmqp4ss
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: [ "CMD-SHELL", "rabbitmq-diagnostics -q ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - smartledger-network
+
+volumes:
+  postgres-read-data:
+  postgres-write-data:
+  pgadmin-data:  
+  rabbitmq-data:  
+
+networks:
+  smartledger-network:
+    driver: bridge

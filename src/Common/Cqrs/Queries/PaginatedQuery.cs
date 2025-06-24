@@ -2,10 +2,10 @@
 using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Common.Cqrs.Query.Abstractions;
 
-namespace SmartLedger.Common.Cqrs.Query;
+namespace SmartLedger.Common.Cqrs.Queries;
 
 /// <summary>
-/// Represents pagination parameters for queries that support paging
+/// Represents pagination parameters for queries that support paging.
 /// </summary>
 /// <typeparam name="TResponse">Response type.</typeparam>
 /// <param name="pageNumber">Page number.</param>
