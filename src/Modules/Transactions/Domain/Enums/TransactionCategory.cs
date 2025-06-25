@@ -6,23 +6,23 @@
 public enum TransactionCategory
 {
     /// <summary>Unknown category.</summary>
-    Unknown = 1,
+    Unknown = 0,
 
     /// <summary>Food and groceries.</summary>
-    Food = 2,
+    Food = 1,
 
     /// <summary>Transportation and commuting.</summary>
-    Transport = 3,
+    Transport = 2,
 
     /// <summary>Salary or income.</summary>
-    Salary = 4,
+    Salary = 3,
 
     /// <summary>Utility payments (e.g., electricity, water).</summary>
-    Utilities = 5,
+    Utilities = 4,
 
     /// <summary>Leisure and entertainment expenses.</summary>
-    Entertainment = 6,
+    Entertainment = 5,
 
     /// <summary>Other or miscellaneous expenses.</summary>
-    Other = 7
+    Other = 6
 }

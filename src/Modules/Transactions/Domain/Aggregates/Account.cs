@@ -1,5 +1,6 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
+using SmartLedger.Modules.Transactions.Domain.Entities;
 using SmartLedger.Modules.Transactions.Domain.Enums;
 using SmartLedger.Modules.Transactions.Domain.Exceptions;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
@@ -7,7 +8,7 @@ using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 namespace SmartLedger.Modules.Transactions.Domain.Aggregates;
 
 /// <summary>
-/// Represents a user account.
+/// Represents an account.
 /// </summary>
 public sealed class Account : AggregateRoot<Guid>
 {
@@ -20,6 +21,14 @@ public sealed class Account : AggregateRoot<Guid>
     /// <summary>ID of the user who owns this account.</summary>
     public Guid UserId { get; private set; }
 
+    /// <summary>Date and time when account was created.</summary>
+    public DateTime CreatedAt { get; private set; }
+
+    private readonly List<Transaction> _transactions = [];
+
+    /// <summary>Collection of transactions associated with this account.</summary>
+    public IReadOnlyCollection<Transaction> Transactions => _transactions.AsReadOnly();
+
     /// <summary>
     /// Constructor for EF Core.
     /// </summary>
@@ -28,11 +37,12 @@ public sealed class Account : AggregateRoot<Guid>
     /// <summary>
     /// Private constructor used by the factory Create method.
     /// </summary>
-    private Account(AccountName name, Money balance, Guid userId)
+    private Account(AccountName name, Money balance, Guid userId, DateTime createdAt)
     {
         Name = name;
         Balance = balance;
         UserId = userId;
+        CreatedAt = createdAt;
     }
 
     /// <summary>
@@ -40,9 +50,10 @@ public sealed class Account : AggregateRoot<Guid>
     /// </summary>
     /// <param name="name">Account name.</param>
     /// <param name="userId">User ID.</param>
+    /// <param name="createdAt">Date and time of creation.</param>
     /// <returns>New <see cref="Account"/> instance.</returns>
     /// <exception cref="DomainValidationException">Thrown if name is null or userId is empty.</exception>
-    public static Account Create(AccountName name, Guid userId)
+    public static Account Create(AccountName name, Guid userId, DateTime createdAt)
     {
         if (userId == Guid.Empty)
         {
@@ -51,39 +62,40 @@ public sealed class Account : AggregateRoot<Guid>
 
         ArgumentNullException.ThrowIfNull(name, nameof(name));
 
-        var balance = Money.Create(0.0m);
-        return new Account(name, balance, userId);
+        return new Account(name, Money.Zero, userId, createdAt);
     }
 
     /// <summary>
     /// Applies a transaction to the account, updating the balance.
     /// </summary>
-    /// <param name="amount">Amount of the transaction.</param>
-    /// <param name="transactionType">Type of the transaction (Income or Expense).</param>
-    /// <exception cref="AccountNotAllowedOperation">Thrown if the expense exceeds available balance.</exception>
-    public void AddTransaction(Money amount, TransactionType transactionType)
+    /// <param name="transaction">Transaction.</param>
+    public void ApplyTransaction(Transaction transaction)
     {
-        if (transactionType == TransactionType.Expense && Balance.Value < amount.Value)
+        if (transaction.Type == TransactionType.Expense && Balance.Value < transaction.Amount.Value)
         {
-            throw new AccountNotAllowedOperation("There are not enough funds in the account.");
+            throw new InsufficientFundsException(nameof(transaction), "Insufficient funds in the account.");
         }
 
-        Balance = Money.Create
-        (Balance.Value + (transactionType == TransactionType.Income
-            ? amount.Value
-            : -amount.Value));
+        Balance = transaction.Type == TransactionType.Income
+            ? Money.Create(Balance.Value + transaction.Amount.Value)
+            : Money.Create(Balance.Value - transaction.Amount.Value);
+
+        _transactions.Add(transaction);
     }
 
     /// <summary>
     /// Reverses a previously applied transaction and adjusts the balance accordingly.
     /// </summary>
-    /// <param name="amount">Amount of the transaction.</param>
-    /// <param name="transactionType">Type of the transaction (Income or Expense).</param>
-    public void RemoveTransaction(Money amount, TransactionType transactionType)
+    /// <param name="transaction">Transaction.</param>
+    public void RevertTransaction(Transaction transaction)
     {
-        Balance = Money.Create(
-            Balance.Value + (transactionType == TransactionType.Income
-                ? -amount.Value
-                : amount.Value));
+        if (!_transactions.Contains(transaction))
+        {
+            throw new InvalidAccountOperationException(nameof(transaction), "Transaction not found in account.");
+        }
+
+        Balance = transaction.Type == TransactionType.Income
+            ? Money.Create(Balance.Value - transaction.Amount.Value)
+            : Money.Create(Balance.Value + transaction.Amount.Value);
     }
 }

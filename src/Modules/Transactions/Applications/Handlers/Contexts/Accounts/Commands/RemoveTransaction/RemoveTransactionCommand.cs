@@ -7,9 +7,7 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// Represents a command to remove a transaction from an account.
 /// </summary>
 /// <param name="AccountId">Account ID.</param>
-/// <param name="Amount">Amount.</param>
-/// <param name="Type">Type of the transaction (Income or Expense).</param>
+/// <param name="TransactionId">Transaction ID.</param>
 public sealed record RemoveTransactionCommand(
     Guid AccountId,
-    decimal Amount,
-    TransactionType Type) : ICommand;
+    Guid TransactionId) : ICommand;

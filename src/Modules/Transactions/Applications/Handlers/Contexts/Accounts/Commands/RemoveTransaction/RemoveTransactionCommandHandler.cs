@@ -13,10 +13,9 @@ public sealed class RemoveTransactionCommandHandler(
     /// <inheritdoc />
     public async Task HandleAsync(RemoveTransactionCommand command, CancellationToken cancellationToken)
     {
-        var request = new AddRemoveTransactionModel(
+        var request = new RemoveTransactionModel(
             command.AccountId,
-            command.Amount,
-            command.Type);
+            command.TransactionId);
 
         await accountService.RemoveTransactionAsync(request, cancellationToken);
     }

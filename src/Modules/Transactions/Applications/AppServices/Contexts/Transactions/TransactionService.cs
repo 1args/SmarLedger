@@ -4,7 +4,7 @@ using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
+using SmartLedger.Modules.Transactions.Domain.Entities;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions;
@@ -15,47 +15,38 @@ public sealed class TransactionService(
     ILogger<TransactionService> logger) : ITransactionService
 {
     /// <inheritdoc />
-    public async Task CreateAsync(CreateTransactionModel request, CancellationToken cancellationToken)
-    {
-        var amount = Money.Create(request.Amount);
-        var notes = TransactionDescription.Create(request.Notes);
-
-        var transaction = Transaction.Create(
-            request.AccountId,
-            amount,
-            request.Type,
-            request.CategoryId,
-            request.CreatedAt,
-            notes);
-
-        await transactionRepository.AddAsync(transaction, cancellationToken);
-    }
-
-    /// <inheritdoc />
     public async Task UpdateAmountAsync(UpdateAmountModel request, CancellationToken cancellationToken)
     {
+        logger.LogInformation(
+            "Updating amount for transaction with ID `{TransactionId}` to `{NewAmount}`",
+            request.TransactionId, request.NewAmount);
+
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
         var amount = Money.Create(request.NewAmount);
 
         transaction.UpdateAmount(amount);
         await transactionRepository.UpdateAsync(transaction, cancellationToken);
+
+        logger.LogInformation(
+            "Transaction with ID `{TransactionId}` updated to new amount `{NewAmount}` successfully.",
+            request.TransactionId, request.NewAmount);
     }
 
     /// <inheritdoc />
     public async Task CategorizeAsync(CategorizeTransactionModel request, CancellationToken cancellationToken)
     {
+        logger.LogInformation(
+            "Categorizing transaction with ID `{TransactionId}` to category `{NewCategory}`",
+            request.TransactionId, nameof(request.NewCategory));
+
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
-        transaction.Categorize(request.NewCategoryId);
+        transaction.Categorize(request.NewCategory);
         await transactionRepository.UpdateAsync(transaction, cancellationToken);
-    }
 
-    /// <inheritdoc />
-    public async Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken)
-    {
-        var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
-
-        await transactionRepository.DeleteAsync([transaction], cancellationToken);
+        logger.LogInformation(
+            "Transaction with ID `{TransactionId}` categorized to `{NewCategory}` successfully.",
+            request.TransactionId, nameof(request.NewCategory));
     }
 
     /// <summary>
@@ -69,6 +60,7 @@ public sealed class TransactionService(
 
         if (transaction is null)
         {
+            logger.LogWarning("Transaction with ID `{TransactionId}` not found.", transactionId);
             throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
         }
 

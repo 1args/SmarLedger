@@ -15,7 +15,7 @@ public sealed class CategorizeTransactionCommandHandler(
     {
         var request = new CategorizeTransactionModel(
             command.TransactionId,
-            command.NewCategoryId);
+            command.NewCategory);
 
         await transactionService.CategorizeAsync(request, cancellationToken);
     }

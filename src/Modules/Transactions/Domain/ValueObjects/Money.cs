@@ -36,6 +36,11 @@ public sealed class Money : ValueObject
         return new Money(value);
     }
 
+    /// <summary>
+    /// Represents zero money value.
+    /// </summary>
+    public static Money Zero => new(0.0m);
+
     /// <inheritdoc />
     protected override IEnumerable<object> GetEqualityComponents()
     {

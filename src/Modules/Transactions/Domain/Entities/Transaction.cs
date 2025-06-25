@@ -3,12 +3,12 @@ using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Modules.Transactions.Domain.Enums;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
-namespace SmartLedger.Modules.Transactions.Domain.Aggregates;
+namespace SmartLedger.Modules.Transactions.Domain.Entities;
 
 /// <summary>
 /// Represents a financial transaction belonging to an account.
 /// </summary>
-public sealed class Transaction : AggregateRoot<Guid>
+public sealed class Transaction : Entity<Guid>
 {
     /// <summary>Account ID.</summary>
     public Guid AccountId { get; private set; }
@@ -19,10 +19,10 @@ public sealed class Transaction : AggregateRoot<Guid>
     /// <summary>Type of transaction (Income or Expense).</summary>
     public TransactionType Type { get; private set; }
 
-    /// <summary>Category ID associated with the transaction.</summary>
-    public int CategoryId { get; private set; }
+    /// <summary>Transaction category.</summary>
+    public TransactionCategory Category { get; private set; }
 
-    /// <summary>Date and time when the transaction was created.</summary>
+    /// <summary>Date and time when transaction was created.</summary>
     public DateTime CreatedAt { get; private set; }
 
     /// <summary>Description or notes of the transaction.</summary>
@@ -40,14 +40,14 @@ public sealed class Transaction : AggregateRoot<Guid>
         Guid accountId,
         Money amount,
         TransactionType type,
-        int categoryId,
+        TransactionCategory category,
         DateTime createdAt,
         TransactionDescription notes)
     {
         AccountId = accountId;
         Amount = amount;
         Type = type;
-        CategoryId = categoryId;
+        Category = category;
         CreatedAt = createdAt;
         Notes = notes;
     }
@@ -58,7 +58,7 @@ public sealed class Transaction : AggregateRoot<Guid>
     /// <param name="accountId">Account identifier.</param>
     /// <param name="amount">Transaction amount.</param>
     /// <param name="type">Type of the transaction.</param>
-    /// <param name="category">Category ID.</param>
+    /// <param name="category">Category.</param>
     /// <param name="createdAt">Date and time of creation.</param>
     /// <param name="notes">Transaction notes.</param>
     /// <returns>New <see cref="Transaction"/> instance.</returns>
@@ -67,7 +67,7 @@ public sealed class Transaction : AggregateRoot<Guid>
         Guid accountId,
         Money amount,
         TransactionType type,
-        int category,
+        TransactionCategory category,
         DateTime createdAt,
         TransactionDescription notes)
     {
@@ -75,7 +75,7 @@ public sealed class Transaction : AggregateRoot<Guid>
         {
             throw new DomainValidationException(nameof(accountId), "Account ID cannot be empty.");
         }
-        if (category == (int)TransactionCategory.Unknown)
+        if (category == TransactionCategory.Unknown)
         {
             throw new DomainValidationException(nameof(category), "Transaction category cannot be 'Unknown'.");
         }
@@ -103,17 +103,17 @@ public sealed class Transaction : AggregateRoot<Guid>
     /// <summary>
     /// Updates the category of the transaction.
     /// </summary>
-    /// <param name="newCategoryId">New category ID.</param>
+    /// <param name="newCategory">New category.</param>
     /// <exception cref="DomainValidationException">Thrown when category is unknown.</exception>
-    public void Categorize(int newCategoryId)
+    public void Categorize(TransactionCategory newCategory)
     {
-        if (newCategoryId == (int)TransactionCategory.Unknown)
+        if (newCategory == TransactionCategory.Unknown)
         {
-            throw new DomainValidationException(nameof(newCategoryId), "Transaction category cannot be 'Unknown'.");
+            throw new DomainValidationException(nameof(newCategory), "Transaction category cannot be 'Unknown'.");
         }
 
-        if (CategoryId == newCategoryId) return;
+        if (Category == newCategory) return;
 
-        CategoryId = newCategoryId;
+        Category = newCategory;
     }
 }

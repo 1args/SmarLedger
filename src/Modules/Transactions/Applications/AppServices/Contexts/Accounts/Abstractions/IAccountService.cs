@@ -1,4 +1,5 @@
 ﻿using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.Transactions.Domain.Aggregates;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 
@@ -19,14 +20,14 @@ public interface IAccountService
     /// </summary>
     /// <param name="request">Model describing the transaction to add.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task AddTransactionAsync(AddRemoveTransactionModel request, CancellationToken cancellationToken);
+    Task AddTransactionAsync(AddTransactionModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Removes a transaction from an existing account.
     /// </summary>
-    /// <param name="request">Model describing the transaction to remove.</param>
+    /// <param name="request">Model containing transaction ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task RemoveTransactionAsync(AddRemoveTransactionModel request, CancellationToken cancellationToken);
+    Task RemoveTransactionAsync(RemoveTransactionModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Deletes an account by its identifier.

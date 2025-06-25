@@ -17,9 +17,6 @@ public sealed class TransactionsWriteDbContext(
     /// <summary>Transactions.</summary>
     public DbSet<Transaction> Transactions { get; set; }
 
-    /// <summary>TransactionCategories.</summary>
-    public DbSet<TransactionCategory> TransactionCategories { get; set; }
-
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
