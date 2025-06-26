@@ -97,5 +97,7 @@ public sealed class Account : AggregateRoot<Guid>
         Balance = transaction.Type == TransactionType.Income
             ? Money.Create(Balance.Value - transaction.Amount.Value)
             : Money.Create(Balance.Value + transaction.Amount.Value);
+
+        _transactions.Remove(transaction);
     }
 }

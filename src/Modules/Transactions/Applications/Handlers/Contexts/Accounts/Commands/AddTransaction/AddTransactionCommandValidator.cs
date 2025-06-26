@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
 
@@ -22,5 +23,13 @@ public sealed class AddTransactionCommandValidator : AbstractValidator<AddTransa
 
         RuleFor(c => c.Type)
             .NotEmpty().WithMessage("Type cannot be empty");
+
+        RuleFor(c => c.Category)
+            .NotEmpty().WithMessage("Category cannot be empty");
+
+        RuleFor(c => c.Notes)
+            .NotEmpty().WithMessage("Notes cannot be empty")
+            .MaximumLength(TransactionDescription.MaxLength)
+            .WithMessage($"Notes cannot exceed '{TransactionDescription.MaxLength}' characters.");
     }
 }

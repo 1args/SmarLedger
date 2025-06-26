@@ -1,7 +1,9 @@
 ﻿using SmartLedger.Common.Applications.AppServices.Services.DateTimeProvider.Abstractions;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
 
@@ -10,7 +12,8 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// </summary>
 public sealed class AddTransactionCommandHandler(
     IAccountService accountService,
-    IDateTimeProvider dateTimeProvider) : ICommandHandler<AddTransactionCommand>
+    IDateTimeProvider dateTimeProvider,
+    IEventBus eventBus) : ICommandHandler<AddTransactionCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(AddTransactionCommand command, CancellationToken cancellationToken)
@@ -23,6 +26,17 @@ public sealed class AddTransactionCommandHandler(
             dateTimeProvider.UtcNow,
             command.Notes);
 
-        await accountService.AddTransactionAsync(request, cancellationToken);
+        var transactionId = await accountService.AddTransactionAsync(request, cancellationToken);
+
+        await eventBus.PublishAsync(
+            new TransactionAddedEvent(
+                transactionId,
+                request.AccountId,
+                request.Amount,
+                request.Type,
+                request.Category,
+                request.CreateAt,
+                request.Notes), 
+            cancellationToken);
     }
 }

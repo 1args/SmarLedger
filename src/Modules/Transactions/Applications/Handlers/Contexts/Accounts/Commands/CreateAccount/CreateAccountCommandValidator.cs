@@ -19,5 +19,8 @@ public sealed class CreateAccountCommandValidator : AbstractValidator<CreateAcco
             .WithMessage("Account name cannot be empty.")
             .MaximumLength(AccountName.MaxLength)
             .WithMessage($"Account name cannot exceed '{AccountName.MaxLength}' characters.");
+
+        RuleFor(c => c.UserId)
+            .NotEmpty().WithMessage("User ID cannot be empty.");
     }
 }

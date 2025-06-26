@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.UpdateAmount;
+namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.UpdateTransactionAmount;
 
 /// <summary>
-/// Validates <see cref="UpdateAmountCommand"/> requests.
+/// Validates <see cref="UpdateTransactionAmountCommand"/> requests.
 /// </summary>
-public sealed class UpdateAmountCommandValidator : AbstractValidator<UpdateAmountCommand>
+public sealed class UpdateTransactionAmountCommandValidator : AbstractValidator<UpdateTransactionAmountCommand>
 {
     /// <summary>
     /// Constructor.
     /// </summary>
-    public UpdateAmountCommandValidator()
+    public UpdateTransactionAmountCommandValidator()
     {
         RuleFor(c => c.TransactionId)
             .NotEmpty().WithMessage("Transaction ID cannot be empty.");

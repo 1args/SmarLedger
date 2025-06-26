@@ -11,8 +11,4 @@ namespace SmartLedger.Modules.Transactions.Infrastructure.Configurators;
 public sealed class TransactionsWriteDbContextConfigurator(
     IConfiguration configuration,
     ILoggerFactory loggerFactory)
-    : BaseDbContextConfigurator<TransactionsWriteDbContext>(configuration, loggerFactory)
-{
-    /// <inheritdoc />
-    protected override string ConnectionStringName => "WriteDefaultConnection";
-}
+    : BaseDbContextConfigurator<TransactionsWriteDbContext>(configuration, loggerFactory);

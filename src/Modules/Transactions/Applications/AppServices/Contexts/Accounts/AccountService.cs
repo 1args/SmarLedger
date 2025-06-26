@@ -17,7 +17,7 @@ public sealed class AccountService(
     ILogger<AccountService> logger): IAccountService
 {
     /// <inheritdoc />
-    public async Task CreateAsync(CreateAccountModel request, CancellationToken cancellationToken)
+    public async Task<Guid> CreateAsync(CreateAccountModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Creating account with name `{Name}` for user `{UserId}`.", 
@@ -29,10 +29,12 @@ public sealed class AccountService(
         await accountRepository.AddAsync(account, cancellationToken);
 
         logger.LogInformation("Account with ID `{AccountId}` created successfully.", account.Id);
+
+        return account.Id;
     }
 
     /// <inheritdoc />
-    public async Task AddTransactionAsync(AddTransactionModel request, CancellationToken cancellationToken)
+    public async Task<Guid> AddTransactionAsync(AddTransactionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Adding transaction of type `{Type}` with amount `{Amount}` to account `{AccountId}`.",
@@ -56,6 +58,8 @@ public sealed class AccountService(
         logger.LogInformation(
             "Transaction added successfully to account `{AccountId}` with transaction ID `{TransactionId}`.",
             request.AccountId, transaction.Id);
+
+        return transaction.Id;
     }
 
     /// <inheritdoc />
@@ -84,14 +88,13 @@ public sealed class AccountService(
 
         account.RevertTransaction(transaction);
 
-        await transactionRepository.DeleteAsync([transaction], cancellationToken);
+        await transactionRepository.DeleteAsync(transaction, cancellationToken);
         await accountRepository.UpdateAsync(account, cancellationToken);
 
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` removed successfully from account `{AccountId}`.",
             request.TransactionId,
             request.AccountId);
-
     }
 
     /// <inheritdoc />
@@ -100,7 +103,7 @@ public sealed class AccountService(
         logger.LogInformation("Deleting account with ID `{AccountId}`.", request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
-        await accountRepository.DeleteAsync([account], cancellationToken);
+        await accountRepository.DeleteAsync(account, cancellationToken);
 
         logger.LogInformation("Account with ID `{AccountId}` deleted successfully.", request.AccountId);
     }

@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Contracts\SmartLedger.Common.Contracts.csproj" />
+    <ProjectReference Include="..\Domain\SmartLedger.Modules.Transactions.Domain.csproj" />
   </ItemGroup>
 
 </Project>

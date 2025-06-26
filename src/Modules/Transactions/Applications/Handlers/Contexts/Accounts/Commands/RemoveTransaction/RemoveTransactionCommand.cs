@@ -1,5 +1,4 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
-using SmartLedger.Modules.Transactions.Domain.Enums;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
 

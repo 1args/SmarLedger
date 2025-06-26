@@ -1,6 +1,8 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
 
@@ -8,7 +10,8 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// Handles the logic for processing <see cref="RemoveTransactionCommand"/>.
 /// </summary>
 public sealed class RemoveTransactionCommandHandler(
-    IAccountService accountService) : ICommandHandler<RemoveTransactionCommand>
+    IAccountService accountService,
+    IEventBus eventBus) : ICommandHandler<RemoveTransactionCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(RemoveTransactionCommand command, CancellationToken cancellationToken)
@@ -18,5 +21,9 @@ public sealed class RemoveTransactionCommandHandler(
             command.TransactionId);
 
         await accountService.RemoveTransactionAsync(request, cancellationToken);
+
+        await eventBus.PublishAsync(
+            new TransactionRemovedEvent(request.AccountId, request.TransactionId), 
+            cancellationToken);
     }
 }

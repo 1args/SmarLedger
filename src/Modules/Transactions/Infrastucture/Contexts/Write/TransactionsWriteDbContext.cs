@@ -20,6 +20,7 @@ public sealed class TransactionsWriteDbContext(
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         CustomModelBuilder.OnModelCreating(modelBuilder);
     }
 }

@@ -5,16 +5,17 @@ using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write.Configurati
 namespace SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
 /// <summary>
-/// Contains custom configuration logic for the EF Core model.
+/// Contains custom configuration logic for the EF Core write model.
 /// </summary>
 public static class CustomModelBuilder
 {
     /// <summary>
-    /// Applies custom configurations and conventions to the EF Core model.
+    /// Applies custom configurations and conventions to the EF Core write model.
     /// </summary>
-    /// <param name="modelBuilder">The model builder used to configure entity mappings.</param>
+    /// <param name="modelBuilder">Model builder used to configure entity mappings.</param>
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("write");
         modelBuilder.SetDefaultDateTimeKind(DateTimeKind.Utc);
 
         modelBuilder.ApplyConfiguration(new AccountConfiguration());

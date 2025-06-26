@@ -15,7 +15,7 @@ public sealed class CategorizeTransactionCommandValidator : AbstractValidator<Ca
         RuleFor(c => c.TransactionId)
             .NotEmpty().WithMessage("Transaction ID cannot be empty.");
 
-        RuleFor(c => c.NewCategoryId)
-            .NotEmpty().WithMessage("Category ID cannot be empty.");
+        RuleFor(c => c.NewCategory)
+            .NotEmpty().WithMessage("Category cannot be empty.");
     }
 }

@@ -38,9 +38,9 @@ public interface IRepository<TEntity> where TEntity : class
     /// <summary>
     /// Deletes a collection of entities from the data source.
     /// </summary>
-    /// <param name="entities">Entities.</param>
+    /// <param name="entity">Entity.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task DeleteAsync(TEntity[] entities, CancellationToken cancellationToken);
+    Task DeleteAsync(TEntity entity, CancellationToken cancellationToken);
 
     /// <summary>
     /// Filters the entities based on the specified predicate expression.

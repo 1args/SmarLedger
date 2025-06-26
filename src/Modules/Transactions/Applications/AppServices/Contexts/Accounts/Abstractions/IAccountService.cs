@@ -13,14 +13,14 @@ public interface IAccountService
     /// </summary>
     /// <param name="request">Account creation model.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task CreateAsync(CreateAccountModel request, CancellationToken cancellationToken);
+    Task<Guid> CreateAsync(CreateAccountModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Adds a transaction to an existing account.
     /// </summary>
     /// <param name="request">Model describing the transaction to add.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task AddTransactionAsync(AddTransactionModel request, CancellationToken cancellationToken);
+    Task<Guid> AddTransactionAsync(AddTransactionModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Removes a transaction from an existing account.

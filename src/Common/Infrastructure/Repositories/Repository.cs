@@ -76,14 +76,11 @@ public sealed class Repository<TEntity> : IRepository<TEntity>
     }
 
     /// <inheritdoc/>
-    public async Task DeleteAsync(TEntity[] entities, CancellationToken cancellationToken)
+    public async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(entities);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        foreach (var entity in entities)
-        {
-            DbContext.Remove(entity);
-        }
+        DbContext.Remove(entity);
 
         await SaveChangesAsync(cancellationToken);
     }

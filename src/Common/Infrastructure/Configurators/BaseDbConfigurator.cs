@@ -14,13 +14,10 @@ public abstract class BaseDbContextConfigurator<TDbContext>(
     ILoggerFactory loggerFactory)
     : IDbContextOptionsConfigurator<TDbContext> where TDbContext : DbContext
 {
-    /// <summary>Connection string.</summary>
-    protected abstract string ConnectionStringName { get; }
-
     /// <inheritdoc />
     public void Configure(DbContextOptionsBuilder<TDbContext> optionsBuilder)
     {
-        var connectionString = configuration.GetConnectionString(ConnectionStringName);
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {

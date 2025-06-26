@@ -1,0 +1,51 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SmartLedger.Common.Infrastructure.Configurators;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+
+namespace SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Configurations;
+
+/// <summary>
+/// Configures the <see cref="AccountReadModelConfiguration"/> entity.
+/// </summary>
+public sealed class AccountReadModelConfiguration : IEntityTypeConfiguration<AccountReadModel>
+{
+    /// <inheritdoc />
+    public void Configure(EntityTypeBuilder<AccountReadModel> builder)
+    {
+        builder.ToTable("AccountReadModel");
+
+        builder.HasKey(a => a.Id);
+
+        builder.Property(a => a.Id)
+            .IsGuid()
+            .ValueGeneratedOnAdd();
+
+        builder.Property(a => a.UserId)
+            .IsRequired();
+
+        builder.Property(a => a.Name)
+            .HasMaxLength(100)
+            .IsRequired();
+
+        builder.Property(a => a.Balance)
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
+
+        builder.Property(a => a.CreatedAt)
+            .IsDateTime()
+            .IsRequired();
+
+        builder.Property(a => a.LastUpdatedAt)
+            .IsDateTime()
+            .IsRequired();
+
+        builder.HasIndex(a => a.UserId)
+            .HasDatabaseName("idx_accountreadmodel_userid")
+            .IsUnique(false);
+
+        builder.HasIndex(a => new { a.UserId, a.CreatedAt })
+            .HasDatabaseName("idx_accountreadmodel_userid_createdat")
+            .IsUnique(false); 
+    }
+}

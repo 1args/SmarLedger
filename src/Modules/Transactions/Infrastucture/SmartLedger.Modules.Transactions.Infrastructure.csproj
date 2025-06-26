@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contexts\Read\Configurations\" />
-    <Folder Include="Contexts\Read\Models\" />
+    <Folder Include="Events\Consumers\" />
+    <Folder Include="Events\Declarations\" />
   </ItemGroup>
 
   <ItemGroup>
