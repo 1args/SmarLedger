@@ -10,13 +10,13 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// Handles the logic for processing <see cref="RemoveTransactionCommand"/>.
 /// </summary>
 public sealed class RemoveTransactionCommandHandler(
-    IAccountService accountService,
+    IAccountsService accountService,
     IEventBus eventBus) : ICommandHandler<RemoveTransactionCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(RemoveTransactionCommand command, CancellationToken cancellationToken)
     {
-        var request = new RemoveTransactionModel(
+        var request = new TransactionRemovalModel(
             command.AccountId,
             command.TransactionId);
 

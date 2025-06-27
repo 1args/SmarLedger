@@ -1,13 +1,28 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
 using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events;
 
-public sealed class TransactionAddedEventConsumer : IEventConsumer<TransactionAddedEvent>
+/// <summary>
+/// Consumes the <see cref="TransactionAddedEvent"/>.
+/// </summary>
+public sealed class TransactionAddedEventConsumer(
+    AccountsSynchronizationService accountsSynchronizationService) : IEventConsumer<TransactionAddedEvent>
 {
-    public Task ConsumeAsync(TransactionAddedEvent @event, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    public async Task ConsumeAsync(TransactionAddedEvent @event, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"Got TransactionAddedEvent {@event.TransactionId}");
-        return Task.CompletedTask; ;
+        var request = new TransactionAdditionSynchronizationModel(
+            @event.TransactionId,
+            @event.AccountId,
+            @event.Amount,
+            @event.Type,
+            @event.Category,
+            @event.CreatedAt,
+            @event.Notes);
+
+        await accountsSynchronizationService.SynchronizeTransactionAdditionAsync(request, cancellationToken);
     }
 }

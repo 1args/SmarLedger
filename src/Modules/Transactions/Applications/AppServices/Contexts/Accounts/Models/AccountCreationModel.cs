@@ -1,15 +1,12 @@
-﻿using SmartLedger.Common.Contracts.Abstractions;
-
-namespace SmartLedger.Modules.Transactions.Events.Events;
+﻿namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
 
 /// <summary>
-/// Event triggered when a new account is created.
+/// Model used to create a new account.
 /// </summary>
 /// <param name="Name">Name of the account.</param>
 /// <param name="UserId">ID of the user who owns the account.</param>
 /// <param name="CreatedAt">Date and time the account was created.</param>
-public sealed record AccountCreatedEvent(
-    Guid AccountId,
+public sealed record AccountCreationModel(
     string Name,
     Guid UserId,
-    DateTime CreatedAt) : Event;
+    DateTime CreatedAt);

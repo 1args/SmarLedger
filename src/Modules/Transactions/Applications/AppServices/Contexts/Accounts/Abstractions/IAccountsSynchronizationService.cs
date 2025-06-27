@@ -1,38 +1,37 @@
 ﻿using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 
 /// <summary>
-/// Provides functionality for managing accounts.
+/// Provides functionality for synchronizing changes in accounts between write and read models.
 /// </summary>
-public interface IAccountService
+public interface IAccountsSynchronizationService
 {
     /// <summary>
-    /// Creates a new account using the specified model.
+    /// Synchronizes the creation of a new account.
     /// </summary>
     /// <param name="request">Account creation model.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> CreateAsync(CreateAccountModel request, CancellationToken cancellationToken);
+    Task SynchronizeAccountCreationAsync(AccountCreationSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Adds a transaction to an existing account.
+    /// Synchronizes the addition of a transaction to an account.
     /// </summary>
     /// <param name="request">Model describing the transaction to add.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> AddTransactionAsync(AddTransactionModel request, CancellationToken cancellationToken);
+    Task SynchronizeTransactionAdditionAsync(TransactionAdditionSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Removes a transaction from an existing account.
+    /// Synchronizes the removal of a transaction from an account.
     /// </summary>
     /// <param name="request">Model containing transaction ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task RemoveTransactionAsync(RemoveTransactionModel request, CancellationToken cancellationToken);
+    Task SynchronizeTransactionRemovalAsync(TransactionRemovalModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Deletes an account by its identifier.
+    /// Synchronizes the deletion of an account.
     /// </summary>
     /// <param name="request">Model containing account ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken);
+    Task SynchronizeAccountDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken);
 }

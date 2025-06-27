@@ -11,14 +11,14 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// Handles the logic for processing <see cref="AddTransactionCommand"/>.
 /// </summary>
 public sealed class AddTransactionCommandHandler(
-    IAccountService accountService,
+    IAccountsService accountService,
     IDateTimeProvider dateTimeProvider,
     IEventBus eventBus) : ICommandHandler<AddTransactionCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(AddTransactionCommand command, CancellationToken cancellationToken)
     {
-        var request = new AddTransactionModel(
+        var request = new TransactionAdditionModel(
             command.AccountId,
             command.Amount,
             command.Type,

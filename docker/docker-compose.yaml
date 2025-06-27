@@ -1,39 +1,18 @@
 services:
 
-  # PostgreSQL Read Database
-  postgres-read:
+  # PostgreSQL
+  postgres:
     image: postgres:16
-    container_name: smartledger-read-db
+    container_name: smartledger-db
     restart: on-failure
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: p4ssw0rd
-      POSTGRES_DB: smartledger_read_db
-    ports:
-      - 5433:5432
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_read_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - postgres-read-data:/var/lib/postgresql/data
-    networks:
-      - smartledger-network
-
-  # PostgreSQL Write Database
-  postgres-write:
-    image: postgres:16
-    container_name: smartledger-write-db
-    restart: on-failure
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: p4ssw0rd
-      POSTGRES_DB: smartledger_write_db
+      POSTGRES_DB: smartledger_db
     ports:
       - 5434:5432
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_write_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_db"]
       interval: 10s
       timeout: 5s
       retries: 5

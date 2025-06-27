@@ -1,13 +1,25 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
 using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Events;
 
-public sealed class TransactionAmountUpdatedEventConsumer : IEventConsumer<TransactionAmountUpdatedEvent>
+/// <summary>
+/// Consumes the <see cref="TransactionAmountUpdatedEvent"/>.
+/// </summary>
+public sealed class TransactionAmountUpdatedEventConsumer(
+    ITransactionsSynchronizationService transactionsSynchronisationService) 
+    : IEventConsumer<TransactionAmountUpdatedEvent>
 {
-    public Task ConsumeAsync(TransactionAmountUpdatedEvent @event, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    public async Task ConsumeAsync(TransactionAmountUpdatedEvent @event, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"Got TransactionAmountUpdatedEventConsumer {@event.TransactionId}");
-        return Task.CompletedTask;
+        var request = new UpdateAmountModel(
+            @event.TransactionId,
+            @event.NewAmount,
+            @event.UpdatedAt);
+
+        await transactionsSynchronisationService.SynchronizeAmountChangeAsync(request, cancellationToken);
     }
 }

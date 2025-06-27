@@ -10,7 +10,7 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// Handles the logic for processing <see cref="DeleteAccountCommand"/>.
 /// </summary>
 public sealed class DeleteAccountCommandHandler(
-    IAccountService accountService,
+    IAccountsService accountService,
     IEventBus eventBus) : ICommandHandler<DeleteAccountCommand>
 {
     /// <inheritdoc />

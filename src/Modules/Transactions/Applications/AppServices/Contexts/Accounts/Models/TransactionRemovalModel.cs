@@ -5,6 +5,6 @@
 /// </summary>
 /// <param name="AccountId">Account ID.</param>
 /// <param name="TransactionId">Transaction ID.</param>
-public sealed record RemoveTransactionModel(
+public sealed record TransactionRemovalModel(
     Guid AccountId,
     Guid TransactionId);

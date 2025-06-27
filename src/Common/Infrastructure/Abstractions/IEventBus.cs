@@ -13,7 +13,6 @@ public interface IEventBus
     /// <typeparam name="TEvent">Event type.</typeparam>
     /// <param name="event">Event.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    /// <returns></returns>
     Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken)
         where TEvent : class, IEvent;
 }

@@ -10,9 +10,9 @@ using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions;
 
 /// <inheritdoc />
-public sealed class TransactionService(
-    IRepository<Transaction> transactionRepository,
-    ILogger<TransactionService> logger) : ITransactionService
+public sealed class TransactionsService(
+    IRepository<Transaction> transactionsRepository,
+    ILogger<TransactionsService> logger) : ITransactionsService
 {
     /// <inheritdoc />
     public async Task UpdateAmountAsync(UpdateAmountModel request, CancellationToken cancellationToken)
@@ -25,7 +25,7 @@ public sealed class TransactionService(
         var amount = Money.Create(request.NewAmount);
 
         transaction.UpdateAmount(amount);
-        await transactionRepository.UpdateAsync(transaction, cancellationToken);
+        await transactionsRepository.UpdateAsync(transaction, cancellationToken);
 
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` updated to new amount `{NewAmount}` successfully.",
@@ -42,7 +42,7 @@ public sealed class TransactionService(
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         transaction.Categorize(request.NewCategory);
-        await transactionRepository.UpdateAsync(transaction, cancellationToken);
+        await transactionsRepository.UpdateAsync(transaction, cancellationToken);
 
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` categorized to `{NewCategory}` successfully.",
@@ -54,7 +54,7 @@ public sealed class TransactionService(
     /// </summary>
     private async Task<Transaction> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
     {
-        var transaction = await transactionRepository
+        var transaction = await transactionsRepository
             .Where(t => t.Id == transactionId)
             .SingleOrDefaultAsync(cancellationToken);
 

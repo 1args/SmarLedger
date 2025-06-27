@@ -1,13 +1,25 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
 using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Events;
 
-public sealed class TransactionCategorizedEventConsumer : IEventConsumer<TransactionCategorizedEvent>
+/// <summary>
+/// Consumes the <see cref="TransactionCategorizedEvent"/>.
+/// </summary>
+public sealed class TransactionCategorizedEventConsumer(
+    ITransactionsSynchronizationService transactionsSynchronisationService) 
+    : IEventConsumer<TransactionCategorizedEvent>
 {
-    public Task ConsumeAsync(TransactionCategorizedEvent @event, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    public async Task ConsumeAsync(TransactionCategorizedEvent @event, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"Got TransactionCategorizedEvent {@event.TransactionId}");
-        return Task.CompletedTask;
+        var request = new CategorizeTransactionModel(
+            @event.TransactionId,
+            @event.NewCategory,
+            @event.UpdatedAt);
+
+        await transactionsSynchronisationService.SynchronizeCategoryChangeAsync(request, cancellationToken);
     }
 }

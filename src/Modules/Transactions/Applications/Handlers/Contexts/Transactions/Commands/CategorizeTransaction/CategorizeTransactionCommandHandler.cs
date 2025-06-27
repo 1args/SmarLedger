@@ -1,6 +1,9 @@
-﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+﻿using SmartLedger.Common.Applications.AppServices.Services.DateTimeProvider.Abstractions;
+using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
+using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.CategorizeTransaction;
 
@@ -8,15 +11,22 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transa
 /// Handles the logic for processing <see cref="CategorizeTransactionCommand"/>.
 /// </summary>
 public sealed class CategorizeTransactionCommandHandler(
-    ITransactionService transactionService) : ICommandHandler<CategorizeTransactionCommand>
+    ITransactionsService transactionService,
+    IDateTimeProvider dateTimeProvider,
+    IEventBus eventBus) : ICommandHandler<CategorizeTransactionCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(CategorizeTransactionCommand command, CancellationToken cancellationToken)
     {
         var request = new CategorizeTransactionModel(
             command.TransactionId,
-            command.NewCategory);
+            command.NewCategory,
+            dateTimeProvider.UtcNow);
 
         await transactionService.CategorizeAsync(request, cancellationToken);
+
+        await eventBus.PublishAsync(
+            new TransactionCategorizedEvent(command.TransactionId, command.NewCategory, request.UpdatedAt),
+            cancellationToken);
     }
 }
