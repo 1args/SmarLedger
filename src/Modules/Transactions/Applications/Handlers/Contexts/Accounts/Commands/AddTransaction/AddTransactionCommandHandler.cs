@@ -35,7 +35,7 @@ public sealed class AddTransactionCommandHandler(
                 request.Amount,
                 request.Type,
                 request.Category,
-                request.CreateAt,
+                request.CreatedAt,
                 request.Notes), 
             cancellationToken);
     }

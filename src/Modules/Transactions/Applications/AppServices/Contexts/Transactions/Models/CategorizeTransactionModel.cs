@@ -11,4 +11,4 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Tra
 public sealed record CategorizeTransactionModel(
     Guid TransactionId, 
     TransactionCategory NewCategory,
-    DateTime? UpdatedAt);
+    DateTime UpdatedAt);

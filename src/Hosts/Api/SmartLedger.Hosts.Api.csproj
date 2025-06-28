@@ -12,6 +12,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Cqrs\SmartLedger.Common.Cqrs.csproj" />
+    <ProjectReference Include="..\..\Common\Infrastructure\SmartLedger.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Transactions\Hosts\SmartLedger.Modules.Transactions.Hosts.csproj" />
   </ItemGroup>
 
 </Project>

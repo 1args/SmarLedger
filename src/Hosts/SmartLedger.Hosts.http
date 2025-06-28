@@ -1,6 +1,0 @@
-@SmartLedger.Hosts_HostAddress = http://localhost:5133
-
-GET {{SmartLedger.Hosts_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

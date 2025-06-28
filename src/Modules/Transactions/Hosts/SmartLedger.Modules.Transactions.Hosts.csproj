@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Applications\SmartLedger.Modules.Transactions.Applications.csproj" />
+    <ProjectReference Include="..\Contracts\SmartLedger.Modules.Transactions.Contracts.csproj" />
     <ProjectReference Include="..\Infrastucture\SmartLedger.Modules.Transactions.Infrastructure.csproj" />
   </ItemGroup>
 

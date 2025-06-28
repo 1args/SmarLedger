@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SmartLedger.Common.Contracts.Options;
+using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Infrastructure.Events;
 
 namespace SmartLedger.Common.Infrastructure.Extensions;
 
@@ -20,7 +22,7 @@ public static class MessageBrokerExtensions
     /// <param name="connectionString">Connection string used for the PostgreSQL database context.</param>
     /// <returns>Modified <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddMessageBroker<TDbContext>(
-        IServiceCollection services,
+        this IServiceCollection services,
         string connectionString)
         where TDbContext : DbContext
     {
@@ -53,6 +55,8 @@ public static class MessageBrokerExtensions
                 outBoxCfg.UsePostgres().UseBusOutbox();
             });
         });
+
+        services.AddSingleton<IEventBus, EventBus>();
 
         return services;
     }

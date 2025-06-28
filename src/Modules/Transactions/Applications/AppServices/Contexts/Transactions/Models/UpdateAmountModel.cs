@@ -9,4 +9,4 @@
 public sealed record UpdateAmountModel(
     Guid TransactionId,
     decimal NewAmount,
-    DateTime? UpdatedAt);
+    DateTime UpdatedAt);
