@@ -61,7 +61,7 @@ public static class AccountsEndpoints
     /// Handles the creation of a new account.
     /// </summary>
     private static async Task<IResult> CreateAccountAsync(
-        [FromBody, BindRequired] CreateAccountRequest request,
+        [FromBody] CreateAccountRequest request,
         [FromServices] CreateAccountCommandHandler handler,
         CancellationToken cancellationToken)
     {

@@ -34,8 +34,7 @@ services:
       - 5050:80
     user: "5050:5050"
     depends_on:
-      - postgres-read
-      - postgres-write
+      - postgres
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     networks:

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -18,7 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Cqrs\SmartLedger.Common.Cqrs.csproj" />
     <ProjectReference Include="..\..\Common\Infrastructure\SmartLedger.Common.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Modules\Transactions\Hosts\SmartLedger.Modules.Transactions.Hosts.csproj" />
+    <ProjectReference Include="..\..\Modules\Transactions\Applications\SmartLedger.Modules.Transactions.Applications.csproj" />
+    <ProjectReference Include="..\..\Modules\Transactions\Contracts\SmartLedger.Modules.Transactions.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

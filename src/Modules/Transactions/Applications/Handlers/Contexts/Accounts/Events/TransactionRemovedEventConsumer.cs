@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
 using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
 
@@ -9,7 +9,7 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// Consumes the <see cref="TransactionRemovedEvent"/>.
 /// </summary>
 public sealed class TransactionRemovedEventConsumer(
-    AccountsSynchronizationService accountsSynchronizationService) : IEventConsumer<TransactionRemovedEvent>
+    IAccountsSynchronizationService accountsSynchronizationService) : IEventConsumer<TransactionRemovedEvent>
 {
     /// <inheritdoc />
     public async Task ConsumeAsync(TransactionRemovedEvent @event, CancellationToken cancellationToken)

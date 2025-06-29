@@ -1,17 +1,19 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using SmartLedger.Common.Applications.AppServices.Extensions;
+using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Applications.Handlers.Extensions;
 using SmartLedger.Common.Infrastructure.Extensions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 using SmartLedger.Modules.Transactions.Infrastructure.Configurators;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
-namespace SmartLedger.Modules.Transactions.Hosts.Extensions;
+namespace SmartLedger.Modules.Transactions.Applications.AppServices.Extensions;
 
 /// <summary>
 /// Extensions for registering the Transactions module.
@@ -49,16 +51,14 @@ public static class TransactionsModuleExtensions
     /// </summary>
     private static IServiceCollection AddApplications(this IServiceCollection services)
     {
-        services.AddDateTimeProvider();
-
         services
             .AddScoped<IAccountsService, AccountsService>()
             .AddScoped<IAccountsSynchronizationService, AccountsSynchronizationService>()
-            .AddScoped<ITransactionsService, ITransactionsService>()
+            .AddScoped<ITransactionsService, TransactionsService>()
             .AddScoped<ITransactionsSynchronizationService, TransactionsSynchronizationService>();
 
         services
-            .AddHandlersFromAssembly(Assembly.GetAssembly(typeof(TransactionsService)));
+            .AddHandlersFromAssembly(typeof(CreateAccountCommandHandler).Assembly);
 
         return services;
     }

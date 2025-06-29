@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SmartLedger.Hosts.Migrations": {
+    "SmartLedger.Modules.Transactions.Hosts.Migrations": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"

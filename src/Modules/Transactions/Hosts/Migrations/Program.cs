@@ -5,8 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartLedger.Common.Hosts.Migrations;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Common.Infrastructure.Events;
-using SmartLedger.Hosts.Migrations;
+using SmartLedger.Modules.Transactions.Hosts.Migrations;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
 // Entry point for executing database migrations
 var builder = Host.CreateDefaultBuilder(args);
@@ -15,7 +16,11 @@ builder.ConfigureServices((context, services) =>
 {
     var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
 
-    services.AddDbContext<OutboxDbContext>(contextBuilder => contextBuilder.UseNpgsql(
+    services.AddDbContext<TransactionsWriteDbContext>(contextBuilder => contextBuilder.UseNpgsql(
+        connectionString,
+        optionsBuilder => optionsBuilder.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+
+    services.AddDbContext<TransactionsReadDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,
         optionsBuilder => optionsBuilder.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 

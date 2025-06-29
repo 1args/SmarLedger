@@ -5,13 +5,15 @@ using System.Linq.Expressions;
 namespace SmartLedger.Common.Infrastructure.Repositories;
 
 /// <inheritdoc/>
-public sealed class Repository<TEntity> : IRepository<TEntity>
+public sealed class Repository<TEntity, TDbContext> :
+    IRepository<TEntity, TDbContext>
     where TEntity : class
+    where TDbContext : DbContext
 {
     /// <summary>
     /// Database context.
     /// </summary>
-    private DbContext DbContext { get; }
+    private TDbContext DbContext { get; }
 
     /// <summary>
     /// Storage of entities./>
@@ -19,10 +21,10 @@ public sealed class Repository<TEntity> : IRepository<TEntity>
     private DbSet<TEntity> DbSet { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Repository{TEntity}"/> class.
+    /// Initializes a new instance of the <see cref="Repository{TEntity, TDbContext}"/> class.
     /// </summary>
     /// <param name="dbContext">DbContext.</param>
-    public Repository(DbContext dbContext)
+    public Repository(TDbContext dbContext)
     {
         DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         DbSet = DbContext.Set<TEntity>();

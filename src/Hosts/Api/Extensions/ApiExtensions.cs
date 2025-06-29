@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
+using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Options;
-using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Common.Infrastructure.Events;
 using SmartLedger.Common.Infrastructure.Extensions;
 using SmartLedger.Hosts.Api.ExceptionHandling;
@@ -23,8 +23,8 @@ public static class ApiExtensions
         services
             .AddOpenApi()
             .AddGlobalExceptionHandler()
-            .AddConfiguredMessageBroker(configuration)
-            .AddDecorators();
+            .AddDateTimeProvider()
+            .AddConfiguredMessageBroker(configuration);
 
         return services;
     }

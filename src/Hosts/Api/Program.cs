@@ -1,5 +1,6 @@
+using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Hosts.Api.Extensions;
-using SmartLedger.Modules.Transactions.Hosts.Extensions;
+using SmartLedger.Modules.Transactions.Applications.AppServices.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -7,7 +8,8 @@ var configuration = builder.Configuration;
 
 services
     .AddApi(configuration)
-    .AddTransactionsModule();
+    .AddTransactionsModule()
+    .AddDecorators();
 
 var app = builder.Build();
 

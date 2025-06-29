@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmartLedger.Common.Infrastructure.Abstractions;
 
@@ -6,7 +7,10 @@ namespace SmartLedger.Common.Infrastructure.Abstractions;
 /// Generic repository for data access operations.
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity being managed.</typeparam>
-public interface IRepository<TEntity> where TEntity : class
+/// /// <typeparam name="TDbContext">DbContext type.</typeparam>
+public interface IRepository<TEntity, TDbContext>
+    where TEntity : class
+    where TDbContext : DbContext
 {
     /// <summary>
     /// Returns a non-material collection of entities.

@@ -13,10 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Applications\SmartLedger.Common.Applications.csproj" />
-    <ProjectReference Include="..\..\..\Common\Infrastructure\SmartLedger.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Domain\SmartLedger.Modules.Transactions.Domain.csproj" />
     <ProjectReference Include="..\Events\SmartLedger.Modules.Transactions.Events.csproj" />
-    <ProjectReference Include="..\Infrastucture\SmartLedger.Modules.Transactions.Infrastructure.csproj" />
+    <ProjectReference Include="..\Infrastructure\SmartLedger.Modules.Transactions.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -56,7 +56,7 @@ public static class MessageBrokerExtensions
             });
         });
 
-        services.AddSingleton<IEventBus, EventBus>();
+        services.AddScoped<IEventBus, EventBus>();
 
         return services;
     }

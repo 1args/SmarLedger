@@ -13,10 +13,10 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 public sealed class CreateAccountCommandHandler(
     IAccountsService accountService,
     IDateTimeProvider dateTimeProvider,
-    IEventBus eventBus) : ICommandHandler<CreateAccountCommand>
+    IEventBus eventBus) : ICommandHandler<CreateAccountCommand, Guid>
 {
     /// <inheritdoc />
-    public async Task HandleAsync(CreateAccountCommand command, CancellationToken cancellationToken)
+    public async Task<Guid> HandleAsync(CreateAccountCommand command, CancellationToken cancellationToken)
     {
         var request = new AccountCreationModel(
             command.Name,
@@ -28,5 +28,7 @@ public sealed class CreateAccountCommandHandler(
         await eventBus.PublishAsync(
             new AccountCreatedEvent(accountId, request.Name, request.UserId, request.CreatedAt), 
             cancellationToken);
+
+        return accountId;
     }
 }

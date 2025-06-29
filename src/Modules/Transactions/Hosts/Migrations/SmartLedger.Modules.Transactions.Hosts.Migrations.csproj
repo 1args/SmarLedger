@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Hosts\Migrations\SmartLedger.Common.Hosts.Migrations.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Hosts\Migrations\SmartLedger.Common.Hosts.Migrations.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SmartLedger.Modules.Transactions.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,15 +31,6 @@
 		<Content Include="appsettings.Development.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
-	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
-	  <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
 	</ItemGroup>
 
 </Project>

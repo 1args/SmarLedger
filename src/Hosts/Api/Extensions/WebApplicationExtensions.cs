@@ -1,4 +1,5 @@
 ﻿using Scalar.AspNetCore;
+using SmartLedger.Hosts.Api.Endpoints;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -8,7 +9,7 @@ namespace SmartLedger.Hosts.Api.Extensions;
 public static class WebApplicationExtensions
 {
     /// <summary>
-    /// Configures API middlewares for the application.
+    /// Configures http request pipeline.
     /// </summary>
     /// <param name="app">Current <see cref="WebApplication"/> instance.</param>
     /// <returns><see cref="WebApplication"/> instance.</returns>
@@ -21,7 +22,19 @@ public static class WebApplicationExtensions
         }
 
         app.UseHttpsRedirection();
+        app.MapApiEndpoints();
 
         return app;
+    }
+
+    /// <summary>
+    /// Registers Api endpoints.
+    /// </summary>
+    private static IEndpointRouteBuilder MapApiEndpoints(this IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapAccountsEndpoints();
+        endpoints.MapTransactionsEndpoints();
+
+        return endpoints;
     }
 }

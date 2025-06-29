@@ -4,14 +4,15 @@ using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 
 /// <inheritdoc />
 public sealed class AccountsSynchronizationService(
-    IRepository<AccountReadModel> accountsRepository,
-    IRepository<TransactionReadModel> transactionsRepository,
+    IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
+    IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
     ILogger<AccountsSynchronizationService> logger) : IAccountsSynchronizationService
 {
     /// <inheritdoc />

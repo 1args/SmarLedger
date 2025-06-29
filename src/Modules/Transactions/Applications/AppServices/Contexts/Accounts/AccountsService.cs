@@ -7,13 +7,14 @@ using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Account
 using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Domain.Entities;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 
 /// <inheritdoc />
 public sealed class AccountsService(
-    IRepository<Account> accountsRepository,
-    IRepository<Transaction> transactionsRepository,
+    IRepository<Account, TransactionsWriteDbContext> accountsRepository,
+    IRepository<Transaction, TransactionsWriteDbContext> transactionsRepository,
     ILogger<AccountsService> logger): IAccountsService
 {
     /// <inheritdoc />

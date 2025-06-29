@@ -30,12 +30,12 @@ public sealed class DatabaseMigrationsService(
             logger.LogInformation("Attempting to apply migrations for `{DbContext}`.", dbContextName);
 
             await dbContext.Database.MigrateAsync(cancellationToken);
+
+            logger.LogInformation("Successfully applied migrations for `{DbContext}`.", dbContextName);
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "An error occurred while applying migrations for `{DbContext}`.", dbContextName);
         }
-
-        logger.LogInformation("Successfully applied migrations for `{DbContext}`.", dbContextName);
     }
 }

@@ -4,13 +4,14 @@ using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions;
 
 /// <inheritdoc />
 public sealed class TransactionsSynchronizationService(
-    IRepository<TransactionReadModel> transactionsRepository,
+    IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
     ILogger<TransactionsSynchronizationService> logger) : ITransactionsSynchronizationService
 {
     /// <inheritdoc />

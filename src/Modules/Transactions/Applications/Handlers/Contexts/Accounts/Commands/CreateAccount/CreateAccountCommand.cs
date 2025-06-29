@@ -9,4 +9,4 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// <param name="UserId">ID of the user who owns the account.</param>
 public sealed record CreateAccountCommand(
     string Name,
-    Guid UserId) : ICommand;
+    Guid UserId) : ICommand<Guid>;

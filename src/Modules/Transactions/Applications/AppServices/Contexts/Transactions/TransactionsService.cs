@@ -6,12 +6,13 @@ using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transac
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
 using SmartLedger.Modules.Transactions.Domain.Entities;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions;
 
 /// <inheritdoc />
 public sealed class TransactionsService(
-    IRepository<Transaction> transactionsRepository,
+    IRepository<Transaction, TransactionsWriteDbContext> transactionsRepository,
     ILogger<TransactionsService> logger) : ITransactionsService
 {
     /// <inheritdoc />

@@ -4,10 +4,17 @@ using SmartLedger.Common.Infrastructure.Events;
 
 namespace SmartLedger.Hosts.Migrations;
 
+/// <summary>
+/// Initiates database migrations for Outbox.
+/// </summary>
 internal sealed class Startup(
     IDatabaseMigrationsService databaseMigrationsService,
     ILoggerFactory loggerFactory)
 {
+    /// <summary>
+    /// Executes the database migration using the provided <see cref="OutboxDbContext"/>.
+    /// </summary>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
     public async Task StartMigrationAsync(CancellationToken cancellationToken)
     {
         var logger = loggerFactory.CreateLogger<Startup>();
