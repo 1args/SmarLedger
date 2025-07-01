@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Common.Infrastructure.Configurations;
 using SmartLedger.Common.Infrastructure.Repositories;
+using SmartLedger.Common.Infrastructure.Transactions;
 
 namespace SmartLedger.Common.Infrastructure.Extensions;
 
@@ -28,7 +29,8 @@ public static class DataAccessExtensions
         services
             .AddSingleton<IDbContextOptionsConfigurator<TDbContext>, TDbContextConfigurator>()
             .AddScoped<DbContext>(sp => sp.GetRequiredService<TDbContext>())
-            .AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            .AddScoped(typeof(IRepository<,>), typeof(Repository<,>))
+            .AddScoped<ITransactionManager, TransactionManager>();
 
         return services;
     }

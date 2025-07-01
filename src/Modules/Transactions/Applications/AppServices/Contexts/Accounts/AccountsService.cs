@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
@@ -15,6 +16,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 public sealed class AccountsService(
     IRepository<Account, TransactionsWriteDbContext> accountsRepository,
     IRepository<Transaction, TransactionsWriteDbContext> transactionsRepository,
+    ITransactionManager transactionManager,
     ILogger<AccountsService> logger): IAccountsService
 {
     /// <inheritdoc />
@@ -53,8 +55,11 @@ public sealed class AccountsService(
 
         account.ApplyTransaction(transaction);
 
-        await transactionsRepository.AddAsync(transaction, cancellationToken);
-        await accountsRepository.UpdateAsync(account, cancellationToken);
+        await transactionManager.StartEffect(async ct =>
+        {
+            await transactionsRepository.AddAsync(transaction, ct);
+            await accountsRepository.UpdateAsync(account, ct);
+        }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
             "Transaction added successfully to account `{AccountId}` with transaction ID `{TransactionId}`.",
@@ -89,8 +94,11 @@ public sealed class AccountsService(
 
         account.RevertTransaction(transaction);
 
-        await transactionsRepository.DeleteAsync(transaction, cancellationToken);
-        await accountsRepository.UpdateAsync(account, cancellationToken);
+        await transactionManager.StartEffect(async ct =>
+        {
+            await transactionsRepository.DeleteAsync(transaction, cancellationToken);
+            await accountsRepository.UpdateAsync(account, cancellationToken);
+        }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` removed successfully from account `{AccountId}`.",

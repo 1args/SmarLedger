@@ -1,12 +1,13 @@
 ﻿using MassTransit;
+using MassTransit.Observables;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events;
 
-namespace SmartLedger.Common.Infrastructure.Extensions;
+namespace SmartLedger.Hosts.Api.Extensions;
 
 /// <summary>
 /// Extension for configuring a message broker using MassTransit and RabbitMQ.
@@ -39,10 +40,14 @@ public static class MessageBrokerExtensions
 
             cfg.SetKebabCaseEndpointNameFormatter();
 
+            cfg.AddConsumers(typeof(AccountCreatedEventConsumer).Assembly);
+
             cfg.UsingRabbitMq((context, rmqCfg) =>
             {
                 rmqCfg.Host(options.HostName, options.VirtualHost, hostCfg =>
                 {
+                    rmqCfg.ConnectReceiveObserver(new ReceiveObservable());
+                    rmqCfg.ConnectSendObserver(new SendObservable());
                     hostCfg.Username(options.Username);
                     hostCfg.Password(options.Password);
                 });

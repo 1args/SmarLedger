@@ -13,7 +13,7 @@ public sealed class TransactionReadModelConfiguration : IEntityTypeConfiguration
     /// <inheritdoc />
     public void Configure(EntityTypeBuilder<TransactionReadModel> builder)
     {
-        builder.ToTable("TransactionReadModel");
+        builder.ToTable("Transactions");
 
         builder.HasKey(t => t.Id);
 
@@ -52,23 +52,23 @@ public sealed class TransactionReadModelConfiguration : IEntityTypeConfiguration
             .IsRequired();
 
         builder.HasIndex(t => t.AccountId)
-            .HasDatabaseName("idx_transactionreadmodel_accountid")
+            .HasDatabaseName("idx_transactions_accountid")
             .IsUnique(false); 
 
         builder.HasIndex(t => t.UserId)
-            .HasDatabaseName("idx_transactionreadmodel_userid")
+            .HasDatabaseName("idx_transactions_userid")
             .IsUnique(false); 
 
         builder.HasIndex(t => new { t.UserId, t.CreatedAt })
-            .HasDatabaseName("idx_transactionreadmodel_userid_createdat")
+            .HasDatabaseName("idx_transactions_userid_createdat")
             .IsUnique(false); 
 
         builder.HasIndex(t => new { t.AccountId, t.Category, t.CreatedAt })
-            .HasDatabaseName("idx_transactionreadmodel_accountid_category_createdat")
+            .HasDatabaseName("idx_transactions_accountid_category_createdat")
             .IsUnique(false);
 
         builder.HasIndex(t => new { t.UserId, t.Type, t.CreatedAt })
-            .HasDatabaseName("idx_transactionreadmodel_userid_type_createdat")
+            .HasDatabaseName("idx_transactions_userid_type_createdat")
             .IsUnique(false); 
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Options;
+using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Common.Infrastructure.Events;
-using SmartLedger.Common.Infrastructure.Extensions;
 using SmartLedger.Hosts.Api.ExceptionHandling;
 
 namespace SmartLedger.Hosts.Api.Extensions;
@@ -25,6 +25,18 @@ public static class ApiExtensions
             .AddGlobalExceptionHandler()
             .AddDateTimeProvider()
             .AddConfiguredMessageBroker(configuration);
+
+        return services;
+    }
+
+    /// <summary>
+    /// Registers decorators.
+    /// </summary>
+    public static IServiceCollection AddDecorators(this IServiceCollection services)
+    {
+        services
+            .AddRequestValidationDecorators()
+            .AddTransactionDecorators<OutboxDbContext>();
 
         return services;
     }

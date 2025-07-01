@@ -4,8 +4,10 @@ using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+using IsolationLevel = System.Data.IsolationLevel;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 
@@ -13,6 +15,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 public sealed class AccountsSynchronizationService(
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
     IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
+    ITransactionManager transactionManager,
     ILogger<AccountsSynchronizationService> logger) : IAccountsSynchronizationService
 {
     /// <inheritdoc />
@@ -25,6 +28,7 @@ public sealed class AccountsSynchronizationService(
         var account = new AccountReadModel
         {
             Id = request.AccountId,
+            UserId = request.UserId,
             Name = request.Name,
             Balance = 0.0m,
             CreatedAt = request.CreatedAt,
@@ -58,7 +62,13 @@ public sealed class AccountsSynchronizationService(
             CreatedAt = request.CreatedAt
         };
 
-        await transactionsRepository.AddAsync(transaction, cancellationToken);
+        account.Balance += request.Amount;
+
+        await transactionManager.StartEffect(async ct =>
+        {
+            await transactionsRepository.AddAsync(transaction, ct);
+            await accountsRepository.UpdateAsync(account, ct);
+        }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
             "Transaction addition with ID `{TransactionId}` synchronized successfully for account `{AccountId}`.",
@@ -72,6 +82,8 @@ public sealed class AccountsSynchronizationService(
             "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`.",
             request.TransactionId, request.AccountId);
 
+        var account = await GetAccountAsync(request.AccountId, cancellationToken);
+
         var transaction = await transactionsRepository
             .Where(t => t.Id == request.TransactionId)
             .SingleOrDefaultAsync(cancellationToken);
@@ -82,7 +94,13 @@ public sealed class AccountsSynchronizationService(
             throw new ReadableException($"Transaction with ID '{request.AccountId}' was not found in synchronization context.");
         }
 
-        await transactionsRepository.DeleteAsync(transaction, cancellationToken);
+        account.Balance -= transaction.Amount;
+
+        await transactionManager.StartEffect(async ct =>
+        {
+            await accountsRepository.UpdateAsync(account, ct);
+            await transactionsRepository.DeleteAsync(transaction, ct);
+        }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
             "Transaction removal with ID `{TransactionId}` synchronized successfully for account `{AccountId}`.",

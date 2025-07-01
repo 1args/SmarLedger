@@ -15,7 +15,7 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
                 name: "read");
 
             migrationBuilder.CreateTable(
-                name: "AccountReadModel",
+                name: "Accounts",
                 schema: "read",
                 columns: table => new
                 {
@@ -28,11 +28,11 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccountReadModel", x => x.uuid);
+                    table.PrimaryKey("PK_Accounts", x => x.uuid);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TransactionReadModel",
+                name: "Transactions",
                 schema: "read",
                 columns: table => new
                 {
@@ -49,49 +49,49 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TransactionReadModel", x => x.uuid);
+                    table.PrimaryKey("PK_Transactions", x => x.uuid);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "idx_accountreadmodel_userid",
+                name: "idx_accounts_userid",
                 schema: "read",
-                table: "AccountReadModel",
+                table: "Accounts",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "idx_accountreadmodel_userid_createdat",
+                name: "idx_accounts_userid_createdat",
                 schema: "read",
-                table: "AccountReadModel",
+                table: "Accounts",
                 columns: new[] { "UserId", "CreatedAt" });
 
             migrationBuilder.CreateIndex(
-                name: "idx_transactionreadmodel_accountid",
+                name: "idx_transactions_accountid",
                 schema: "read",
-                table: "TransactionReadModel",
+                table: "Transactions",
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
-                name: "idx_transactionreadmodel_accountid_category_createdat",
+                name: "idx_transactions_accountid_category_createdat",
                 schema: "read",
-                table: "TransactionReadModel",
+                table: "Transactions",
                 columns: new[] { "AccountId", "Category", "CreatedAt" });
 
             migrationBuilder.CreateIndex(
-                name: "idx_transactionreadmodel_userid",
+                name: "idx_transactions_userid",
                 schema: "read",
-                table: "TransactionReadModel",
+                table: "Transactions",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "idx_transactionreadmodel_userid_createdat",
+                name: "idx_transactions_userid_createdat",
                 schema: "read",
-                table: "TransactionReadModel",
+                table: "Transactions",
                 columns: new[] { "UserId", "CreatedAt" });
 
             migrationBuilder.CreateIndex(
-                name: "idx_transactionreadmodel_userid_type_createdat",
+                name: "idx_transactions_userid_type_createdat",
                 schema: "read",
-                table: "TransactionReadModel",
+                table: "Transactions",
                 columns: new[] { "UserId", "Type", "CreatedAt" });
         }
 
@@ -99,11 +99,11 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AccountReadModel",
+                name: "Accounts",
                 schema: "read");
 
             migrationBuilder.DropTable(
-                name: "TransactionReadModel",
+                name: "Transactions",
                 schema: "read");
         }
     }

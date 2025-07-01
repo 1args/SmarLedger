@@ -22,7 +22,9 @@ public static class WebApplicationExtensions
         }
 
         app.UseHttpsRedirection();
+        app.UseExceptionHandler();
         app.MapApiEndpoints();
+
 
         return app;
     }

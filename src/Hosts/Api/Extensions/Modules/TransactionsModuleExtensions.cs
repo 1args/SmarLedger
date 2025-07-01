@@ -1,8 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using SmartLedger.Common.Applications.AppServices.Extensions;
-using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Common.Applications.Handlers.Extensions;
+﻿using SmartLedger.Common.Applications.Handlers.Extensions;
 using SmartLedger.Common.Infrastructure.Extensions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
@@ -13,7 +9,7 @@ using SmartLedger.Modules.Transactions.Infrastructure.Configurators;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
-namespace SmartLedger.Modules.Transactions.Applications.AppServices.Extensions;
+namespace SmartLedger.Hosts.Api.Extensions.Modules;
 
 /// <summary>
 /// Extensions for registering the Transactions module.

@@ -17,8 +17,8 @@ public class PaginatedQuery<TResponse>(
     where TResponse : class
 {
     /// <inheritdoc />
-    public int PageNumber { get; set; }
+    public int PageNumber { get; set; } = pageNumber;
 
     /// <inheritdoc />
-    public int PageSize { get; set; }
+    public int PageSize { get; set; } = pageSize;
 }

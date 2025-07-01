@@ -6,8 +6,8 @@
 public enum TransactionType
 {
     /// <summary>Income transaction (funds coming into the account).</summary>
-    Income = 0,
+    Income = 1,
 
     /// <summary>Expense transaction (funds going out from the account).</summary>
-    Expense = 1,
+    Expense = 2,
 }

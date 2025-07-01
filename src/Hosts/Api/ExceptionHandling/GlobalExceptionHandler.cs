@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Domain.Exceptions;
@@ -31,6 +32,7 @@ public sealed class GlobalExceptionHandler(
         {
             DomainValidationException => (StatusCodes.Status400BadRequest, "Bad Request", exception.Message),
             NotFoundException => (StatusCodes.Status404NotFound, "Not Found", exception.Message),
+            ValidationException => (StatusCodes.Status400BadRequest, "Validation error", exception.Message),
             ConflictException => (StatusCodes.Status409Conflict, "Conflict", exception.Message),
             _ => (StatusCodes.Status500InternalServerError, "Internal Server Error",
                 "An unexpected error occurred. Please try again later.")

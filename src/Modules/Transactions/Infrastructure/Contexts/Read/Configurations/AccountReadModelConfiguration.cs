@@ -13,7 +13,7 @@ public sealed class AccountReadModelConfiguration : IEntityTypeConfiguration<Acc
     /// <inheritdoc />
     public void Configure(EntityTypeBuilder<AccountReadModel> builder)
     {
-        builder.ToTable("AccountReadModel");
+        builder.ToTable("Accounts");
 
         builder.HasKey(a => a.Id);
 
@@ -41,11 +41,11 @@ public sealed class AccountReadModelConfiguration : IEntityTypeConfiguration<Acc
             .IsRequired();
 
         builder.HasIndex(a => a.UserId)
-            .HasDatabaseName("idx_accountreadmodel_userid")
+            .HasDatabaseName("idx_accounts_userid")
             .IsUnique(false);
 
         builder.HasIndex(a => new { a.UserId, a.CreatedAt })
-            .HasDatabaseName("idx_accountreadmodel_userid_createdat")
+            .HasDatabaseName("idx_accounts_userid_createdat")
             .IsUnique(false); 
     }
 }

@@ -54,12 +54,12 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("idx_accountreadmodel_userid");
+                        .HasDatabaseName("idx_accounts_userid");
 
                     b.HasIndex("UserId", "CreatedAt")
-                        .HasDatabaseName("idx_accountreadmodel_userid_createdat");
+                        .HasDatabaseName("idx_accounts_userid_createdat");
 
-                    b.ToTable("AccountReadModel", "read");
+                    b.ToTable("Accounts", "read");
                 });
 
             modelBuilder.Entity("SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models.TransactionReadModel", b =>
@@ -107,21 +107,21 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId")
-                        .HasDatabaseName("idx_transactionreadmodel_accountid");
+                        .HasDatabaseName("idx_transactions_accountid");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("idx_transactionreadmodel_userid");
+                        .HasDatabaseName("idx_transactions_userid");
 
                     b.HasIndex("UserId", "CreatedAt")
-                        .HasDatabaseName("idx_transactionreadmodel_userid_createdat");
+                        .HasDatabaseName("idx_transactions_userid_createdat");
 
                     b.HasIndex("AccountId", "Category", "CreatedAt")
-                        .HasDatabaseName("idx_transactionreadmodel_accountid_category_createdat");
+                        .HasDatabaseName("idx_transactions_accountid_category_createdat");
 
                     b.HasIndex("UserId", "Type", "CreatedAt")
-                        .HasDatabaseName("idx_transactionreadmodel_userid_type_createdat");
+                        .HasDatabaseName("idx_transactions_userid_type_createdat");
 
-                    b.ToTable("TransactionReadModel", "read");
+                    b.ToTable("Transactions", "read");
                 });
 #pragma warning restore 612, 618
         }

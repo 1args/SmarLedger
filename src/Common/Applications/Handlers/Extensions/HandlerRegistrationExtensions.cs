@@ -60,34 +60,29 @@ public static class HandlerRegistrationExtensions
 
         var handlerInterfaces = new[]
         {
-            typeof(IQueryHandler<,>),
+            typeof(ICommandHandler<>),
             typeof(ICommandHandler<,>),
-            typeof(ICommandHandler<>)
+            typeof(IQueryHandler<,>),
         };
 
         var handlerTypes = assembly.DefinedTypes
             .Where(t => t.IsConcrete() && !t.IsOpenGenericType())
-            .Select(t => new
-            {
-                Type = t.AsType(),
-                Interfaces = t.GetInterfaces()
-                    .Where(i => i.IsGenericType)
-                    .Select(i => i.GetGenericTypeDefinition())
-                    .Intersect(handlerInterfaces)
-                    .ToList()
-            });
+            .Where(t => Array.Exists(
+                t.GetInterfaces(),
+                i => i.IsGenericType && handlerInterfaces.Contains(i.GetGenericTypeDefinition())))
+            .ToList();
 
-        foreach (var handler in handlerTypes)
-        {
-            foreach (var interfaceType in handler.Interfaces)
+        foreach (var handlerType in handlerTypes)
+        { 
+            var interfaces = handlerType.GetInterfaces()
+               .Where(i => i.IsGenericType && handlerInterfaces.Contains(i.GetGenericTypeDefinition()));
+            
+            foreach (var @interface in interfaces)
             {
-                var concreteInterface = handler.Type.GetInterfaces()
-                    .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == interfaceType);
-
-                services.TryAddScoped(concreteInterface, handler.Type);
+               services.TryAddScoped(@interface, handlerType);
             }
         }
-        
+
         return services;
     }
 
@@ -114,9 +109,9 @@ public static class HandlerRegistrationExtensions
             var concreteInterface = eventConsumerType.GetInterfaces()
                 .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == eventConsumerInterface);
 
-            services.AddScoped(concreteInterface, eventConsumerType);
+            services.TryAddScoped(concreteInterface, eventConsumerType);
 
-            services.AddScoped(typeof(IConsumer<>).MakeGenericType(
+            services.TryAddScoped(typeof(IConsumer<>).MakeGenericType(
                 concreteInterface.GetGenericArguments()[0]),
                 eventConsumerType);
         }

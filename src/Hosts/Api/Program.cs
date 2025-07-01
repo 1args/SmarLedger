@@ -1,6 +1,5 @@
-using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Hosts.Api.Extensions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Extensions;
+using SmartLedger.Hosts.Api.Extensions.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

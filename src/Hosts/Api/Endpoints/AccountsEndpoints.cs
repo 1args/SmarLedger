@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
@@ -62,7 +62,7 @@ public static class AccountsEndpoints
     /// </summary>
     private static async Task<IResult> CreateAccountAsync(
         [FromBody] CreateAccountRequest request,
-        [FromServices] CreateAccountCommandHandler handler,
+        [FromServices] ICommandHandler<CreateAccountCommand, Guid> handler,
         CancellationToken cancellationToken)
     {
         var command = new CreateAccountCommand(request.Name, request.UserId);
@@ -75,8 +75,8 @@ public static class AccountsEndpoints
     /// Handles the deletion of an existing account.
     /// </summary>
     private static async Task<IResult> DeleteAccountAsync(
-        [FromRoute, BindRequired] Guid accountId,
-        [FromServices] DeleteAccountCommandHandler handler,
+        [FromRoute] Guid accountId,
+        [FromServices] ICommandHandler<DeleteAccountCommand> handler,
         CancellationToken cancellationToken)
     {
         var command = new DeleteAccountCommand(accountId);
@@ -89,9 +89,9 @@ public static class AccountsEndpoints
     /// Handles the addition of a transaction to an account.
     /// </summary>
     private static async Task<IResult> AddTransactionAsync(
-        [FromRoute, BindRequired] Guid accountId,
-        [FromBody, BindRequired] AddTransactionRequest request,
-        [FromServices] AddTransactionCommandHandler handler,
+        [FromRoute] Guid accountId,
+        [FromBody] AddTransactionRequest request,
+        [FromServices] ICommandHandler<AddTransactionCommand> handler,
         CancellationToken cancellationToken)
     {
         var command = new AddTransactionCommand(
@@ -105,9 +105,9 @@ public static class AccountsEndpoints
     /// Handles the removal of a transaction from an account.
     /// </summary>
     private static async Task<IResult> RemoveTransactionAsync(
-        [FromRoute, BindRequired] Guid accountId,
-        [FromRoute, BindRequired] Guid transactionId,
-        [FromServices] RemoveTransactionCommandHandler handler,
+        [FromRoute] Guid accountId,
+        [FromRoute] Guid transactionId,
+        [FromServices] ICommandHandler<RemoveTransactionCommand> handler,
         CancellationToken cancellationToken)
     {
         var command = new RemoveTransactionCommand(accountId, transactionId);

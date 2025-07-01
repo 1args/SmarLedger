@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Applications\SmartLedger.Common.Applications.csproj" />
+    <ProjectReference Include="..\Applications\Handlers\SmartLedger.Common.Applications.Handlers.csproj" />
   </ItemGroup>
 
 </Project>

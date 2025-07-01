@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 using SmartLedger.Modules.Transactions.Domain.Enums;
 
-namespace SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
+namespace SmartLedger.Modules.Transactions.Contracts.Events;
 
 /// <summary>
 /// Event triggered when a transaction is assigned a new category.

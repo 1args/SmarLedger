@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.CategorizeTransaction;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.UpdateTransactionAmount;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
@@ -45,9 +45,9 @@ public static class TransactionsEndpoints
     /// Updates the amount of a specific transaction.
     /// </summary>
     private static async Task<IResult> UpdateTransactionAmountAsync(
-        [FromRoute, BindRequired] Guid transactionId,
-        [FromBody, BindRequired] UpdateTransactionAmountRequest request,
-        [FromServices] UpdateTransactionAmountCommandHandler handler,
+        [FromRoute] Guid transactionId,
+        [FromBody] UpdateTransactionAmountRequest request,
+        [FromServices] ICommandHandler<UpdateTransactionAmountCommand> handler,
         CancellationToken cancellationToken)
     {
         var command = new UpdateTransactionAmountCommand(transactionId, request.NewAmount);
@@ -60,9 +60,9 @@ public static class TransactionsEndpoints
     /// Updates the category of a specific transaction.
     /// </summary>
     private static async Task<IResult> CategorizeTransactionAmountAsync(
-        [FromRoute, BindRequired] Guid transactionId,
-        [FromBody, BindRequired] CategorizeTransactionRequest request,
-        [FromServices] CategorizeTransactionCommandHandler handler,
+        [FromRoute] Guid transactionId,
+        [FromBody] CategorizeTransactionRequest request,
+        [FromServices] ICommandHandler<CategorizeTransactionCommand> handler,
         CancellationToken cancellationToken)
     {
         var command = new CategorizeTransactionCommand(transactionId, request.NewCategory);

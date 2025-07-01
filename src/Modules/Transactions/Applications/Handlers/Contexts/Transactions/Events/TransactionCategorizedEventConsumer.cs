@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
-using SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
+using SmartLedger.Modules.Transactions.Contracts.Events;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Events;
 

@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Contracts\SmartLedger.Common.Contracts.csproj" />
-    <ProjectReference Include="..\Domain\SmartLedger.Modules.Transactions.Domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
   </ItemGroup>
 
 </Project>

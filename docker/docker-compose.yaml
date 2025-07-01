@@ -17,13 +17,13 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - postgres-write-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - smartledger-network
 
   # PgAdmin
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:9.5
     container_name: smart-ledger-pgadmin
     restart: on-failure
     environment:
@@ -62,8 +62,7 @@ services:
       - smartledger-network
 
 volumes:
-  postgres-read-data:
-  postgres-write-data:
+  postgres-data:
   pgadmin-data:  
   rabbitmq-data:  
 

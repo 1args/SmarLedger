@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 
-namespace SmartLedger.Modules.Transactions.Infrastructure.Events.Declarations;
+namespace SmartLedger.Modules.Transactions.Contracts.Events;
 
 /// <summary>
 /// Event triggered when a transaction is removed.
