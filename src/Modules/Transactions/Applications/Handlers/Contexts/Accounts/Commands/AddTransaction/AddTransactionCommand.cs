@@ -16,4 +16,4 @@ public sealed record AddTransactionCommand(
     decimal Amount,
     TransactionType Type,
     TransactionCategory Category,
-    string Notes) : ICommand;
+    string Notes) : ICommand<Guid>;

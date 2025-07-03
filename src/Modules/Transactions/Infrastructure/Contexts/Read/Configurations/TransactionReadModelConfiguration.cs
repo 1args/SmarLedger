@@ -19,7 +19,7 @@ public sealed class TransactionReadModelConfiguration : IEntityTypeConfiguration
 
         builder.Property(t => t.Id)
             .IsGuid()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedNever();
 
         builder.Property(t => t.AccountId)
             .IsRequired();

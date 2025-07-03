@@ -2,7 +2,10 @@
 using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.CategorizeTransaction;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.UpdateTransactionAmount;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
+using SmartLedger.Modules.Transactions.Contracts.Responses;
+using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
@@ -38,6 +41,14 @@ public static class TransactionsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
+        endpoints.MapGet("/{transactionId:guid}", GetTransactionAsync)
+            .WithName("GetTransaction")
+            .WithSummary("Retrieves a transaction by its identifier.")
+            .WithDescription("Retrieves the transaction details for the specified transaction ID.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
         return app;
     }
 
@@ -69,5 +80,19 @@ public static class TransactionsEndpoints
         await handler.HandleAsync(command, cancellationToken);
 
         return Results.Ok();
+    }
+
+    /// <summary>
+    /// Retrieves transaction details by its ID.
+    /// </summary>
+    private static async Task<IResult> GetTransactionAsync(
+        [FromRoute] Guid transactionId,
+        [FromServices] IQueryHandler<GetTransactionQuery, TransactionReadModel> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetTransactionQuery(transactionId);
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
     }
 }

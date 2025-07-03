@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
-using IsolationLevel = System.Data.IsolationLevel;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 
@@ -59,7 +58,8 @@ public sealed class AccountsSynchronizationService(
             Category = request.Category.ToString(),
             Notes = request.Notes,
             AccountName = account.Name,
-            CreatedAt = request.CreatedAt
+            CreatedAt = request.CreatedAt,
+            LastUpdatedAt = request.CreatedAt
         };
 
         account.Balance += request.Amount;
@@ -76,7 +76,7 @@ public sealed class AccountsSynchronizationService(
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeTransactionRemovalAsync(TransactionRemovalModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeTransactionRemovalAsync(TransactionRemovalSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`.",
@@ -95,6 +95,7 @@ public sealed class AccountsSynchronizationService(
         }
 
         account.Balance -= transaction.Amount;
+        account.LastUpdatedAt = request.AccountUpdatedAt;
 
         await transactionManager.StartEffect(async ct =>
         {

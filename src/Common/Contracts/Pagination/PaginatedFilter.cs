@@ -3,7 +3,7 @@
 /// <summary>
 /// Filter for pagination.
 /// </summary>
-public sealed class PaginatedFilter
+public record PaginatedFilter
 {
     public const int MaxPageSize = 100;
 

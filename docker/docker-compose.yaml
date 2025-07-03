@@ -61,10 +61,30 @@ services:
     networks:
       - smartledger-network
 
+  # Redis
+  redis:
+    container_name: postit-redis
+    image: redis:7.2-alpine
+    restart: on-failure
+    command: >
+      --requirepass p4ssword
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - redis-data:/data
+    networks:
+      - redis-data
+
 volumes:
   postgres-data:
   pgadmin-data:  
-  rabbitmq-data:  
+  rabbitmq-data: 
+  redis-data:
 
 networks:
   smartledger-network:

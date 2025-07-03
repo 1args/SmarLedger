@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
@@ -12,6 +13,8 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Tra
 /// <inheritdoc />
 public sealed class TransactionsSynchronizationService(
     IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
+    IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
+    ITransactionManager transactionManager,
     ILogger<TransactionsSynchronizationService> logger) : ITransactionsSynchronizationService
 {
     /// <inheritdoc />
@@ -22,11 +25,26 @@ public sealed class TransactionsSynchronizationService(
             request.TransactionId, request.NewAmount);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
+        var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
+
+        var amountDifference = request.NewAmount - transaction.Amount;
 
         transaction.Amount = request.NewAmount;
         transaction.LastUpdatedAt = request.UpdatedAt;
 
-        await transactionsRepository.UpdateAsync(transaction, cancellationToken);
+        account.Balance = transaction.Type switch
+        {
+            "Income" => account.Balance + amountDifference,
+            "Expense" => account.Balance - amountDifference,
+            _ => account.Balance 
+        };
+        account.LastUpdatedAt = request.UpdatedAt;
+
+        await transactionManager.StartEffect(async ct =>
+        {
+            await transactionsRepository.UpdateAsync(transaction, ct);
+            await accountsRepository.UpdateAsync(account, ct);
+        }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
             "Transaction amount for transaction ID `{TransactionId}` synchronized successfully.",
@@ -68,5 +86,23 @@ public sealed class TransactionsSynchronizationService(
         }
 
         return transaction;
+    }
+
+    /// <summary>
+    /// Retrieves an account by its ID or throws if not found.
+    /// </summary>
+    private async Task<AccountReadModel> GetAccountAsync(Guid accountId, CancellationToken cancellationToken)
+    {
+        var account = await accountsRepository
+            .Where(a => a.Id == accountId)
+            .SingleOrDefaultAsync(cancellationToken);
+
+        if (account is null)
+        {
+            logger.LogWarning("Account with ID `{AccountId}` not found in synchronization context.", accountId);
+            throw new NotFoundException($"Account with ID '{accountId}' was not found in synchronization context.");
+        }
+
+        return account;
     }
 }

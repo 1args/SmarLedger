@@ -26,7 +26,7 @@ public interface IAccountsSynchronizationService
     /// </summary>
     /// <param name="request">Model containing transaction ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task SynchronizeTransactionRemovalAsync(TransactionRemovalModel request, CancellationToken cancellationToken);
+    Task SynchronizeTransactionRemovalAsync(TransactionRemovalSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Synchronizes the deletion of an account.

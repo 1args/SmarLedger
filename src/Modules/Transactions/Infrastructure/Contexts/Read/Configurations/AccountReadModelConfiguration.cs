@@ -19,7 +19,7 @@ public sealed class AccountReadModelConfiguration : IEntityTypeConfiguration<Acc
 
         builder.Property(a => a.Id)
             .IsGuid()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedNever();
 
         builder.Property(a => a.UserId)
             .IsRequired();

@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetPaginatedTransactions;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Accounts;
+using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
+using SmartLedger.Modules.Transactions.Contracts.Responses;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
@@ -28,7 +32,7 @@ public static class AccountsEndpoints
             .WithName("CreateAccount")
             .WithSummary("Creates a new account.")
             .WithDescription("Creates a new account with the specified name and user ID.")
-            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapDelete("/{accountId:guid}", DeleteAccountAsync)
@@ -54,6 +58,14 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
+        endpoints.MapPost("/{accountId:guid}/transactions/search", GetPaginatedTransactionsAsync)
+            .WithName("GetPaginatedTransactions")
+            .WithSummary("Retrieves a paginated list of transactions for the specified account.")
+            .WithDescription("Returns a paginated list of transactions associated with the given account ID.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
         return app;
     }
 
@@ -66,9 +78,9 @@ public static class AccountsEndpoints
         CancellationToken cancellationToken)
     {
         var command = new CreateAccountCommand(request.Name, request.UserId);
-        await handler.HandleAsync(command, cancellationToken);
+        var response = await handler.HandleAsync(command, cancellationToken);
 
-        return Results.Created();
+        return Results.Ok(response);
     }
 
     /// <summary>
@@ -91,14 +103,14 @@ public static class AccountsEndpoints
     private static async Task<IResult> AddTransactionAsync(
         [FromRoute] Guid accountId,
         [FromBody] AddTransactionRequest request,
-        [FromServices] ICommandHandler<AddTransactionCommand> handler,
+        [FromServices] ICommandHandler<AddTransactionCommand, Guid> handler,
         CancellationToken cancellationToken)
     {
         var command = new AddTransactionCommand(
             accountId, request.Amount, request.Type, request.Category, request.Notes);
-        await handler.HandleAsync(command, cancellationToken);
+        var response = await handler.HandleAsync(command, cancellationToken);
 
-        return Results.Ok();
+        return Results.Ok(response);
     }
 
     /// <summary>
@@ -114,5 +126,30 @@ public static class AccountsEndpoints
         await handler.HandleAsync(command, cancellationToken);
 
         return Results.Ok();
+    }
+
+    /// <summary>
+    /// Retrieves a paginated list of transactions for the specified account with optional filters.
+    /// </summary>
+    private static async Task<IResult> GetPaginatedTransactionsAsync(
+        [FromRoute] Guid accountId,
+        [FromBody] GetPaginatedTransactionsRequest request,
+        [FromServices] IQueryHandler<GetPaginatedTransactionsQuery, PaginatedList<TransactionResponse>> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetPaginatedTransactionsQuery(
+            request.PageNumber,
+            request.PageSize,
+            accountId, 
+            request.MinAmount, 
+            request.MaxAmount,
+            request.Type,
+            request.Category,
+            request.StartDate,
+            request.EndDate);
+
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
     }
 }

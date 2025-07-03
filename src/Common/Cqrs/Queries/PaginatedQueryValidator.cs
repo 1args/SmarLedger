@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Common.Cqrs.Query.Abstractions;
+using SmartLedger.Common.Cqrs.Queries.Abstractions;
 
 namespace SmartLedger.Common.Cqrs.Queries;
 

@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Common.Cqrs.Query.Abstractions;
+using SmartLedger.Common.Cqrs.Queries.Abstractions;
 
 namespace SmartLedger.Common.Cqrs.Queries;
 
@@ -8,17 +8,8 @@ namespace SmartLedger.Common.Cqrs.Queries;
 /// Represents pagination parameters for queries that support paging.
 /// </summary>
 /// <typeparam name="TResponse">Response type.</typeparam>
-/// <param name="pageNumber">Page number.</param>
-/// <param name="pageSize">Page size.</param>
-public class PaginatedQuery<TResponse>(
-    int pageNumber,
-    int pageSize)
+/// <param name="PageNumber">Page number.</param>
+/// <param name="PageSize">Page size.</param>
+public record PaginatedQuery<TResponse>(int PageNumber, int PageSize)
     : IQuery<PaginatedList<TResponse>>, IPaginatedQuery
-    where TResponse : class
-{
-    /// <inheritdoc />
-    public int PageNumber { get; set; } = pageNumber;
-
-    /// <inheritdoc />
-    public int PageSize { get; set; } = pageSize;
-}
+    where TResponse : class;

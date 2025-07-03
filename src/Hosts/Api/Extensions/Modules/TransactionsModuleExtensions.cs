@@ -50,8 +50,12 @@ public static class TransactionsModuleExtensions
         services
             .AddScoped<IAccountsService, AccountsService>()
             .AddScoped<IAccountsSynchronizationService, AccountsSynchronizationService>()
+            .AddScoped<IAccountsRetrievalService, AccountsRetrievalService>();
+
+        services
             .AddScoped<ITransactionsService, TransactionsService>()
-            .AddScoped<ITransactionsSynchronizationService, TransactionsSynchronizationService>();
+            .AddScoped<ITransactionsSynchronizationService, TransactionsSynchronizationService>()
+            .AddScoped<ITransactionsRetrievalService, TransactionsRetrievalService>();
 
         services
             .AddHandlersFromAssembly(typeof(CreateAccountCommandHandler).Assembly);

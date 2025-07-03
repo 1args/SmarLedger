@@ -13,10 +13,10 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 public sealed class AddTransactionCommandHandler(
     IAccountsService accountService,
     IDateTimeProvider dateTimeProvider,
-    IEventBus eventBus) : ICommandHandler<AddTransactionCommand>
+    IEventBus eventBus) : ICommandHandler<AddTransactionCommand, Guid>
 {
     /// <inheritdoc />
-    public async Task HandleAsync(AddTransactionCommand command, CancellationToken cancellationToken)
+    public async Task<Guid> HandleAsync(AddTransactionCommand command, CancellationToken cancellationToken)
     {
         var request = new TransactionAdditionModel(
             command.AccountId,
@@ -38,5 +38,7 @@ public sealed class AddTransactionCommandHandler(
                 request.CreatedAt,
                 request.Notes), 
             cancellationToken);
+
+        return transactionId;
     }
-}
+} 
