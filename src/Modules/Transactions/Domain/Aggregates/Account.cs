@@ -62,7 +62,7 @@ public sealed class Account : AggregateRoot<Guid>
 
         ArgumentNullException.ThrowIfNull(name, nameof(name));
 
-        return new Account(name, Money.Zero, userId, createdAt);
+        return new(name, Money.Zero, userId, createdAt);
     }
 
     /// <summary>

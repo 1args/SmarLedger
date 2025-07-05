@@ -40,7 +40,7 @@ public sealed class AccountName : ValueObject
         {
             throw new DomainValidationException(nameof(value), $"Account name cannot exceed '{MaxLength}' characters.");
         }
-        return new AccountName(value);
+        return new(value);
     }
 
     /// <inheritdoc />

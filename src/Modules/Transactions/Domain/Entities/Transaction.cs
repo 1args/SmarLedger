@@ -83,7 +83,7 @@ public sealed class Transaction : Entity<Guid>
         ArgumentNullException.ThrowIfNull(amount, nameof(amount));
         ArgumentNullException.ThrowIfNull(notes, nameof(notes));
 
-        return new Transaction(accountId, amount, type, category, createdAt, notes);
+        return new(accountId, amount, type, category, createdAt, notes);
     }
 
     /// <summary>

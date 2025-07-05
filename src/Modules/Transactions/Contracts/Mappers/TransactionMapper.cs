@@ -1,4 +1,4 @@
-﻿using SmartLedger.Modules.Transactions.Contracts.Responses;
+﻿using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Transactions.Contracts.Mappers;
@@ -12,14 +12,29 @@ public static class TransactionMapper
     /// Maps a <see cref="TransactionReadModel"/> to a <see cref="TransactionResponse"/>.
     /// </summary>
     /// <param name="transaction">Transaction read model to map.</param>
-    /// <returns><see cref="TransactionResponse"/> containing the mapped transaction data.</returns>
+    /// <returns><see cref="TransactionListItem"/> containing the mapped transaction data.</returns>
     public static TransactionResponse MapToResponse(this TransactionReadModel transaction) =>
-        new TransactionResponse(
-            TransactionId: transaction.Id,
-            Amount: transaction.Amount,
-            Type: transaction.Type,
-            Category: transaction.Category,
-            Notes: transaction.Notes,
-            CreatedAt: transaction.CreatedAt,
-            LastUpdatedAt: transaction.LastUpdatedAt);
+        new(transaction.Id,
+            transaction.AccountId,
+            transaction.AccountName, 
+            transaction.Amount, 
+            transaction.Type, 
+            transaction.Category, 
+            transaction.Notes,
+            transaction.CreatedAt, 
+            transaction.LastUpdatedAt);
+
+    /// <summary>
+    /// Maps a <see cref="TransactionReadModel"/> to a <see cref="TransactionListItem"/>.
+    /// </summary>
+    /// <param name="transaction">Transaction read model to map.</param>
+    /// <returns><see cref="TransactionListItem"/> containing the mapped transaction data.</returns>
+    public static TransactionListItem MapToListItem(this TransactionReadModel transaction) =>
+        new(transaction.Id,
+            transaction.Amount,
+            transaction.Type, 
+            transaction.Category,
+            transaction.Notes, 
+            transaction.CreatedAt, 
+            transaction.LastUpdatedAt);
 }

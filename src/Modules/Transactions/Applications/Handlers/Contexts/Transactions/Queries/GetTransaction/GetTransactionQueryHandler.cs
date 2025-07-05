@@ -1,7 +1,6 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
 
@@ -9,10 +8,10 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transa
 /// Handles the logic for processing <see cref="GetTransactionQuery"/>.
 /// </summary>
 public sealed class GetTransactionQueryHandler(
-    ITransactionsRetrievalService transactionsRetrievalService) : IQueryHandler<GetTransactionQuery, TransactionReadModel>
+    ITransactionsRetrievalService transactionsRetrievalService) : IQueryHandler<GetTransactionQuery, TransactionResponse>
 {
     /// <inheritdoc />
-    public async Task<TransactionReadModel> HandleAsync(GetTransactionQuery query, CancellationToken cancellationToken)
+    public async Task<TransactionResponse> HandleAsync(GetTransactionQuery query, CancellationToken cancellationToken)
     {
         var response = await transactionsRetrievalService.GetTransactionAsync(query.TransactionId, cancellationToken);
 

@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Cqrs.Queries;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetPaginatedTransactions;
 
@@ -24,4 +24,4 @@ public sealed record GetPaginatedTransactionsQuery(
     string? Type,
     string? Category,
     DateTime? StartDate,
-    DateTime? EndDate) : PaginatedQuery<TransactionResponse>(PageNumber, PageSize);
+    DateTime? EndDate) : PaginatedQuery<TransactionListItem>(PageNumber, PageSize);

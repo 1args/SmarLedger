@@ -1,7 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 
@@ -16,8 +15,14 @@ public interface ITransactionsRetrievalService
     /// <param name="transactionId">Transaction ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Returns a <see cref="TransactionResponse"/> containing the transaction details.</returns>
-    Task<TransactionReadModel> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken);
-    
-    Task<PaginatedList<TransactionResponse>> GetPaginatedTransactionsAsync(GetPaginatedTransactionsModel filter,
+    Task<TransactionResponse> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Retrieves a paginated list of transactions for a specific account.
+    /// </summary>
+    /// <param name="filter">Filter.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>Paginated list of transactions.</returns>
+    Task<PaginatedList<TransactionListItem>> GetPaginatedTransactionsAsync(GetPaginatedTransactionsModel filter,
         CancellationToken cancellationToken);
 }

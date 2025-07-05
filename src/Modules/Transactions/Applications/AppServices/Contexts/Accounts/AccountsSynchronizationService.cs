@@ -83,16 +83,7 @@ public sealed class AccountsSynchronizationService(
             request.TransactionId, request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
-
-        var transaction = await transactionsRepository
-            .Where(t => t.Id == request.TransactionId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (transaction is null)
-        {
-            logger.LogWarning("Transaction with ID `{AccountId}` was not found in synchronization context.", request.AccountId);
-            throw new ReadableException($"Transaction with ID '{request.AccountId}' was not found in synchronization context.");
-        }
+        var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         account.Balance -= transaction.Amount;
         account.LastUpdatedAt = request.AccountUpdatedAt;
@@ -135,5 +126,23 @@ public sealed class AccountsSynchronizationService(
         }
 
         return account;
+    }
+
+    /// <summary>
+    /// Retrieves transaction by its ID or throws if not found.
+    /// </summary>
+    private async Task<TransactionReadModel> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
+    {
+        var transaction = await transactionsRepository
+            .Where(t => t.Id == transactionId)
+            .SingleOrDefaultAsync(cancellationToken);
+
+        if (transaction is null)
+        {
+            logger.LogWarning("Transaction with ID `{TransactionId}` not found in synchronization context.", transactionId);
+            throw new ReadableException($"Transaction with ID '{transactionId}' was not found in synchronization context. ");
+        }
+
+        return transaction;
     }
 }

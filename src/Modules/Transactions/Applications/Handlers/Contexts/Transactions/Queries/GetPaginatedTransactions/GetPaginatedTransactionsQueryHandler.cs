@@ -2,7 +2,7 @@
 using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetPaginatedTransactions;
 
@@ -10,10 +10,10 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transa
 /// Handles the logic for processing <see cref="GetPaginatedTransactionsQuery"/>.
 /// </summary>
 public sealed class GetPaginatedTransactionsQueryHandler(
-    ITransactionsRetrievalService transactionsRetrievalService) : IQueryHandler<GetPaginatedTransactionsQuery, PaginatedList<TransactionResponse>>
+    ITransactionsRetrievalService transactionsRetrievalService) : IQueryHandler<GetPaginatedTransactionsQuery, PaginatedList<TransactionListItem>>
 {
     /// <inheritdoc />
-    public async Task<PaginatedList<TransactionResponse>> HandleAsync(GetPaginatedTransactionsQuery query, CancellationToken cancellationToken)
+    public async Task<PaginatedList<TransactionListItem>> HandleAsync(GetPaginatedTransactionsQuery query, CancellationToken cancellationToken)
     {
         var request = new GetPaginatedTransactionsModel(
             query.PageNumber,

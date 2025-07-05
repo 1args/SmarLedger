@@ -5,6 +5,7 @@ using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactio
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
 using SmartLedger.Modules.Transactions.Contracts.Responses;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
@@ -87,7 +88,7 @@ public static class TransactionsEndpoints
     /// </summary>
     private static async Task<IResult> GetTransactionAsync(
         [FromRoute] Guid transactionId,
-        [FromServices] IQueryHandler<GetTransactionQuery, TransactionReadModel> handler,
+        [FromServices] IQueryHandler<GetTransactionQuery, TransactionResponse> handler,
         CancellationToken cancellationToken)
     {
         var query = new GetTransactionQuery(transactionId);

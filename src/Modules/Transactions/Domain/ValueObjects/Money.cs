@@ -33,7 +33,7 @@ public sealed class Money : ValueObject
         {
             throw new DomainValidationException(nameof(value), "Amount cannot be negative.");
         }
-        return new Money(value);
+        return new(value);
     }
 
     /// <summary>

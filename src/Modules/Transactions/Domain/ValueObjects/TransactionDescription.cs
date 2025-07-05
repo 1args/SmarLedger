@@ -40,12 +40,12 @@ public sealed class TransactionDescription : ValueObject
         {
             throw new DomainValidationException(nameof(value), $"Transaction description cannot exceed '{MaxLength}' characters.");
         }
-        return new TransactionDescription(value);
+        return new(value);
     }
 
     /// <inheritdoc />
     protected override IEnumerable<object> GetEqualityComponents()
     {
-        throw new NotImplementedException();
+        yield return Value;
     }
 }

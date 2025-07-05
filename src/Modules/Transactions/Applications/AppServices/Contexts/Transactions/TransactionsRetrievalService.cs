@@ -8,7 +8,7 @@ using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transac
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Models;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Specifications;
 using SmartLedger.Modules.Transactions.Contracts.Mappers;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
@@ -20,11 +20,13 @@ public sealed class TransactionsRetrievalService(
     ILogger<ITransactionsRetrievalService> logger) : ITransactionsRetrievalService
 {
     /// <inheritdoc />
-    public async Task<TransactionReadModel> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
+    public async Task<TransactionResponse> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving transaction with ID `{TransactionId}`.", transactionId);
 
         var transaction = await transactionsRepository
+            .AsQueryable()
+            .AsNoTracking()
             .Where(t => t.Id == transactionId)
             .SingleOrDefaultAsync(cancellationToken);
 
@@ -36,15 +38,15 @@ public sealed class TransactionsRetrievalService(
 
         logger.LogInformation("Transaction with ID `{TransactionId}` retrieved successfully.", transactionId);
 
-        return transaction;
+        return transaction.MapToResponse();
     }
 
     /// <inheritdoc />
-    public async Task<PaginatedList<TransactionResponse>> GetPaginatedTransactionsAsync(
+    public async Task<PaginatedList<TransactionListItem>> GetPaginatedTransactionsAsync(
         GetPaginatedTransactionsModel filter, 
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated transactions for account with ID `{AccountId}`", filter.AccountId);
+        logger.LogInformation("Retrieving paginated transactions for account with ID `{AccountId}`.", filter.AccountId);
 
         var combinedSpecification = new TransactionByAccountIdSpecification(filter.AccountId)
             .And(new TransactionByAmountRangeSpecification(filter.MinAmount, filter.MaxAmount))
@@ -57,12 +59,10 @@ public sealed class TransactionsRetrievalService(
             .AsNoTracking()
             .Where(combinedSpecification)
             .OrderBy(t => t.CreatedAt)
-            .Select(t => t.MapToResponse());
+            .Select(t => t.MapToListItem());
 
-        var paginatedFilter = new PaginatedFilter(filter.PageNumber, filter.PageSize);
-
-        var paginatedTransactions = await PaginatedList<TransactionResponse>
-            .CreateAsync(query, paginatedFilter, cancellationToken);
+        var paginatedTransactions = await PaginatedList<TransactionListItem>
+            .CreateAsync(query, filter, cancellationToken);
 
         logger.LogInformation(
             "Successfully retrieved `{Count}` transactions (Page `{PageNumber}` of `{TotalPages}`) for account with ID `{AccountId}`.",

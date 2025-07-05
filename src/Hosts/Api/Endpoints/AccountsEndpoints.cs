@@ -5,10 +5,14 @@ using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.C
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetPaginatedTransactions;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Accounts;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
@@ -54,6 +58,22 @@ public static class AccountsEndpoints
             .WithName("RemoveTransaction")
             .WithSummary("Removes a transaction from an account")
             .WithDescription("Removes a specific transaction from the specified account.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
+        endpoints.MapGet("/{accountId:guid}", GetAccountAsync)
+            .WithName("GetAccount")
+            .WithSummary("Retrieves an account by its identifier.")
+            .WithDescription("Retrieves the account details for the specified account ID.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
+        endpoints.MapPost("/{userId:guid}/accounts/search", GetPaginatedAccountsAsync)
+            .WithName("GetPaginatedAccounts")
+            .WithSummary("Retrieves a paginated list of accounts for the specified user.")
+            .WithDescription("Returns a paginated list of accounts associated with the given user ID.")
             .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
@@ -129,12 +149,49 @@ public static class AccountsEndpoints
     }
 
     /// <summary>
+    /// Retrieves account details by its ID.
+    /// </summary>
+    private static async Task<IResult> GetAccountAsync(
+        [FromRoute] Guid accountId,
+        [FromServices] IQueryHandler<GetAccountQuery, AccountResponse> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetAccountQuery(accountId);
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
+    }
+
+    /// <summary>
+    /// Retrieves a paginated list of transactions for the specified account with optional filters.
+    /// </summary>
+    private static async Task<IResult> GetPaginatedAccountsAsync(
+        [FromRoute] Guid userId,
+        [FromBody] GetPaginatedAccountsRequest request,
+        [FromServices] IQueryHandler<GetPaginatedAccountsQuery, PaginatedList<AccountListItem>> handler,
+        CancellationToken cancellationToken)
+    {
+       var query = new GetPaginatedAccountsQuery(
+            request.PageNumber,
+            request.PageSize,
+            userId,
+            request.MinBalance,
+            request.MaxBalance,
+            request.StartDate,
+            request.EndDate);
+
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
+    }
+
+    /// <summary>
     /// Retrieves a paginated list of transactions for the specified account with optional filters.
     /// </summary>
     private static async Task<IResult> GetPaginatedTransactionsAsync(
         [FromRoute] Guid accountId,
         [FromBody] GetPaginatedTransactionsRequest request,
-        [FromServices] IQueryHandler<GetPaginatedTransactionsQuery, PaginatedList<TransactionResponse>> handler,
+        [FromServices] IQueryHandler<GetPaginatedTransactionsQuery, PaginatedList<TransactionListItem>> handler,
         CancellationToken cancellationToken)
     {
         var query = new GetPaginatedTransactionsQuery(
