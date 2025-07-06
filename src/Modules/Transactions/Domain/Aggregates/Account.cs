@@ -8,7 +8,7 @@ using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 namespace SmartLedger.Modules.Transactions.Domain.Aggregates;
 
 /// <summary>
-/// Represents an account.
+/// Represents a user's account.
 /// </summary>
 public sealed class Account : AggregateRoot<Guid>
 {

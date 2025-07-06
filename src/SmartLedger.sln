@@ -84,6 +84,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Applications.Handlers", "Modules\Transactions\Applications\Handlers\SmartLedger.Modules.Transactions.Applications.Handlers.csproj", "{F3891547-4443-4195-9092-4A7FEBD76D6F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Budgets", "Budgets", "{C11C76D3-5798-474E-A1CA-FE43B43A034E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3C6A2C82-E953-4830-ADB5-3BD6195C5193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Budgets.Domain", "Modules\Budgets\Domain\SmartLedger.Modules.Budgets.Domain.csproj", "{89AE83EE-1C66-4952-B9FB-9DE24F76966F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +156,10 @@ Global
 		{F3891547-4443-4195-9092-4A7FEBD76D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3891547-4443-4195-9092-4A7FEBD76D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3891547-4443-4195-9092-4A7FEBD76D6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89AE83EE-1C66-4952-B9FB-9DE24F76966F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89AE83EE-1C66-4952-B9FB-9DE24F76966F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89AE83EE-1C66-4952-B9FB-9DE24F76966F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89AE83EE-1C66-4952-B9FB-9DE24F76966F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,5 +200,8 @@ Global
 		{2058631F-FF51-40DB-A7E7-F1191E036EA8} = {37E4C15F-F2D8-4BB5-AE00-6E18833DAD3E}
 		{A1217DFC-8781-4AD5-B0CD-8C3DA56B5445} = {DB34BAA6-E37D-4F01-8BAA-56BE0024028F}
 		{F3891547-4443-4195-9092-4A7FEBD76D6F} = {2058631F-FF51-40DB-A7E7-F1191E036EA8}
+		{C11C76D3-5798-474E-A1CA-FE43B43A034E} = {B22AC098-0BA3-4FFE-97F8-6A22FE29CCA2}
+		{3C6A2C82-E953-4830-ADB5-3BD6195C5193} = {C11C76D3-5798-474E-A1CA-FE43B43A034E}
+		{89AE83EE-1C66-4952-B9FB-9DE24F76966F} = {3C6A2C82-E953-4830-ADB5-3BD6195C5193}
 	EndGlobalSection
 EndGlobal
