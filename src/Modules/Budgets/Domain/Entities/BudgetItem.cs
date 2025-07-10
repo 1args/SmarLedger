@@ -24,6 +24,9 @@ public sealed class BudgetItem : Entity<Guid>
     /// <summary>Current status of the item (e.g., Active, Exceeded).</summary>
     public BudgetItemStatus Status { get; private set; }
 
+    /// <summary>Date and time when budget item was created.</summary>
+    public DateTime CreatedAt { get; private set; }
+
     /// <summary>ID of the budget this item belongs to.</summary>
     public Guid BudgetId { get; private set; }
 
@@ -35,12 +38,13 @@ public sealed class BudgetItem : Entity<Guid>
     /// <summary>
     /// Private constructor used by factory method.
     /// </summary>
-    private BudgetItem(TransactionCategory category, BudgetItemLimit limit)
+    private BudgetItem(TransactionCategory category, BudgetItemLimit limit, DateTime createdAt)
     {
         Category = category;
         Limit = limit;
         SpentAmount = Money.Zero;
         Status = BudgetItemStatus.Active;
+        CreatedAt = createdAt;
     }
 
     /// <summary>
@@ -48,9 +52,10 @@ public sealed class BudgetItem : Entity<Guid>
     /// </summary>
     /// <param name="category">Transaction category.</param>
     /// <param name="limit">Spending limit for the category.</param>
+    /// <param name="createdAt">Date and time when budget item was created.</param>
     /// <returns>New instance of <see cref="BudgetItem"/>.</returns>
     /// <exception cref="DomainValidationException">Thrown if category is 'Unknown' or limit is null.</exception>
-    public static BudgetItem Create(TransactionCategory category, BudgetItemLimit limit)
+    public static BudgetItem Create(TransactionCategory category, BudgetItemLimit limit, DateTime createdAt)
     {
         ArgumentNullException.ThrowIfNull(limit, nameof(limit));
 
@@ -59,7 +64,7 @@ public sealed class BudgetItem : Entity<Guid>
             throw new DomainValidationException(nameof(category), "Transaction category cannot be 'Unknown'.");
         }
 
-        return new(category, limit);
+        return new(category, limit, createdAt);
     }
 
     /// <summary>

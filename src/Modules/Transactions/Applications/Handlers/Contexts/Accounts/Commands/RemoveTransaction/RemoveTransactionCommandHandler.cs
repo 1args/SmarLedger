@@ -17,13 +17,12 @@ public sealed class RemoveTransactionCommandHandler(
     public async Task HandleAsync(RemoveTransactionCommand command, CancellationToken cancellationToken)
     {
         var request = new TransactionRemovalModel(
-            command.AccountId,
-            command.TransactionId);
+            command.AccountId);
 
         await accountService.RemoveTransactionAsync(request, cancellationToken);
 
         await eventBus.PublishAsync(
-            new TransactionRemovedEvent(request.AccountId, request.TransactionId), 
+            new TransactionRemovedEvent(request.TransactionId), 
             cancellationToken);
     }
 }

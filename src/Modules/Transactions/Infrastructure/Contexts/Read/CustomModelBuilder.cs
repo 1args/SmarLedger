@@ -15,10 +15,12 @@ public static class CustomModelBuilder
     /// <param name="modelBuilder">Model builder used to configure entity mappings.</param>
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("read");
-        modelBuilder.SetDefaultDateTimeKind(DateTimeKind.Utc);
+        modelBuilder
+            .HasDefaultSchema("read")
+            .SetDefaultDateTimeKind(DateTimeKind.Utc);
 
-        modelBuilder.ApplyConfiguration(new AccountReadModelConfiguration());
-        modelBuilder.ApplyConfiguration(new TransactionReadModelConfiguration());
+        modelBuilder
+            .ApplyConfiguration(new AccountReadModelConfiguration())
+            .ApplyConfiguration(new TransactionReadModelConfiguration());
     }
 }

@@ -15,10 +15,12 @@ public static class CustomModelBuilder
     /// <param name="modelBuilder">Model builder used to configure entity mappings.</param>
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("write");
-        modelBuilder.SetDefaultDateTimeKind(DateTimeKind.Utc);
+        modelBuilder
+            .HasDefaultSchema("write")
+            .SetDefaultDateTimeKind(DateTimeKind.Utc);
 
-        modelBuilder.ApplyConfiguration(new AccountConfiguration());
-        modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+        modelBuilder
+            .ApplyConfiguration(new AccountConfiguration())
+            .ApplyConfiguration(new TransactionConfiguration());
     }
 }

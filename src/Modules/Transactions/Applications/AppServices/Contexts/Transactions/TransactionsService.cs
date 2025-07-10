@@ -29,12 +29,9 @@ public sealed class TransactionsService(
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
         var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
 
-        var oldMoney = transaction.Amount;
         var newMoney = Money.Create(request.NewAmount);
 
-        account.RevertTransaction(transaction);
-        transaction.UpdateAmount(newMoney);
-        account.ApplyTransaction(transaction);
+        transaction.UpdateAmount(account, newMoney);
 
         await transactionManager.StartEffect(async ct =>
         {

@@ -37,14 +37,14 @@ public sealed class Budget : AggregateRoot<Guid>
     /// Private constructor used by factory method.
     /// </summary>
     private Budget(
+        Guid userId,
         BudgetName name,
         BudgetPeriod period,
-        Guid userId,
         DateTime createAt)
     {
+        UserId = userId;
         Name = name;
         Period = period;
-        UserId = userId;
         CreatedAt = createAt;
     }
 
@@ -58,9 +58,9 @@ public sealed class Budget : AggregateRoot<Guid>
     /// <returns>New instance of <see cref="Budget"/>.</returns>
     /// <exception cref="DomainValidationException">Thrown when userId is empty or arguments are null.</exception>
     public static Budget Create(
+        Guid userId,
         BudgetName name,
         BudgetPeriod period,
-        Guid userId,
         DateTime createdAt)
     {
         if (userId == Guid.Empty)
@@ -71,7 +71,7 @@ public sealed class Budget : AggregateRoot<Guid>
         ArgumentNullException.ThrowIfNull(name, nameof(name));
         ArgumentNullException.ThrowIfNull(period, nameof(period));
 
-        return new(name, period, userId, createdAt);
+        return new(userId, name, period, createdAt);
     }
 
     /// <summary>

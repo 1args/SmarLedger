@@ -23,7 +23,7 @@ public sealed class AccountsService(
     public async Task<Guid> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Creating account with name `{Name}` for user `{UserId}`.", 
+            "Creating account with name `{Name}` for user with ID `{UserId}`.", 
             request.Name, request.UserId);
 
         var name = AccountName.Create(request.Name);
@@ -31,7 +31,8 @@ public sealed class AccountsService(
 
         await accountsRepository.AddAsync(account, cancellationToken);
 
-        logger.LogInformation("Account with ID `{AccountId}` created successfully.", account.Id);
+        logger.LogInformation("Account with ID `{AccountId}` created successfully for user with ID `{UserId}`.",
+            account.Id, account.UserId);
 
         return account.Id;
     }
@@ -63,7 +64,7 @@ public sealed class AccountsService(
 
         logger.LogInformation(
             "Transaction added successfully to account `{AccountId}` with transaction ID `{TransactionId}`.",
-            request.AccountId, transaction.Id);
+            account.Id, transaction.Id);
 
         return transaction.Id;
     }
@@ -71,25 +72,21 @@ public sealed class AccountsService(
     /// <inheritdoc />
     public async Task RemoveTransactionAsync(TransactionRemovalModel request, CancellationToken cancellationToken)
     {
+        var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
+
+        logger.LogInformation(
+            "Removing transaction with ID `{TransactionId}` from account with ID `{AccountId}`.",
+            transaction.Id, transaction.AccountId);
+
         var account = await accountsRepository
-            .Where(a => a.Id == request.AccountId)
+            .Where(a => a.Id == transaction.AccountId)
             .Include(a => a.Transactions)
-            .FirstOrDefaultAsync(cancellationToken);
+            .SingleOrDefaultAsync(cancellationToken);
 
         if (account is null)
         {
-            logger.LogWarning("Account with ID `{AccountId}` not found.", request.AccountId);
-            throw new NotFoundException($"Account with ID '{request.AccountId}' was not found");
-        }
-
-        var transaction = await transactionsRepository
-            .Where(t => t.Id == request.TransactionId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (transaction is null)
-        {
-            logger.LogWarning("Transaction with ID `{TransactionId}` not found.", request.TransactionId);
-            throw new NotFoundException($"Account with ID '{request.TransactionId}' was not found");
+            logger.LogWarning("Account with ID `{AccountId}` not found.", transaction.AccountId);
+            throw new NotFoundException($"Account with ID '{transaction.AccountId}' was not found");
         }
 
         account.RevertTransaction(transaction);
@@ -102,8 +99,8 @@ public sealed class AccountsService(
 
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` removed successfully from account `{AccountId}`.",
-            request.TransactionId,
-            request.AccountId);
+            transaction.Id,
+            account.Id);
     }
 
     /// <inheritdoc />
@@ -133,5 +130,23 @@ public sealed class AccountsService(
         }
 
         return account;
+    }
+
+    /// <summary>
+    /// Retrieves transaction by its ID or throws if not found.
+    /// </summary>
+    private async Task<Transaction> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
+    {
+        var transaction = await transactionsRepository
+            .Where(t => t.Id == transactionId)
+            .SingleOrDefaultAsync(cancellationToken);
+
+        if (transaction is null)
+        {
+            logger.LogWarning("Transaction with ID `{TransactionId}` not found.", transactionId);
+            throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
+        }
+
+        return transaction;
     }
 }

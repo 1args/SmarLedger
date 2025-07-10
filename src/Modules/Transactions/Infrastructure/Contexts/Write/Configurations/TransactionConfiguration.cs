@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartLedger.Common.Infrastructure.Configurators;
+using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Domain.Entities;
 
 namespace SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write.Configurations;
@@ -51,5 +52,10 @@ public sealed class TransactionConfiguration : IEntityTypeConfiguration<Transact
                 .HasMaxLength(500)
                 .IsRequired();
         });
+
+        builder.HasOne<Account>()
+            .WithMany(a => a.Transactions)
+            .HasForeignKey(t => t.AccountId)
+            .IsRequired();
     }
 }

@@ -12,7 +12,7 @@ using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbContext
 {
     [DbContext(typeof(TransactionsReadDbContext))]
-    [Migration("20250701213001_InitialCreate")]
+    [Migration("20250707205413_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,7 +29,6 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
             modelBuilder.Entity("SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models.AccountReadModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("uuid");
 
@@ -68,7 +67,6 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
             modelBuilder.Entity("SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models.TransactionReadModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("uuid");
 

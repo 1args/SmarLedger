@@ -26,7 +26,6 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
             modelBuilder.Entity("SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models.AccountReadModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("uuid");
 
@@ -65,7 +64,6 @@ namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbCon
             modelBuilder.Entity("SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models.TransactionReadModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("uuid");
 

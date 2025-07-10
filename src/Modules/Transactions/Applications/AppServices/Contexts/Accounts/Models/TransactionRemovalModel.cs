@@ -3,8 +3,6 @@
 /// <summary>
 /// Model used to remove a transaction from an account.
 /// </summary>
-/// <param name="AccountId">Account ID.</param>
 /// <param name="TransactionId">Transaction ID.</param>
 public sealed record TransactionRemovalModel(
-    Guid AccountId,
     Guid TransactionId);

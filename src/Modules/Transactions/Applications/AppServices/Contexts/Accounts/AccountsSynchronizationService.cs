@@ -62,7 +62,12 @@ public sealed class AccountsSynchronizationService(
             LastUpdatedAt = request.CreatedAt
         };
 
-        account.Balance += request.Amount;
+        account.Balance = transaction.Type switch
+        {
+            "Income" => account.Balance += transaction.Amount,
+            "Expense" => account.Balance -= transaction.Amount,
+            _ => account.Balance
+        };
 
         await transactionManager.StartEffect(async ct =>
         {
@@ -78,20 +83,27 @@ public sealed class AccountsSynchronizationService(
     /// <inheritdoc />
     public async Task SynchronizeTransactionRemovalAsync(TransactionRemovalSynchronizationModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation(
-            "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`.",
-            request.TransactionId, request.AccountId);
-
-        var account = await GetAccountAsync(request.AccountId, cancellationToken);
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
-        account.Balance -= transaction.Amount;
+        logger.LogInformation(
+            "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`.",
+            transaction.Id, transaction.AccountId);
+
+        var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
+
+        account.Balance = transaction.Type switch
+        {
+            "Income" => account.Balance -= transaction.Amount,
+            "Expense" => account.Balance += transaction.Amount,
+            _ => account.Balance
+        };
+
         account.LastUpdatedAt = request.AccountUpdatedAt;
 
         await transactionManager.StartEffect(async ct =>
         {
-            await accountsRepository.UpdateAsync(account, ct);
             await transactionsRepository.DeleteAsync(transaction, ct);
+            await accountsRepository.UpdateAsync(account, ct);
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(

@@ -12,7 +12,7 @@ using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.WriteDbContext
 {
     [DbContext(typeof(TransactionsWriteDbContext))]
-    [Migration("20250701213023_InitialCreate")]
+    [Migration("20250707205356_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

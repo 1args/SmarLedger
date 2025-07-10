@@ -1,5 +1,6 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
+using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Domain.Enums;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
@@ -89,15 +90,19 @@ public sealed class Transaction : Entity<Guid>
     /// <summary>
     /// Updates the amount of the transaction.
     /// </summary>
+    /// <param name="account">Account.</param>
     /// <param name="newAmount">New amount to assign.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="newAmount"/> is null.</exception>
-    public void UpdateAmount(Money newAmount)
+    public void UpdateAmount(Account account, Money newAmount)
     {
+        ArgumentNullException.ThrowIfNull(account, nameof(account));
         ArgumentNullException.ThrowIfNull(newAmount, nameof(newAmount));
 
         if (Amount.Equals(newAmount)) return;
 
+        account.RevertTransaction(this);
         Amount = newAmount;
+        account.ApplyTransaction(this);
     }
 
     /// <summary>

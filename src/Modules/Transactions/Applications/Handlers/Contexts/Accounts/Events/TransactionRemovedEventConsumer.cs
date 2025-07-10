@@ -18,7 +18,6 @@ public sealed class TransactionRemovedEventConsumer(
     {
         var request = new TransactionRemovalSynchronizationModel(
             @event.TransactionId,
-            @event.AccountId,
             dateTimeProvider.UtcNow);
 
         await accountsSynchronizationService.SynchronizeTransactionRemovalAsync(request, cancellationToken);
