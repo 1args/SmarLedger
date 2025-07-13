@@ -26,12 +26,13 @@ public sealed class AddTransactionCommandHandler(
             dateTimeProvider.UtcNow,
             command.Notes);
 
-        var transactionId = await accountService.AddTransactionAsync(request, cancellationToken);
+        var response = await accountService.AddTransactionAsync(request, cancellationToken);
 
         await eventBus.PublishAsync(
             new TransactionAddedEvent(
-                transactionId,
+                response.TransactionId,
                 request.AccountId,
+                response.UserId,
                 request.Amount,
                 request.Type,
                 request.Category,
@@ -39,6 +40,6 @@ public sealed class AddTransactionCommandHandler(
                 request.Notes), 
             cancellationToken);
 
-        return transactionId;
+        return response.TransactionId;
     }
 } 

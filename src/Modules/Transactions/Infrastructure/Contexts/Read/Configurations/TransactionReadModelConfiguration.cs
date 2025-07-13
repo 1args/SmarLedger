@@ -33,18 +33,20 @@ public sealed class TransactionReadModelConfiguration : IEntityTypeConfiguration
 
         builder.Property(t => t.Type)
             .HasConversion<string>()
+            .HasMaxLength(PropertyLengthConstants.Length20)
             .IsRequired();
 
         builder.Property(t => t.Category)
             .HasConversion<string>()
+            .HasMaxLength(PropertyLengthConstants.Length20)
             .IsRequired();
 
         builder.Property(t => t.Notes)
-            .HasMaxLength(500)
+            .HasMaxLength(PropertyLengthConstants.Length200)
             .IsRequired();
 
         builder.Property(t => t.AccountName)
-            .HasMaxLength(100)
+            .HasMaxLength(PropertyLengthConstants.Length100)
             .IsRequired();
 
         builder.Property(t => t.CreatedAt)

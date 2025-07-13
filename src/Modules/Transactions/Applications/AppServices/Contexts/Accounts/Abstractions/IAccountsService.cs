@@ -19,7 +19,7 @@ public interface IAccountsService
     /// </summary>
     /// <param name="request">Model describing the transaction to add.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
+    Task<(Guid TransactionId, Guid UserId)> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Removes a transaction from an existing account.

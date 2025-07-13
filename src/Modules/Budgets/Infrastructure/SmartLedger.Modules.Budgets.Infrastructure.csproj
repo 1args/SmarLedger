@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Domain\SmartLedger.Modules.Budgets.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contexts\Read\Configurations\" />
-  </ItemGroup>
-
 </Project>

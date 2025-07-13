@@ -9,6 +9,8 @@ using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Budgets.Domain.Entities;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
 using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Transactions.Domain.Enums;
+using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 
@@ -86,9 +88,39 @@ public sealed class BudgetsService(
     }
 
     /// <inheritdoc />
-    public async Task UpdateSendingAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    public async Task UpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
     {
+        if (!IsExpense(request))
+        {
+            return;
+        }
 
+        logger.LogInformation(
+            "Updating spending amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`.",
+            request.Category, request.Amount, request.UserId);
+
+        var activeBudgets = await GetActiveBudgetsAsync(request, cancellationToken);
+
+        if (activeBudgets.Count == 0)
+        {
+            logger.LogWarning("No active budgets found for user with ID `{UserId}`.", request.UserId);
+            return;
+        }
+
+        var amount = Money.Create(request.Amount);
+        var categoriesToUpdate = activeBudgets.SelectMany(b => b.Items).ToList();
+
+        foreach (var category in categoriesToUpdate)
+        {
+            var budget = activeBudgets.First(b => b.Items.Contains(category));
+            category.AddExpense(amount, budget.Period);
+        }
+
+        await budgetItemsRepository.UpdateRangeAsync(categoriesToUpdate.ToArray(), cancellationToken);
+
+        logger.LogInformation(
+            "Spending amount updated for category `{Category}` with amount `{Amount}` for user with ID `{UserId}` in `{Count}` budgets.",
+            request.Category, request.Amount, request.UserId, activeBudgets.Count);
     }
 
     /// <inheritdoc />
@@ -100,6 +132,23 @@ public sealed class BudgetsService(
         await budgetsRepository.DeleteAsync(budget, cancellationToken);
 
         logger.LogInformation("Budget with ID `{BudgetId}` deleted successfully.", request.BudgetId);
+    }
+
+    /// <summary>
+    /// Determines whether the given transaction is an expense.
+    /// </summary>
+    private static bool IsExpense(TransactionAdditionModel request)
+        => request.Type == TransactionType.Expense;
+
+    /// <summary>
+    /// Retrieves all active budgets for a user that match the specified category in the transaction request.
+    /// </summary>
+    private async Task<List<Budget>> GetActiveBudgetsAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    {
+        return await budgetsRepository
+            .Where(b => b.UserId == request.UserId && b.Period.IsActive(request.CreatedAt))
+            .Include(b => b.Items.Where(item => item.Category == request.Category))
+            .ToListAsync(cancellationToken);
     }
 
     /// <summary>

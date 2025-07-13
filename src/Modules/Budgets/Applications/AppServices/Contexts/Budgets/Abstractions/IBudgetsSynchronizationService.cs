@@ -3,43 +3,43 @@
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 
 /// <summary>
-/// Provides functionality for managing budgets.
+/// Provides functionality for synchronizing changes in budgets between write and read models.
 /// </summary>
-public interface IBudgetsService
+public interface IBudgetsSynchronizationService
 {
     /// <summary>
-    /// Creates a new budget for a user.
+    /// Synchronizes the creation of a new budget.
     /// </summary>
     /// <param name="request">Model containing budget creation data.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken);
+    Task SynchronizeBudgetCreationAsync(BudgetCreationSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Adds a new category (budget item) to an existing budget.
+    /// Synchronizes the addition of a category to a budget.
     /// </summary>
     /// <param name="request">Model describing the category to add.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> AddCategoryAsync(CategoryAdditionModel request, CancellationToken cancellationToken);
+    Task SynchronizeCategoryAdditionAsync(CategoryAdditionSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Removes an existing category (budget item) from a budget.
+    /// Synchronizes the removal of a category from a budget.
     /// </summary>
     /// <param name="request">Model containing the category ID to remove.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task RemoveCategoryAsync(CategoryRemovalModel request, CancellationToken cancellationToken);
+    Task SynchronizeCategoryRemovalAsync(CategoryRemovalModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Updates the spending amount by adding a transaction in the budget context.
+    /// Synchronises the update the spending amount by adding a transaction in the budget context.
     /// </summary>
     /// <param name="request">Model containing transaction details.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns></returns>
-    Task UpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
+    Task SynchronizeUpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Deletes a budget by its identifier.
+    /// Synchronizes the deletion of a budget.
     /// </summary>
     /// <param name="request">Model containing budget ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken);
+    Task SynchronizeBudgetDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken);
 }

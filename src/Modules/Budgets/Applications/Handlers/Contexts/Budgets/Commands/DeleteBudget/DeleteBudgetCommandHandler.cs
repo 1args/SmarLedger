@@ -1,6 +1,8 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Contracts.Events;
 
 namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.DeleteBudget;
 
@@ -8,7 +10,8 @@ namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Com
 /// Handles the logic for processing <see cref="DeleteBudgetCommand"/>.
 /// </summary>
 public sealed class DeleteBudgetCommandHandler(
-    IBudgetsService budgetsService) : ICommandHandler<DeleteBudgetCommand>
+    IBudgetsService budgetsService,
+    IEventBus eventBus) : ICommandHandler<DeleteBudgetCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(DeleteBudgetCommand command, CancellationToken cancellationToken)
@@ -16,5 +19,7 @@ public sealed class DeleteBudgetCommandHandler(
         var request = new IdOnlyModel(command.BudgetId);
 
         await budgetsService.DeleteAsync(request, cancellationToken);
+
+        await eventBus.PublishAsync(new BudgetDeletedEvent(command.BudgetId), cancellationToken);
     }
 }

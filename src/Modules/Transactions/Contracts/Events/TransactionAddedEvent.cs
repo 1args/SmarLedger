@@ -6,7 +6,9 @@ namespace SmartLedger.Modules.Transactions.Contracts.Events;
 /// <summary>
 /// Event triggered when a new transaction is added.
 /// </summary>
+/// <param name="TransactionId">Transaction ID.</param>
 /// <param name="AccountId">Account ID.</param>
+/// <param name="UserId">User ID.</param>
 /// <param name="Amount">Transaction amount.</param>
 /// <param name="Type">Type of transaction (income or expense).</param>
 /// <param name="Category">Transaction category.</param>
@@ -15,6 +17,7 @@ namespace SmartLedger.Modules.Transactions.Contracts.Events;
 public sealed record TransactionAddedEvent(
     Guid TransactionId,
     Guid AccountId,
+    Guid UserId,
     decimal Amount,
     TransactionType Type,
     TransactionCategory Category,

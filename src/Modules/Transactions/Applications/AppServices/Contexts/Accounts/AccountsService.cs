@@ -38,7 +38,7 @@ public sealed class AccountsService(
     }
 
     /// <inheritdoc />
-    public async Task<Guid> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    public async Task<(Guid TransactionId, Guid UserId)> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Adding transaction of type `{Type}` with amount `{Amount}` to account `{AccountId}`.",
@@ -66,7 +66,7 @@ public sealed class AccountsService(
             "Transaction added successfully to account `{AccountId}` with transaction ID `{TransactionId}`.",
             account.Id, transaction.Id);
 
-        return transaction.Id;
+        return (transaction.Id, account.UserId);
     }
 
     /// <inheritdoc />

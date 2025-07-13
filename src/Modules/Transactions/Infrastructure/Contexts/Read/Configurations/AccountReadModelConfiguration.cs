@@ -25,7 +25,7 @@ public sealed class AccountReadModelConfiguration : IEntityTypeConfiguration<Acc
             .IsRequired();
 
         builder.Property(a => a.Name)
-            .HasMaxLength(100)
+            .HasMaxLength(PropertyLengthConstants.Length100)
             .IsRequired();
 
         builder.Property(a => a.Balance)

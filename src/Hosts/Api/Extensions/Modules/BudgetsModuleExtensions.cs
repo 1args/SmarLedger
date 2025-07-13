@@ -1,5 +1,10 @@
-﻿using SmartLedger.Common.Infrastructure.Extensions;
+﻿using SmartLedger.Common.Applications.Handlers.Extensions;
+using SmartLedger.Common.Infrastructure.Extensions;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.CreateBudget;
 using SmartLedger.Modules.Budgets.Infrastructure.Configurators;
+using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Write;
 
 namespace SmartLedger.Hosts.Api.Extensions.Modules;
@@ -29,7 +34,8 @@ public static class BudgetsModuleExtensions
     private static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services
-            .AddDataAccess<BudgetsWriteDbContext, BudgetsWriteDbContextConfigurator>();
+            .AddDataAccess<BudgetsWriteDbContext, BudgetsWriteDbContextConfigurator>()
+            .AddDataAccess<BudgetsReadDbContext, BudgetsReadDbContextConfigurator>();
 
         return services;
     }
@@ -39,6 +45,11 @@ public static class BudgetsModuleExtensions
     /// </summary>
     private static IServiceCollection AddApplications(this IServiceCollection services)
     {
+        services
+            .AddScoped<IBudgetsService, BudgetsService>();
+
+        services
+            .AddHandlersFromAssembly(typeof(CreateBudgetCommandHandler).Assembly);
 
         return services;
     }

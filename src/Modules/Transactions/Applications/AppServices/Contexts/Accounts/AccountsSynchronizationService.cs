@@ -108,7 +108,7 @@ public sealed class AccountsSynchronizationService(
 
         logger.LogInformation(
             "Transaction removal with ID `{TransactionId}` synchronized successfully for account `{AccountId}`.",
-            request.TransactionId, request.AccountId);
+            request.TransactionId, account.Id);
     }
 
     /// <inheritdoc />

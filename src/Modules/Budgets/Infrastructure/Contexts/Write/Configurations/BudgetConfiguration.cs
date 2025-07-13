@@ -56,4 +56,4 @@ public sealed class BudgetConfiguration : IEntityTypeConfiguration<Budget>
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
     }
-}
+}f
