@@ -22,7 +22,7 @@ public sealed class TransactionsRetrievalService(
     /// <inheritdoc />
     public async Task<TransactionResponse> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving transaction with ID `{TransactionId}`.", transactionId);
+        logger.LogInformation("Retrieving transaction with ID `{TransactionId}`...", transactionId);
 
         var transaction = await transactionsRepository
             .AsQueryable()
@@ -46,7 +46,9 @@ public sealed class TransactionsRetrievalService(
         GetPaginatedTransactionsModel filter, 
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated transactions for account with ID `{AccountId}`.", filter.AccountId);
+        logger.LogInformation(
+            "Retrieving paginated transactions for account with ID `{AccountId}`...", 
+            filter.AccountId);
 
         var combinedSpecification = new TransactionByAccountIdSpecification(filter.AccountId)
             .And(new TransactionByAmountRangeSpecification(filter.MinAmount, filter.MaxAmount))

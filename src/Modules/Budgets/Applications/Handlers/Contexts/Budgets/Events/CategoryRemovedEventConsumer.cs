@@ -14,7 +14,7 @@ public sealed class CategoryRemovedEventConsumer(
     /// <inheritdoc />
     public async Task ConsumeAsync(CategoryRemovedEvent @event, CancellationToken cancellationToken)
     {
-        var request = new CategoryRemovalModel(@event.CategoryId);
+        var request = new CategoryRemovalSynchronizationModel(@event.CategoryId);
 
         await budgetsSynchronizationService.SynchronizeCategoryRemovalAsync(request, cancellationToken);
     }

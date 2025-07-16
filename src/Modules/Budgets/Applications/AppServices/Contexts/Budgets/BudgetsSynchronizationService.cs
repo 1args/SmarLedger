@@ -21,7 +21,7 @@ public sealed class BudgetsSynchronizationService(
     public async Task SynchronizeBudgetCreationAsync(BudgetCreationSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing budget creation with ID `{AccountId}` and name `{Name}`.",
+            "Synchronizing budget creation with ID `{BudgetId}` and name `{Name}`...",
             request.BudgetId, request.Name);
 
         var budget = new BudgetReadModel
@@ -37,14 +37,16 @@ public sealed class BudgetsSynchronizationService(
 
         await budgetsRepository.AddAsync(budget, cancellationToken);
 
-        logger.LogInformation("Budget with ID `{AccountId}` synchronized successfully.", request.BudgetId);
+        logger.LogInformation(
+            "Budget with ID `{BudgetId}` was successfully synchronized after creation.",
+            request.BudgetId);
     }
 
     /// <inheritdoc />
     public async Task SynchronizeCategoryAdditionAsync(CategoryAdditionSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing category addition with ID `{CategoryId}` for budget with ID `{BudgetId}`.",
+            "Synchronizing category addition with ID `{CategoryId}` for budget with ID `{BudgetId}`...",
             request.CategoryId, request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
@@ -66,23 +68,23 @@ public sealed class BudgetsSynchronizationService(
         await budgetItemsRepository.AddAsync(category, cancellationToken);
 
         logger.LogInformation(
-            "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` synchronized successfully.",
+            "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` was successfully synchronized after addition.",
             request.CategoryId, request.BudgetId);
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeCategoryRemovalAsync(CategoryRemovalModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeCategoryRemovalAsync(CategoryRemovalSynchronizationModel request, CancellationToken cancellationToken)
     {
         var category = await GetCategoryAsync(request.CategoryId, cancellationToken);
 
         logger.LogInformation(
-            "Synchronizing category removal with ID `{CategoryId}` for budget with ID `{BudgetId}`.",
+            "Synchronizing category removal with ID `{CategoryId}` for budget with ID `{BudgetId}`...",
             request.CategoryId, category.BudgetId);
 
         await budgetItemsRepository.DeleteAsync(category, cancellationToken);
 
         logger.LogInformation(
-            "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` synchronized successfully.",
+            "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` was successfully synchronized after removal.",
             request.CategoryId, category.BudgetId);
     }
 
@@ -95,7 +97,7 @@ public sealed class BudgetsSynchronizationService(
         }
 
         logger.LogInformation(
-            "Synchronizing update of spending amount amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`.",
+            "Synchronizing update of spending amount amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`...",
             request.Category, request.Amount, request.UserId);
 
         var activeBudgets = await GetActiveBudgetsAsync(request, cancellationToken);
@@ -117,19 +119,23 @@ public sealed class BudgetsSynchronizationService(
         await budgetItemsRepository.UpdateRangeAsync(categories.ToArray(), cancellationToken);
 
         logger.LogInformation(
-            "Spending amount for category `{Category}` update synchronized successfully for user with ID `{UserId}`.",
+            "Spending amount for category `{Category}` for user with ID `{UserId}` was successfully synchronized after update.",
             request.Category, request.UserId);
     }
 
     /// <inheritdoc />
     public async Task SynchronizeBudgetDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Synchronizing budget deletion with ID `{BudgetId}`.", request.BudgetId);
+        logger.LogInformation(
+            "Synchronizing budget deletion with ID `{BudgetId}`...", 
+            request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
         await budgetsRepository.DeleteAsync(budget, cancellationToken);
 
-        logger.LogInformation("Budget with ID `{BudgetId}` synchronized successfully.", request.BudgetId);
+        logger.LogInformation(
+            "Budget with ID `{BudgetId}` was successfully synchronized after deletion.", 
+            request.BudgetId);
     }
 
     /// <summary>

@@ -17,13 +17,12 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 /// <inheritdoc />
 public sealed class AccountsRetrievalService(
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
-    IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
     ILogger<AccountsRetrievalService> logger) : IAccountsRetrievalService
 {
     /// <inheritdoc />
     public async Task<AccountResponse> GetAccountAsync(Guid accountId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving account with ID `{AccountId}`.", accountId);
+        logger.LogInformation("Retrieving account with ID `{AccountId}`...", accountId);
 
         var account = await accountsRepository
             .AsQueryable()
@@ -47,7 +46,7 @@ public sealed class AccountsRetrievalService(
         GetPaginatedAccountsModel filter, 
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated accounts for user with ID `{UserId}`.", filter.UserId);
+        logger.LogInformation("Retrieving paginated accounts for user with ID `{UserId}`...", filter.UserId);
         
         var combinedSpecification = new AccountByUserIdSpecification(filter.UserId)
            .And(new AccountByBalanceRangeSpecification(filter.MinBalance, filter.MaxBalance))

@@ -8,6 +8,7 @@ var configuration = builder.Configuration;
 services
     .AddApi(configuration)
     .AddTransactionsModule()
+    .AddBudgetsModule()
     .AddDecorators();
 
 var app = builder.Build();

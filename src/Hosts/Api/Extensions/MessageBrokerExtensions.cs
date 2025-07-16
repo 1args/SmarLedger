@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events;
 
 namespace SmartLedger.Hosts.Api.Extensions;
@@ -41,6 +42,7 @@ public static class MessageBrokerExtensions
             cfg.SetKebabCaseEndpointNameFormatter();
 
             cfg.AddConsumers(typeof(AccountCreatedEventConsumer).Assembly);
+            cfg.AddConsumers(typeof(BudgetCreatedEventConsumer).Assembly);
 
             cfg.UsingRabbitMq((context, rmqCfg) =>
             {

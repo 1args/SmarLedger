@@ -21,7 +21,7 @@ public sealed class AccountsSynchronizationService(
     public async Task SynchronizeAccountCreationAsync(AccountCreationSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing account creation with ID `{AccountId}` and name `{Name}`.",
+            "Synchronizing account creation with ID `{AccountId}` and name `{Name}`...",
             request.AccountId, request.Name);
 
         var account = new AccountReadModel
@@ -36,14 +36,16 @@ public sealed class AccountsSynchronizationService(
 
         await accountsRepository.AddAsync(account, cancellationToken);
 
-        logger.LogInformation("Account with ID `{AccountId}` synchronized successfully.", request.AccountId);
+        logger.LogInformation(
+            "Account with ID `{AccountId}` was successfully synchronized after creation.", 
+            request.AccountId);
     }
 
     /// <inheritdoc />
     public async Task SynchronizeTransactionAdditionAsync(TransactionAdditionSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing addition of transaction with ID `{TransactionId}` to account `{AccountId}`.",
+            "Synchronizing addition of transaction with ID `{TransactionId}` to account `{AccountId}`...",
             request.TransactionId, request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
@@ -76,7 +78,7 @@ public sealed class AccountsSynchronizationService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction addition with ID `{TransactionId}` synchronized successfully for account `{AccountId}`.",
+            "Transaction with ID `{TransactionId}` was successfully synchronized after addition to account `{AccountId}`.",
             request.TransactionId, request.AccountId);
     }
 
@@ -86,7 +88,7 @@ public sealed class AccountsSynchronizationService(
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         logger.LogInformation(
-            "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`.",
+            "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`...",
             transaction.Id, transaction.AccountId);
 
         var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
@@ -107,19 +109,21 @@ public sealed class AccountsSynchronizationService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction removal with ID `{TransactionId}` synchronized successfully for account `{AccountId}`.",
+            "Transaction with ID `{TransactionId}` was successfully synchronized after removal from account `{AccountId}`.",
             request.TransactionId, account.Id);
     }
 
     /// <inheritdoc />
     public async Task SynchronizeAccountDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Synchronizing deletion of account with ID `{AccountId}`.", request.AccountId);
+        logger.LogInformation("Synchronizing deletion of account with ID `{AccountId}`...", request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
         await accountsRepository.DeleteAsync(account, cancellationToken);
 
-        logger.LogInformation("Account with ID `{AccountId}` synchronized successfully for deletion.", request.AccountId);
+        logger.LogInformation(
+            "Account with ID `{AccountId}` was successfully synchronized after deletion.",
+            request.AccountId);
     }
 
     /// <summary>

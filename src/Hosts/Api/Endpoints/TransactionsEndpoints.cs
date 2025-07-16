@@ -4,9 +4,7 @@ using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactio
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.UpdateTransactionAmount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
-using SmartLedger.Modules.Transactions.Contracts.Responses;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartLedger.Common.Infrastructure.Configurations;
+using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Configurations;
 
 namespace SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
 
@@ -18,6 +19,8 @@ public static class CustomModelBuilder
             .HasDefaultSchema("read")
             .SetDefaultDateTimeKind(DateTimeKind.Utc);
 
-      
+        modelBuilder
+            .ApplyConfiguration(new BudgetItemReadModelConfiguration())
+            .ApplyConfiguration(new BudgetItemReadModelConfiguration());
     }
 }

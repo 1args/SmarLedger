@@ -1,10 +1,8 @@
 ﻿namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 
 /// <summary>
-/// Model used to remove a category (budget item) from a budget.
+/// Model used to synchronize the removal of a budget category.
 /// </summary>
-/// <param name="BudgetId">Budget ID.</param>
 /// <param name="CategoryId">Category ID.</param>
-public sealed record CategoryRemovalModel(
-    Guid BudgetId,
+public sealed record CategoryRemovalSynchronizationModel(
     Guid CategoryId);

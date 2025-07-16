@@ -3,7 +3,7 @@
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 
 /// <summary>
-/// Model used to add a new category (budget item) to a budget.
+/// Represents a model for synchronizing the addition of a category (budget item) to a budget.
 /// </summary>
 /// <param name="CategoryId">Category ID.</param>
 /// <param name="BudgetId">Budget ID.</param>

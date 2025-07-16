@@ -8,7 +8,6 @@ using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.C
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetPaginatedTransactions;
-using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Accounts;
 using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;

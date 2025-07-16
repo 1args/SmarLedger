@@ -24,7 +24,8 @@ public sealed class BudgetsService(
     /// <inheritdoc />
     public async Task<Guid> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Creating budget with name `{Name}` for user with ID `{Userid}`.", 
+        logger.LogInformation(
+            "Creating budget with name `{Name}` for user with ID `{UserId}`...", 
             request.UserId, request.Name);
 
         var name = BudgetName.Create(request.Name);
@@ -34,7 +35,8 @@ public sealed class BudgetsService(
 
         await budgetsRepository.AddAsync(budget, cancellationToken);
 
-        logger.LogInformation("Budget with ID `{BudgetId}` created successfully for user with ID `{UserId}`.",
+        logger.LogInformation(
+            "Budget with ID `{BudgetId}` created successfully for user with ID `{UserId}`.",
             budget.Id, request.UserId);
 
         return budget.Id;
@@ -43,10 +45,11 @@ public sealed class BudgetsService(
     /// <inheritdoc />
     public async Task<Guid> AddCategoryAsync(CategoryAdditionModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Adding category `{Category}` with limit `{Limit}` to budget with ID `{BudgetId}`.",
+        logger.LogInformation(
+            "Adding category `{Category}` with limit `{Limit}` to budget with ID `{BudgetId}`...",
             request.Category, request.Limit, request.BudgetId);
 
-        var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
+        var budget = await GetBudgetAsync(request.BudgetId, useInclude: true, cancellationToken : cancellationToken);
 
         var limit = BudgetItemLimit.Create(request.Limit);
         var category = BudgetItem.Create(request.Category, limit, request.CreatedAt);
@@ -59,7 +62,8 @@ public sealed class BudgetsService(
             await budgetsRepository.UpdateAsync(budget, ct);
         }, IsolationLevel.Serializable, cancellationToken);
 
-        logger.LogInformation("Category `{Category}` with limit `{Limit}` added to budget with ID `{BudgetId}`.",
+        logger.LogInformation(
+            "Category `{Category}` with limit `{Limit}` added to budget with ID `{BudgetId}`.",
             request.Category, request.Limit, request.BudgetId);
 
         return category.Id;
@@ -70,7 +74,8 @@ public sealed class BudgetsService(
     {
         var category = await GetCategoryAsync(request.CategoryId, cancellationToken);
 
-        logger.LogInformation("Removing category with ID `{CategoryId}` from budget with ID `{BudgetId}`.",
+        logger.LogInformation(
+            "Removing category with ID `{CategoryId}` from budget with ID `{BudgetId}`...",
             request.CategoryId, category.BudgetId);
 
         var budget = await GetBudgetAsync(category.BudgetId, cancellationToken);
@@ -83,7 +88,8 @@ public sealed class BudgetsService(
             await budgetsRepository.UpdateAsync(budget, ct);
         }, IsolationLevel.Serializable, cancellationToken);
 
-        logger.LogInformation("Category with ID `{CategoryId}` removed from budget with ID `{BudgetId}`.",
+        logger.LogInformation(
+            "Category with ID `{CategoryId}` removed from budget with ID `{BudgetId}`...",
             request.CategoryId, category.BudgetId);
     }
 
@@ -96,7 +102,7 @@ public sealed class BudgetsService(
         }
 
         logger.LogInformation(
-            "Updating spending amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`.",
+            "Updating spending amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`...",
             request.Category, request.Amount, request.UserId);
 
         var activeBudgets = await GetActiveBudgetsAsync(request, cancellationToken);
@@ -126,7 +132,7 @@ public sealed class BudgetsService(
     /// <inheritdoc />
     public async Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Deleting budget with ID `{BudgetId}`.", request.BudgetId);
+        logger.LogInformation("Deleting budget with ID `{BudgetId}`...", request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
         await budgetsRepository.DeleteAsync(budget, cancellationToken);
@@ -154,11 +160,16 @@ public sealed class BudgetsService(
     /// <summary>
     /// Retrieves a budget by its ID or throws if not found.
     /// </summary>
-    private async Task<Budget> GetBudgetAsync(Guid budgetIt, CancellationToken cancellationToken)
+    private async Task<Budget> GetBudgetAsync(Guid budgetIt, CancellationToken cancellationToken, bool useInclude = false)
     {
-        var budget = await budgetsRepository
-            .Where(b => b.Id == budgetIt)
-            .SingleOrDefaultAsync(cancellationToken);
+        var query = budgetsRepository
+            .Where(b => b.Id == budgetIt);
+
+        query = useInclude
+            ? query.Include(b => b.Items)
+            : query;
+       
+        var budget = await query.SingleOrDefaultAsync(cancellationToken);
 
         if (budget is null)
         {

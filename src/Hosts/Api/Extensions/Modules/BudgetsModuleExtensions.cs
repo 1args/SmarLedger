@@ -46,7 +46,8 @@ public static class BudgetsModuleExtensions
     private static IServiceCollection AddApplications(this IServiceCollection services)
     {
         services
-            .AddScoped<IBudgetsService, BudgetsService>();
+            .AddScoped<IBudgetsService, BudgetsService>()
+            .AddScoped<IBudgetsSynchronizationService, BudgetsSynchronizationService>();
 
         services
             .AddHandlersFromAssembly(typeof(CreateBudgetCommandHandler).Assembly);

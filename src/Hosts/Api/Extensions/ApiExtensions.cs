@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
+using Serilog;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Cqrs.Extensions;
@@ -22,9 +23,28 @@ public static class ApiExtensions
     {
         services
             .AddOpenApi()
+            .AddLogging(configuration)
             .AddGlobalExceptionHandler()
             .AddDateTimeProvider()
             .AddConfiguredMessageBroker(configuration);
+
+        return services;
+    }
+
+    /// <summary>
+    /// Registers Serilog.
+    /// </summary>
+    public static IServiceCollection AddLogging(this IServiceCollection services, IConfiguration configuration)
+    {
+        var logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+            .CreateLogger();
+
+        services.AddLogging(builder =>
+        {
+            builder.ClearProviders();
+            builder.AddSerilog(logger, dispose: true);
+        });
 
         return services;
     }

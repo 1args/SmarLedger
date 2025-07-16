@@ -1,7 +1,7 @@
 ﻿namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 
 /// <summary>
-/// Model used to create a new budget in synchronization context.
+/// Model used to synchronize the creation of a budget.
 /// </summary>
 /// <param name="UserId">Budget ID.</param>
 /// <param name="UserId">ID of the user who owns the budget.</param>

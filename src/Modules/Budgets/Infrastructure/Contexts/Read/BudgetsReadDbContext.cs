@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
 
@@ -9,7 +10,11 @@ namespace SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
 public sealed class BudgetsReadDbContext(
     DbContextOptions<BudgetsReadDbContext> options) : DbContext(options)
 {
+    /// <summary>Budgets.</summary>
+    public DbSet<BudgetReadModel> Budgets { get; set; }
 
+    /// <summary>BudgetItems.</summary>
+    public DbSet<BudgetItemReadModel> BudgetItems { get; set; }
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

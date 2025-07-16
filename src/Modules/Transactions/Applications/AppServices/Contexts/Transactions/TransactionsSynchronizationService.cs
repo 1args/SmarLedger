@@ -21,7 +21,7 @@ public sealed class TransactionsSynchronizationService(
     public async Task SynchronizeAmountChangeAsync(UpdateAmountModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing transaction amount for transaction with ID `{TransactionId}` to `{NewAmount}`.",
+            "Synchronizing transaction amount for transaction with ID `{TransactionId}` to `{NewAmount}`...",
             request.TransactionId, request.NewAmount);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -47,7 +47,7 @@ public sealed class TransactionsSynchronizationService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction amount for transaction ID `{TransactionId}` synchronized successfully.",
+            "Transaction with ID `{TransactionId}` was successfully synchronized after amount change.",
             request.TransactionId);
     }
 
@@ -55,7 +55,7 @@ public sealed class TransactionsSynchronizationService(
     public async Task SynchronizeCategoryChangeAsync(CategorizeTransactionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing transaction category for transaction with ID `{TransactionId}` to `{NewCategory}`.",
+            "Synchronizing transaction category for transaction with ID `{TransactionId}` to `{NewCategory}`...",
             request.TransactionId, request.NewCategory);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -66,7 +66,7 @@ public sealed class TransactionsSynchronizationService(
         await transactionsRepository.UpdateAsync(transaction, cancellationToken);
 
         logger.LogInformation(
-            "Transaction category for transaction ID `{TransactionId}` synchronized successfully.",
+            "Transaction with ID `{TransactionId}` was successfully synchronized after category change.",
             request.TransactionId);
     }
 

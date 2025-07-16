@@ -26,7 +26,7 @@ public interface IBudgetsSynchronizationService
     /// </summary>
     /// <param name="request">Model containing the category ID to remove.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task SynchronizeCategoryRemovalAsync(CategoryRemovalModel request, CancellationToken cancellationToken);
+    Task SynchronizeCategoryRemovalAsync(CategoryRemovalSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Synchronises the update the spending amount by adding a transaction in the budget context.

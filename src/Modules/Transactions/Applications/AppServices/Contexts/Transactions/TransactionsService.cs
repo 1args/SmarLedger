@@ -23,7 +23,7 @@ public sealed class TransactionsService(
     public async Task UpdateAmountAsync(UpdateAmountModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Updating amount for transaction with ID `{TransactionId}` to `{NewAmount}`.",
+            "Updating amount for transaction with ID `{TransactionId}` to `{NewAmount}`...",
             request.TransactionId, request.NewAmount);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -48,7 +48,7 @@ public sealed class TransactionsService(
     public async Task CategorizeAsync(CategorizeTransactionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Categorizing transaction with ID `{TransactionId}` to category `{NewCategory}`.",
+            "Categorizing transaction with ID `{TransactionId}` to category `{NewCategory}`...",
             request.TransactionId, nameof(request.NewCategory));
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);

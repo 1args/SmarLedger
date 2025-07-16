@@ -25,7 +25,6 @@ public static class WebApplicationExtensions
         app.UseExceptionHandler();
         app.MapApiEndpoints();
 
-
         return app;
     }
 
@@ -34,8 +33,10 @@ public static class WebApplicationExtensions
     /// </summary>
     private static IEndpointRouteBuilder MapApiEndpoints(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapAccountsEndpoints();
-        endpoints.MapTransactionsEndpoints();
+        endpoints
+            .MapAccountsEndpoints()
+            .MapTransactionsEndpoints()
+            .MapBudgetsEndpoints();
 
         return endpoints;
     }

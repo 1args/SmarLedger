@@ -31,6 +31,7 @@ public sealed class GlobalExceptionHandler(
         var (statusCode, title, detail) = exception switch
         {
             DomainValidationException => (StatusCodes.Status400BadRequest, "Bad Request", exception.Message),
+            DomainException => (StatusCodes.Status400BadRequest, "Bad Request", exception.Message),
             NotFoundException => (StatusCodes.Status404NotFound, "Not Found", exception.Message),
             ValidationException => (StatusCodes.Status400BadRequest, "Validation error", exception.Message),
             ConflictException => (StatusCodes.Status409Conflict, "Conflict", exception.Message),

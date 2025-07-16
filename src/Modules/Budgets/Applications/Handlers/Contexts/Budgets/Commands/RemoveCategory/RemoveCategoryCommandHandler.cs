@@ -16,7 +16,7 @@ public sealed class RemoveCategoryCommandHandler(
     /// <inheritdoc />
     public async Task HandleAsync(RemoveCategoryCommand command, CancellationToken cancellationToken)
     {
-        var request = new CategoryRemovalModel(command.CategoryId);
+        var request = new CategoryRemovalModel(command.BudgetId, command.CategoryId);
 
         await budgetsService.RemoveCategoryAsync(request, cancellationToken);
 
