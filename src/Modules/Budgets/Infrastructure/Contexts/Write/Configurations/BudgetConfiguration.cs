@@ -50,7 +50,7 @@ public sealed class BudgetConfiguration : IEntityTypeConfiguration<Budget>
                 .IsRequired();
         });
 
-        builder.HasMany(b => b.Items)
+        builder.HasMany(b => b.Categories)
             .WithOne()
             .HasForeignKey(bi => bi.BudgetId)
             .OnDelete(DeleteBehavior.Cascade)

@@ -43,7 +43,7 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.WriteDbContext
                     b.ToTable("Budgets", "write");
                 });
 
-            modelBuilder.Entity("SmartLedger.Modules.Budgets.Domain.Entities.BudgetItem", b =>
+            modelBuilder.Entity("SmartLedger.Modules.Budgets.Domain.Entities.BudgetCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.WriteDbContext
 
                     b.HasIndex("BudgetId");
 
-                    b.ToTable("BudgetItems", "write");
+                    b.ToTable("BudgetCategories", "write");
                 });
 
             modelBuilder.Entity("SmartLedger.Modules.Budgets.Domain.Aggregates.Budget", b =>
@@ -124,46 +124,46 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.WriteDbContext
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SmartLedger.Modules.Budgets.Domain.Entities.BudgetItem", b =>
+            modelBuilder.Entity("SmartLedger.Modules.Budgets.Domain.Entities.BudgetCategory", b =>
                 {
                     b.HasOne("SmartLedger.Modules.Budgets.Domain.Aggregates.Budget", null)
-                        .WithMany("Items")
+                        .WithMany("Categories")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("SmartLedger.Modules.Budgets.Domain.ValueObjects.BudgetItemLimit", "Limit", b1 =>
+                    b.OwnsOne("SmartLedger.Modules.Budgets.Domain.ValueObjects.BudgetCategoryLimit", "Limit", b1 =>
                         {
-                            b1.Property<Guid>("BudgetItemId")
+                            b1.Property<Guid>("BudgetCategoryId")
                                 .HasColumnType("uuid");
 
                             b1.Property<decimal>("Value")
                                 .HasColumnType("decimal(18,2)")
                                 .HasColumnName("Limit");
 
-                            b1.HasKey("BudgetItemId");
+                            b1.HasKey("BudgetCategoryId");
 
-                            b1.ToTable("BudgetItems", "write");
+                            b1.ToTable("BudgetCategories", "write");
 
                             b1.WithOwner()
-                                .HasForeignKey("BudgetItemId");
+                                .HasForeignKey("BudgetCategoryId");
                         });
 
                     b.OwnsOne("SmartLedger.Modules.Transactions.Domain.ValueObjects.Money", "SpentAmount", b1 =>
                         {
-                            b1.Property<Guid>("BudgetItemId")
+                            b1.Property<Guid>("BudgetCategoryId")
                                 .HasColumnType("uuid");
 
                             b1.Property<decimal>("Value")
                                 .HasColumnType("decimal(18,2)")
                                 .HasColumnName("SpentAmount");
 
-                            b1.HasKey("BudgetItemId");
+                            b1.HasKey("BudgetCategoryId");
 
-                            b1.ToTable("BudgetItems", "write");
+                            b1.ToTable("BudgetCategories", "write");
 
                             b1.WithOwner()
-                                .HasForeignKey("BudgetItemId");
+                                .HasForeignKey("BudgetCategoryId");
                         });
 
                     b.Navigation("Limit")
@@ -175,7 +175,7 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.WriteDbContext
 
             modelBuilder.Entity("SmartLedger.Modules.Budgets.Domain.Aggregates.Budget", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,6 +16,7 @@ public static class TransactionMapper
     public static TransactionResponse MapToResponse(this TransactionReadModel transaction) =>
         new(transaction.Id,
             transaction.AccountId,
+            transaction.UserId,
             transaction.AccountName, 
             transaction.Amount, 
             transaction.Type, 

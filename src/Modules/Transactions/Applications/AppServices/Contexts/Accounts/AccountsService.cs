@@ -80,7 +80,7 @@ public sealed class AccountsService(
             transaction.Id, transaction.AccountId);
 
         var account = await accountsRepository
-            .Where(a => a.Id == transaction.AccountId)
+            .Where(a => a.Id == request.AccountId)
             .Include(a => a.Transactions)
             .SingleOrDefaultAsync(cancellationToken);
 

@@ -8,12 +8,12 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Tra
 /// <param name="PageNumber">Page number.</param>
 /// <param name="PageSize">Page size.</param>
 /// <param name="AccountId">Account ID.</param>
-/// <param name="MinAmount">Minimum transaction amount filter.</param>
-/// <param name="MaxAmount">Maximum transaction amount filter.</param>
-/// <param name="Type">Transaction type filter.</param>
-/// <param name="Category">Transaction category filter.</param>
-/// <param name="StartDate">Start date for filtering transactions.</param>
-/// <param name="EndDate">End date for filtering transactions.</param>
+/// <param name="MinAmount">Minimum transaction amount filter (optional).</param>
+/// <param name="MaxAmount">Maximum transaction amount filter. (optional)</param>
+/// <param name="Type">Transaction type filter. (optional)</param>
+/// <param name="Category">Transaction category filter (optional).</param>
+/// <param name="StartDate">Filter by start date (optional).</param>
+/// <param name="EndDate">Filter by end date (optional).</param>
 public sealed record GetPaginatedTransactionsModel(
     int PageNumber,
     int PageSize,

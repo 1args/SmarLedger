@@ -23,7 +23,7 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.ReadDbContext
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models.BudgetItemReadModel", b =>
+            modelBuilder.Entity("SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models.BudgetCategoryReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
@@ -37,15 +37,17 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.ReadDbContext
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<Guid?>("BudgetReadModelId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("now()");
@@ -59,8 +61,12 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.ReadDbContext
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("SpentAmount")
-                        .HasColumnType("numeric")
-                        .HasColumnName("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -75,15 +81,13 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.ReadDbContext
                     b.HasIndex("BudgetId")
                         .HasDatabaseName("idx_budgetitems_budgetid");
 
-                    b.HasIndex("BudgetReadModelId");
-
                     b.HasIndex("UserId")
                         .HasDatabaseName("idx_budgetitems_userid");
 
                     b.HasIndex("BudgetId", "Category")
                         .HasDatabaseName("idc_budgetitems_budgetid_userid");
 
-                    b.ToTable("BudgetItems", "read");
+                    b.ToTable("BudgetCategories", "read");
                 });
 
             modelBuilder.Entity("SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models.BudgetReadModel", b =>
@@ -114,18 +118,6 @@ namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.ReadDbContext
                     b.HasKey("Id");
 
                     b.ToTable("Budgets", "read");
-                });
-
-            modelBuilder.Entity("SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models.BudgetItemReadModel", b =>
-                {
-                    b.HasOne("SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models.BudgetReadModel", null)
-                        .WithMany("Items")
-                        .HasForeignKey("BudgetReadModelId");
-                });
-
-            modelBuilder.Entity("SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models.BudgetReadModel", b =>
-                {
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

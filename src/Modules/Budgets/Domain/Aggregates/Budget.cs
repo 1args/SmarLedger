@@ -20,10 +20,10 @@ public sealed class Budget : AggregateRoot<Guid>
     /// <summary>Time period covered by the budget.</summary>
     public BudgetPeriod Period { get; private set; }
 
-    private readonly List<BudgetItem> _items = [];
+    private readonly List<BudgetCategory> _categories = [];
 
     /// <summary>List of items (categories) tracked in this budget.</summary>
-    public IReadOnlyCollection<BudgetItem> Items => _items.AsReadOnly();
+    public IReadOnlyCollection<BudgetCategory> Categories => _categories.AsReadOnly();
 
     /// <summary>Date and time when budget was created.</summary>
     public DateTime CreatedAt { get; private set; }
@@ -75,40 +75,40 @@ public sealed class Budget : AggregateRoot<Guid>
     }
 
     /// <summary>
-    /// Adds a new item to the budget.
+    /// Adds a new category to the budget.
     /// </summary>
-    /// <param name="item">Item to add.</param>
+    /// <param name="category">Category to add.</param>
     /// <exception cref="InvalidBudgetOperationException">Thrown when an item with the same category already exists.</exception>
-    public void AddItem(BudgetItem item)
+    public void AddCategory(BudgetCategory category)
     {
-        ArgumentNullException.ThrowIfNull(item);
+        ArgumentNullException.ThrowIfNull(category);
 
-        if (_items.Any(i => i.Category == item.Category))
+        if (_categories.Any(i => i.Category == category.Category))
         {
             throw new InvalidBudgetOperationException(
-                nameof(item),
-                $"Category '{item.Category.ToString()}' already exists in budget.");
+                nameof(category),
+                $"Category '{category.Category.ToString()}' already exists in budget.");
         }
 
-        _items.Add(item);
+        _categories.Add(category);
     }
 
     /// <summary>
-    /// Removes an item from the budget.
+    /// Removes a category from the budget.
     /// </summary>
-    /// <param name="item">Item to remove.</param>
+    /// <param name="category">Category to remove.</param>
     /// <exception cref="InvalidBudgetOperationException">Thrown when the item does not exist in the budget.</exception>
-    public void RemoveItem(BudgetItem item)
+    public void RemoveCategory(BudgetCategory category)
     {
-        ArgumentNullException.ThrowIfNull(item);
+        ArgumentNullException.ThrowIfNull(category);
 
-        if (!_items.Contains(item))
+        if (!_categories.Contains(category))
         {
             throw new InvalidBudgetOperationException(
-                nameof(item),
-                $"Item with category '{item.Category.ToString()}' does not exist in budget.");
+                nameof(category),
+                $"Item with category '{category.Category.ToString()}' does not exist in budget.");
         }
 
-        _items.Remove(item);
+        _categories.Remove(category);
     }
 }

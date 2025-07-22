@@ -14,7 +14,7 @@ public sealed class BudgetsReadDbContext(
     public DbSet<BudgetReadModel> Budgets { get; set; }
 
     /// <summary>BudgetItems.</summary>
-    public DbSet<BudgetItemReadModel> BudgetItems { get; set; }
+    public DbSet<BudgetCategoryReadModel> BudgetCategories { get; set; }
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

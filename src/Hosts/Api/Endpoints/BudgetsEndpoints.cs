@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.AddCategory;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.CreateBudget;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.DeleteBudget;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.RemoveCategory;
-using SmartLedger.Modules.Budgets.Contracts.Requests;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetBudget;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetBudgetCategory;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgets;
+using SmartLedger.Modules.Budgets.Contracts.Requests.BudgetCategories;
+using SmartLedger.Modules.Budgets.Contracts.Requests.Budgets;
+using SmartLedger.Modules.Budgets.Contracts.Responses.BudgetCategories;
+using SmartLedger.Modules.Budgets.Contracts.Responses.Budgets;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
@@ -51,6 +59,37 @@ public static class BudgetsEndpoints
             .WithSummary("Deletes a budget by its identifier.")
             .WithDescription("Removes an existing budget identified by its unique budget ID.")
             .Produces(StatusCodes.Status204NoContent)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
+        endpoints.MapPost("/search", GetPaginatedBudgetsAsync)
+            .WithName("GetPaginatedBudgets")
+            .WithSummary("Retrieves a paginated list of budgets for the specified user.")
+            .WithDescription("Returns a paginated list of budgets associated with the given user ID, with optional filters for start and end dates.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest);
+
+        endpoints.MapGet("/{budgetId:guid}", GetBudgetAsync)
+            .WithName("GetBudget")
+            .WithSummary("Retrieves a budget by its identifier.")
+            .WithDescription("Retrieves the budget details for the specified budget ID.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
+        endpoints.MapPost("/{budgetId:guid}/categories/search", GetPaginatedBudgetCategoriesAsync)
+            .WithName("GetPaginatedBudgetCategories")
+            .WithSummary("Retrieves a paginated list of budget categories for the specified budget.")
+            .WithDescription("Returns a paginated list of budget categories associated with the given budget ID, with optional filters for category, limits, spent amounts, status, and dates.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound);
+
+        endpoints.MapGet("/{budgetId:guid}/categories/{budgetCategoryId:guid}", GetBudgetCategoryAsync)
+            .WithName("GetBudgetCategory")
+            .WithSummary("Retrieves a budget category by its identifier.")
+            .WithDescription("Retrieves the budget category details for the specified budget and category IDs.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         return app;
@@ -109,5 +148,81 @@ public static class BudgetsEndpoints
         await handler.HandleAsync(command, cancellationToken);
 
         return Results.NoContent();
+    }
+
+    /// <summary>
+    /// Retrieves budget details by its ID.
+    /// </summary>
+    private static async Task<IResult> GetBudgetAsync(
+        [FromRoute] Guid budgetId,
+        [FromServices] IQueryHandler<GetBudgetQuery, BudgetResponse> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetBudgetQuery(budgetId);
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
+    }
+
+    /// <summary>
+    /// Retrieves a paginated list of budgets for the specified user with optional filters.
+    /// </summary>
+    private static async Task<IResult> GetPaginatedBudgetsAsync(
+        [FromBody] GetPaginatedBudgetsRequest request,
+        [FromServices] IQueryHandler<GetPaginatedBudgetsQuery, PaginatedList<BudgetListItem>> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetPaginatedBudgetsQuery(
+            request.PageNumber,
+            request.PageSize,
+            request.UserId,
+            request.StartDate,
+            request.EndDate);
+
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
+    }
+
+    /// <summary>
+    /// Retrieves budget category details by its ID.
+    /// </summary>
+    private static async Task<IResult> GetBudgetCategoryAsync(
+        [FromRoute] Guid budgetId,
+        [FromRoute] Guid budgetCategoryId,
+        [FromServices] IQueryHandler<GetBudgetCategoryQuery, BudgetCategoryResponse> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetBudgetCategoryQuery(budgetCategoryId);
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
+    }
+
+    /// <summary>
+    /// Retrieves a paginated list of budget categories for the specified budget with optional filters.
+    /// </summary>
+    private static async Task<IResult> GetPaginatedBudgetCategoriesAsync(
+        [FromRoute] Guid budgetId,
+        [FromBody] GetPaginatedBudgetCategoriesRequest request,
+        [FromServices] IQueryHandler<GetPaginatedBudgetCategoriesQuery, PaginatedList<BudgetCategoryListItem>> handler,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetPaginatedBudgetCategoriesQuery(
+            request.PageNumber,
+            request.PageSize,
+            budgetId,
+            request.Category,
+            request.MinLimit,
+            request.MaxLimit,
+            request.MinSpentAmount,
+            request.MaxSpentAmount,
+            request.Status,
+            request.StartDate,
+            request.EndDate);
+
+        var response = await handler.HandleAsync(query, cancellationToken);
+
+        return Results.Ok(response);
     }
 }

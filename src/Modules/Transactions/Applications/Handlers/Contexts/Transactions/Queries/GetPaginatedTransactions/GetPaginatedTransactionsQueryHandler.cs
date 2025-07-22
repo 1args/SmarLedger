@@ -15,7 +15,7 @@ public sealed class GetPaginatedTransactionsQueryHandler(
     /// <inheritdoc />
     public async Task<PaginatedList<TransactionListItem>> HandleAsync(GetPaginatedTransactionsQuery query, CancellationToken cancellationToken)
     {
-        var request = new GetPaginatedTransactionsModel(
+        var filter = new GetPaginatedTransactionsModel(
             query.PageNumber,
             query.PageSize,
             query.AccountId,
@@ -26,6 +26,6 @@ public sealed class GetPaginatedTransactionsQueryHandler(
             query.StartDate,
             query.EndDate);
 
-        return await transactionsRetrievalService.GetPaginatedTransactionsAsync(request, cancellationToken);
+        return await transactionsRetrievalService.GetPaginatedTransactionsAsync(filter, cancellationToken);
     }
 }

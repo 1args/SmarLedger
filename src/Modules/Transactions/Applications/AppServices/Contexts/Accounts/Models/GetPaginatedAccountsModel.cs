@@ -7,11 +7,11 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 /// </summary>
 /// <param name="PageNumber">Page number.</param>
 /// <param name="PageSize">Page size.</param>
-/// <param name="UserId">Account ID.</param>
-/// <param name="MinBalance">Minimum transaction balance filter.</param>
-/// <param name="MaxBalance">Maximum transaction balance filter.</param>
-/// <param name="StartDate">Start date for filtering transactions.</param>
-/// <param name="EndDate">End date for filtering transactions.</param>
+/// <param name="UserId">User ID.</param>
+/// <param name="MinBalance">Minimum transaction balance filter (optional).</param>
+/// <param name="MaxBalance">Maximum transaction balance filter (optional).</param>
+/// <param name="StartDate">Filter by start date (optional).</param>
+/// <param name="EndDate">Filter by end date (optional).</param>
 public sealed record GetPaginatedAccountsModel(
     int PageNumber,
     int PageSize,

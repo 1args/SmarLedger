@@ -25,6 +25,6 @@ public static class CustomModelBuilder
 
         modelBuilder
             .ApplyConfiguration(new BudgetConfiguration())
-            .ApplyConfiguration(new BudgetItemConfiguration());
+            .ApplyConfiguration(new BudgetCategoryConfiguration());
     }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Applications\AppServices\SmartLedger.Common.Applications.AppServices.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Budgets.Contracts.csproj" />
     <ProjectReference Include="..\..\Infrastructure\SmartLedger.Modules.Budgets.Infrastructure.csproj" />
   </ItemGroup>
 

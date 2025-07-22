@@ -29,12 +29,14 @@ public interface IBudgetsSynchronizationService
     Task SynchronizeCategoryRemovalAsync(CategoryRemovalSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Synchronises the update the spending amount by adding a transaction in the budget context.
+    /// Synchronises the addition the spending amount by adding a transaction in the budget context.
     /// </summary>
     /// <param name="request">Model containing transaction details.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns></returns>
-    Task SynchronizeUpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
+    Task SynchronizeAdditionSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken);
+
+    Task SynchronizeReversionSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Synchronizes the deletion of a budget.

@@ -44,11 +44,6 @@ public sealed class BudgetReadModelConfiguration : IEntityTypeConfiguration<Budg
             .IsDateTime()
             .IsRequired();
 
-        builder.HasMany(b => b.Items)
-            .WithOne()
-            .HasForeignKey(bi => bi.BudgetId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         builder.HasIndex(b => b.UserId)
             .HasDatabaseName("idx_budgets_userid")
             .IsUnique(false);

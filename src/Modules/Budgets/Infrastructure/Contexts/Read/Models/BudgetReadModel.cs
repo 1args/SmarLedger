@@ -25,7 +25,4 @@ public sealed class BudgetReadModel
 
     /// <summary>Date and time when budget was last updated.</summary>
     public DateTime LastUpdatedAt { get; set; }
-
-    /// <summary>Collection of budget items associated with this budget.</summary>
-    public List<BudgetItemReadModel> Items { get; set; } = [];
 }

@@ -5,8 +5,8 @@ using Microsoft.Extensions.Options;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Common.Infrastructure.Events;
-using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events;
-using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events;
+using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.BudgetCreated;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 

@@ -69,7 +69,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
-        endpoints.MapPost("/{userId:guid}/accounts/search", GetPaginatedAccountsAsync)
+        app.MapPost("/{userId:guid}/accounts/search", GetPaginatedAccountsAsync)
             .WithName("GetPaginatedAccounts")
             .WithSummary("Retrieves a paginated list of accounts for the specified user.")
             .WithDescription("Returns a paginated list of accounts associated with the given user ID.")

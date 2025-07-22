@@ -2,7 +2,7 @@
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Contracts.Events;
+using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountDeleted;
 
 namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
 

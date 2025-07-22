@@ -107,6 +107,6 @@ internal sealed class ValidationDecorator
     {
         return string.Join(
             Environment.NewLine,
-            failures.Select(f => $"Field {f.PropertyName}: {f.ErrorMessage}"));
+            failures.Select(f => $"Field '{f.PropertyName}': {f.ErrorMessage}"));
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.BudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.Budgets;
 using SmartLedger.Modules.Budgets.Domain.Enums;
 using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
 using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models;
@@ -14,8 +17,8 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 /// <inheritdoc />
 public sealed class BudgetsSynchronizationService(
     IRepository<BudgetReadModel, BudgetsReadDbContext> budgetsRepository,
-    IRepository<BudgetItemReadModel, BudgetsReadDbContext> budgetItemsRepository,
-    ILogger<IBudgetsSynchronizationService> logger): IBudgetsSynchronizationService
+    IRepository<BudgetCategoryReadModel, BudgetsReadDbContext> budgetItemsRepository,
+    ILogger<BudgetsSynchronizationService> logger): IBudgetsSynchronizationService
 {
     /// <inheritdoc />
     public async Task SynchronizeBudgetCreationAsync(BudgetCreationSynchronizationModel request, CancellationToken cancellationToken)
@@ -51,7 +54,7 @@ public sealed class BudgetsSynchronizationService(
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
 
-        var category = new BudgetItemReadModel
+        var category = new BudgetCategoryReadModel
         {
             Id = request.CategoryId,
             BudgetId = request.BudgetId,
@@ -60,7 +63,9 @@ public sealed class BudgetsSynchronizationService(
             Category = request.Category.ToString(),
             Limit = request.Limit,
             SpentAmount = 0.0m,
-            Status = BudgetItemStatus.Active.ToString(),
+            Status = BudgetCategoryStatus.Active.ToString(),
+            StartDate = budget.StartDate,
+            EndDate = budget.EndDate,
             CreatedAt = request.CreatedAt,
             LastUpdatedAt = request.CreatedAt
         };
@@ -89,38 +94,25 @@ public sealed class BudgetsSynchronizationService(
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeUpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeAdditionSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken)
     {
-        if (!IsExpense(request))
-        {
-            return;
-        }
+        if (!IsExpense(request)) return;
 
-        logger.LogInformation(
-            "Synchronizing update of spending amount amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`...",
-            request.Category, request.Amount, request.UserId);
+        await ProcessSpendingSynchronizationAsync(
+            request,
+            cancellationToken,
+            (category, r) => category.SpentAmount += r.Amount);
+    }
 
-        var activeBudgets = await GetActiveBudgetsAsync(request, cancellationToken);
+    /// <inheritdoc />
+    public async Task SynchronizeReversionSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken)
+    {
+        if (!IsExpense(request)) return;
 
-        if (activeBudgets.Count == 0)
-        {
-            logger.LogWarning(
-                "No active budgets found for user with ID `{UserId}` in synchronization context.",
-                request.UserId);
-            return;
-        }
-
-        var categories = activeBudgets
-            .SelectMany(b => b.Items)
-            .ToList();
-
-        UpdateCategories(categories, activeBudgets, request);
-
-        await budgetItemsRepository.UpdateRangeAsync(categories.ToArray(), cancellationToken);
-
-        logger.LogInformation(
-            "Spending amount for category `{Category}` for user with ID `{UserId}` was successfully synchronized after update.",
-            request.Category, request.UserId);
+        await ProcessSpendingSynchronizationAsync(
+            request,
+            cancellationToken,
+            (category, r) => category.SpentAmount -= r.Amount);
     }
 
     /// <inheritdoc />
@@ -141,50 +133,80 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Determines whether the given transaction is an expense.
     /// </summary>
-    private static bool IsExpense(TransactionAdditionModel request)
+    private static bool IsExpense(TransactionModificationModel request)
         => request.Type == TransactionType.Expense;
 
     /// <summary>
-    /// Retrieves all active budgets for a user that match the specified category in the transaction request.
+    /// Processes spending synchronization for categories by applying the specified action.
     /// </summary>
-    private async Task<List<BudgetReadModel>> GetActiveBudgetsAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    private async Task ProcessSpendingSynchronizationAsync(
+        TransactionModificationModel request,
+        CancellationToken cancellationToken,
+        Action<BudgetCategoryReadModel, TransactionModificationModel> updateAction)
     {
-        return await budgetsRepository
-            .Where(b => b.UserId == request.UserId &&
-                        b.StartDate <= request.CreatedAt &&
-                        b.EndDate >= request.CreatedAt)
-            .Include(b => b.Items
-                .Where(i => i.Category == request.Category.ToString()))
-            .ToListAsync(cancellationToken);
+        logger.LogInformation(
+            "Synchronizing update of spending amount amount for category `{Category}` with amount `{Amount}` and user with ID `{UserId}`...",
+            request.Category, request.Amount, request.UserId);
+
+        var categories = await GetActiveCategoriesAsync(request, cancellationToken);
+        CheckCategoriesExistence(categories, request);
+
+        categories.ForEach(c =>
+        {
+            updateAction(c, request);
+            c.Status = GetUpdatedStatus(c, request);
+            c.LastUpdatedAt = request.CreatedAt;
+        });
+
+        await budgetItemsRepository.UpdateRangeAsync(categories.ToArray(), cancellationToken);
+
+        logger.LogInformation(
+            "Spending amount for category `{Category}` and user with ID `{UserId}` was successfully synchronized after update.",
+            request.Category, request.UserId);
     }
 
     /// <summary>
-    /// Updates the spending amount and status of budget categories.
+    /// Retrieves all active categories for a user that match the specified category in the transaction request.
     /// </summary>
-    private static void UpdateCategories(List<BudgetItemReadModel> categories, List<BudgetReadModel> budgets, TransactionAdditionModel request)
+    private async Task<List<BudgetCategoryReadModel>> GetActiveCategoriesAsync(TransactionModificationModel request, CancellationToken cancellationToken)
     {
-        foreach (var category in categories)
-        {
-            category.SpentAmount += request.Amount;
+        var combinedSpecification = new BudgetCategoryByUserIdSpecification(request.UserId)
+            .And(new ActiveBudgetCategorySpecification(request.CreatedAt))
+            .And(new BudgetCategoryByCategorySpecification(request.Category.ToString()));
 
-            var budget = budgets.Single(b => b.Id == category.BudgetId);
+        var categories = await budgetItemsRepository
+            .AsQueryable()
+            .Where(combinedSpecification)
+            .ToListAsync(cancellationToken);
 
-            category.Status = GetUpdatedStatus(budget, category, request);
-            category.LastUpdatedAt = request.CreatedAt;
-        }
+        return categories;
+    }
+
+    /// <summary>
+    /// Checks if any active categories exist and throws an exception if none are found.
+    /// </summary>
+    private void CheckCategoriesExistence(List<BudgetCategoryReadModel> categories, TransactionModificationModel request)
+    {
+        if (categories.Count != 0) return;
+
+        logger.LogWarning(
+            "No active categories found for category `{Category}` and user with ID `{UserId}` in synchronization context.",
+            request.Category, request.UserId);
+        throw new NotFoundException(
+            $"No active budgets found for user with ID '{request.UserId}' and category '{request.Category}' in synchronization context.");
     }
 
     /// <summary>
     /// Determines the updated status of a budget category.
     /// </summary>
-    private static string GetUpdatedStatus(BudgetReadModel budget, BudgetItemReadModel category, TransactionAdditionModel request)
+    private static string GetUpdatedStatus(BudgetCategoryReadModel category, TransactionModificationModel request)
     {
-        if (budget.StartDate > request.CreatedAt || budget.EndDate < request.CreatedAt)
-            return BudgetItemStatus.Inactive.ToString();
+        if (category.StartDate > request.CreatedAt || category.EndDate < request.CreatedAt)
+            return BudgetCategoryStatus.Inactive.ToString();
 
         return category.SpentAmount >= category.Limit
-            ? BudgetItemStatus.Exceeded.ToString()
-            : BudgetItemStatus.Active.ToString();
+            ? BudgetCategoryStatus.Exceeded.ToString()
+            : BudgetCategoryStatus.Active.ToString();
     }
 
     /// <summary>
@@ -208,7 +230,7 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Retrieves a category by its ID or throws if not found.
     /// </summary>
-    private async Task<BudgetItemReadModel> GetCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+    private async Task<BudgetCategoryReadModel> GetCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
     {
         var category = await budgetItemsRepository
             .Where(c => c.Id == categoryId)

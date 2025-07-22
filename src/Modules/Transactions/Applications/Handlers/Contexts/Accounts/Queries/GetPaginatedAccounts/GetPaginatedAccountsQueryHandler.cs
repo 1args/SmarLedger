@@ -13,10 +13,9 @@ public sealed class GetPaginatedAccountsQueryHandler(
     IAccountsRetrievalService accountsRetrievalService) : IQueryHandler<GetPaginatedAccountsQuery, PaginatedList<AccountListItem>>
 {
     /// <inheritdoc />
-    public async Task<PaginatedList<AccountListItem>> HandleAsync(GetPaginatedAccountsQuery query,
-        CancellationToken cancellationToken)
+    public async Task<PaginatedList<AccountListItem>> HandleAsync(GetPaginatedAccountsQuery query, CancellationToken cancellationToken)
     {
-        var request = new GetPaginatedAccountsModel(
+        var filter = new GetPaginatedAccountsModel(
             query.PageNumber,
             query.PageSize,
             query.UserId,
@@ -25,6 +24,6 @@ public sealed class GetPaginatedAccountsQueryHandler(
             query.StartDate,
             query.EndDate);
 
-        return await accountsRetrievalService.GetPaginatedAccountsAsync(request, cancellationToken);
+        return await accountsRetrievalService.GetPaginatedAccountsAsync(filter, cancellationToken);
     }
 }

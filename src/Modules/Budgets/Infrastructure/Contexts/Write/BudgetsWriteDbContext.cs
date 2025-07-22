@@ -15,7 +15,7 @@ public sealed class BudgetsWriteDbContext(
     public DbSet<Budget> Budgets { get; set; }
 
     /// <summary>BudgetItems.</summary>
-    public DbSet<BudgetItem> BudgetItems { get; set; }
+    public DbSet<BudgetCategory> BudgetCategories { get; set; }
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

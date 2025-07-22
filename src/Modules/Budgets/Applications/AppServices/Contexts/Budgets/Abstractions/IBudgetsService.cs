@@ -34,7 +34,14 @@ public interface IBudgetsService
     /// <param name="request">Model containing transaction details.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns></returns>
-    Task UpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
+    Task AddSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Reverts the spending amount by removing a transaction in the budget context.
+    /// </summary>
+    /// <param name="request">Model containing transaction details.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task RevertSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Deletes a budget by its identifier.

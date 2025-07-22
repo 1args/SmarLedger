@@ -20,7 +20,7 @@ public static class CustomModelBuilder
             .SetDefaultDateTimeKind(DateTimeKind.Utc);
 
         modelBuilder
-            .ApplyConfiguration(new BudgetItemReadModelConfiguration())
-            .ApplyConfiguration(new BudgetItemReadModelConfiguration());
+            .ApplyConfiguration(new BudgetCategoryReadModelConfiguration())
+            .ApplyConfiguration(new BudgetCategoryReadModelConfiguration());
     }
 }

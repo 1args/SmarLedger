@@ -5,6 +5,7 @@
 /// </summary>
 /// <param name="TransactionId">Transaction ID.</param>
 /// <param name="AccountId">Account ID.</param>
+/// <param name="UserId">User ID.</param>
 /// <param name="AccountName">Account name.</param>
 /// <param name="Amount">Transaction amount.</param>
 /// <param name="Type">Type of transaction (Income or Expense).</param>
@@ -15,6 +16,7 @@
 public record TransactionResponse(
     Guid TransactionId,
     Guid AccountId,
+    Guid UserId,
     string AccountName,
     decimal Amount,
     string Type,

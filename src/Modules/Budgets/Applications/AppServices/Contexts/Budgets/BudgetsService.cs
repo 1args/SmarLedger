@@ -1,10 +1,13 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.BudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.Budgets;
 using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Budgets.Domain.Entities;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
@@ -17,7 +20,7 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 /// <inheritdoc />
 public sealed class BudgetsService(
     IRepository<Budget, BudgetsWriteDbContext> budgetsRepository,
-    IRepository<BudgetItem, BudgetsWriteDbContext> budgetItemsRepository,
+    IRepository<BudgetCategory, BudgetsWriteDbContext> budgetItemsRepository,
     ITransactionManager transactionManager,
     ILogger<BudgetsService> logger) : IBudgetsService
 {
@@ -26,7 +29,7 @@ public sealed class BudgetsService(
     {
         logger.LogInformation(
             "Creating budget with name `{Name}` for user with ID `{UserId}`...", 
-            request.UserId, request.Name);
+            request.Name, request.UserId);
 
         var name = BudgetName.Create(request.Name);
         var period = BudgetPeriod.Create(request.StartDate, request.EndDate);
@@ -51,10 +54,10 @@ public sealed class BudgetsService(
 
         var budget = await GetBudgetAsync(request.BudgetId, useInclude: true, cancellationToken : cancellationToken);
 
-        var limit = BudgetItemLimit.Create(request.Limit);
-        var category = BudgetItem.Create(request.Category, limit, request.CreatedAt);
+        var limit = BudgetCategoryLimit.Create(request.Limit);
+        var category = BudgetCategory.Create(request.Category, limit, request.CreatedAt);
 
-        budget.AddItem(category);
+        budget.AddCategory(category);
 
         await transactionManager.StartEffect(async ct =>
         {
@@ -78,9 +81,9 @@ public sealed class BudgetsService(
             "Removing category with ID `{CategoryId}` from budget with ID `{BudgetId}`...",
             request.CategoryId, category.BudgetId);
 
-        var budget = await GetBudgetAsync(category.BudgetId, cancellationToken);
+        var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
 
-        budget.RemoveItem(category);
+        budget.RemoveCategory(category);
 
         await transactionManager.StartEffect(async ct =>
         {
@@ -94,39 +97,25 @@ public sealed class BudgetsService(
     }
 
     /// <inheritdoc />
-    public async Task UpdateSendingAmountAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    public async Task AddSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken)
     {
-        if (!IsExpense(request))
-        {
-            return;
-        }
+        if (!IsExpense(request)) return;
 
-        logger.LogInformation(
-            "Updating spending amount for category `{Category}` with amount `{Amount}` for user with ID `{UserId}`...",
-            request.Category, request.Amount, request.UserId);
+        await ProcessSpendingAsync(
+            request, 
+            cancellationToken,
+            (item, amount, period) => item.AddExpense(amount, period));
+    }
 
-        var activeBudgets = await GetActiveBudgetsAsync(request, cancellationToken);
+    /// <inheritdoc />
+    public async Task RevertSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken)
+    {
+        if (!IsExpense(request)) return;
 
-        if (activeBudgets.Count == 0)
-        {
-            logger.LogWarning("No active budgets found for user with ID `{UserId}`.", request.UserId);
-            return;
-        }
-
-        var amount = Money.Create(request.Amount);
-        var categoriesToUpdate = activeBudgets.SelectMany(b => b.Items).ToList();
-
-        foreach (var category in categoriesToUpdate)
-        {
-            var budget = activeBudgets.First(b => b.Items.Contains(category));
-            category.AddExpense(amount, budget.Period);
-        }
-
-        await budgetItemsRepository.UpdateRangeAsync(categoriesToUpdate.ToArray(), cancellationToken);
-
-        logger.LogInformation(
-            "Spending amount updated for category `{Category}` with amount `{Amount}` for user with ID `{UserId}` in `{Count}` budgets.",
-            request.Category, request.Amount, request.UserId, activeBudgets.Count);
+        await ProcessSpendingAsync(
+            request,
+            cancellationToken,
+            (item, amount, period) => item.RevertExpense(amount, period));
     }
 
     /// <inheritdoc />
@@ -143,38 +132,89 @@ public sealed class BudgetsService(
     /// <summary>
     /// Determines whether the given transaction is an expense.
     /// </summary>
-    private static bool IsExpense(TransactionAdditionModel request)
+    private static bool IsExpense(TransactionModificationModel request)
         => request.Type == TransactionType.Expense;
+
+    /// <summary>
+    /// Processes spending updates for budgets by applying the specified action to each category.
+    /// </summary>
+    private async Task ProcessSpendingAsync(
+        TransactionModificationModel request,
+        CancellationToken cancellationToken,
+        Action<BudgetCategory, Money, BudgetPeriod> updateAction)
+    {
+        logger.LogInformation(
+            "Updating spending amount for category `{request.Category}` with amount `{request.Amount}` for user with ID `{request.UserId}`...",
+            request.Category, request.Amount, request.UserId);
+
+        var budgets = await GetActiveBudgetsAsync(request, cancellationToken);
+        CheckBudgetsExistence(budgets, request);
+
+        var amount = Money.Create(request.Amount);
+
+        budgets
+            .SelectMany(b => b.Categories
+                .Select(bi => new { BudgetItem = bi, b.Period }))
+            .ToList()
+            .ForEach(x => updateAction(x.BudgetItem, amount, x.Period));
+
+        await budgetsRepository.UpdateRangeAsync(budgets.ToArray(), cancellationToken);
+
+        logger.LogInformation(
+            "Spending amount updated for category `{request.Category}` with amount `{request.Amount}` for user with ID `{request.UserId}`.",
+            request.Category, request.Amount, request.UserId);
+    }
 
     /// <summary>
     /// Retrieves all active budgets for a user that match the specified category in the transaction request.
     /// </summary>
-    private async Task<List<Budget>> GetActiveBudgetsAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    private async Task<List<Budget>> GetActiveBudgetsAsync(TransactionModificationModel request, CancellationToken cancellationToken)
     {
-        return await budgetsRepository
-            .Where(b => b.UserId == request.UserId && b.Period.IsActive(request.CreatedAt))
-            .Include(b => b.Items.Where(item => item.Category == request.Category))
+        var combinedSpecification = new BudgetByUserIdSpecification(request.UserId)
+            .And(new ActiveBudgetSpecification(request.CreatedAt))
+            .And(new BudgetByCategorySpecification(request.Category));
+
+        var budget = await budgetsRepository
+            .AsQueryable()
+            .Where(combinedSpecification)
+            .Include(b => b.Categories)
             .ToListAsync(cancellationToken);
+
+        return budget;
+    }
+
+    /// <summary>
+    ///  Checks if any active budgets exist and throws an exception if none are found.
+    /// </summary>
+    private void CheckBudgetsExistence(List<Budget> budgets, TransactionModificationModel request)
+    {
+        if (budgets.Count != 0) return;
+
+        logger.LogWarning(
+            "No active budgets found for user with ID `{UserId}` and category `{Category}`.",
+            request.UserId, request.Category);
+        throw new NotFoundException(
+            $"No active budgets found for user with ID '{request.UserId}' and category '{request.Category}'.");
     }
 
     /// <summary>
     /// Retrieves a budget by its ID or throws if not found.
     /// </summary>
-    private async Task<Budget> GetBudgetAsync(Guid budgetIt, CancellationToken cancellationToken, bool useInclude = false)
+    private async Task<Budget> GetBudgetAsync(Guid budgetId, CancellationToken cancellationToken, bool useInclude = false)
     {
         var query = budgetsRepository
-            .Where(b => b.Id == budgetIt);
+            .Where(b => b.Id == budgetId);
 
         query = useInclude
-            ? query.Include(b => b.Items)
+            ? query.Include(b => b.Categories)
             : query;
        
         var budget = await query.SingleOrDefaultAsync(cancellationToken);
 
         if (budget is null)
         {
-            logger.LogWarning("Budget with ID `{AccountId}` not found.", budgetIt);
-            throw new NotFoundException($"Budget with ID '{budgetIt}' was not found.");
+            logger.LogWarning("Budget with ID `{AccountId}` not found.", budgetId);
+            throw new NotFoundException($"Budget with ID '{budgetId}' was not found.");
         }
 
         return budget;
@@ -183,10 +223,10 @@ public sealed class BudgetsService(
     /// <summary>
     /// Retrieves a category by its ID or throws if not found.
     /// </summary>
-    private async Task<BudgetItem> GetCategoryAsync(Guid budgetItemId, CancellationToken cancellationToken)
+    private async Task<BudgetCategory> GetCategoryAsync(Guid budgetItemId, CancellationToken cancellationToken)
     {
         var category = await budgetItemsRepository
-            .Where(c => c.Id == budgetItemId)
+            .Where(bi => bi.Id == budgetItemId)
             .SingleOrDefaultAsync(cancellationToken);
 
         if (category is null)
