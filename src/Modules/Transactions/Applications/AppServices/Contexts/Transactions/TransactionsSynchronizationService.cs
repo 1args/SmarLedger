@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
@@ -15,6 +16,7 @@ public sealed class TransactionsSynchronizationService(
     IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
     ITransactionManager transactionManager,
+    HybridCache cache,
     ILogger<TransactionsSynchronizationService> logger) : ITransactionsSynchronizationService
 {
     /// <inheritdoc />
@@ -36,7 +38,7 @@ public sealed class TransactionsSynchronizationService(
         {
             "Income" => account.Balance + amountDifference,
             "Expense" => account.Balance - amountDifference,
-            _ => account.Balance 
+            _ => account.Balance
         };
         account.LastUpdatedAt = request.UpdatedAt;
 
@@ -45,6 +47,11 @@ public sealed class TransactionsSynchronizationService(
             await transactionsRepository.UpdateAsync(transaction, ct);
             await accountsRepository.UpdateAsync(account, ct);
         }, IsolationLevel.Serializable, cancellationToken);
+
+        await cache.RemoveAsync($"transaction:{request.TransactionId}", cancellationToken);
+        await cache.RemoveAsync($"transactions:account:{transaction.AccountId}:*", cancellationToken);
+        await cache.RemoveAsync($"account:{transaction.AccountId}", cancellationToken);
+        await cache.RemoveAsync($"accounts:user:{account.UserId}:*", cancellationToken);
 
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` was successfully synchronized after amount change.",
@@ -65,6 +72,9 @@ public sealed class TransactionsSynchronizationService(
 
         await transactionsRepository.UpdateAsync(transaction, cancellationToken);
 
+        await cache.RemoveAsync($"transaction:{request.TransactionId}", cancellationToken);
+        await cache.RemoveAsync($"transactions:account:{transaction.AccountId}:*", cancellationToken);
+
         logger.LogInformation(
             "Transaction with ID `{TransactionId}` was successfully synchronized after category change.",
             request.TransactionId);
@@ -82,7 +92,7 @@ public sealed class TransactionsSynchronizationService(
         if (transaction is null)
         {
             logger.LogWarning("Transaction with ID `{TransactionId}` not found in synchronization context.", transactionId);
-            throw new ReadableException($"Transaction with ID '{transactionId}' was not found in synchronization context. ");
+            throw new ReadableException($"Transaction with ID '{transactionId}' was not found in synchronization context.");
         }
 
         return transaction;
