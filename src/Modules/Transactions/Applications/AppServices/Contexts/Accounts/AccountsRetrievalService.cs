@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
@@ -17,6 +18,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 /// <inheritdoc />
 public sealed class AccountsRetrievalService(
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
+    HybridCache cache,
     ILogger<AccountsRetrievalService> logger) : IAccountsRetrievalService
 {
     /// <inheritdoc />
@@ -24,42 +26,68 @@ public sealed class AccountsRetrievalService(
     {
         logger.LogInformation("Retrieving account with ID `{AccountId}`...", accountId);
 
-        var account = await accountsRepository
-            .AsQueryable()
-            .AsNoTracking()
-            .Where(a => a.Id == accountId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (account is null)
+        var cacheKey = $"account:{accountId}";
+        var cacheOptions = new HybridCacheEntryOptions()
         {
-            logger.LogWarning("Account with ID `{AccountId}` not found.", accountId);
-            throw new NotFoundException($"Account with ID '{accountId}' was not found.");
-        }
+            Expiration = TimeSpan.FromMinutes(1),
+            LocalCacheExpiration = TimeSpan.FromSeconds(15)
+        };
+
+        var account = await cache.GetOrCreateAsync(
+            key: cacheKey,
+            options: cacheOptions,
+            factory: async ct =>
+            {
+                var result = await accountsRepository
+                    .AsQueryable()
+                    .AsNoTracking()
+                    .Where(a => a.Id == accountId)
+                    .SingleOrDefaultAsync(ct);
+
+                if (result is null)
+                {
+                    logger.LogWarning("Account with ID `{AccountId}` not found.", accountId);
+                    throw new NotFoundException($"Account with ID '{accountId}' was not found.");
+                }
+
+                return result.MapToResponse();
+            }, cancellationToken: cancellationToken);
 
         logger.LogInformation("Account with ID `{AccountId}` retrieved successfully.", accountId);
-
-        return account.MapToResponse();
+        return account;
     }
 
     /// <inheritdoc />
     public async Task<PaginatedList<AccountListItem>> GetPaginatedAccountsAsync(
-        GetPaginatedAccountsModel filter, 
+        GetPaginatedAccountsModel filter,
         CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving paginated accounts for user with ID `{UserId}`...", filter.UserId);
-        
-        var combinedSpecification = new AccountByUserIdSpecification(filter.UserId)
-           .And(new AccountByBalanceRangeSpecification(filter.MinBalance, filter.MaxBalance))
-           .And(new AccountByDateRangeSpecification(filter.StartDate, filter.EndDate));
 
-        var accounts = accountsRepository
-           .AsQueryable()
-           .AsNoTracking()
-           .Where(combinedSpecification)
-           .Select(a => a.MapToListItem());
+        var cacheKey = $"accounts:user:{filter.UserId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}:maxbalance:{filter.MaxBalance}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
+        var cacheOptions = new HybridCacheEntryOptions()
+        {
+            Expiration = TimeSpan.FromSeconds(15),
+            LocalCacheExpiration = TimeSpan.FromSeconds(10)
+        };
 
-        var paginatedAccounts = await PaginatedList<AccountListItem>
-            .CreateAsync(accounts, filter, cancellationToken);
+        var paginatedAccounts = await cache.GetOrCreateAsync(
+            key: cacheKey,
+            options: cacheOptions,
+            factory: async ct =>
+            {
+                var combinedSpecification = new AccountByUserIdSpecification(filter.UserId)
+                    .And(new AccountByBalanceRangeSpecification(filter.MinBalance, filter.MaxBalance))
+                    .And(new AccountByDateRangeSpecification(filter.StartDate, filter.EndDate));
+
+                var accounts = accountsRepository
+                    .AsQueryable()
+                    .AsNoTracking()
+                    .Where(combinedSpecification)
+                    .Select(a => a.MapToListItem());
+
+                return await PaginatedList<AccountListItem>.CreateAsync(accounts, filter, ct);
+            }, cancellationToken: cancellationToken);
 
         logger.LogInformation(
             "Successfully retrieved `{Count}` accounts (Page `{PageNumber}` of `{TotalPages}`) for user with ID `{UserId}`.",

@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Caching.Hybrid;
+using Microsoft.Extensions.Options;
 using Serilog;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Common.Infrastructure.Events;
 using SmartLedger.Hosts.Api.ExceptionHandling;
+using HybridCacheOptions = SmartLedger.Common.Contracts.Options.HybridCacheOptions;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -26,7 +29,8 @@ public static class ApiExtensions
             .AddLogging(configuration)
             .AddGlobalExceptionHandler()
             .AddDateTimeProvider()
-            .AddConfiguredMessageBroker(configuration);
+            .AddConfiguredMessageBroker(configuration)
+            .AddCaching(configuration);
 
         return services;
     }
@@ -100,6 +104,34 @@ public static class ApiExtensions
         });
 
         services.AddExceptionHandler<GlobalExceptionHandler>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds caching.
+    /// </summary>
+    /// <param name="services">Service collection.</param>
+    /// <param name="configuration">Configuration.</param>
+    /// <returns>Modified <see cref="IServiceCollection"/>.</returns>
+    private static IServiceCollection AddCaching(this IServiceCollection services, IConfiguration configuration)
+    {
+        var hybridCacheOptions = configuration.GetSection(nameof(HybridCacheOptions)).Get<HybridCacheOptions>();
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = configuration.GetConnectionString("RedisConnection");
+        });
+
+        services.AddHybridCache(options =>
+        {
+            options.MaximumPayloadBytes = hybridCacheOptions!.MaximumPayloadBytes;
+            options.DefaultEntryOptions = new HybridCacheEntryOptions
+            {
+                LocalCacheExpiration = hybridCacheOptions.LocalCacheExpirationSeconds,
+                Expiration = hybridCacheOptions.DefaultExpirationSeconds
+            };
+        });
 
         return services;
     }

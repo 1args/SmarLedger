@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace SmartLedger.Common.Infrastructure.Repositories;
 
 /// <inheritdoc/>
-public sealed class Repository<TEntity, TDbContext> :
+public sealed class DefaultRepository<TEntity, TDbContext> :
     IRepository<TEntity, TDbContext>
     where TEntity : class
     where TDbContext : DbContext
@@ -21,10 +21,10 @@ public sealed class Repository<TEntity, TDbContext> :
     private DbSet<TEntity> DbSet { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Repository{TEntity, TDbContext}"/> class.
+    /// Initializes a new instance of the <see cref="DefaultRepository{TEntity, TDbContext}"/> class.
     /// </summary>
     /// <param name="dbContext">DbContext.</param>
-    public Repository(TDbContext dbContext)
+    public DefaultRepository(TDbContext dbContext)
     {
         DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         DbSet = DbContext.Set<TEntity>();

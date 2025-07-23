@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
@@ -17,6 +18,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Tra
 /// <inheritdoc />
 public sealed class TransactionsRetrievalService(
     IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
+    HybridCache cache,
     ILogger<ITransactionsRetrievalService> logger) : ITransactionsRetrievalService
 {
     /// <inheritdoc />
@@ -24,47 +26,71 @@ public sealed class TransactionsRetrievalService(
     {
         logger.LogInformation("Retrieving transaction with ID `{TransactionId}`...", transactionId);
 
-        var transaction = await transactionsRepository
-            .AsQueryable()
-            .AsNoTracking()
-            .Where(t => t.Id == transactionId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (transaction is null)
+        var cacheKey = $"transaction:{transactionId}";
+        var cacheOptions = new HybridCacheEntryOptions()
         {
-            logger.LogWarning("Transaction with ID `{TransactionId}` not found.", transactionId);
-            throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
-        }
+            Expiration = TimeSpan.FromMinutes(5),
+            LocalCacheExpiration = TimeSpan.FromSeconds(30)
+        };
+
+        var transaction = await cache.GetOrCreateAsync(
+            key: cacheKey,
+            options: cacheOptions,
+            factory: async ct =>
+            {
+                var result = await transactionsRepository
+                    .AsQueryable()
+                    .AsNoTracking()
+                    .Where(t => t.Id == transactionId)
+                    .SingleOrDefaultAsync(ct);
+
+                if (result is null)
+                {
+                    logger.LogWarning("Transaction with ID `{TransactionId}` not found.", transactionId);
+                    throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
+                }
+
+                return result.MapToResponse();
+            }, cancellationToken: cancellationToken);
 
         logger.LogInformation("Transaction with ID `{TransactionId}` retrieved successfully.", transactionId);
-
-        return transaction.MapToResponse();
+        return transaction;
     }
 
     /// <inheritdoc />
     public async Task<PaginatedList<TransactionListItem>> GetPaginatedTransactionsAsync(
-        GetPaginatedTransactionsModel filter, 
+        GetPaginatedTransactionsModel filter,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation(
-            "Retrieving paginated transactions for account with ID `{AccountId}`...", 
-            filter.AccountId);
+        logger.LogInformation("Retrieving paginated transactions for account with ID `{AccountId}`...", filter.AccountId);
 
-        var combinedSpecification = new TransactionByAccountIdSpecification(filter.AccountId)
-            .And(new TransactionByAmountRangeSpecification(filter.MinAmount, filter.MaxAmount))
-            .And(new TransactionByTypeSpecification(filter.Type))
-            .And(new TransactionByCategorySpecification(filter.Category))
-            .And(new TransactionByDateRangeSpecification(filter.StartDate, filter.EndDate));
+        var cacheKey = $"transactions:account:{filter.AccountId}:page:{filter.PageNumber}:type:{filter.Type ?? "none"}:category:{filter.Category ?? "none"}:minamount:{filter.MinAmount}:maxamount:{filter.MaxAmount}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
+        var cacheOptions = new HybridCacheEntryOptions()
+        {
+            Expiration = TimeSpan.FromSeconds(15),
+            LocalCacheExpiration = TimeSpan.FromSeconds(10)
+        };
 
-        var query = transactionsRepository
-            .AsQueryable()
-            .AsNoTracking()
-            .Where(combinedSpecification)
-            .OrderBy(t => t.CreatedAt)
-            .Select(t => t.MapToListItem());
+        var paginatedTransactions = await cache.GetOrCreateAsync(
+            key: cacheKey,
+            options: cacheOptions,
+            factory: async ct =>
+            {
+                var combinedSpecification = new TransactionByAccountIdSpecification(filter.AccountId)
+                    .And(new TransactionByAmountRangeSpecification(filter.MinAmount, filter.MaxAmount))
+                    .And(new TransactionByTypeSpecification(filter.Type))
+                    .And(new TransactionByCategorySpecification(filter.Category))
+                    .And(new TransactionByDateRangeSpecification(filter.StartDate, filter.EndDate));
 
-        var paginatedTransactions = await PaginatedList<TransactionListItem>
-            .CreateAsync(query, filter, cancellationToken);
+                var query = transactionsRepository
+                    .AsQueryable()
+                    .AsNoTracking()
+                    .Where(combinedSpecification)
+                    .OrderBy(t => t.CreatedAt)
+                    .Select(t => t.MapToListItem());
+
+                return await PaginatedList<TransactionListItem>.CreateAsync(query, filter, ct);
+            }, cancellationToken: cancellationToken);
 
         logger.LogInformation(
             "Successfully retrieved `{Count}` transactions (Page `{PageNumber}` of `{TotalPages}`) for account with ID `{AccountId}`.",

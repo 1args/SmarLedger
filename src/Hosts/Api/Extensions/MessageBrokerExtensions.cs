@@ -37,7 +37,7 @@ public static class MessageBrokerExtensions
         {
             using var serviceProvider = services.BuildServiceProvider();
 
-            var options = serviceProvider.GetRequiredService<IOptions<RabbitMqOptions>>().Value;
+            var rabbitMqOptions = serviceProvider.GetRequiredService<IOptions<RabbitMqOptions>>().Value;
 
             cfg.SetKebabCaseEndpointNameFormatter();
 
@@ -46,12 +46,12 @@ public static class MessageBrokerExtensions
 
             cfg.UsingRabbitMq((context, rmqCfg) =>
             {
-                rmqCfg.Host(options.HostName, options.VirtualHost, hostCfg =>
+                rmqCfg.Host(rabbitMqOptions.HostName, rabbitMqOptions.VirtualHost, hostCfg =>
                 {
                     rmqCfg.ConnectReceiveObserver(new ReceiveObservable());
                     rmqCfg.ConnectSendObserver(new SendObservable());
-                    hostCfg.Username(options.Username);
-                    hostCfg.Password(options.Password);
+                    hostCfg.Username(rabbitMqOptions.Username);
+                    hostCfg.Password(rabbitMqOptions.Password);
                 });
                 rmqCfg.ConfigureEndpoints(context);
             });

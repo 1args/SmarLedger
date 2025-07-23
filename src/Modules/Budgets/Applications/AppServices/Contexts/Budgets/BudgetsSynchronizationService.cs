@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
@@ -18,6 +19,7 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsSynchronizationService(
     IRepository<BudgetReadModel, BudgetsReadDbContext> budgetsRepository,
     IRepository<BudgetCategoryReadModel, BudgetsReadDbContext> budgetItemsRepository,
+    HybridCache cache,
     ILogger<BudgetsSynchronizationService> logger): IBudgetsSynchronizationService
 {
     /// <inheritdoc />
@@ -39,6 +41,7 @@ public sealed class BudgetsSynchronizationService(
         };
 
         await budgetsRepository.AddAsync(budget, cancellationToken);
+        await cache.RemoveAsync($"budgets:user:{request.UserId}:*", cancellationToken);
 
         logger.LogInformation(
             "Budget with ID `{BudgetId}` was successfully synchronized after creation.",
@@ -72,6 +75,9 @@ public sealed class BudgetsSynchronizationService(
 
         await budgetItemsRepository.AddAsync(category, cancellationToken);
 
+        await cache.RemoveAsync($"budgetcategory:{request.CategoryId}", cancellationToken); 
+        await cache.RemoveAsync($"budgetcategories:budget:{request.BudgetId}:*", cancellationToken);
+
         logger.LogInformation(
             "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` was successfully synchronized after addition.",
             request.CategoryId, request.BudgetId);
@@ -87,6 +93,9 @@ public sealed class BudgetsSynchronizationService(
             request.CategoryId, category.BudgetId);
 
         await budgetItemsRepository.DeleteAsync(category, cancellationToken);
+
+        await cache.RemoveAsync($"budgetcategory:{request.CategoryId}", cancellationToken); 
+        await cache.RemoveAsync($"budgetcategories:budget:{category.BudgetId}:*", cancellationToken);
 
         logger.LogInformation(
             "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` was successfully synchronized after removal.",
@@ -123,7 +132,12 @@ public sealed class BudgetsSynchronizationService(
             request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
+
         await budgetsRepository.DeleteAsync(budget, cancellationToken);
+
+        await cache.RemoveAsync($"budget:{request.BudgetId}", cancellationToken);
+        await cache.RemoveAsync($"budgets:user:{budget.UserId}:*", cancellationToken); 
+        await cache.RemoveAsync($"budgetcategories:budget:{budget.Id}:*", cancellationToken); 
 
         logger.LogInformation(
             "Budget with ID `{BudgetId}` was successfully synchronized after deletion.", 
@@ -159,6 +173,12 @@ public sealed class BudgetsSynchronizationService(
         });
 
         await budgetItemsRepository.UpdateRangeAsync(categories.ToArray(), cancellationToken);
+
+        foreach (var category in categories)
+        {
+            await cache.RemoveAsync($"budgetcategory:{category.Id}", cancellationToken);
+            await cache.RemoveAsync($"budgetcategories:budget:{category.BudgetId}:*", cancellationToken);
+        }
 
         logger.LogInformation(
             "Spending amount for category `{Category}` and user with ID `{UserId}` was successfully synchronized after update.",

@@ -29,7 +29,7 @@ public static class DataAccessExtensions
         services
             .AddSingleton<IDbContextOptionsConfigurator<TDbContext>, TDbContextConfigurator>()
             .AddScoped<DbContext>(sp => sp.GetRequiredService<TDbContext>())
-            .AddScoped(typeof(IRepository<,>), typeof(Repository<,>))
+            .AddScoped(typeof(IRepository<,>), typeof(DefaultRepository<,>))
             .AddScoped<ITransactionManager, TransactionManager>();
 
         return services;
