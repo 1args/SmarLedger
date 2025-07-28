@@ -1,0 +1,47 @@
+receivers:
+  otlp:
+    protocols:
+      grpc: 
+        endpoint: "0.0.0.0:4317"
+      http: 
+        endpoint: "0.0.0.0:4318"
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    send_timestamps: true
+    namespace: otel
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+  otlp:
+    endpoint: "jaeger:4317"
+    tls:
+      insecure: true
+  debug: 
+    verbosity: normal 
+
+processors:
+  batch:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 400
+  attributes:
+    actions:
+      - key: environment
+        value: production
+        action: insert
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp, debug] 
+    logs:
+      receivers: [otlp]
+      processors: [batch, attributes]
+      exporters: [loki]

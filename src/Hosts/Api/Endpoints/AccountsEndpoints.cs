@@ -73,6 +73,7 @@ public static class AccountsEndpoints
             .WithName("GetPaginatedAccounts")
             .WithSummary("Retrieves a paginated list of accounts for the specified user.")
             .WithDescription("Returns a paginated list of accounts associated with the given user ID.")
+            .WithTags("Accounts")
             .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);

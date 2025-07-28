@@ -24,6 +24,7 @@ public sealed class BudgetsRetrievalService(
     HybridCache cache,
     ILogger<BudgetsRetrievalService> logger) : IBudgetsRetrievalService
 {
+    /// <inheritdoc />
     public async Task<BudgetResponse> GetBudgetAsync(Guid budgetId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving budget with ID {BudgetId}...", budgetId);
@@ -59,11 +60,15 @@ public sealed class BudgetsRetrievalService(
         return budget;
     }
 
-    public async Task<PaginatedList<BudgetListItem>> GetPaginatedBudgetsAsync(GetPaginatedBudgetsModel filter, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    public async Task<PaginatedList<BudgetListItem>> GetPaginatedBudgetsAsync(
+        GetPaginatedBudgetsModel filter,
+        CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving paginated budgets for user with ID `{UserId}`...", filter.UserId);
 
-        var cacheKey = $"budgets:user:{filter.UserId}:page:{filter.PageNumber}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
+        var cacheKey = $"budgets:user:{filter.UserId}:page:{filter.PageNumber}:start:{filter.StartDate:yyyy-MM-dd}" +
+                       $":end:{filter.EndDate:yyyy-MM-dd}";
         var cacheOptions = new HybridCacheEntryOptions()
         {
             Expiration = TimeSpan.FromMinutes(1),
@@ -97,6 +102,7 @@ public sealed class BudgetsRetrievalService(
         return paginatedBudgets;
     }
 
+    /// <inheritdoc />
     public async Task<BudgetCategoryResponse> GetBudgetCategoryAsync(Guid budgetCategoryId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving budget category with ID {BudgetCategoryId}...", budgetCategoryId);
@@ -132,11 +138,16 @@ public sealed class BudgetsRetrievalService(
         return budgetCategory;
     }
 
-    public async Task<PaginatedList<BudgetCategoryListItem>> GetPaginatedBudgetCategoriesAsync(GetPaginatedBudgetCategoriesModel filter, CancellationToken cancellationToken)
+    /// <inheritdoc />
+    public async Task<PaginatedList<BudgetCategoryListItem>> GetPaginatedBudgetCategoriesAsync(
+        GetPaginatedBudgetCategoriesModel filter, 
+        CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving paginated budget categories for budget with ID `{BudgetId}`...", filter.BudgetId);
 
-        var cacheKey = $"budgetcategories:budget:{filter.BudgetId}:page:{filter.PageNumber}:category:{filter.Category ?? "none"}:minlimit:{filter.MinLimit}:maxlimit:{filter.MaxLimit}:minspent:{filter.MinSpentAmount}:maxspent:{filter.MaxSpentAmount}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
+        var cacheKey = $"budgetcategories:budget:{filter.BudgetId}:page:{filter.PageNumber}:category:{filter.Category}" +
+                       $":minlimit:{filter.MinLimit}:maxlimit:{filter.MaxLimit}:minspent:{filter.MinSpentAmount}" +
+                       $":maxspent:{filter.MaxSpentAmount}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
         var cacheOptions = new HybridCacheEntryOptions()
         {
             Expiration = TimeSpan.FromSeconds(30),

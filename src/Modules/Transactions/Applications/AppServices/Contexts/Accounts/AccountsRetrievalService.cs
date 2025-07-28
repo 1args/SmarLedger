@@ -64,7 +64,8 @@ public sealed class AccountsRetrievalService(
     {
         logger.LogInformation("Retrieving paginated accounts for user with ID `{UserId}`...", filter.UserId);
 
-        var cacheKey = $"accounts:user:{filter.UserId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}:maxbalance:{filter.MaxBalance}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
+        var cacheKey = $"accounts:user:{filter.UserId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}" +
+                       $":maxbalance:{filter.MaxBalance}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
         var cacheOptions = new HybridCacheEntryOptions()
         {
             Expiration = TimeSpan.FromSeconds(15),

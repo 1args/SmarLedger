@@ -11,21 +11,20 @@ public static class WebApplicationExtensions
     /// <summary>
     /// Configures http request pipeline.
     /// </summary>
-    /// <param name="app">Current <see cref="WebApplication"/> instance.</param>
+    /// <param name="application">Current <see cref="WebApplication"/> instance.</param>
     /// <returns><see cref="WebApplication"/> instance.</returns>
-    public static WebApplication UseApiMiddlewares(this WebApplication app)
+    public static WebApplication UseApiMiddlewares(this WebApplication application)
     {
-        if (app.Environment.IsDevelopment())
+        if (application.Environment.IsDevelopment())
         {
-            app.MapOpenApi();
-            app.MapScalarApiReference();
+            application.MapOpenApi();
+            application.MapScalarApiReference();
         }
 
-        app.UseHttpsRedirection();
-        app.UseExceptionHandler();
-        app.MapApiEndpoints();
+        application.UseHttpsRedirection();
+        application.MapApiEndpoints();
 
-        return app;
+        return application;
     }
 
     /// <summary>

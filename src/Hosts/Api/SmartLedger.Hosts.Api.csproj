@@ -12,6 +12,17 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="OpenTelemetry" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.12.0-beta.1" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Process" Version="1.12.0-beta.1" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.12.0-beta.1" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.6.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
@@ -21,12 +32,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Cqrs\SmartLedger.Common.Cqrs.csproj" />
+    <ProjectReference Include="..\..\Common\Hosts\Common\SmartLedger.Common.Hosts.csproj" />
     <ProjectReference Include="..\..\Common\Infrastructure\SmartLedger.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Budgets\Applications\Handlers\SmartLedger.Modules.Budgets.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Budgets\Infrastructure\SmartLedger.Modules.Budgets.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Transactions\Applications\AppServices\SmartLedger.Modules.Transactions.Applications.AppServices.csproj" />
     <ProjectReference Include="..\..\Modules\Transactions\Applications\Handlers\SmartLedger.Modules.Transactions.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Transactions\Contracts\SmartLedger.Modules.Transactions.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Cors\" />
   </ItemGroup>
 
 </Project>

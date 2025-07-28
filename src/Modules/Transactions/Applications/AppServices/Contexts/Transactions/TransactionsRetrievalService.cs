@@ -64,7 +64,9 @@ public sealed class TransactionsRetrievalService(
     {
         logger.LogInformation("Retrieving paginated transactions for account with ID `{AccountId}`...", filter.AccountId);
 
-        var cacheKey = $"transactions:account:{filter.AccountId}:page:{filter.PageNumber}:type:{filter.Type ?? "none"}:category:{filter.Category ?? "none"}:minamount:{filter.MinAmount}:maxamount:{filter.MaxAmount}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
+        var cacheKey = $"transactions:account:{filter.AccountId}:page:{filter.PageNumber}:type:{filter.Type ?? "none"}" +
+                       $":category:{filter.Category ?? "none"}:minamount:{filter.MinAmount}:maxamount:{filter.MaxAmount}" +
+                       $":start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
         var cacheOptions = new HybridCacheEntryOptions()
         {
             Expiration = TimeSpan.FromSeconds(15),
