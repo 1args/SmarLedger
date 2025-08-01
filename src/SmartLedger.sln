@@ -42,7 +42,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{533C8D62-454C-4398-9173-4777FA889CC9}"
 	ProjectSection(SolutionItems) = preProject
 		..\docker\config\otel-collector\config.yml = ..\docker\config\otel-collector\config.yml
-		..\docker\docker-compose.yaml = ..\docker\docker-compose.yaml
+		..\docker\docker-compose.monitoring.yml = ..\docker\docker-compose.monitoring.yml
+		..\docker\docker-compose.yml = ..\docker\docker-compose.yml
 		..\docker\config\loki\loki-config.yml = ..\docker\config\loki\loki-config.yml
 		..\docker\config\prometheus\prometheus.yml = ..\docker\config\prometheus\prometheus.yml
 	EndProjectSection
@@ -120,6 +121,26 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{CD39A0E2-684F-459E-8CC1-86A7FCFD515C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Common.Hosts", "Common\Hosts\Common\SmartLedger.Common.Hosts.csproj", "{8C95D6BE-E7B5-467A-BC50-152FE16F25D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{D6751EB5-C1D7-4CE1-A6D2-6BEDAD98A319}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{3315345C-A5DD-4DEA-9A4D-FA7BDA8FEF10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppServices", "AppServices", "{4A33F111-F927-411F-95EA-CDA62507FAF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Handlers", "Handlers", "{1F20F665-3D94-438C-93EE-AEE020FA401C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Security.Applications.AppServices", "Modules\Security\Applications\AppServices\SmartLedger.Modules.Security.Applications.AppServices.csproj", "{1A05AB27-B2AE-4ADA-9570-3969B1911642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Security.Applications.Handlers", "Modules\Security\Applications\Handlers\SmartLedger.Modules.Security.Applications.Handlers.csproj", "{4860062F-96BC-430A-BF29-3160A23220DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{1C0DBCD7-87B0-4F71-A13F-673E39E6F36D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Security.Contracts", "Modules\Security\Contracts\SmartLedger.Modules.Security.Contracts.csproj", "{E24CBE4D-AF11-46DE-AE82-E45650DC222D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{05CE5F6F-4A33-431B-8981-3020427F47FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Security.Clients", "Modules\Security\Clients\SmartLedger.Modules.Security.Clients.csproj", "{F82A6FA0-9891-409C-BDDC-655ACEBAC829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -215,6 +236,22 @@ Global
 		{8C95D6BE-E7B5-467A-BC50-152FE16F25D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C95D6BE-E7B5-467A-BC50-152FE16F25D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C95D6BE-E7B5-467A-BC50-152FE16F25D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A05AB27-B2AE-4ADA-9570-3969B1911642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A05AB27-B2AE-4ADA-9570-3969B1911642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A05AB27-B2AE-4ADA-9570-3969B1911642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A05AB27-B2AE-4ADA-9570-3969B1911642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4860062F-96BC-430A-BF29-3160A23220DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4860062F-96BC-430A-BF29-3160A23220DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4860062F-96BC-430A-BF29-3160A23220DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4860062F-96BC-430A-BF29-3160A23220DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E24CBE4D-AF11-46DE-AE82-E45650DC222D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E24CBE4D-AF11-46DE-AE82-E45650DC222D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E24CBE4D-AF11-46DE-AE82-E45650DC222D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E24CBE4D-AF11-46DE-AE82-E45650DC222D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82A6FA0-9891-409C-BDDC-655ACEBAC829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82A6FA0-9891-409C-BDDC-655ACEBAC829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82A6FA0-9891-409C-BDDC-655ACEBAC829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82A6FA0-9891-409C-BDDC-655ACEBAC829}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -272,5 +309,15 @@ Global
 		{E80BFEB4-BC33-482F-B9AB-C60DEC7FCE97} = {5BA95F48-AAEB-44E5-A9EC-A9A7A2386601}
 		{CD39A0E2-684F-459E-8CC1-86A7FCFD515C} = {8CB47733-B045-4FDB-BB9B-5FD13866FEF7}
 		{8C95D6BE-E7B5-467A-BC50-152FE16F25D0} = {CD39A0E2-684F-459E-8CC1-86A7FCFD515C}
+		{D6751EB5-C1D7-4CE1-A6D2-6BEDAD98A319} = {B22AC098-0BA3-4FFE-97F8-6A22FE29CCA2}
+		{3315345C-A5DD-4DEA-9A4D-FA7BDA8FEF10} = {D6751EB5-C1D7-4CE1-A6D2-6BEDAD98A319}
+		{4A33F111-F927-411F-95EA-CDA62507FAF1} = {3315345C-A5DD-4DEA-9A4D-FA7BDA8FEF10}
+		{1F20F665-3D94-438C-93EE-AEE020FA401C} = {3315345C-A5DD-4DEA-9A4D-FA7BDA8FEF10}
+		{1A05AB27-B2AE-4ADA-9570-3969B1911642} = {4A33F111-F927-411F-95EA-CDA62507FAF1}
+		{4860062F-96BC-430A-BF29-3160A23220DB} = {1F20F665-3D94-438C-93EE-AEE020FA401C}
+		{1C0DBCD7-87B0-4F71-A13F-673E39E6F36D} = {D6751EB5-C1D7-4CE1-A6D2-6BEDAD98A319}
+		{E24CBE4D-AF11-46DE-AE82-E45650DC222D} = {1C0DBCD7-87B0-4F71-A13F-673E39E6F36D}
+		{05CE5F6F-4A33-431B-8981-3020427F47FC} = {D6751EB5-C1D7-4CE1-A6D2-6BEDAD98A319}
+		{F82A6FA0-9891-409C-BDDC-655ACEBAC829} = {05CE5F6F-4A33-431B-8981-3020427F47FC}
 	EndGlobalSection
 EndGlobal
