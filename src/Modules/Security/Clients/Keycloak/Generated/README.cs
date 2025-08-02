@@ -1,4 +1,4 @@
-﻿### Keycloak usage 
+### Keycloak usage 
 
 After launching keycloak, you need to create and configure a realm. 
 After that, you need to generate the necessary classes and interfaces to work with keycloak.

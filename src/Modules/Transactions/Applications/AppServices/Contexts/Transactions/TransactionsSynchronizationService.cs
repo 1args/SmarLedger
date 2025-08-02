@@ -23,7 +23,7 @@ public sealed class TransactionsSynchronizationService(
     public async Task SynchronizeAmountChangeAsync(UpdateAmountModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing transaction amount for transaction with ID `{TransactionId}` to `{NewAmount}`...",
+            "Synchronizing transaction amount for transaction with ID {TransactionId} to {NewAmount}",
             request.TransactionId, request.NewAmount);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -54,7 +54,7 @@ public sealed class TransactionsSynchronizationService(
         await cache.RemoveAsync($"accounts:user:{account.UserId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID `{TransactionId}` was successfully synchronized after amount change.",
+            "Transaction with ID {TransactionId} was successfully synchronized after amount change",
             request.TransactionId);
     }
 
@@ -62,7 +62,7 @@ public sealed class TransactionsSynchronizationService(
     public async Task SynchronizeCategoryChangeAsync(CategorizeTransactionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing transaction category for transaction with ID `{TransactionId}` to `{NewCategory}`...",
+            "Synchronizing transaction category for transaction with ID {TransactionId} to {NewCategory}",
             request.TransactionId, request.NewCategory);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -76,7 +76,7 @@ public sealed class TransactionsSynchronizationService(
         await cache.RemoveAsync($"transactions:account:{transaction.AccountId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID `{TransactionId}` was successfully synchronized after category change.",
+            "Transaction with ID {TransactionId} was successfully synchronized after category change",
             request.TransactionId);
     }
 
@@ -91,7 +91,7 @@ public sealed class TransactionsSynchronizationService(
 
         if (transaction is null)
         {
-            logger.LogWarning("Transaction with ID `{TransactionId}` not found in synchronization context.", transactionId);
+            logger.LogWarning("Transaction with ID {TransactionId} not found in synchronization context", transactionId);
             throw new ReadableException($"Transaction with ID '{transactionId}' was not found in synchronization context.");
         }
 
@@ -109,7 +109,7 @@ public sealed class TransactionsSynchronizationService(
 
         if (account is null)
         {
-            logger.LogWarning("Account with ID `{AccountId}` not found in synchronization context.", accountId);
+            logger.LogWarning("Account with ID {AccountId} not found in synchronization context", accountId);
             throw new NotFoundException($"Account with ID '{accountId}' was not found in synchronization context.");
         }
 

@@ -28,7 +28,7 @@ public sealed class BudgetsService(
     public async Task<Guid> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Creating budget with name `{Name}` for user with ID `{UserId}`...", 
+            "Creating budget with name {Name} for user with ID {UserId}", 
             request.Name, request.UserId);
 
         var name = BudgetName.Create(request.Name);
@@ -39,7 +39,7 @@ public sealed class BudgetsService(
         await budgetsRepository.AddAsync(budget, cancellationToken);
 
         logger.LogInformation(
-            "Budget with ID `{BudgetId}` created successfully for user with ID `{UserId}`.",
+            "Budget with ID {BudgetId} created successfully for user with ID {UserId}",
             budget.Id, request.UserId);
 
         return budget.Id;
@@ -49,7 +49,7 @@ public sealed class BudgetsService(
     public async Task<Guid> AddCategoryAsync(CategoryAdditionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Adding category `{Category}` with limit `{Limit}` to budget with ID `{BudgetId}`...",
+            "Adding category {Category} with limit {Limit} to budget with ID {BudgetId}",
             request.Category, request.Limit, request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, useInclude: true, cancellationToken : cancellationToken);
@@ -66,7 +66,7 @@ public sealed class BudgetsService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Category `{Category}` with limit `{Limit}` added to budget with ID `{BudgetId}`.",
+            "Category {Category} with limit {Limit} added to budget with ID {BudgetId}",
             request.Category, request.Limit, request.BudgetId);
 
         return category.Id;
@@ -78,7 +78,7 @@ public sealed class BudgetsService(
         var category = await GetCategoryAsync(request.CategoryId, cancellationToken);
 
         logger.LogInformation(
-            "Removing category with ID `{CategoryId}` from budget with ID `{BudgetId}`...",
+            "Removing category with ID {CategoryId} from budget with ID {BudgetId}",
             request.CategoryId, category.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
@@ -92,7 +92,7 @@ public sealed class BudgetsService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Category with ID `{CategoryId}` removed from budget with ID `{BudgetId}`...",
+            "Category with ID {CategoryId} removed from budget with ID {BudgetId}",
             request.CategoryId, category.BudgetId);
     }
 
@@ -121,12 +121,12 @@ public sealed class BudgetsService(
     /// <inheritdoc />
     public async Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Deleting budget with ID `{BudgetId}`...", request.BudgetId);
+        logger.LogInformation("Deleting budget with ID {BudgetId}", request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
         await budgetsRepository.DeleteAsync(budget, cancellationToken);
 
-        logger.LogInformation("Budget with ID `{BudgetId}` deleted successfully.", request.BudgetId);
+        logger.LogInformation("Budget with ID {BudgetId} deleted successfully", request.BudgetId);
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ public sealed class BudgetsService(
         Action<BudgetCategory, Money, BudgetPeriod> updateAction)
     {
         logger.LogInformation(
-            "Updating spending amount for category `{request.Category}` with amount `{request.Amount}` for user with ID `{request.UserId}`...",
+            "Updating spending amount for category {request.Category} with amount {request.Amount} for user with ID {request.UserId}",
             request.Category, request.Amount, request.UserId);
 
         var budgets = await GetActiveBudgetsAsync(request, cancellationToken);
@@ -161,7 +161,7 @@ public sealed class BudgetsService(
         await budgetsRepository.UpdateRangeAsync(budgets.ToArray(), cancellationToken);
 
         logger.LogInformation(
-            "Spending amount updated for category `{request.Category}` with amount `{request.Amount}` for user with ID `{request.UserId}`.",
+            "Spending amount updated for category {request.Category} with amount {request.Amount} for user with ID {request.UserId}",
             request.Category, request.Amount, request.UserId);
     }
 
@@ -191,7 +191,7 @@ public sealed class BudgetsService(
         if (budgets.Count != 0) return;
 
         logger.LogWarning(
-            "No active budgets found for user with ID `{UserId}` and category `{Category}`.",
+            "No active budgets found for user with ID {UserId} and category {Category}",
             request.UserId, request.Category);
         throw new NotFoundException(
             $"No active budgets found for user with ID '{request.UserId}' and category '{request.Category}'.");
@@ -213,7 +213,7 @@ public sealed class BudgetsService(
 
         if (budget is null)
         {
-            logger.LogWarning("Budget with ID `{AccountId}` not found.", budgetId);
+            logger.LogWarning("Budget with ID {AccountId} not found", budgetId);
             throw new NotFoundException($"Budget with ID '{budgetId}' was not found.");
         }
 
@@ -231,7 +231,7 @@ public sealed class BudgetsService(
 
         if (category is null)
         {
-            logger.LogWarning("Category with ID `{CategoryId}` not found.", budgetItemId);
+            logger.LogWarning("Category with ID {CategoryId} not found.", budgetItemId);
             throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
         }
 

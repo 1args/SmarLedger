@@ -24,7 +24,7 @@ public sealed class AccountsRetrievalService(
     /// <inheritdoc />
     public async Task<AccountResponse> GetAccountAsync(Guid accountId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving account with ID `{AccountId}`...", accountId);
+        logger.LogInformation("Retrieving account with ID {AccountId}", accountId);
 
         var cacheKey = $"account:{accountId}";
         var cacheOptions = new HybridCacheEntryOptions()
@@ -46,14 +46,14 @@ public sealed class AccountsRetrievalService(
 
                 if (result is null)
                 {
-                    logger.LogWarning("Account with ID `{AccountId}` not found.", accountId);
+                    logger.LogWarning("Account with ID {AccountId} not found", accountId);
                     throw new NotFoundException($"Account with ID '{accountId}' was not found.");
                 }
 
                 return result.MapToResponse();
             }, cancellationToken: cancellationToken);
 
-        logger.LogInformation("Account with ID `{AccountId}` retrieved successfully.", accountId);
+        logger.LogInformation("Account with ID {AccountId} retrieved successfully", accountId);
         return account;
     }
 
@@ -62,7 +62,7 @@ public sealed class AccountsRetrievalService(
         GetPaginatedAccountsModel filter,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated accounts for user with ID `{UserId}`...", filter.UserId);
+        logger.LogInformation("Retrieving paginated accounts for user with ID {UserId}", filter.UserId);
 
         var cacheKey = $"accounts:user:{filter.UserId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}" +
                        $":maxbalance:{filter.MaxBalance}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
@@ -91,7 +91,7 @@ public sealed class AccountsRetrievalService(
             }, cancellationToken: cancellationToken);
 
         logger.LogInformation(
-            "Successfully retrieved `{Count}` accounts (Page `{PageNumber}` of `{TotalPages}`) for user with ID `{UserId}`.",
+            "Successfully retrieved {Count} accounts (Page {PageNumber} of {TotalPages}) for user with ID {UserId}",
             paginatedAccounts.Items.Count,
             paginatedAccounts.PageNumber,
             paginatedAccounts.TotalPages,

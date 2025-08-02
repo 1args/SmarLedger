@@ -26,7 +26,7 @@ public sealed class BudgetsSynchronizationService(
     public async Task SynchronizeBudgetCreationAsync(BudgetCreationSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing budget creation with ID `{BudgetId}` and name `{Name}`...",
+            "Synchronizing budget creation with ID {BudgetId} and name {Name}",
             request.BudgetId, request.Name);
 
         var budget = new BudgetReadModel
@@ -44,7 +44,7 @@ public sealed class BudgetsSynchronizationService(
         await cache.RemoveAsync($"budgets:user:{request.UserId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Budget with ID `{BudgetId}` was successfully synchronized after creation.",
+            "Budget with ID {BudgetId} was successfully synchronized after creation",
             request.BudgetId);
     }
 
@@ -52,7 +52,7 @@ public sealed class BudgetsSynchronizationService(
     public async Task SynchronizeCategoryAdditionAsync(CategoryAdditionSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing category addition with ID `{CategoryId}` for budget with ID `{BudgetId}`...",
+            "Synchronizing category addition with ID {CategoryId} for budget with ID {BudgetId}",
             request.CategoryId, request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
@@ -79,7 +79,7 @@ public sealed class BudgetsSynchronizationService(
         await cache.RemoveAsync($"budgetcategories:budget:{request.BudgetId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` was successfully synchronized after addition.",
+            "Category with ID {CategoryId} for budget with ID {BudgetId} was successfully synchronized after addition",
             request.CategoryId, request.BudgetId);
     }
 
@@ -89,7 +89,7 @@ public sealed class BudgetsSynchronizationService(
         var category = await GetCategoryAsync(request.CategoryId, cancellationToken);
 
         logger.LogInformation(
-            "Synchronizing category removal with ID `{CategoryId}` for budget with ID `{BudgetId}`...",
+            "Synchronizing category removal with ID {CategoryId} for budget with ID {BudgetId}",
             request.CategoryId, category.BudgetId);
 
         await budgetItemsRepository.DeleteAsync(category, cancellationToken);
@@ -98,7 +98,7 @@ public sealed class BudgetsSynchronizationService(
         await cache.RemoveAsync($"budgetcategories:budget:{category.BudgetId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Category with ID `{CategoryId}` for budget with ID `{BudgetId}` was successfully synchronized after removal.",
+            "Category with ID {CategoryId} for budget with ID {BudgetId} was successfully synchronized after removal",
             request.CategoryId, category.BudgetId);
     }
 
@@ -128,7 +128,7 @@ public sealed class BudgetsSynchronizationService(
     public async Task SynchronizeBudgetDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing budget deletion with ID `{BudgetId}`...", 
+            "Synchronizing budget deletion with ID `{BudgetId}", 
             request.BudgetId);
 
         var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
@@ -140,7 +140,7 @@ public sealed class BudgetsSynchronizationService(
         await cache.RemoveAsync($"budgetcategories:budget:{budget.Id}:*", cancellationToken); 
 
         logger.LogInformation(
-            "Budget with ID `{BudgetId}` was successfully synchronized after deletion.", 
+            "Budget with ID {BudgetId} was successfully synchronized after deletion", 
             request.BudgetId);
     }
 
@@ -159,7 +159,7 @@ public sealed class BudgetsSynchronizationService(
         Action<BudgetCategoryReadModel, TransactionModificationModel> updateAction)
     {
         logger.LogInformation(
-            "Synchronizing update of spending amount amount for category `{Category}` with amount `{Amount}` and user with ID `{UserId}`...",
+            "Synchronizing update of spending amount amount for category {Category} with amount {Amount} and user with ID {UserId}",
             request.Category, request.Amount, request.UserId);
 
         var categories = await GetActiveCategoriesAsync(request, cancellationToken);
@@ -181,7 +181,7 @@ public sealed class BudgetsSynchronizationService(
         }
 
         logger.LogInformation(
-            "Spending amount for category `{Category}` and user with ID `{UserId}` was successfully synchronized after update.",
+            "Spending amount for category {Category} and user with ID {UserId} was successfully synchronized after update",
             request.Category, request.UserId);
     }
 
@@ -210,7 +210,7 @@ public sealed class BudgetsSynchronizationService(
         if (categories.Count != 0) return;
 
         logger.LogWarning(
-            "No active categories found for category `{Category}` and user with ID `{UserId}` in synchronization context.",
+            "No active categories found for category {Category} and user with ID {UserId} in synchronization context",
             request.Category, request.UserId);
         throw new NotFoundException(
             $"No active budgets found for user with ID '{request.UserId}' and category '{request.Category}' in synchronization context.");
@@ -240,7 +240,7 @@ public sealed class BudgetsSynchronizationService(
 
         if (budget is null)
         {
-            logger.LogWarning("Budget with ID `{BudgetId}` not found in synchronization context.", budgetId);
+            logger.LogWarning("Budget with ID {BudgetId} not found in synchronization context", budgetId);
             throw new ReadableException($"Budget with ID '{budgetId}' was not found in synchronization context.");
         }
 
@@ -258,7 +258,7 @@ public sealed class BudgetsSynchronizationService(
 
         if (category is null)
         {
-            logger.LogWarning("Category with ID `{CategoryId}` not found in synchronization context.", categoryId);
+            logger.LogWarning("Category with ID {CategoryId} not found in synchronization context", categoryId);
             throw new ReadableException($"Category with ID '{categoryId}' was not found in synchronization context.");
         }
         return category;

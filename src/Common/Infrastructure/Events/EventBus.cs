@@ -21,7 +21,7 @@ public sealed class EventBus(
         if (@event is Event baseEvent)
         {
             logger.LogInformation(
-                "Publishing event `{EventType}` with ID `{EventId}`.",
+                "Publishing event {EventType} with ID {EventId}",
                 baseEvent.GetType().Name,
                 baseEvent.CorrelationId);
         }

@@ -16,7 +16,6 @@ public static class ApiExtensions
     /// Registers API services and configurations.
     /// </summary>
     /// <param name="services">Service collection.</param>
-    /// <param name="appBuilder">Application builder..</param>
     /// <param name="configuration">Configuration.</param>
     /// <returns>Modified <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
@@ -24,7 +23,8 @@ public static class ApiExtensions
         services
             .AddOpenApi()
             .AddDateTimeProvider()
-            .AddConfiguredMessageBroker(configuration);
+            .AddConfiguredMessageBroker(configuration)
+            .AddHttpClient();
 
         var featureRegistry = new FeaturesRegistry()
             .RegisterFeaturesFromAssembly(Assembly.GetExecutingAssembly());

@@ -24,7 +24,7 @@ public sealed class TransactionsRetrievalService(
     /// <inheritdoc />
     public async Task<TransactionResponse> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving transaction with ID `{TransactionId}`...", transactionId);
+        logger.LogInformation("Retrieving transaction with ID {TransactionId}", transactionId);
 
         var cacheKey = $"transaction:{transactionId}";
         var cacheOptions = new HybridCacheEntryOptions()
@@ -46,14 +46,14 @@ public sealed class TransactionsRetrievalService(
 
                 if (result is null)
                 {
-                    logger.LogWarning("Transaction with ID `{TransactionId}` not found.", transactionId);
+                    logger.LogWarning("Transaction with ID {TransactionId} not found", transactionId);
                     throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
                 }
 
                 return result.MapToResponse();
             }, cancellationToken: cancellationToken);
 
-        logger.LogInformation("Transaction with ID `{TransactionId}` retrieved successfully.", transactionId);
+        logger.LogInformation("Transaction with ID {TransactionId} retrieved successfully", transactionId);
         return transaction;
     }
 
@@ -62,7 +62,7 @@ public sealed class TransactionsRetrievalService(
         GetPaginatedTransactionsModel filter,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated transactions for account with ID `{AccountId}`...", filter.AccountId);
+        logger.LogInformation("Retrieving paginated transactions for account with ID {AccountId}", filter.AccountId);
 
         var cacheKey = $"transactions:account:{filter.AccountId}:page:{filter.PageNumber}:type:{filter.Type ?? "none"}" +
                        $":category:{filter.Category ?? "none"}:minamount:{filter.MinAmount}:maxamount:{filter.MaxAmount}" +
@@ -95,7 +95,7 @@ public sealed class TransactionsRetrievalService(
             }, cancellationToken: cancellationToken);
 
         logger.LogInformation(
-            "Successfully retrieved `{Count}` transactions (Page `{PageNumber}` of `{TotalPages}`) for account with ID `{AccountId}`.",
+            "Successfully retrieved {Count} transactions (Page {PageNumber} of {TotalPages}) for account with ID {AccountId}",
             paginatedTransactions.Items.Count,
             paginatedTransactions.PageNumber,
             paginatedTransactions.TotalPages,

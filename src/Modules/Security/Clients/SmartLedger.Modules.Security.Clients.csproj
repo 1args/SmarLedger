@@ -7,11 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Generated\README.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>README.md</DependentUpon>
-    </None>
+    <PackageReference Include="Flurl" Version="4.0.0" />
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Generated\README.md">
+    <None Update="Keycloak\Generated\README.md">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>README.cs</LastGenOutput>
     </None>
@@ -30,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Generated\README.cs">
+    <Compile Update="Keycloak\Generated\README.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>README.md</DependentUpon>

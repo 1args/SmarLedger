@@ -27,7 +27,7 @@ public sealed class BudgetsRetrievalService(
     /// <inheritdoc />
     public async Task<BudgetResponse> GetBudgetAsync(Guid budgetId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving budget with ID {BudgetId}...", budgetId);
+        logger.LogInformation("Retrieving budget with ID {BudgetId}", budgetId);
 
         var cacheKey = $"budget:{budgetId}";
         var cacheOptions = new HybridCacheEntryOptions()
@@ -49,14 +49,14 @@ public sealed class BudgetsRetrievalService(
 
                 if (result is null)
                 {
-                    logger.LogWarning("Budget with ID `{BudgetId}` not found.", budgetId);
+                    logger.LogWarning("Budget with ID {BudgetId} not found", budgetId);
                     throw new NotFoundException($"Budget with ID '{budgetId}' was not found.");
                 }
 
                 return result.MapToResponse();
             }, cancellationToken: cancellationToken);
 
-        logger.LogInformation("Budget with ID `{BudgetId}` retrieved successfully.", budgetId);
+        logger.LogInformation("Budget with ID {BudgetId} retrieved successfully", budgetId);
         return budget;
     }
 
@@ -65,7 +65,7 @@ public sealed class BudgetsRetrievalService(
         GetPaginatedBudgetsModel filter,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated budgets for user with ID `{UserId}`...", filter.UserId);
+        logger.LogInformation("Retrieving paginated budgets for user with ID {UserId}", filter.UserId);
 
         var cacheKey = $"budgets:user:{filter.UserId}:page:{filter.PageNumber}:start:{filter.StartDate:yyyy-MM-dd}" +
                        $":end:{filter.EndDate:yyyy-MM-dd}";
@@ -93,7 +93,7 @@ public sealed class BudgetsRetrievalService(
             }, cancellationToken: cancellationToken);
 
         logger.LogInformation(
-            "Successfully retrieved `{Count}` budgets (Page `{PageNumber}` of `{TotalPages}`) for user with ID `{UserId}`.",
+            "Successfully retrieved {Count} budgets (Page {PageNumber} of {TotalPages}) for user with ID {UserId}",
             paginatedBudgets.Items.Count,
             paginatedBudgets.PageNumber,
             paginatedBudgets.TotalPages,
@@ -105,7 +105,7 @@ public sealed class BudgetsRetrievalService(
     /// <inheritdoc />
     public async Task<BudgetCategoryResponse> GetBudgetCategoryAsync(Guid budgetCategoryId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving budget category with ID {BudgetCategoryId}...", budgetCategoryId);
+        logger.LogInformation("Retrieving budget category with ID {BudgetCategoryId}", budgetCategoryId);
 
         var cacheKey = $"budgetcategory:{budgetCategoryId}";
         var cacheOptions = new HybridCacheEntryOptions()
@@ -127,14 +127,14 @@ public sealed class BudgetsRetrievalService(
 
                 if (result is null)
                 {
-                    logger.LogWarning("Budget category with ID `{BudgetCategoryId}` not found.", budgetCategoryId);
+                    logger.LogWarning("Budget category with ID {BudgetCategoryId} not found", budgetCategoryId);
                     throw new NotFoundException($"Budget category with ID '{budgetCategoryId}' was not found.");
                 }
 
                 return result.MapToResponse();
             }, cancellationToken: cancellationToken);
 
-        logger.LogInformation("Budget category with ID `{BudgetCategoryId}` retrieved successfully.", budgetCategoryId);
+        logger.LogInformation("Budget category with ID {BudgetCategoryId} retrieved successfully", budgetCategoryId);
         return budgetCategory;
     }
 
@@ -143,7 +143,7 @@ public sealed class BudgetsRetrievalService(
         GetPaginatedBudgetCategoriesModel filter, 
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated budget categories for budget with ID `{BudgetId}`...", filter.BudgetId);
+        logger.LogInformation("Retrieving paginated budget categories for budget with ID {BudgetId}", filter.BudgetId);
 
         var cacheKey = $"budgetcategories:budget:{filter.BudgetId}:page:{filter.PageNumber}:category:{filter.Category}" +
                        $":minlimit:{filter.MinLimit}:maxlimit:{filter.MaxLimit}:minspent:{filter.MinSpentAmount}" +
@@ -175,7 +175,7 @@ public sealed class BudgetsRetrievalService(
             }, cancellationToken: cancellationToken);
 
         logger.LogInformation(
-            "Successfully retrieved `{Count}` budget categories (Page `{PageNumber}` of `{TotalPages}`) for budget ID `{BudgetId}`.",
+            "Successfully retrieved {Count} budget categories (Page {PageNumber} of {TotalPages}) for budget ID {BudgetId}",
             paginatedBudgetCategories.Items.Count,
             paginatedBudgetCategories.PageNumber,
             paginatedBudgetCategories.TotalPages,

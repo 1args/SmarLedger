@@ -23,7 +23,7 @@ public sealed class AccountsSynchronizationService(
     public async Task SynchronizeAccountCreationAsync(AccountCreationSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing account creation with ID `{AccountId}` and name `{Name}`...",
+            "Synchronizing account creation with ID {AccountId} and name {Name}",
             request.AccountId, request.Name);
 
         var account = new AccountReadModel
@@ -40,7 +40,7 @@ public sealed class AccountsSynchronizationService(
         await cache.RemoveAsync($"accounts:user:{request.UserId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Account with ID `{AccountId}` was successfully synchronized after creation.",
+            "Account with ID {AccountId} was successfully synchronized after creation",
             request.AccountId);
     }
 
@@ -48,7 +48,7 @@ public sealed class AccountsSynchronizationService(
     public async Task SynchronizeTransactionAdditionAsync(TransactionAdditionSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing addition of transaction with ID `{TransactionId}` to account `{AccountId}`...",
+            "Synchronizing addition of transaction with ID {TransactionId} to account {AccountId}",
             request.TransactionId, request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
@@ -85,7 +85,7 @@ public sealed class AccountsSynchronizationService(
         await cache.RemoveAsync($"transactions:account:{request.AccountId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID `{TransactionId}` was successfully synchronized after addition to account `{AccountId}`.",
+            "Transaction with ID {TransactionId} was successfully synchronized after addition to account {AccountId}",
             request.TransactionId, request.AccountId);
     }
 
@@ -95,7 +95,7 @@ public sealed class AccountsSynchronizationService(
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         logger.LogInformation(
-            "Synchronizing removal of transaction with ID `{TransactionId}` from account `{AccountId}`...",
+            "Synchronizing removal of transaction with ID {TransactionId} from account `{AccountId}",
             transaction.Id, transaction.AccountId);
 
         var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
@@ -120,14 +120,14 @@ public sealed class AccountsSynchronizationService(
         await cache.RemoveAsync($"transactions:account:{transaction.AccountId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID `{TransactionId}` was successfully synchronized after removal from account `{AccountId}`.",
+            "Transaction with ID {TransactionId} was successfully synchronized after removal from account {AccountId}",
             request.TransactionId, account.Id);
     }
 
     /// <inheritdoc />
     public async Task SynchronizeAccountDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Synchronizing deletion of account with ID `{AccountId}`...", request.AccountId);
+        logger.LogInformation("Synchronizing deletion of account with ID {AccountId}", request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
         await accountsRepository.DeleteAsync(account, cancellationToken);
@@ -137,7 +137,7 @@ public sealed class AccountsSynchronizationService(
         await cache.RemoveAsync($"transactions:account:{request.AccountId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Account with ID `{AccountId}` was successfully synchronized after deletion.",
+            "Account with ID {AccountId} was successfully synchronized after deletion",
             request.AccountId);
     }
 
@@ -152,7 +152,7 @@ public sealed class AccountsSynchronizationService(
 
         if (account is null)
         {
-            logger.LogWarning("Account with ID `{AccountId}` not found in synchronization context.", accountId);
+            logger.LogWarning("Account with ID {AccountId} not found in synchronization context", accountId);
             throw new NotFoundException($"Account with ID '{accountId}' was not found in synchronization context.");
         }
 
@@ -170,7 +170,7 @@ public sealed class AccountsSynchronizationService(
 
         if (transaction is null)
         {
-            logger.LogWarning("Transaction with ID `{TransactionId}` not found in synchronization context.", transactionId);
+            logger.LogWarning("Transaction with ID {TransactionId} not found in synchronization context", transactionId);
             throw new ReadableException($"Transaction with ID '{transactionId}' was not found in synchronization context.");
         }
 

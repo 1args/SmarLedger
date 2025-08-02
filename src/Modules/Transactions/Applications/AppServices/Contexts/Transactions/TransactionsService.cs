@@ -23,7 +23,7 @@ public sealed class TransactionsService(
     public async Task UpdateAmountAsync(UpdateAmountModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Updating amount for transaction with ID `{TransactionId}` to `{NewAmount}`...",
+            "Updating amount for transaction with ID {TransactionId} to {NewAmount}",
             request.TransactionId, request.NewAmount);
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -40,7 +40,7 @@ public sealed class TransactionsService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID `{TransactionId}` updated to new amount `{NewAmount}` successfully.",
+            "Transaction with ID {TransactionId} updated to new amount {NewAmount} successfully",
             request.TransactionId, request.NewAmount);
     }
 
@@ -48,7 +48,7 @@ public sealed class TransactionsService(
     public async Task CategorizeAsync(CategorizeTransactionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Categorizing transaction with ID `{TransactionId}` to category `{NewCategory}`...",
+            "Categorizing transaction with ID {TransactionId} to category {NewCategory}",
             request.TransactionId, nameof(request.NewCategory));
 
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
@@ -57,7 +57,7 @@ public sealed class TransactionsService(
         await transactionsRepository.UpdateAsync(transaction, cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID `{TransactionId}` categorized to `{NewCategory}` successfully.",
+            "Transaction with ID {TransactionId} categorized to {NewCategory} successfully",
             request.TransactionId, nameof(request.NewCategory));
     }
 
@@ -72,7 +72,7 @@ public sealed class TransactionsService(
 
         if (transaction is null)
         {
-            logger.LogWarning("Transaction with ID `{TransactionId}` not found.", transactionId);
+            logger.LogWarning("Transaction with ID {TransactionId} not found", transactionId);
             throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
         }
 
@@ -90,7 +90,7 @@ public sealed class TransactionsService(
 
         if (account is null)
         {
-            logger.LogWarning("Account with ID `{AccountId}` not found.", accountId);
+            logger.LogWarning("Account with ID {AccountId} not found", accountId);
             throw new NotFoundException($"Account with ID '{accountId}' was not found.");
         }
 

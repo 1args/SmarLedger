@@ -20,22 +20,22 @@ public sealed class DatabaseMigrationsService(
     {
         var dbContextName = typeof(TDbContext).Name;
 
-        logger.LogInformation("Starting database migration for `{DbContext}`.", dbContextName);
+        logger.LogInformation("Starting database migration for {DbContext}", dbContextName);
 
         var dbContext = _serviceProvider.CreateScope().ServiceProvider.GetRequiredService<TDbContext>()
             ?? throw new ArgumentNullException($"Failed to get DbContext with the following name: '{dbContextName}'.");
 
         try
         {
-            logger.LogInformation("Attempting to apply migrations for `{DbContext}`.", dbContextName);
+            logger.LogInformation("Attempting to apply migrations for {DbContext}", dbContextName);
 
             await dbContext.Database.MigrateAsync(cancellationToken);
 
-            logger.LogInformation("Successfully applied migrations for `{DbContext}`.", dbContextName);
+            logger.LogInformation("Successfully applied migrations for {DbContext}", dbContextName);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "An error occurred while applying migrations for `{DbContext}`.", dbContextName);
+            logger.LogError(ex, "An error occurred while applying migrations for {DbContext}", dbContextName);
         }
     }
 }
