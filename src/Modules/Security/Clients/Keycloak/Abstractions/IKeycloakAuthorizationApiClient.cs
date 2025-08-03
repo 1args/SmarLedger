@@ -1,4 +1,4 @@
-﻿using SmartLedger.Modules.Security.Contracts.Responses;
+﻿using SmartLedger.Modules.Security.Clients.Keycloak.Models;
 
 namespace SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 
@@ -25,9 +25,17 @@ public interface IKeycloakAuthorizationApiClient
     Task<TokenResponse> RefreshTokenAsync(string refreshToken, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Logs out a user by invalidating their session in Keycloak.
+    /// Logs out a user by invalidating their sessions in Keycloak.
     /// </summary>
     /// <param name="userId">User ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     Task LogoutAsync(Guid userId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Retrieves the list of active user sessions for a specific user.
+    /// </summary>
+    /// <param name="userId">User ID.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>List of active user sessions.</returns>
+    Task<IReadOnlyCollection<KeycloakUserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken)
 }

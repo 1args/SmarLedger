@@ -48,7 +48,7 @@ public sealed class AccountsSynchronizationService(
     public async Task SynchronizeTransactionAdditionAsync(TransactionAdditionSynchronizationModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Synchronizing addition of transaction with ID {TransactionId} to account {AccountId}",
+            "Synchronizing addition of transaction with ID {TransactionId} to account with ID {AccountId}",
             request.TransactionId, request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
@@ -85,7 +85,7 @@ public sealed class AccountsSynchronizationService(
         await cache.RemoveAsync($"transactions:account:{request.AccountId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID {TransactionId} was successfully synchronized after addition to account {AccountId}",
+            "Transaction with ID {TransactionId} was successfully synchronized after addition to account with ID {AccountId}",
             request.TransactionId, request.AccountId);
     }
 
@@ -95,7 +95,7 @@ public sealed class AccountsSynchronizationService(
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         logger.LogInformation(
-            "Synchronizing removal of transaction with ID {TransactionId} from account `{AccountId}",
+            "Synchronizing removal of transaction with ID {TransactionId} from account with ID {AccountId}",
             transaction.Id, transaction.AccountId);
 
         var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
@@ -120,7 +120,7 @@ public sealed class AccountsSynchronizationService(
         await cache.RemoveAsync($"transactions:account:{transaction.AccountId}:*", cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID {TransactionId} was successfully synchronized after removal from account {AccountId}",
+            "Transaction with ID {TransactionId} was successfully synchronized after removal from account with ID {AccountId}",
             request.TransactionId, account.Id);
     }
 

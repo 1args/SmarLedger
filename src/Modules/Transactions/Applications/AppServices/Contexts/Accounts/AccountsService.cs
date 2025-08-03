@@ -42,7 +42,7 @@ public sealed class AccountsService(
     public async Task<(Guid TransactionId, Guid UserId)> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
     {
         logger.LogInformation(
-            "Adding transaction of type {Type} with amount {Amount} to account {AccountId}",
+            "Adding transaction of type {Type} with amount {Amount} to account with ID {AccountId}",
             request.Type, request.Amount, request.AccountId);
 
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
@@ -76,7 +76,7 @@ public sealed class AccountsService(
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         logger.LogInformation(
-            "Removing transaction with ID {TransactionId} from account with ID`{AccountId}",
+            "Removing transaction with ID {TransactionId} from account with ID {AccountId}",
             transaction.Id, transaction.AccountId);
 
         var account = await accountsRepository

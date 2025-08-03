@@ -231,7 +231,7 @@ public sealed class BudgetsService(
 
         if (category is null)
         {
-            logger.LogWarning("Category with ID {CategoryId} not found.", budgetItemId);
+            logger.LogWarning("Category with ID {CategoryId} not found", budgetItemId);
             throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
         }
 

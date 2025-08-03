@@ -4,10 +4,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
+using SmartLedger.Modules.Security.Clients.Keycloak.Converters;
+using SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
 using SmartLedger.Modules.Security.Clients.Keycloak.Models;
 using SmartLedger.Modules.Security.Contracts.Exceptions;
 using SmartLedger.Modules.Security.Contracts.Options;
-using SmartLedger.Modules.Security.Contracts.Responses;
 
 namespace SmartLedger.Modules.Security.Clients.Keycloak;
 
@@ -43,12 +44,7 @@ public sealed class KeycloakAuthorizationApiClient(
             };
 
             var discoveryDocument = await GetDiscoveryDocumentAsync(httpClient, cancellationToken);
-
-            if (discoveryDocument is null || string.IsNullOrWhiteSpace(discoveryDocument.TokenEndpoint))
-            {
-                logger.LogError("Token endpoint is missing or invalid for authorization request");
-                throw new KeycloakApiException(AuthorizationServerFailedMessage);
-            }
+            ValidateTokenEndpoint(discoveryDocument.TokenEndpoint);
 
             var response = await SendTokenRequestAsync(
                 httpClient,
@@ -91,12 +87,7 @@ public sealed class KeycloakAuthorizationApiClient(
             };
 
             var discoveryDocument = await GetDiscoveryDocumentAsync(httpClient, cancellationToken);
-
-            if (discoveryDocument is null || string.IsNullOrWhiteSpace(discoveryDocument.TokenEndpoint))
-            {
-                logger.LogError("Token endpoint is missing or invalid for authorization request");
-                throw new KeycloakApiException("Failed to get the necessary information from the authorization server.");
-            }
+            ValidateTokenEndpoint(discoveryDocument.TokenEndpoint);
 
             var response = await SendTokenRequestAsync(
                 httpClient,
@@ -142,6 +133,34 @@ public sealed class KeycloakAuthorizationApiClient(
         }
     }
 
+    /// <inheritdoc />
+    public async Task<IReadOnlyCollection<KeycloakUserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Retrieving user sessions for user with ID {UserId}", userId);
+
+        try
+        {
+            var sessions = await keycloakGeneratedApiClient.SessionsAllAsync(
+                _keycloakAuthorizationOptions.Realm,
+                userId.ToString(),
+                cancellationToken);
+
+            var userSessions = sessions
+                .Select(s => s.MapToKeycloakUserSessionResponse())
+                .ToList();
+
+            logger.LogInformation("Successfully retrieved {SessionCount} sessions for user with ID {UserId}",
+                userSessions.Count, userId);
+
+            return userSessions.AsReadOnly();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to retrieve sessions for user {UserId}", userId);
+            throw new KeycloakApiException("The list of user sessions could not be retrieved. Please try again.");
+        }
+    }
+
     /// <summary>
     /// Retrieves the Keycloak discovery document containing metadata.
     /// </summary>
@@ -177,7 +196,7 @@ public sealed class KeycloakAuthorizationApiClient(
 
             if (string.IsNullOrWhiteSpace(response.AccessToken))
             {
-                logger.LogError("Empty access token received for {Identifier}", identifier ?? "refresh-token");
+                logger.LogWarning("Empty access token received for {Identifier}", identifier ?? "refresh-token");
                 throw new KeycloakApiException("Failed to retrieve access token. Please try again.");
             }
 
@@ -193,6 +212,18 @@ public sealed class KeycloakAuthorizationApiClient(
         {
             var errorMessage = await ex.GetResponseStringAsync();
             logger.LogError(ex, "An error occurred while executing a token request: {ErrorMessage}", errorMessage);
+            throw new KeycloakApiException(AuthorizationServerFailedMessage);
+        }
+    }
+
+    /// <summary>
+    /// Validates the token endpoint from the discovery document.
+    /// </summary>
+    private void ValidateTokenEndpoint(string? tokenEndpoint)
+    {
+        if (string.IsNullOrWhiteSpace(tokenEndpoint))
+        {
+            logger.LogWarning("Token endpoint is missing or invalid for authorization request");
             throw new KeycloakApiException(AuthorizationServerFailedMessage);
         }
     }
