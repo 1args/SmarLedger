@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Security.Clients.Keycloak.Models;
+﻿namespace SmartLedger.Modules.Security.Contracts.Responses.Users;
 
 /// <summary>
 /// Represents a response containing user information from Keycloak.
@@ -10,7 +10,7 @@
 /// <param name="Email">Email.</param>
 /// <param name="IsEmailVerified">Email confirmation indicator.</param>
 /// <param name="CreatedAt">Date and time when user was created.</param>
-public sealed record KeycloakUserResponse(
+public sealed record UserResponse(
     Guid Id,
     string Username,
     string FirstName,

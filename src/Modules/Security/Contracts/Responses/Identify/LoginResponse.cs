@@ -1,12 +1,12 @@
-﻿namespace SmartLedger.Modules.Security.Clients.Keycloak.Models;
+﻿namespace SmartLedger.Modules.Security.Contracts.Responses.Identify;
 
 /// <summary>
-/// Represents a response containing access and refresh tokens from Keycloak.
+/// Represents a response containing authentication tokens.
 /// </summary>
 /// <param name="AccessToken">Access token.</param>
 /// <param name="RefreshToken">Refresh token.</param>
 /// <param name="ExpiresIn">Time when access token expires.</param>
-public sealed record TokenResponse(
+public sealed class LoginResponse(
     string AccessToken,
     string RefreshToken,
-    long? ExpiresIn);
+    DateTime? ExpiresIn);

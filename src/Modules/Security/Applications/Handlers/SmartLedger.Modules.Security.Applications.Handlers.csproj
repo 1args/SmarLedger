@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Contexts\Users\Commands\" />
+    <Folder Include="Contexts\Users\Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Applications\Handlers\SmartLedger.Common.Applications.Handlers.csproj" />
+    <ProjectReference Include="..\AppServices\SmartLedger.Modules.Security.Applications.AppServices.csproj" />
+  </ItemGroup>
+
 </Project>

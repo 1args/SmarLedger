@@ -4,17 +4,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
-using SmartLedger.Modules.Security.Clients.Keycloak.Converters;
 using SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
 using SmartLedger.Modules.Security.Clients.Keycloak.Models;
 using SmartLedger.Modules.Security.Contracts.Exceptions;
 using SmartLedger.Modules.Security.Contracts.Options;
+using SmartLedger.Modules.Security.Contracts.Responses.Identify;
 
 namespace SmartLedger.Modules.Security.Clients.Keycloak;
 
-/// <summary>
-/// Keycloak authorization API Client.
-/// </summary>
+/// <inheritdoc />
 public sealed class KeycloakAuthorizationApiClient(
     IHttpClientFactory httpClientFactory,
     IKeycloakGeneratedApiClient keycloakGeneratedApiClient,
@@ -23,7 +21,11 @@ public sealed class KeycloakAuthorizationApiClient(
 {
     private readonly KeycloakAuthorizationOptions _keycloakAuthorizationOptions = keycloakAuthorizationOptions.Value;
 
+    /// <summary>Message indicating that the authorization server failed to provide necessary information.</summary>
     private const string AuthorizationServerFailedMessage = "Failed to get the necessary information from the authorization server.";
+
+    /// <summary>Message indicating that the password reset operation failed.</summary>
+    private const string ResetPasswordFailedMessage = "Failed to reset the password. Please try again.";
 
     /// <inheritdoc />
     public async Task<TokenResponse> AuthorizeAsync(string username, string password, CancellationToken cancellationToken)
@@ -134,7 +136,7 @@ public sealed class KeycloakAuthorizationApiClient(
     }
 
     /// <inheritdoc />
-    public async Task<IReadOnlyCollection<KeycloakUserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<UserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Retrieving user sessions for user with ID {UserId}", userId);
 
@@ -146,7 +148,7 @@ public sealed class KeycloakAuthorizationApiClient(
                 cancellationToken);
 
             var userSessions = sessions
-                .Select(s => s.MapToKeycloakUserSessionResponse())
+                .Select(s => s.MapToUserSessionResponse())
                 .ToList();
 
             logger.LogInformation("Successfully retrieved {SessionCount} sessions for user with ID {UserId}",
@@ -158,6 +160,53 @@ public sealed class KeycloakAuthorizationApiClient(
         {
             logger.LogError(ex, "Failed to retrieve sessions for user {UserId}", userId);
             throw new KeycloakApiException("The list of user sessions could not be retrieved. Please try again.");
+        }
+    }
+
+    public async Task ResetPasswordAsync(Guid userId, string currentPassword, string newPassword, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Resetting password for user with ID {UserId}", userId);
+
+        try
+        {
+            using var httpClient = httpClientFactory.CreateClient();
+
+            var requestBody = new Dictionary<string, string>
+            {
+                { "currentPassword", currentPassword },
+                { "newPassword", newPassword },
+                { "userId", userId.ToString() },
+            };
+
+            var passwordChangeUrl = $"{_keycloakAuthorizationOptions.AdminBaseUrl}/auth/realms/{_keycloakAuthorizationOptions.Realm}/account/credentials/password";
+
+            var response = await passwordChangeUrl
+                .WithTimeout(TimeSpan.FromSeconds(10))
+                .PostUrlEncodedAsync(requestBody, cancellationToken: cancellationToken);
+
+            if (response.ResponseMessage.IsSuccessStatusCode)
+            {
+                var errorMessage = await response.ResponseMessage.Content.ReadAsStringAsync(cancellationToken);
+
+                logger.LogWarning("Failed to change password for user {UserId}: {ErrorMessage}", userId, errorMessage);
+
+                throw response.StatusCode switch
+                {
+                    (int)HttpStatusCode.Unauthorized => new KeycloakApiException("Invalid current password"),
+                    _ => new KeycloakApiException(ResetPasswordFailedMessage)
+                };
+            }
+
+            logger.LogInformation("Successfully reset password for user with ID {UserId}", userId);
+        }
+        catch (KeycloakApiException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to reset password for user {UserId}", userId);
+            throw new KeycloakApiException(ResetPasswordFailedMessage);
         }
     }
 

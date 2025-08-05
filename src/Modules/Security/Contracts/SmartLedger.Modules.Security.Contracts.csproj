@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Mappers\" />
-    <Folder Include="Requests\" />
-    <Folder Include="Responses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Contracts\SmartLedger.Common.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

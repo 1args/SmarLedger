@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Clients\SmartLedger.Modules.Security.Clients.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Security.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

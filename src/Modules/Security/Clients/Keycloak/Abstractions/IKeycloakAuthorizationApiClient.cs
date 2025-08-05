@@ -1,4 +1,5 @@
 ﻿using SmartLedger.Modules.Security.Clients.Keycloak.Models;
+using SmartLedger.Modules.Security.Contracts.Responses.Identify;
 
 namespace SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 
@@ -37,5 +38,14 @@ public interface IKeycloakAuthorizationApiClient
     /// <param name="userId">User ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>List of active user sessions.</returns>
-    Task<IReadOnlyCollection<KeycloakUserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken)
+    Task<IReadOnlyCollection<UserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Resets the password for a user in Keycloak.
+    /// </summary>
+    /// <param name="userId">User ID.</param
+    /// <param name="currentPassword">Current password.</param>
+    /// <param name="newPassword">New password.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task ResetPasswordAsync(Guid userId, string currentPassword, string newPassword, CancellationToken cancellationToken);
 }

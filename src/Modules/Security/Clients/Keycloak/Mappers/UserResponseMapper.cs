@@ -1,19 +1,21 @@
 ﻿using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
-using SmartLedger.Modules.Security.Clients.Keycloak.Models;
+using SmartLedger.Modules.Security.Clients.Keycloak.Converters;
+using SmartLedger.Modules.Security.Contracts.Responses.Users;
 
 namespace SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
 
 /// <summary>
 /// Mapper for converting Keycloak UserRepresentation to response model.
 /// </summary>
-public static class KeycloakUserResponseMapper
+public static class UserResponseMapper
 {
     /// <summary>
-    /// Maps a <see cref="UserRepresentation"/> to a <see cref="KeycloakUserResponse"/>.
+    /// Maps a <see cref="UserRepresentation"/> to a <see cref="UserResponse"/>.
     /// </summary>
     /// <param name="userRepresentation">User representation model.</param>
-    /// <returns><see cref="KeycloakUserResponse"/> containing the mapped user data.</returns>
-    public static KeycloakUserResponse MapToKeycloakUserResponse(this UserRepresentation userRepresentation, Guid userId) =>
+    /// <param name="userId">User ID.</param>
+    /// <returns><see cref="UserResponse"/> containing the mapped user data.</returns>
+    public static UserResponse MapToUserResponse(this UserRepresentation userRepresentation, Guid userId) =>
         new(userId,
             userRepresentation.Username!, 
             userRepresentation.FirstName!,
@@ -21,6 +23,6 @@ public static class KeycloakUserResponseMapper
             userRepresentation.Email!,
             userRepresentation.EmailVerified!.Value,
             userRepresentation.CreatedTimestamp.HasValue
-                ? DateTimeOffset.FromUnixTimeMilliseconds(userRepresentation.CreatedTimestamp.Value).UtcDateTime
+                ? DateTimeConverter.FromUnixMillisToDateTimeUtc(userRepresentation.CreatedTimestamp.Value)
                 : null);
 }
