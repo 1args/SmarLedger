@@ -43,6 +43,7 @@ public static class IdentifyEndpoints
             .ProducesProblem(StatusCodes.Status401Unauthorized);
 
         endpoints.MapPost("/reset-password", ResetPasswordAsync)
+            .RequireAuthorization()
             .WithName("ResetPassword")
             .WithSummary("Resets the user's password.")
             .WithDescription("Allows the user to reset their password by providing the current and new passwords.")
@@ -51,6 +52,7 @@ public static class IdentifyEndpoints
             .ProducesProblem(StatusCodes.Status401Unauthorized);
 
         endpoints.MapPost("/logout", LogoutAsync)
+            .RequireAuthorization()
             .WithName("Logout")
             .WithSummary("Logs out the current user.")
             .WithDescription("Ends the current user's session and invalidates active tokens.")
@@ -58,6 +60,7 @@ public static class IdentifyEndpoints
             .ProducesProblem(StatusCodes.Status401Unauthorized);
 
         endpoints.MapGet("/me/sessions", GetUserSessionsAsync)
+            .RequireAuthorization()
             .WithName("GetUserSessions")
             .WithSummary("Retrieves the current user's active sessions.")
             .WithDescription("Returns a list of all active sessions associated with the currently authenticated user.")
@@ -85,7 +88,7 @@ public static class IdentifyEndpoints
     /// Refreshes access tokens using a valid refresh token.
     /// </summary>
     private static async Task<IResult> RefreshTokenAsync(
-        [FromBody] string refreshToken,
+        [FromQuery] string refreshToken,
         [FromServices] IQueryHandler<RefreshTokenQuery, LoginResponse> handler,
         CancellationToken cancellationToken)
     {
@@ -118,14 +121,14 @@ public static class IdentifyEndpoints
     {
         await handler.HandleAsync(new LogoutCommand(), cancellationToken);
 
-        return Results.SignOut();
+        return Results.Ok();
     }
 
     /// <summary>
     /// Retrieves all active sessions for the current user.
     /// </summary>
     private static async Task<IResult> GetUserSessionsAsync(
-        [FromServices] IQueryHandler<GetSessionsQuery, List<UserSessionResponse>> handler,
+        [FromServices] IQueryHandler<GetSessionsQuery, IReadOnlyCollection<UserSessionResponse>> handler,
         CancellationToken cancellationToken)
     {
         var query = new GetSessionsQuery();

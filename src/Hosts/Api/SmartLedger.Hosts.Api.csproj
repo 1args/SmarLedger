@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry" Version="1.12.0" />
@@ -28,6 +29,7 @@
     <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.OpenSearch" Version="1.3.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.13.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +39,6 @@
     <ProjectReference Include="..\..\Modules\Budgets\Applications\Handlers\SmartLedger.Modules.Budgets.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Budgets\Infrastructure\SmartLedger.Modules.Budgets.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Security\Applications\Handlers\SmartLedger.Modules.Security.Applications.Handlers.csproj" />
-    <ProjectReference Include="..\..\Modules\Transactions\Applications\AppServices\SmartLedger.Modules.Transactions.Applications.AppServices.csproj" />
     <ProjectReference Include="..\..\Modules\Transactions\Applications\Handlers\SmartLedger.Modules.Transactions.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Transactions\Contracts\SmartLedger.Modules.Transactions.Contracts.csproj" />
   </ItemGroup>

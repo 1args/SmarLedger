@@ -42,13 +42,12 @@ public sealed class AuthorizationService(
 
         if (!userId.HasValue)
         {
-            throw new AuthorizationException("User ID is not available for logout operation.");
+            const string errorMessage = "User ID is not available for logout operation";
+            logger.LogWarning(errorMessage);
+            throw new AuthorizationException($"{errorMessage}.");
         }
 
-        if (userId.HasValue)
-        {
-            await keycloakAuthorizationApiClient.LogoutAsync(userId.Value, cancellationToken);
-        }
+        await keycloakAuthorizationApiClient.LogoutAsync(userId.Value, cancellationToken);
     }
 
     /// <inheritdoc />

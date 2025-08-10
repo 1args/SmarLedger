@@ -18,7 +18,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 /// <inheritdoc />
 public sealed class AccountsRetrievalService(
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
-    HybridCache cache,
+    IHybridCache cache,
     ILogger<AccountsRetrievalService> logger) : IAccountsRetrievalService
 {
     /// <inheritdoc />
@@ -27,7 +27,7 @@ public sealed class AccountsRetrievalService(
         logger.LogInformation("Retrieving account with ID {AccountId}", accountId);
 
         var cacheKey = $"account:{accountId}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(1),
             LocalCacheExpiration = TimeSpan.FromSeconds(15)
@@ -66,7 +66,7 @@ public sealed class AccountsRetrievalService(
 
         var cacheKey = $"accounts:user:{filter.UserId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}" +
                        $":maxbalance:{filter.MaxBalance}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromSeconds(15),
             LocalCacheExpiration = TimeSpan.FromSeconds(10)

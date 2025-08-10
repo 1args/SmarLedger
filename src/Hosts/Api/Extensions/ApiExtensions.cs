@@ -1,9 +1,16 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using SmartLedger.Common.Applications.AppServices.Extensions;
+using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Common.Hosts.Features;
 using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
+using SmartLedger.Modules.Security.Clients.Keycloak;
+using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
+using SmartLedger.Modules.Security.Contracts.Options;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -24,7 +31,8 @@ public static class ApiExtensions
             .AddOpenApi()
             .AddDateTimeProvider()
             .AddConfiguredMessageBroker(configuration)
-            .AddHttpClient();
+            .AddHttpClient()
+            .AddAuthenticationViaKeycloak(configuration);
 
         var featureRegistry = new FeaturesRegistry()
             .RegisterFeaturesFromAssembly(Assembly.GetExecutingAssembly());
@@ -61,6 +69,63 @@ public static class ApiExtensions
         }
 
         services.AddMessageBroker<OutboxDbContext>(connectionString);
+
+        return services;
+    }
+
+    /// <summary>
+    /// Registers authentication rules using JWT Bearer authentication with Keycloak as the identity provider.
+    /// </summary>
+    private static IServiceCollection AddAuthenticationViaKeycloak(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<KeycloakAuthorizationOptions>(configuration.GetSection(nameof(KeycloakAuthorizationOptions)));
+
+        var keycloakOptions = configuration.GetSection(nameof(KeycloakAuthorizationOptions)).Get<KeycloakAuthorizationOptions>();
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(o =>
+            {
+                o.RequireHttpsMetadata = false;
+                o.MetadataAddress = keycloakOptions!.MetadataAddress;
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = keycloakOptions.TokenValidationOptions.ValidateIssuerSigningKey,
+                    ValidateIssuer = keycloakOptions.TokenValidationOptions.ValidateIssuer,
+                    ValidIssuer = keycloakOptions.TokenValidationOptions.Issuer,
+                    ValidateAudience = keycloakOptions.TokenValidationOptions.ValidateAudience,
+                    ValidateLifetime = true,
+                    ClockSkew = keycloakOptions.TokenValidationOptions.ClockSkew
+                };
+                o.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"Authentication failed: {context.Exception}");
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("Token validated successfully");
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+
+        services.AddAuthorization();
+        services.AddTransient<KeycloakAdminAuthHandler>();
+
+        services.AddHttpClient<IKeycloakGeneratedApiClient, KeycloakGeneratedApiClient>(client =>
+        {
+            client.BaseAddress = new Uri(keycloakOptions!.AdminBaseUrl);
+        }).AddHttpMessageHandler<KeycloakAdminAuthHandler>();
+
+        services
+            .AddScoped<IKeycloakAuthorizationApiClient, KeycloakAuthorizationApiClient>()
+            .AddScoped<IKeycloakUserApiClient, KeycloakUserApiClient>();
+
+        services.AddScoped(provider => new Lazy<IAuthorizationData>(provider.GetRequiredService<IAuthorizationData>));
+
+        services.AddScoped<IAuthorizationData, AuthorizationData>();
 
         return services;
     }

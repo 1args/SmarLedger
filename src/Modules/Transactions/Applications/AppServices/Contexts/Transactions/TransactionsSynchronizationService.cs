@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
@@ -16,7 +15,7 @@ public sealed class TransactionsSynchronizationService(
     IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
     ITransactionManager transactionManager,
-    HybridCache cache,
+    IHybridCache cache,
     ILogger<TransactionsSynchronizationService> logger) : ITransactionsSynchronizationService
 {
     /// <inheritdoc />

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
@@ -19,7 +18,7 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsSynchronizationService(
     IRepository<BudgetReadModel, BudgetsReadDbContext> budgetsRepository,
     IRepository<BudgetCategoryReadModel, BudgetsReadDbContext> budgetItemsRepository,
-    HybridCache cache,
+    IHybridCache cache,
     ILogger<BudgetsSynchronizationService> logger): IBudgetsSynchronizationService
 {
     /// <inheritdoc />

@@ -21,7 +21,7 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsRetrievalService(
     IRepository<BudgetReadModel, BudgetsReadDbContext> budgetsRepository,
     IRepository<BudgetCategoryReadModel, BudgetsReadDbContext> budgetCategoriesRepository,
-    HybridCache cache,
+    IHybridCache cache,
     ILogger<BudgetsRetrievalService> logger) : IBudgetsRetrievalService
 {
     /// <inheritdoc />
@@ -39,7 +39,7 @@ public sealed class BudgetsRetrievalService(
         var budget = await cache.GetOrCreateAsync(
             key: cacheKey,
             options: cacheOptions,
-            factory: async (ct) =>
+            factory: async ct =>
             {
                 var result = await budgetsRepository
                     .AsQueryable()
@@ -69,7 +69,7 @@ public sealed class BudgetsRetrievalService(
 
         var cacheKey = $"budgets:user:{filter.UserId}:page:{filter.PageNumber}:start:{filter.StartDate:yyyy-MM-dd}" +
                        $":end:{filter.EndDate:yyyy-MM-dd}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(1),
             LocalCacheExpiration = TimeSpan.FromSeconds(15)
@@ -108,7 +108,7 @@ public sealed class BudgetsRetrievalService(
         logger.LogInformation("Retrieving budget category with ID {BudgetCategoryId}", budgetCategoryId);
 
         var cacheKey = $"budgetcategory:{budgetCategoryId}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(5),
             LocalCacheExpiration = TimeSpan.FromSeconds(30)
@@ -148,7 +148,7 @@ public sealed class BudgetsRetrievalService(
         var cacheKey = $"budgetcategories:budget:{filter.BudgetId}:page:{filter.PageNumber}:category:{filter.Category}" +
                        $":minlimit:{filter.MinLimit}:maxlimit:{filter.MaxLimit}:minspent:{filter.MinSpentAmount}" +
                        $":maxspent:{filter.MaxSpentAmount}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromSeconds(30),
             LocalCacheExpiration = TimeSpan.FromSeconds(10)

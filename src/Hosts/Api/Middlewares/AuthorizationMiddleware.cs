@@ -1,29 +1,61 @@
 ﻿using SmartLedger.Common.Contracts.Authorization;
+using System.Security.Claims;
 
 namespace SmartLedger.Hosts.Api.Middlewares;
 
 public class AuthorizationMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next = next;
-
-    public async Task InvokeAsync(HttpContext context, IAuthorizationData authorizationData)
+    public async Task InvokeAsync(HttpContext context)
     {
-        if (!context.User.Identity!.IsAuthenticated)
+        if (context.Request.Path.StartsWithSegments("/identify/login"))
         {
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            await context.Response.WriteAsync("User is not authenticated.");
+            await next(context);
             return;
         }
 
-        var userId = context.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+        if (context.Request.Path.StartsWithSegments("/identify/refresh-token"))
+        {
+            await next(context);
+            return;
+        }
 
-        if (string.IsNullOrEmpty(userId) || !Guid.TryParse(userId, out var passedUserId))
+        Console.WriteLine("Claims present in token:");
+        foreach (var claim in context.User.Claims)
+        {
+            Console.WriteLine($"{claim.Type}: {claim.Value}");
+        }
+
+        var userId = context.User.FindFirst("sub")?.Value;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            userId = context.User.Claims
+                .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        }
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            userId = context.User.Claims
+                .FirstOrDefault(c => c.Type.EndsWith("/sub"))?.Value;
+        }
+
+        if (string.IsNullOrEmpty(userId))
         {
             context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync("Invalid or missing user ID in token.");
+            await context.Response.WriteAsync("Missing 'sub' claim in token.");
             return;
         }
 
-        authorizationData.UserId = passedUserId;
+        if (!Guid.TryParse(userId, out var passedUserId))
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync($"Invalid user ID format: {userId}");
+            return;
+        }
+
+        var authorizationData = context.RequestServices.GetRequiredService<Lazy<IAuthorizationData>>();
+        authorizationData.Value.UserId = passedUserId;
+
+        await next(context);
     }
 }

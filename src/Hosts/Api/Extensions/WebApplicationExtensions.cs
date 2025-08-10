@@ -1,5 +1,6 @@
 ﻿using Scalar.AspNetCore;
 using SmartLedger.Hosts.Api.Endpoints;
+using SmartLedger.Hosts.Api.Middlewares;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -22,6 +23,9 @@ public static class WebApplicationExtensions
         }
 
         application.UseHttpsRedirection();
+        application.UseAuthentication();
+        application.UseAuthorization();
+        application.UseMiddleware<AuthorizationMiddleware>();
         application.MapApiEndpoints();
 
         return application;
@@ -35,7 +39,8 @@ public static class WebApplicationExtensions
         endpoints
             .MapAccountsEndpoints()
             .MapTransactionsEndpoints()
-            .MapBudgetsEndpoints();
+            .MapBudgetsEndpoints()
+            .MapIdentifyEndpoints();
 
         return endpoints;
     }

@@ -31,10 +31,13 @@ public sealed class KeycloakAuthorizationOptions
 
     /// <summary>Keycloak admin realm name.</summary>
     public string AdminRealm { get; set; } = string.Empty;
-    
+
     /// <summary>Keycloak server URL.</summary>
     public string Authority { get; set; } = string.Empty;
 
     /// <summary>Keycloak authorization URL.</summary>
     public string AuthorizationUrl { get; set; } = string.Empty;
+
+    /// <summary>Options for validating JWT tokens.</summary>
+    public TokenValidationOptions TokenValidationOptions { get; set; } = new();
 }

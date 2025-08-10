@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Hybrid;
 using SmartLedger.Common.Hosts.Features.Abstractions;
+using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Infrastructure.Caching;
 using HybridCacheOptions = SmartLedger.Common.Contracts.Options.HybridCacheOptions;
 
 namespace SmartLedger.Hosts.Api.Features.Redis;
@@ -28,5 +30,7 @@ internal class RedisFeature : IAppFeature
                 Expiration = hybridCacheOptions.DefaultExpirationSeconds
             };
         });
+
+        services.AddSingleton<IHybridCache, DefaultHybridCache>();
     }
 }

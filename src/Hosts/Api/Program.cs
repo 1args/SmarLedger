@@ -9,6 +9,7 @@ services
     .AddApi(configuration)
     .AddTransactionsModule()
     .AddBudgetsModule()
+    .AddSecurityModule()
     .AddDecorators();
 
 var app = builder.Build();

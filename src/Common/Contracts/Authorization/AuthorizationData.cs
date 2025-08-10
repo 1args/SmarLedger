@@ -3,9 +3,8 @@
 /// <summary>
 /// Represents authorization data containing user information.
 /// </summary>
-/// <param name="userId">User ID.</param>
-public sealed class AuthorizationData(Guid userId) : IAuthorizationData
+public sealed class AuthorizationData : IAuthorizationData
 {
     /// <inheritdoc />
-    public Guid? UserId { get; set; } = userId;
+    public Guid? UserId { get; set; }
 }

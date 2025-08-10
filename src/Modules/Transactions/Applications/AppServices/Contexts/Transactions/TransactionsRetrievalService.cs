@@ -18,7 +18,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Tra
 /// <inheritdoc />
 public sealed class TransactionsRetrievalService(
     IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
-    HybridCache cache,
+    IHybridCache cache,
     ILogger<ITransactionsRetrievalService> logger) : ITransactionsRetrievalService
 {
     /// <inheritdoc />
@@ -27,7 +27,7 @@ public sealed class TransactionsRetrievalService(
         logger.LogInformation("Retrieving transaction with ID {TransactionId}", transactionId);
 
         var cacheKey = $"transaction:{transactionId}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(5),
             LocalCacheExpiration = TimeSpan.FromSeconds(30)
@@ -67,7 +67,7 @@ public sealed class TransactionsRetrievalService(
         var cacheKey = $"transactions:account:{filter.AccountId}:page:{filter.PageNumber}:type:{filter.Type ?? "none"}" +
                        $":category:{filter.Category ?? "none"}:minamount:{filter.MinAmount}:maxamount:{filter.MaxAmount}" +
                        $":start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
-        var cacheOptions = new HybridCacheEntryOptions()
+        var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromSeconds(15),
             LocalCacheExpiration = TimeSpan.FromSeconds(10)

@@ -41,7 +41,7 @@ public sealed class KeycloakAuthorizationApiClient(
                 { "username", username },
                 { "password", password },
                 { "grant_type", "password" },
-                { "clientId", _keycloakAuthorizationOptions.ClientId },
+                { "client_id", _keycloakAuthorizationOptions.ClientId },
                 { "client_secret", _keycloakAuthorizationOptions.ClientSecret },
             };
 
@@ -84,7 +84,7 @@ public sealed class KeycloakAuthorizationApiClient(
             {
                 { "refresh_token", refreshToken },
                 { "grant_type", "refresh_token" },
-                { "clientId", _keycloakAuthorizationOptions.ClientId },
+                { "client_id", _keycloakAuthorizationOptions.ClientId },
                 { "client_secret", _keycloakAuthorizationOptions.ClientSecret },
             };
 
@@ -173,9 +173,9 @@ public sealed class KeycloakAuthorizationApiClient(
 
             var requestBody = new Dictionary<string, string>
             {
-                { "currentPassword", currentPassword },
-                { "newPassword", newPassword },
-                { "userId", userId.ToString() },
+                { "current_password", currentPassword },
+                { "new_password", newPassword },
+                { "user_id", userId.ToString() },
             };
 
             var passwordChangeUrl = $"{_keycloakAuthorizationOptions.AdminBaseUrl}/auth/realms/{_keycloakAuthorizationOptions.Realm}/account/credentials/password";
@@ -184,7 +184,7 @@ public sealed class KeycloakAuthorizationApiClient(
                 .WithTimeout(TimeSpan.FromSeconds(10))
                 .PostUrlEncodedAsync(requestBody, cancellationToken: cancellationToken);
 
-            if (response.ResponseMessage.IsSuccessStatusCode)
+            if (!response.ResponseMessage.IsSuccessStatusCode)
             {
                 var errorMessage = await response.ResponseMessage.Content.ReadAsStringAsync(cancellationToken);
 
@@ -219,9 +219,7 @@ public sealed class KeycloakAuthorizationApiClient(
             .WithTimeout(TimeSpan.FromSeconds(30))
             .GetJsonAsync<DiscoveryDocument>(cancellationToken: cancellationToken);
 
-        logger.LogInformation(
-            "Successfully retrieved discovery document from {MetadataAddress}",
-            _keycloakAuthorizationOptions.MetadataAddress);
+        logger.LogInformation("Successfully retrieved discovery document");
 
         return discovery;
     }
