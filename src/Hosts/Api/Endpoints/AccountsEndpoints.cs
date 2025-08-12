@@ -32,6 +32,7 @@ public static class AccountsEndpoints
             .WithOpenApi();
 
         endpoints.MapPost("/", CreateAccountAsync)
+            .RequireAuthorization()
             .WithName("CreateAccount")
             .WithSummary("Creates a new account.")
             .WithDescription("Creates a new account with the specified name and user ID.")
@@ -39,6 +40,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapDelete("/{accountId:guid}", DeleteAccountAsync)
+            .RequireAuthorization()
             .WithName("DeleteAccount")
             .WithSummary("Deletes an account.")
             .WithDescription("Removes an account specified by its unique ID.")
@@ -46,6 +48,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/{accountId:guid}/transactions", AddTransactionAsync)
+            .RequireAuthorization()
             .WithName("AddTransaction")
             .WithSummary("Adds a transaction to an account.")
             .WithDescription("Adds a new transaction to the specified account with details such as amount, type, category, and notes.")
@@ -54,6 +57,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapDelete("/{accountId:guid}/transactions/{transactionId:guid}", RemoveTransactionAsync)
+            .RequireAuthorization()
             .WithName("RemoveTransaction")
             .WithSummary("Removes a transaction from an account")
             .WithDescription("Removes a specific transaction from the specified account.")
@@ -62,6 +66,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{accountId:guid}", GetAccountAsync)
+            .RequireAuthorization()
             .WithName("GetAccount")
             .WithSummary("Retrieves an account by its identifier.")
             .WithDescription("Retrieves the account details for the specified account ID.")
@@ -69,7 +74,8 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
-        app.MapPost("/{userId:guid}/accounts/search", GetPaginatedAccountsAsync)
+        app.MapPost("/accounts/me/search", GetPaginatedAccountsAsync)
+            .RequireAuthorization()
             .WithName("GetPaginatedAccounts")
             .WithSummary("Retrieves a paginated list of accounts for the specified user.")
             .WithDescription("Returns a paginated list of accounts associated with the given user ID.")
@@ -79,6 +85,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/{accountId:guid}/transactions/search", GetPaginatedTransactionsAsync)
+            .RequireAuthorization()
             .WithName("GetPaginatedTransactions")
             .WithSummary("Retrieves a paginated list of transactions for the specified account.")
             .WithDescription("Returns a paginated list of transactions associated with the given account ID.")
@@ -97,7 +104,7 @@ public static class AccountsEndpoints
         [FromServices] ICommandHandler<CreateAccountCommand, Guid> handler,
         CancellationToken cancellationToken)
     {
-        var command = new CreateAccountCommand(request.Name, request.UserId);
+        var command = new CreateAccountCommand(request.Name);
         var response = await handler.HandleAsync(command, cancellationToken);
 
         return Results.Ok(response);
@@ -166,7 +173,6 @@ public static class AccountsEndpoints
     /// Retrieves a paginated list of transactions for the specified account with optional filters.
     /// </summary>
     private static async Task<IResult> GetPaginatedAccountsAsync(
-        [FromRoute] Guid userId,
         [FromBody] GetPaginatedAccountsRequest request,
         [FromServices] IQueryHandler<GetPaginatedAccountsQuery, PaginatedList<AccountListItem>> handler,
         CancellationToken cancellationToken)
@@ -174,7 +180,6 @@ public static class AccountsEndpoints
        var query = new GetPaginatedAccountsQuery(
             request.PageNumber,
             request.PageSize,
-            userId,
             request.MinBalance,
             request.MaxBalance,
             request.StartDate,

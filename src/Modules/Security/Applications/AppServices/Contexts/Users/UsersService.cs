@@ -18,25 +18,14 @@ public sealed class UsersService(
     /// <inheritdoc />
     public async Task<UserResponse> GetCurrentUserAsync(CancellationToken cancellationToken)
     {
-        if (!authorizationData.Value.UserId.HasValue)
-        {
-            logger.LogWarning("User ID is not available for retrieving current user information.");
-            throw new UnauthorizedAccessException("User ID is required to retrieve current user information.");
-        }
-
-        var userId = authorizationData.Value.UserId.Value;
+        var userId = authorizationData.Value.UserId;
         return await keycloakUserApiClient.GetUserAsync(userId, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task EmailVerificationAsync(EmailOnlyModel request, CancellationToken cancellationToken)
     {
-        if (!authorizationData.Value.UserId.HasValue)
-        {
-            logger.LogWarning("User ID is not available for email verification.");
-            throw new UnauthorizedAccessException("User ID is required to verify email.");
-        }
-        var userId = authorizationData.Value.UserId.Value;
+        var userId = authorizationData.Value.UserId;
         await keycloakUserApiClient.EmailVerificationAsync(userId, request.Email, cancellationToken);
     }
 }

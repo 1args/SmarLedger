@@ -12,7 +12,7 @@ public interface IAccountsService
     /// </summary>
     /// <param name="request">Account creation model.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken);
+    Task<(Guid AccountId, Guid UserId)> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Adds a transaction to an existing account.

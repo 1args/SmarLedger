@@ -20,15 +20,14 @@ public sealed class CreateAccountCommandHandler(
     {
         var request = new AccountCreationModel(
             command.Name,
-            command.UserId,
             dateTimeProvider.UtcNow);
 
-        var accountId = await accountService.CreateAsync(request, cancellationToken);
+        var response = await accountService.CreateAsync(request, cancellationToken);
 
         await eventBus.PublishAsync(
-            new AccountCreatedEvent(accountId, request.Name, request.UserId, request.CreatedAt), 
+            new AccountCreatedEvent(response.AccountId, request.Name, response.UserId, request.CreatedAt), 
             cancellationToken);
 
-        return accountId;
+        return response.AccountId;
     }
 }

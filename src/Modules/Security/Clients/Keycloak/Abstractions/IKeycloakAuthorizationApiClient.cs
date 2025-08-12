@@ -9,6 +9,13 @@ namespace SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 public interface IKeycloakAuthorizationApiClient
 {
     /// <summary>
+    /// Creates a new user in Keycloak with the provided details.
+    /// </summary>
+    /// <param name="request">Model containing registration data.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task CreateUserAsync(UserCreationModel request, CancellationToken cancellationToken);
+
+    /// <summary>
     /// Authorizes a user with the provided username and password.
     /// </summary>
     /// <param name="username">User name.</param>
@@ -39,13 +46,4 @@ public interface IKeycloakAuthorizationApiClient
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>List of active user sessions.</returns>
     Task<IReadOnlyCollection<UserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Resets the password for a user in Keycloak.
-    /// </summary>
-    /// <param name="userId">User ID.</param
-    /// <param name="currentPassword">Current password.</param>
-    /// <param name="newPassword">New password.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task ResetPasswordAsync(Guid userId, string currentPassword, string newPassword, CancellationToken cancellationToken);
 }

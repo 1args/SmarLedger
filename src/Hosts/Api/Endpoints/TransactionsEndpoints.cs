@@ -25,6 +25,7 @@ public static class TransactionsEndpoints
             .WithOpenApi();
 
         endpoints.MapPatch("/{transactionId:guid}/amount", UpdateTransactionAmountAsync)
+            .RequireAuthorization()
             .WithName("UpdateTransactionAmount")
             .WithSummary("Updates the amount of a specific transaction.")
             .WithDescription("Modifies the amount of an existing transaction identified by its ID.")
@@ -33,6 +34,7 @@ public static class TransactionsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPatch("/{transactionId:guid}/category", CategorizeTransactionAmountAsync)
+            .RequireAuthorization()
             .WithName("CategorizeTransactionAmount")
             .WithSummary("Updates the category of a specific transaction.")
             .WithDescription("Assigns a new category to an existing transaction identified by its ID.")
@@ -41,6 +43,7 @@ public static class TransactionsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{transactionId:guid}", GetTransactionAsync)
+            .RequireAuthorization()
             .WithName("GetTransaction")
             .WithSummary("Retrieves a transaction by its identifier.")
             .WithDescription("Retrieves the transaction details for the specified transaction ID.")

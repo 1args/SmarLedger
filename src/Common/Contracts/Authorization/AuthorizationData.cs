@@ -6,5 +6,5 @@
 public sealed class AuthorizationData : IAuthorizationData
 {
     /// <inheritdoc />
-    public Guid? UserId { get; set; }
+    public Guid UserId { get; set; }
 }

@@ -4,7 +4,7 @@ using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abst
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 using SmartLedger.Modules.Budgets.Contracts.Responses.Budgets;
 
-namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgetCategories;
+namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgets;
 
 /// <summary>
 /// Handles the logic for processing <see cref="GetPaginatedBudgetsQuery"/>.
@@ -18,7 +18,6 @@ public sealed class GetPaginatedBudgetsQueryHandler(
         var filter = new GetPaginatedBudgetsModel(
             query.PageNumber,
             query.PageSize,
-            query.UserId,
             query.StartDate,
             query.EndDate);
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
+using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
@@ -21,28 +22,31 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsService(
     IRepository<Budget, BudgetsWriteDbContext> budgetsRepository,
     IRepository<BudgetCategory, BudgetsWriteDbContext> budgetItemsRepository,
+    Lazy<IAuthorizationData> authorizationData,
     ITransactionManager transactionManager,
     ILogger<BudgetsService> logger) : IBudgetsService
 {
     /// <inheritdoc />
-    public async Task<Guid> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken)
+    public async Task<(Guid BudgetId, Guid UserId)> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken)
     {
+        var userId = authorizationData.Value.UserId;
+
         logger.LogInformation(
             "Creating budget with name {Name} for user with ID {UserId}", 
-            request.Name, request.UserId);
+            request.Name, userId);
 
         var name = BudgetName.Create(request.Name);
         var period = BudgetPeriod.Create(request.StartDate, request.EndDate);
 
-        var budget = Budget.Create(request.UserId, name, period, request.CreatedAt);
+        var budget = Budget.Create(userId, name, period, request.CreatedAt);
 
         await budgetsRepository.AddAsync(budget, cancellationToken);
 
         logger.LogInformation(
             "Budget with ID {BudgetId} created successfully for user with ID {UserId}",
-            budget.Id, request.UserId);
+            budget.Id, userId);
 
-        return budget.Id;
+        return (budget.Id, userId);
     }
 
     /// <inheritdoc />

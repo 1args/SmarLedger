@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Cqrs.Queries;
 using SmartLedger.Modules.Budgets.Contracts.Responses.BudgetCategories;
 
-namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgets;
+namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgetCategories;
 
 /// <summary>
 /// Query to retrieve paginated budget categories based on various filters.

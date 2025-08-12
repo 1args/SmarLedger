@@ -18,7 +18,6 @@ public sealed class GetPaginatedAccountsQueryHandler(
         var filter = new GetPaginatedAccountsModel(
             query.PageNumber,
             query.PageSize,
-            query.UserId,
             query.MinBalance,
             query.MaxBalance,
             query.StartDate,

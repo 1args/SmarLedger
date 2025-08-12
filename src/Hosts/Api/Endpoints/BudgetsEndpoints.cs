@@ -33,6 +33,7 @@ public static class BudgetsEndpoints
             .WithOpenApi();
 
         endpoints.MapPost("/", CreateBudgetAsync)
+            .RequireAuthorization()
             .WithName("CreateBudget")
             .WithSummary("Creates a new budget.")
             .WithDescription("Creates a new budget for the specified user, with name, start date, and end date.")
@@ -40,6 +41,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapPost("/{budgetId:guid}/categories", AddCategoryAsync)
+            .RequireAuthorization()
             .WithName("AddCategoryToBudget")
             .WithSummary("Adds a category to a budget.")
             .WithDescription("Adds a new category with a limit to the specified budget.")
@@ -48,6 +50,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapDelete("/{budgetId:guid}/categories/{categoryId:guid}", RemoveCategoryAsync)
+            .RequireAuthorization()
             .WithName("RemoveCategoryFromBudget")
             .WithSummary("Removes a category from a budget.")
             .WithDescription("Removes an existing category from the specified budget by its unique category ID.")
@@ -55,6 +58,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapDelete("/{budgetId:guid}", DeleteBudgetAsync)
+            .RequireAuthorization()
             .WithName("DeleteBudget")
             .WithSummary("Deletes a budget by its identifier.")
             .WithDescription("Removes an existing budget identified by its unique budget ID.")
@@ -62,6 +66,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/search", GetPaginatedBudgetsAsync)
+            .RequireAuthorization()
             .WithName("GetPaginatedBudgets")
             .WithSummary("Retrieves a paginated list of budgets for the specified user.")
             .WithDescription("Returns a paginated list of budgets associated with the given user ID, with optional filters for start and end dates.")
@@ -69,6 +74,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapGet("/{budgetId:guid}", GetBudgetAsync)
+            .RequireAuthorization()
             .WithName("GetBudget")
             .WithSummary("Retrieves a budget by its identifier.")
             .WithDescription("Retrieves the budget details for the specified budget ID.")
@@ -77,6 +83,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/{budgetId:guid}/categories/search", GetPaginatedBudgetCategoriesAsync)
+            .RequireAuthorization()
             .WithName("GetPaginatedBudgetCategories")
             .WithSummary("Retrieves a paginated list of budget categories for the specified budget.")
             .WithDescription("Returns a paginated list of budget categories associated with the given budget ID, with optional filters for category, limits, spent amounts, status, and dates.")
@@ -85,6 +92,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{budgetId:guid}/categories/{budgetCategoryId:guid}", GetBudgetCategoryAsync)
+            .RequireAuthorization()
             .WithName("GetBudgetCategory")
             .WithSummary("Retrieves a budget category by its identifier.")
             .WithDescription("Retrieves the budget category details for the specified budget and category IDs.")
@@ -103,8 +111,7 @@ public static class BudgetsEndpoints
         [FromServices] ICommandHandler<CreateBudgetCommand, Guid> handler,
         CancellationToken cancellationToken)
     {
-        var command = new CreateBudgetCommand(
-            request.UserId, request.Name, request.StartDate, request.EndDate);
+        var command = new CreateBudgetCommand(request.Name, request.StartDate, request.EndDate);
         var response = await handler.HandleAsync(command, cancellationToken);
 
         return Results.Ok(response);
@@ -175,7 +182,6 @@ public static class BudgetsEndpoints
         var query = new GetPaginatedBudgetsQuery(
             request.PageNumber,
             request.PageSize,
-            request.UserId,
             request.StartDate,
             request.EndDate);
 

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SmartLedger.Common.Cqrs.Queries;
 
-namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgets;
+namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgetCategories;
 
 /// <summary>
 /// Validates <see cref="GetPaginatedBudgetCategoriesQuery"/> requests.

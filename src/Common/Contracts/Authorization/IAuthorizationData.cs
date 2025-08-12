@@ -8,5 +8,5 @@ public interface IAuthorizationData
     /// <summary>
     /// Unique identifier of the user.
     /// </summary>
-    public Guid? UserId { get; set; }
+    public Guid UserId { get; set; }
 }

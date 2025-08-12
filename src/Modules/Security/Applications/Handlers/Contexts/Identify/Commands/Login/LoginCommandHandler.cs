@@ -15,6 +15,7 @@ public sealed class LoginCommandHandler(
     public async Task<LoginResponse> HandleAsync(LoginCommand command, CancellationToken cancellationToken)
     {
         var request = new LoginModel(command.Username, command.Password);
+
         return await authorizationService.AuthorizeAsync(request, cancellationToken);
     }
 }

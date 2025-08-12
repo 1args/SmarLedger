@@ -19,24 +19,23 @@ public sealed class CreateBudgetCommandHandler(
     public async Task<Guid> HandleAsync(CreateBudgetCommand command, CancellationToken cancellationToken)
     {
         var request = new BudgetCreationModel(
-            command.UserId,
             command.Name,
             command.StartDate,
             command.EndDate,
             dateTimeProvider.UtcNow);
 
-        var budgetId = await budgetService.CreateAsync(request, cancellationToken);
+        var response = await budgetService.CreateAsync(request, cancellationToken);
 
         await eventBus.PublishAsync(
             new BudgetCreatedEvent(
-                budgetId,
-                command.UserId,
+                response.BudgetId,
+                response.UserId,
                 command.Name,
                 command.StartDate,
                 command.EndDate,
                 dateTimeProvider.UtcNow),
             cancellationToken);
 
-        return budgetId;
+        return response.BudgetId;
     }
 }

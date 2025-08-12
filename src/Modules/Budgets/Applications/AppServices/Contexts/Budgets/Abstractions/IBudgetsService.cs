@@ -12,7 +12,7 @@ public interface IBudgetsService
     /// </summary>
     /// <param name="request">Model containing budget creation data.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken);
+    Task<(Guid BudgetId, Guid UserId)> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Adds a new category (budget item) to an existing budget.

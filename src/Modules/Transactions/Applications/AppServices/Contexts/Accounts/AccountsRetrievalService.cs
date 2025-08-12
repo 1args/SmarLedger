@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
+using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Common.Infrastructure.Abstractions;
@@ -18,6 +19,7 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 /// <inheritdoc />
 public sealed class AccountsRetrievalService(
     IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
+    Lazy<IAuthorizationData> authorizationData,
     IHybridCache cache,
     ILogger<AccountsRetrievalService> logger) : IAccountsRetrievalService
 {
@@ -62,9 +64,11 @@ public sealed class AccountsRetrievalService(
         GetPaginatedAccountsModel filter,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated accounts for user with ID {UserId}", filter.UserId);
+        var userId = authorizationData.Value.UserId;
 
-        var cacheKey = $"accounts:user:{filter.UserId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}" +
+        logger.LogInformation("Retrieving paginated accounts for user with ID {UserId}", userId);
+
+        var cacheKey = $"accounts:user:{userId}:page:{filter.PageNumber}:minbalance:{filter.MinBalance}" +
                        $":maxbalance:{filter.MaxBalance}:start:{filter.StartDate:yyyy-MM-dd}:end:{filter.EndDate:yyyy-MM-dd}";
         var cacheOptions = new HybridCacheEntryOptions
         {
@@ -77,7 +81,7 @@ public sealed class AccountsRetrievalService(
             options: cacheOptions,
             factory: async ct =>
             {
-                var combinedSpecification = new AccountByUserIdSpecification(filter.UserId)
+                var combinedSpecification = new AccountByUserIdSpecification(userId)
                     .And(new AccountByBalanceRangeSpecification(filter.MinBalance, filter.MaxBalance))
                     .And(new AccountByDateRangeSpecification(filter.StartDate, filter.EndDate));
 
@@ -95,7 +99,7 @@ public sealed class AccountsRetrievalService(
             paginatedAccounts.Items.Count,
             paginatedAccounts.PageNumber,
             paginatedAccounts.TotalPages,
-            filter.UserId);
+            userId);
 
         return paginatedAccounts;
     }

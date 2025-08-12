@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
+using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Contracts.Pagination;
 using SmartLedger.Common.Infrastructure.Abstractions;
@@ -21,6 +22,7 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsRetrievalService(
     IRepository<BudgetReadModel, BudgetsReadDbContext> budgetsRepository,
     IRepository<BudgetCategoryReadModel, BudgetsReadDbContext> budgetCategoriesRepository,
+    Lazy<IAuthorizationData> authorizationData,
     IHybridCache cache,
     ILogger<BudgetsRetrievalService> logger) : IBudgetsRetrievalService
 {
@@ -65,10 +67,13 @@ public sealed class BudgetsRetrievalService(
         GetPaginatedBudgetsModel filter,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving paginated budgets for user with ID {UserId}", filter.UserId);
+        var userId = authorizationData.Value.UserId;
 
-        var cacheKey = $"budgets:user:{filter.UserId}:page:{filter.PageNumber}:start:{filter.StartDate:yyyy-MM-dd}" +
+        logger.LogInformation("Retrieving paginated budgets for user with ID {UserId}", userId);
+
+        var cacheKey = $"budgets:user:{userId}:page:{filter.PageNumber}:start:{filter.StartDate:yyyy-MM-dd}" +
                        $":end:{filter.EndDate:yyyy-MM-dd}";
+
         var cacheOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(1),
@@ -80,7 +85,7 @@ public sealed class BudgetsRetrievalService(
             options: cacheOptions,
             factory: async ct =>
             {
-                var combinedSpecification = new BudgetByUserIdSpecification(filter.UserId)
+                var combinedSpecification = new BudgetByUserIdSpecification(userId)
                     .And(new BudgetByDateRangeSpecification(filter.StartDate, filter.EndDate));
 
                 var budgets = budgetsRepository
@@ -97,7 +102,7 @@ public sealed class BudgetsRetrievalService(
             paginatedBudgets.Items.Count,
             paginatedBudgets.PageNumber,
             paginatedBudgets.TotalPages,
-            filter.UserId);
+            userId);
 
         return paginatedBudgets;
     }

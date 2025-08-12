@@ -4,13 +4,13 @@ using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abst
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 using SmartLedger.Modules.Budgets.Contracts.Responses.BudgetCategories;
 
-namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgets;
+namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Queries.GetPaginatedBudgetCategories;
 
 /// <summary>
 /// Handles the logic for processing <see cref="GetPaginatedBudgetCategoriesQuery"/>.
 /// </summary>
 public sealed class GetPaginatedBudgetCategoriesQueryHandler(
-    IBudgetsRetrievalService budgetsRetrievalService): IQueryHandler<GetPaginatedBudgetCategoriesQuery, PaginatedList<BudgetCategoryListItem>>
+    IBudgetsRetrievalService budgetsRetrievalService) : IQueryHandler<GetPaginatedBudgetCategoriesQuery, PaginatedList<BudgetCategoryListItem>>
 {
     /// <inheritdoc />
     public async Task<PaginatedList<BudgetCategoryListItem>> HandleAsync(GetPaginatedBudgetCategoriesQuery query, CancellationToken cancellationToken)

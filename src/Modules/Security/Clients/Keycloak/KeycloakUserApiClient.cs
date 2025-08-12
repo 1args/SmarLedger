@@ -22,13 +22,13 @@ public sealed class KeycloakUserApiClient(
     /// <inheritdoc />
     public async Task<UserResponse> GetUserAsync(Guid userId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving user information for user with ID: {UserId}", userId);
+        logger.LogInformation("Retrieving user information for user with ID {UserId}", userId);
 
         var userRepresentation = await GetKeycloakUserAsync(userId, cancellationToken);
 
         if (userRepresentation is null)
         {
-            logger.LogWarning("User with ID {UserId} not found for retrieving user information.", userId);
+            logger.LogWarning("User with ID {UserId} not found for retrieving user information", userId);
             throw new KeycloakApiException($"User with ID {userId} not found.");
         }
 

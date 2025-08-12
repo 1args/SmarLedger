@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Authorization;
-using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Modules.Security.Applications.AppServices.Contexts.Identify.Abstractions;
 using SmartLedger.Modules.Security.Applications.AppServices.Contexts.Identify.Models;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 using SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
+using SmartLedger.Modules.Security.Clients.Keycloak.Models;
 using SmartLedger.Modules.Security.Contracts.Responses.Identify;
 
 namespace SmartLedger.Modules.Security.Applications.AppServices.Contexts.Identify;
@@ -17,6 +17,21 @@ public sealed class AuthorizationService(
     Lazy<IAuthorizationData> authorizationData,
     ILogger<AuthorizationService> logger) : IAuthorizationService
 {
+    /// <inheritdoc />
+    public async Task RegisterAsync(UserRegistrationModel request, CancellationToken cancellationToken)
+    {
+        var userCreationModel = new UserCreationModel
+        (
+            request.Username,
+            request.Email,
+            request.FirstName,
+            request.LastName,
+            request.Password
+        );
+
+        await keycloakAuthorizationApiClient.CreateUserAsync(userCreationModel, cancellationToken);
+    }
+
     /// <inheritdoc />
     public async Task<LoginResponse> AuthorizeAsync(LoginModel request, CancellationToken cancellationToken)
     {
@@ -40,14 +55,7 @@ public sealed class AuthorizationService(
     {
         var userId = authorizationData.Value.UserId;
 
-        if (!userId.HasValue)
-        {
-            const string errorMessage = "User ID is not available for logout operation";
-            logger.LogWarning(errorMessage);
-            throw new AuthorizationException($"{errorMessage}.");
-        }
-
-        await keycloakAuthorizationApiClient.LogoutAsync(userId.Value, cancellationToken);
+        await keycloakAuthorizationApiClient.LogoutAsync(userId, cancellationToken);
     }
 
     /// <inheritdoc />
@@ -55,27 +63,6 @@ public sealed class AuthorizationService(
     {
         var userId = authorizationData.Value.UserId;
 
-        if (userId.HasValue)
-        {
-            return await keycloakAuthorizationApiClient.GetUserSessionsAsync(userId.Value, cancellationToken);
-        }
-
-        logger.LogWarning("User ID is not available for retrieving user sessions.");
-        return new List<UserSessionResponse>();
-    }
-
-    /// <inheritdoc />
-    public async Task ResetPasswordAsync(ResetPasswordModel request, CancellationToken cancellationToken)
-    {
-        var userId = authorizationData.Value.UserId;
-
-        if (userId.HasValue)
-        {
-            await keycloakAuthorizationApiClient.ResetPasswordAsync(
-                userId.Value,
-                request.CurrentPassword, 
-                request.NewPassword,
-                cancellationToken);
-        }
+        return await keycloakAuthorizationApiClient.GetUserSessionsAsync(userId, cancellationToken);
     }
 }

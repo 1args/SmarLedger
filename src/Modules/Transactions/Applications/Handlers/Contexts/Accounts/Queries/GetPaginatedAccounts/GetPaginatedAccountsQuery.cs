@@ -8,7 +8,6 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 /// </summary>
 /// <param name="PageNumber">Page number.</param>
 /// <param name="PageSize">Page size.</param>
-/// <param name="UserId">Account ID.</param>
 /// <param name="MinBalance">Minimum transaction balance filter.</param>
 /// <param name="MaxBalance">Maximum transaction balance filter.</param>
 /// <param name="StartDate">Start date for filtering transactions.</param>
@@ -16,7 +15,6 @@ namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accoun
 public sealed record GetPaginatedAccountsQuery(
     int PageNumber,
     int PageSize,
-    Guid UserId,
     decimal? MinBalance,
     decimal? MaxBalance,
     DateTime? StartDate,

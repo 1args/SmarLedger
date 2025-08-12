@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Hosts.Api.Helpers;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Login;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Logout;
-using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.ResetPassword;
+using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Register;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Queries.GetSessions;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Queries.RefreshToken;
 using SmartLedger.Modules.Security.Contracts.Requests.Identify;
 using SmartLedger.Modules.Security.Contracts.Responses.Identify;
+using LoginRequest = SmartLedger.Modules.Security.Contracts.Requests.Identify.LoginRequest;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
 /// <summary>
-/// Maps endpoints related to identity operations such as login, logout, token refresh, and session management.
+/// Maps endpoints related to identity operations.
 /// </summary>
 public static class IdentifyEndpoints
 {
@@ -26,6 +28,13 @@ public static class IdentifyEndpoints
             .WithTags("Identify")
             .WithOpenApi();
 
+        endpoints.MapPost("/register", RegisterAsync)
+            .WithName("Register")
+            .WithSummary("Registers a new user.")
+            .WithDescription("Creates a new user account with the provided username, email, first name, last name, and password.")
+            .Produces(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest);
+
         endpoints.MapPost("/login", LoginAsync)
             .WithName("Login")
             .WithSummary("Authenticates a user.")
@@ -38,15 +47,6 @@ public static class IdentifyEndpoints
             .WithName("RefreshToken")
             .WithSummary("Refreshes the access token.")
             .WithDescription("Uses a valid refresh token to generate a new access token.")
-            .Produces(StatusCodes.Status200OK)
-            .ProducesProblem(StatusCodes.Status400BadRequest)
-            .ProducesProblem(StatusCodes.Status401Unauthorized);
-
-        endpoints.MapPost("/reset-password", ResetPasswordAsync)
-            .RequireAuthorization()
-            .WithName("ResetPassword")
-            .WithSummary("Resets the user's password.")
-            .WithDescription("Allows the user to reset their password by providing the current and new passwords.")
             .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status401Unauthorized);
@@ -71,15 +71,39 @@ public static class IdentifyEndpoints
     }
 
     /// <summary>
+    /// Registers a new user with the provided details.
+    /// </summary>
+    private static async Task<IResult> RegisterAsync(
+        [FromBody] RegistrationRequest request,
+        [FromServices] ICommandHandler<RegisterCommand> handler,
+        CancellationToken cancellationToken)
+    {
+        var command = new RegisterCommand(
+            request.Username,
+            request.Email,
+            request.FirstName,
+            request.LastName,
+            request.Password);
+
+        await handler.HandleAsync(command, cancellationToken);
+
+        return Results.Created();
+    }
+
+    /// <summary>
     /// Authenticates a user using provided credentials.
     /// </summary>
     private static async Task<IResult> LoginAsync(
         [FromBody] LoginRequest request,
         [FromServices] ICommandHandler<LoginCommand, LoginResponse> handler,
+        HttpContext httpContext,
         CancellationToken cancellationToken)
     {
         var command = new LoginCommand(request.Username, request.Password);
         var response = await handler.HandleAsync(command, cancellationToken);
+
+        CookieHelper.SetAccessTokenCookie(response.AccessToken, httpContext.Response.Cookies);
+        CookieHelper.SetRefreshTokenCookie(response.RefreshToken, httpContext.Response.Cookies);
 
         return Results.Ok(response);
     }
@@ -90,26 +114,16 @@ public static class IdentifyEndpoints
     private static async Task<IResult> RefreshTokenAsync(
         [FromQuery] string refreshToken,
         [FromServices] IQueryHandler<RefreshTokenQuery, LoginResponse> handler,
+        HttpContext httpContext,
         CancellationToken cancellationToken)
     {
         var query = new RefreshTokenQuery(refreshToken);
         var response = await handler.HandleAsync(query, cancellationToken);
 
+        CookieHelper.SetAccessTokenCookie(response.AccessToken, httpContext.Response.Cookies);
+        CookieHelper.SetRefreshTokenCookie(response.RefreshToken, httpContext.Response.Cookies);
+
         return Results.Ok(response);
-    }
-
-    /// <summary>
-    /// Resets the current user's password.
-    /// </summary>
-    private static async Task<IResult> ResetPasswordAsync(
-        [FromBody] ResetPasswordRequest request,
-        [FromServices] ICommandHandler<ResetPasswordCommand> handler,
-        CancellationToken cancellationToken)
-    {
-        var command = new ResetPasswordCommand(request.CurrentPassword, request.NewPassword);
-        await handler.HandleAsync(command, cancellationToken);
-
-        return Results.Ok();
     }
 
     /// <summary>
@@ -117,9 +131,13 @@ public static class IdentifyEndpoints
     /// </summary>
     private static async Task<IResult> LogoutAsync(
         [FromServices] ICommandHandler<LogoutCommand> handler,
+        HttpContext httpContext,
         CancellationToken cancellationToken)
     {
         await handler.HandleAsync(new LogoutCommand(), cancellationToken);
+
+        CookieHelper.ClearCookies(CookieHelper.AccessTokenCookieName, httpContext.Response.Cookies);
+        CookieHelper.ClearCookies(CookieHelper.RefreshTokenCookieName, httpContext.Response.Cookies);
 
         return Results.Ok();
     }

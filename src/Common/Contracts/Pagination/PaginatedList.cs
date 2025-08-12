@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace SmartLedger.Common.Contracts.Pagination;
 
@@ -32,6 +33,7 @@ public sealed class PaginatedList<TData>
     /// <summary>
     /// Private constructor used by the factory method.
     /// </summary>
+    [JsonConstructor]
     private PaginatedList(int totalCount, int pageNumber, int pageSize, List<TData> items)
     {
         TotalCount = totalCount;
@@ -46,7 +48,7 @@ public sealed class PaginatedList<TData>
     /// <param name="source">Data source to paginate.</param>
     /// <param name="paginationFilter">Pagination filter.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    /// <returns>A new instance of the <see cref="PaginatedFilter"/> class.</returns>
+    /// <returns>New instance of the <see cref="PaginatedFilter"/> class.</returns>
     public static async Task<PaginatedList<TData>> CreateAsync(
         IQueryable<TData> source,
         PaginatedFilter paginationFilter,

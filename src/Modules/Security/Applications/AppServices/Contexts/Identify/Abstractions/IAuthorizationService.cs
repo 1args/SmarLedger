@@ -9,6 +9,13 @@ namespace SmartLedger.Modules.Security.Applications.AppServices.Contexts.Identif
 public interface IAuthorizationService
 {
     /// <summary>
+    /// Registers a new user with the provided registration data.
+    /// </summary>
+    /// <param name="request">Model containing user registration data.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task RegisterAsync(UserRegistrationModel request, CancellationToken cancellationToken);
+
+    /// <summary>
     /// Authorizes a user with the provided login data.
     /// </summary>
     /// <param name="request">Model containing username and password.</param>
@@ -36,11 +43,4 @@ public interface IAuthorizationService
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>List of active user sessions.</returns>
     Task<IReadOnlyCollection<UserSessionResponse>> GetUserSessionsAsync(CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Resets the password for a user.
-    /// </summary>
-    /// <param name="request">Model containing current and new passwords.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task ResetPasswordAsync(ResetPasswordModel request, CancellationToken cancellationToken);
 }

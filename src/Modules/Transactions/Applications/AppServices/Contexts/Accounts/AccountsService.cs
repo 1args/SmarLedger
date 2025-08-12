@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructure.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
@@ -16,26 +17,29 @@ namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Acc
 public sealed class AccountsService(
     IRepository<Account, TransactionsWriteDbContext> accountsRepository,
     IRepository<Transaction, TransactionsWriteDbContext> transactionsRepository,
+    Lazy<IAuthorizationData> authorizationData,
     ITransactionManager transactionManager,
     ILogger<AccountsService> logger): IAccountsService
 {
     /// <inheritdoc />
-    public async Task<Guid> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken)
+    public async Task<(Guid AccountId, Guid UserId)> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken)
     {
+        var userId = authorizationData.Value.UserId;
+
         logger.LogInformation(
             "Creating account with name {Name} for user with ID {UserId}", 
-            request.Name, request.UserId);
+            request.Name, userId);
 
         var name = AccountName.Create(request.Name);
-        var account = Account.Create(name, request.UserId, request.CreatedAt);
+        var account = Account.Create(name, userId, request.CreatedAt);
 
         await accountsRepository.AddAsync(account, cancellationToken);
 
         logger.LogInformation(
             "Account with ID {AccountId} created successfully for user with ID {UserId}",
-            account.Id, account.UserId);
+            account.Id, userId);
 
-        return account.Id;
+        return (account.Id, userId);
     }
 
     /// <inheritdoc />

@@ -24,8 +24,74 @@ public sealed class KeycloakAuthorizationApiClient(
     /// <summary>Message indicating that the authorization server failed to provide necessary information.</summary>
     private const string AuthorizationServerFailedMessage = "Failed to get the necessary information from the authorization server.";
 
-    /// <summary>Message indicating that the password reset operation failed.</summary>
-    private const string ResetPasswordFailedMessage = "Failed to reset the password. Please try again.";
+    /// <inheritdoc />
+    public async Task CreateUserAsync(UserCreationModel request, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Initiating creation for user {Username}", request.Username);
+
+        try
+        {
+            var useRepresentation = new UserRepresentation
+            {
+                Username = request.Username,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Enabled = true,
+                EmailVerified = false,
+                Credentials = new List<CredentialRepresentation>
+                {
+                    new()
+                    {
+                        Type = "password",
+                        Value = request.Password,
+                        Temporary = false
+                    }
+                }
+            };
+
+            await keycloakGeneratedApiClient.UsersPOSTAsync(
+                _keycloakAuthorizationOptions.Realm,
+                useRepresentation,
+                cancellationToken: cancellationToken);
+
+            logger.LogInformation("User {Username} successfully created", request.Username);
+        }
+        catch (FlurlHttpException ex) when (ex.StatusCode == (int)HttpStatusCode.Conflict)
+        {
+            var errorResponse = await ex.GetResponseStringAsync();
+            var errorMessage = "User with that name or email address already exists."; 
+
+            if (!string.IsNullOrWhiteSpace(errorResponse))
+            {
+                errorMessage = errorResponse.ToLower() switch
+                {
+                    var msg when msg.Contains("username") => "User with that name already exists.",
+                    var msg when msg.Contains("email") => "User with this email address already exists.",
+                    _ => errorMessage
+                };
+            }
+
+            logger.LogWarning("User creation failed: {ErrorMessage}", errorMessage);
+            throw new KeycloakApiException(errorMessage);
+        }
+        catch (FlurlHttpException ex) when (ex.StatusCode == (int)HttpStatusCode.BadRequest)
+        {
+            var errorMessage = await ex.GetResponseStringAsync();
+            logger.LogWarning("User creation failed due to validation errors: {ErrorMessage}", errorMessage);
+            throw new KeycloakApiException("Registration data is invalid. Please check all fields.");
+        }
+        catch (KeycloakApiException ex)
+        {
+            logger.LogError(ex, "Creation failed for user {Username}", request.Username);
+            throw;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Unexpected error during creation for user {Username}", request.Username);
+            throw new KeycloakApiException("An error occurred during creation. Please try again.");
+        }
+    }
 
     /// <inheritdoc />
     public async Task<TokenResponse> AuthorizeAsync(string username, string password, CancellationToken cancellationToken)
@@ -160,53 +226,6 @@ public sealed class KeycloakAuthorizationApiClient(
         {
             logger.LogError(ex, "Failed to retrieve sessions for user {UserId}", userId);
             throw new KeycloakApiException("The list of user sessions could not be retrieved. Please try again.");
-        }
-    }
-
-    public async Task ResetPasswordAsync(Guid userId, string currentPassword, string newPassword, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Resetting password for user with ID {UserId}", userId);
-
-        try
-        {
-            using var httpClient = httpClientFactory.CreateClient();
-
-            var requestBody = new Dictionary<string, string>
-            {
-                { "current_password", currentPassword },
-                { "new_password", newPassword },
-                { "user_id", userId.ToString() },
-            };
-
-            var passwordChangeUrl = $"{_keycloakAuthorizationOptions.AdminBaseUrl}/auth/realms/{_keycloakAuthorizationOptions.Realm}/account/credentials/password";
-
-            var response = await passwordChangeUrl
-                .WithTimeout(TimeSpan.FromSeconds(10))
-                .PostUrlEncodedAsync(requestBody, cancellationToken: cancellationToken);
-
-            if (!response.ResponseMessage.IsSuccessStatusCode)
-            {
-                var errorMessage = await response.ResponseMessage.Content.ReadAsStringAsync(cancellationToken);
-
-                logger.LogWarning("Failed to change password for user {UserId}: {ErrorMessage}", userId, errorMessage);
-
-                throw response.StatusCode switch
-                {
-                    (int)HttpStatusCode.Unauthorized => new KeycloakApiException("Invalid current password"),
-                    _ => new KeycloakApiException(ResetPasswordFailedMessage)
-                };
-            }
-
-            logger.LogInformation("Successfully reset password for user with ID {UserId}", userId);
-        }
-        catch (KeycloakApiException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to reset password for user {UserId}", userId);
-            throw new KeycloakApiException(ResetPasswordFailedMessage);
         }
     }
 
