@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Hosts.Api.Helpers;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Login;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Logout;
@@ -25,6 +26,8 @@ public static class IdentifyEndpoints
     public static IEndpointRouteBuilder MapIdentifyEndpoints(this IEndpointRouteBuilder app)
     {
         var endpoints = app.MapGroup("/identify")
+            .RequireRateLimiting(RateLimitPolicy.Authentication)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithTags("Identify")
             .WithOpenApi();
 
@@ -53,6 +56,7 @@ public static class IdentifyEndpoints
 
         endpoints.MapPost("/logout", LogoutAsync)
             .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("Logout")
             .WithSummary("Logs out the current user.")
             .WithDescription("Ends the current user's session and invalidates active tokens.")
@@ -61,6 +65,7 @@ public static class IdentifyEndpoints
 
         endpoints.MapGet("/me/sessions", GetUserSessionsAsync)
             .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
             .WithName("GetUserSessions")
             .WithSummary("Retrieves the current user's active sessions.")
             .WithDescription("Returns a list of all active sessions associated with the currently authenticated user.")

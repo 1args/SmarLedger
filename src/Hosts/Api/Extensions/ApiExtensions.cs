@@ -32,7 +32,8 @@ public static class ApiExtensions
             .AddDateTimeProvider()
             .AddConfiguredMessageBroker(configuration)
             .AddHttpClient()
-            .AddAuthenticationViaKeycloak(configuration);
+            .AddAuthenticationViaKeycloak(configuration)
+            .AddControllers();
 
         var featureRegistry = new FeaturesRegistry()
             .RegisterFeaturesFromAssembly(Assembly.GetExecutingAssembly());

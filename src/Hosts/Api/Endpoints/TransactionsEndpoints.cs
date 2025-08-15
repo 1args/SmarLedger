@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.CategorizeTransaction;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Commands.UpdateTransactionAmount;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Transactions.Queries.GetTransaction;
@@ -21,11 +22,14 @@ public static class TransactionsEndpoints
     public static IEndpointRouteBuilder MapTransactionsEndpoints(this IEndpointRouteBuilder app)
     {
         var endpoints = app.MapGroup("/transactions")
+            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.Global)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithTags("Transactions")
             .WithOpenApi();
 
         endpoints.MapPatch("/{transactionId:guid}/amount", UpdateTransactionAmountAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("UpdateTransactionAmount")
             .WithSummary("Updates the amount of a specific transaction.")
             .WithDescription("Modifies the amount of an existing transaction identified by its ID.")
@@ -34,7 +38,7 @@ public static class TransactionsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPatch("/{transactionId:guid}/category", CategorizeTransactionAmountAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("CategorizeTransactionAmount")
             .WithSummary("Updates the category of a specific transaction.")
             .WithDescription("Assigns a new category to an existing transaction identified by its ID.")
@@ -43,7 +47,7 @@ public static class TransactionsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{transactionId:guid}", GetTransactionAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
             .WithName("GetTransaction")
             .WithSummary("Retrieves a transaction by its identifier.")
             .WithDescription("Retrieves the transaction details for the specified transaction ID.")

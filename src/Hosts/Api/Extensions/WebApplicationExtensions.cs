@@ -26,7 +26,7 @@ public static class WebApplicationExtensions
         application.UseAuthentication();
         application.UseAuthorization();
         application.UseMiddleware<AuthorizationMiddleware>();
-        
+        application.UseRateLimiter();
         application.MapApiEndpoints();
 
         return application;
@@ -42,7 +42,7 @@ public static class WebApplicationExtensions
             .MapTransactionsEndpoints()
             .MapBudgetsEndpoints()
             .MapIdentifyEndpoints()
-            .MappUsersEndpoints();
+            .MapUsersEndpoints();
 
         return endpoints;
     }

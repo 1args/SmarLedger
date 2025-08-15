@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Contracts.Pagination;
+using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.AddCategory;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.CreateBudget;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.DeleteBudget;
@@ -29,11 +30,14 @@ public static class BudgetsEndpoints
     public static IEndpointRouteBuilder MapBudgetsEndpoints(this IEndpointRouteBuilder app)
     {
         var endpoints = app.MapGroup("/budgets")
+            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.Global)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithTags("Budgets")
             .WithOpenApi();
 
         endpoints.MapPost("/", CreateBudgetAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("CreateBudget")
             .WithSummary("Creates a new budget.")
             .WithDescription("Creates a new budget for the specified user, with name, start date, and end date.")
@@ -41,7 +45,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapPost("/{budgetId:guid}/categories", AddCategoryAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("AddCategoryToBudget")
             .WithSummary("Adds a category to a budget.")
             .WithDescription("Adds a new category with a limit to the specified budget.")
@@ -50,7 +54,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapDelete("/{budgetId:guid}/categories/{categoryId:guid}", RemoveCategoryAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("RemoveCategoryFromBudget")
             .WithSummary("Removes a category from a budget.")
             .WithDescription("Removes an existing category from the specified budget by its unique category ID.")
@@ -58,7 +62,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapDelete("/{budgetId:guid}", DeleteBudgetAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("DeleteBudget")
             .WithSummary("Deletes a budget by its identifier.")
             .WithDescription("Removes an existing budget identified by its unique budget ID.")
@@ -66,7 +70,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/search", GetPaginatedBudgetsAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.SearchOperations)
             .WithName("GetPaginatedBudgets")
             .WithSummary("Retrieves a paginated list of budgets for the specified user.")
             .WithDescription("Returns a paginated list of budgets associated with the given user ID, with optional filters for start and end dates.")
@@ -74,7 +78,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapGet("/{budgetId:guid}", GetBudgetAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
             .WithName("GetBudget")
             .WithSummary("Retrieves a budget by its identifier.")
             .WithDescription("Retrieves the budget details for the specified budget ID.")
@@ -83,7 +87,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/{budgetId:guid}/categories/search", GetPaginatedBudgetCategoriesAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.SearchOperations)
             .WithName("GetPaginatedBudgetCategories")
             .WithSummary("Retrieves a paginated list of budget categories for the specified budget.")
             .WithDescription("Returns a paginated list of budget categories associated with the given budget ID, with optional filters for category, limits, spent amounts, status, and dates.")
@@ -92,7 +96,7 @@ public static class BudgetsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{budgetId:guid}/categories/{budgetCategoryId:guid}", GetBudgetCategoryAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
             .WithName("GetBudgetCategory")
             .WithSummary("Retrieves a budget category by its identifier.")
             .WithDescription("Retrieves the budget category details for the specified budget and category IDs.")

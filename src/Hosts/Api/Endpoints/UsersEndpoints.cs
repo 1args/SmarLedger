@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
+using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Users.Queries.GetCurrentUser;
 using SmartLedger.Modules.Security.Contracts.Responses.Users;
 
@@ -15,18 +16,21 @@ public static class UsersEndpoints
     /// </summary>
     /// <param name="app">Application's endpoint route builder.</param>
     /// <returns>Modified <see cref="IEndpointRouteBuilder"/>.</returns>
-    public static IEndpointRouteBuilder MappUsersEndpoints(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapUsersEndpoints(this IEndpointRouteBuilder app)
     {
         var endpoints = app.MapGroup("/users")
+            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.Global)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithTags("Users")
             .WithOpenApi();
 
         endpoints.MapGet("/me", GetCurrentUserAsync)
-            .RequireAuthorization()
+            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
             .WithName("GetCurrentUser")
             .WithSummary("Retrieves the current user.")
             .WithDescription("Returns the details of the currently authenticated user.")
-            .Produces<UserResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status401Unauthorized);
 
         return app;
