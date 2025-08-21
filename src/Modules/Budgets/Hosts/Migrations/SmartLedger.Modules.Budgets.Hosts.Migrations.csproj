@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Hosts\Migrations\SmartLedger.Common.Hosts.Migrations.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\SmartLedger.Modules.Budgets.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructures\DataAccess\SmartLedger.Modules.Budgets.Infrastructures.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

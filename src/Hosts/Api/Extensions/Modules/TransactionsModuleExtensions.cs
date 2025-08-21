@@ -1,13 +1,13 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Extensions;
-using SmartLedger.Common.Infrastructure.Extensions;
+using SmartLedger.Common.Infrastructures.DataAccess.Extensions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
-using SmartLedger.Modules.Transactions.Infrastructure.Configurators;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Configurators;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
 
 namespace SmartLedger.Hosts.Api.Extensions.Modules;
 

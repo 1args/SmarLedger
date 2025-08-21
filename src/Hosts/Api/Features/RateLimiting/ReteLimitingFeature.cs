@@ -42,6 +42,19 @@ internal class ReteLimitingFeature : IAppFeature
                 }
             };
 
+            options.AddPolicy<string>(RateLimitPolicy.IpAddress, httpContext =>
+            {
+                return RateLimitPartition.GetFixedWindowLimiter(
+                    partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+                    factory: _ => new FixedWindowRateLimiterOptions
+                    {
+                        Window = TimeSpan.FromMinutes(1),
+                        PermitLimit = 300,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = 10
+                    })!;
+            });
+
             options.AddSlidingWindowLimiter(RateLimitPolicy.ReadOperations, limiterOptions =>
             {
                 limiterOptions.Window = TimeSpan.FromSeconds(30);
@@ -83,19 +96,6 @@ internal class ReteLimitingFeature : IAppFeature
                 limiterOptions.PermitLimit = 100;
                 limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 limiterOptions.QueueLimit = 15;
-            });
-
-            options.AddPolicy<string>(RateLimitPolicy.IpAddress, httpContext =>
-            {
-                return RateLimitPartition.GetFixedWindowLimiter(
-                    partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
-                    factory: _ => new FixedWindowRateLimiterOptions
-                    {
-                        Window = TimeSpan.FromMinutes(1),
-                        PermitLimit = 300,
-                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = 10
-                    })!;
             });
         });
     }

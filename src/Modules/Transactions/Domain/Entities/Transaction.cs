@@ -1,5 +1,6 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Domain.Enums;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;

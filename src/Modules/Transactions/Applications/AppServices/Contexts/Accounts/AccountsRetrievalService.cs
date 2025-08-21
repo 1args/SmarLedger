@@ -5,14 +5,14 @@ using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Specifications;
 using SmartLedger.Modules.Transactions.Contracts.Mappers;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 

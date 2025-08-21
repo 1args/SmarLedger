@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Hosts\Migrations\SmartLedger.Common.Hosts.Migrations.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\SmartLedger.Modules.Transactions.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructures\DataAccess\SmartLedger.Modules.Transactions.Infrastructures.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

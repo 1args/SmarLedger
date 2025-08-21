@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Transactions.Contracts.Mappers;
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
 
 namespace SmartLedger.Modules.Budgets.Hosts.Migrations;
 
@@ -13,7 +13,7 @@ internal sealed class Startup(
     ILoggerFactory loggerFactory)
 {
     /// <summary>
-    /// Executes the database migration using the provided <see cref="BudgetsWriteDbContext"/> and <see cref="TransactionsReadDbContext"/>.
+    /// Executes the database migration using the provided <see cref="BudgetsWriteDbContext"/> and <see cref="BudgetsReadDbContext"/>.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     public async Task StartMigrationAsync(CancellationToken cancellationToken)

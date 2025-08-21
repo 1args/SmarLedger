@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Applications.AppServices.Specifications;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Specifications;
 

@@ -1,11 +1,11 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Extensions;
-using SmartLedger.Common.Infrastructure.Extensions;
+using SmartLedger.Common.Infrastructures.DataAccess.Extensions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.CreateBudget;
-using SmartLedger.Modules.Budgets.Infrastructure.Configurators;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Configurators;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
 
 namespace SmartLedger.Hosts.Api.Extensions.Modules;
 

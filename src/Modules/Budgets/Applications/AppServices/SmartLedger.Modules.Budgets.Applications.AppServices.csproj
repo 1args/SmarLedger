@@ -13,7 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Applications\AppServices\SmartLedger.Common.Applications.AppServices.csproj" />
     <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Budgets.Contracts.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\SmartLedger.Modules.Budgets.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructures\DataAccess\SmartLedger.Modules.Budgets.Infrastructures.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

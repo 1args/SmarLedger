@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Common.Infrastructures.DataAccess.Events;
 
 namespace SmartLedger.Hosts.Migrations;
 

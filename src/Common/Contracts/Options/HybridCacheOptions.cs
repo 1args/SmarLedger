@@ -1,7 +1,7 @@
 ﻿namespace SmartLedger.Common.Contracts.Options;
 
 /// <summary>
-/// Options for configuring a hybrid cache system.
+/// Options for configuring hybrid cache system.
 /// </summary>
 public sealed class HybridCacheOptions
 {

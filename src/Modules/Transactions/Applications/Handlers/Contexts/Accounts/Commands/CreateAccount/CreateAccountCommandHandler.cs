@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Applications.AppServices.Services.DateTimeProvider.Abstractions;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
 using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;

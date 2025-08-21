@@ -6,8 +6,8 @@ using Microsoft.Extensions.Hosting;
 using SmartLedger.Common.Hosts.Migrations;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
 using SmartLedger.Modules.Transactions.Hosts.Migrations;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
 
 // Entry point for executing database migrations
 var builder = Host.CreateDefaultBuilder(args);

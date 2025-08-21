@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
-using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Domain.ValueObjects;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
 using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Domain.Entities;
 using SmartLedger.Modules.Transactions.Domain.ValueObjects;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
 
 namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
 

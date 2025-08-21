@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Hybrid;
 using SmartLedger.Common.Hosts.Features.Abstractions;
-using SmartLedger.Common.Infrastructure.Abstractions;
-using SmartLedger.Common.Infrastructure.Caching;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
+using SmartLedger.Common.Infrastructures.DataAccess.Caching;
 using HybridCacheOptions = SmartLedger.Common.Contracts.Options.HybridCacheOptions;
 
 namespace SmartLedger.Hosts.Api.Features.Redis;

@@ -5,7 +5,7 @@ using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.BudgetCategories;
@@ -13,8 +13,8 @@ using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Spec
 using SmartLedger.Modules.Budgets.Contracts.Mappers;
 using SmartLedger.Modules.Budgets.Contracts.Responses.BudgetCategories;
 using SmartLedger.Modules.Budgets.Contracts.Responses.Budgets;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 

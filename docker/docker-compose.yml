@@ -73,7 +73,7 @@ services:
     volumes:
       - ./config/keycloak/import:/opt/keycloak/data/import
       - ./config/keycloak/providers:/opt/keycloak/providers
-      - keycloak_logs:/opt/keycloak/data/log/
+      - keycloak-logs:/opt/keycloak/data/log/
     networks:
       - smartledger-network
   
@@ -95,6 +95,28 @@ services:
       retries: 5
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - smartledger-network
+
+  # MinIO
+  minio:
+    container_name: postit-minio
+    image: minio/minio:latest
+    restart: on-failure
+    command: server /data --console-address ":9001"
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    healthcheck:
+      test: [ "CMD", "mc", "ready", "local" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - minio-data:/data
     networks:
       - smartledger-network
 
@@ -161,7 +183,8 @@ volumes:
   rabbitmq-data: 
   redis-data:
   opensearch-logs:
-  keycloak_logs:
+  keycloak-logs:
+  minio-data:
 
 networks:
   smartledger-network:

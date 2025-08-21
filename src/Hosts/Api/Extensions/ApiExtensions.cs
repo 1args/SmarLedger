@@ -6,7 +6,7 @@ using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Common.Hosts.Features;
-using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;

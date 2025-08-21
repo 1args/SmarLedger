@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
 
 namespace SmartLedger.Modules.Transactions.Hosts.Migrations;
 

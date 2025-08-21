@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Budgets\Domain\SmartLedger.Modules.Budgets.Domain.csproj" />
+    <ProjectReference Include="..\..\Transactions\Domain\SmartLedger.Modules.Transactions.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartLedger.Common.Hosts.Migrations;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Hosts.Migrations;
 
 // Entry point for executing database migrations

@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Applications.AppServices.Specifications;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.BudgetCategories;
 

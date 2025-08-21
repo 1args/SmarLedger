@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Modules.Budgets.Contracts.Responses.BudgetCategories;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Read.Models;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read.Models;
 
 namespace SmartLedger.Modules.Budgets.Contracts.Mappers;
 

@@ -4,7 +4,8 @@ using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
-using SmartLedger.Common.Infrastructure.Abstractions;
+using SmartLedger.Common.Domain.ValueObjects;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.BudgetCategories;
@@ -12,9 +13,8 @@ using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Spec
 using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Budgets.Domain.Entities;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
-using SmartLedger.Modules.Budgets.Infrastructure.Contexts.Write;
+using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
 using SmartLedger.Modules.Transactions.Domain.Enums;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 

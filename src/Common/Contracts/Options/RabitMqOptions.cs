@@ -1,7 +1,7 @@
 ﻿namespace SmartLedger.Common.Contracts.Options;
 
 /// <summary>
-/// RabbitMQ options.
+/// Options for configuring RabbitMQ.
 /// </summary>
 public sealed class RabbitMqOptions
 {
