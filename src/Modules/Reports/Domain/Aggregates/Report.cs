@@ -6,7 +6,6 @@ using SmartLedger.Modules.Reports.Domain.Enums;
 using SmartLedger.Modules.Reports.Domain.ValueObjects;
 using SmartLedger.Modules.Transactions.Domain.Aggregates;
 using SmartLedger.Modules.Transactions.Domain.Enums;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.Reports.Domain.Aggregates;
 
@@ -105,6 +104,8 @@ public sealed class Report : AggregateRoot<Guid>
     /// <param name="budgets">List of budgets.</param>
     /// <param name="type">Report type.</param>
     /// <param name="generatedAt">Date and time when report was generated.</param>
+    /// <param name="startPeriod">Start date of the report period.</param>
+    /// <param name="endPeriod">End date of the report period.</param>
     /// <returns>New instance of <see cref="Report"/>.</returns>
     /// <exception cref="DomainValidationException"></exception>
     public static Report Create(
@@ -112,7 +113,9 @@ public sealed class Report : AggregateRoot<Guid>
         IReadOnlyCollection<Account> accounts,
         IReadOnlyCollection<Budget> budgets,
         ReportType type,
-        DateTime generatedAt)
+        DateTime generatedAt,
+        DateTime? startPeriod = null,
+        DateTime? endPeriod = null)
     {
         if (accounts is null || !accounts.Any())
         {
@@ -124,10 +127,12 @@ public sealed class Report : AggregateRoot<Guid>
         }
         ArgumentNullException.ThrowIfNull(userInfo);
 
-        var (startPeriod, endPeriod) = DetermineReportPeriod(type, generatedAt, null, null);
+        var (receivedStartPeriod, receivedEndPeriod) = DetermineReportPeriod(
+            type, generatedAt, startPeriod, endPeriod);
+
         ValidatePeriod(startPeriod, endPeriod);
 
-        var report =  new Report(userInfo, accounts, budgets, type, generatedAt, startPeriod, endPeriod);
+        var report =  new Report(userInfo, accounts, budgets, type, generatedAt, receivedStartPeriod, receivedEndPeriod);
 
         report.ComputeFinancialMetrics();
         report.ComputeSavingsPercentage();

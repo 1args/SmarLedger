@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLedger Financial Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+    
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #2980b9;
+            --light-bg: #f8f9fa;
+            --border: #dce1e5;
+            --text: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.5;
+            color: var(--text);
+            background-color: white;
+            padding: 15px;
+            font-size: 12px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header Styles */
+        .header {
+            padding: 25px 30px;
+            border-bottom: 2px solid var(--primary);
+            background: white;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+            .logo i {
+                font-size: 28px;
+                color: var(--accent);
+                margin-right: 15px;
+            }
+
+        .logo-text h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .report-id {
+            font-size: 12px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .header-info {
+            text-align: right;
+            font-size: 11px;
+            color: var(--secondary);
+        }
+
+        /* User Info */
+        .user-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .user-info-item {
+            padding: 10px;
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+            .user-info-item i {
+                margin-right: 5px;
+                color: var(--accent);
+            }
+
+        /* Main Content */
+        .content {
+            padding: 0;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+            .section:last-child {
+                border-bottom: none;
+            }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+            .section-header i {
+                font-size: 18px;
+                color: var(--accent);
+                margin-right: 12px;
+                background: var(--light-bg);
+                padding: 8px;
+                border-radius: 4px;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--border);
+            }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .kpi-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .kpi-icon {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .income .kpi-icon {
+            background: var(--light-bg);
+            color: var(--success);
+            border: 1px solid #d5e8d5;
+        }
+
+        .expense .kpi-icon {
+            background: var(--light-bg);
+            color: var(--danger);
+            border: 1px solid #f8d7da;
+        }
+
+        .balance .kpi-icon {
+            background: var(--light-bg);
+            color: var(--accent);
+            border: 1px solid #cce5ff;
+        }
+
+        .savings .kpi-icon {
+            background: var(--light-bg);
+            color: var(--warning);
+            border: 1px solid #fff3cd;
+        }
+
+        .kpi-title {
+            font-size: 11px;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Summary Section */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: var(--light-bg);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+        }
+
+            .summary-item i {
+                margin-right: 8px;
+                color: var(--accent);
+                font-size: 14px;
+            }
+
+        .summary-text {
+            font-size: 11px;
+        }
+
+            .summary-text strong {
+                display: block;
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--light-bg);
+            color: var(--primary);
+            font-weight: 600;
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+            th:last-child {
+                border-right: none;
+            }
+
+        td {
+            border-right: 1px solid var(--border);
+        }
+
+            td:last-child {
+                border-right: none;
+            }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Status badges */
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+            .status.under {
+                background-color: #e8f5e9;
+                color: var(--success);
+                border: 1px solid #c3e6cb;
+            }
+
+            .status.over {
+                background-color: #ffebee;
+                color: var(--danger);
+                border: 1px solid #f5c6cb;
+            }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--secondary);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            background: var(--light-bg);
+        }
+
+        /* Utility classes */
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /* Print styles for PDF conversion */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 10px;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+                max-width: 100%;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .kpi-grid {
+                page-break-inside: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-main">
+                <div class="logo">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <div class="logo-text">
+                        <h1>Financial Report</h1>
+                        <div class="report-id">Report ID: {{ReportId}}</div>
+                    </div>
+                </div>
+                <div class="header-info">
+                    Generated: {{GeneratedAt}}<br>
+                    Period: {{StartPeriod}} to {{EndPeriod}}
+                </div>
+            </div>
+
+            <!-- User Info -->
+            <div class="user-info-grid">
+                <div class="user-info-item">
+                    <i class="fa-solid fa-user"></i> {{UserInfo.FirstName}} {{UserInfo.LastName}}
+                </div>
+                <div class="user-info-item">
+                    <i class="fa-solid fa-at"></i> {{UserInfo.Username}}
+                </div>
+                <div class="user-info-item">
+                    <i class="fa-solid fa-file-lines"></i> {{Type}}
+                </div>
+                <div class="user-info-item">
+                    <i class="fa-solid fa-calendar-days"></i> {{StartPeriod}} – {{EndPeriod}}
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- KPI Section -->
+            <div class="section">
+                <div class="section-header">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <div class="section-title">Financial Overview</div>
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card income">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </div>
+                        <div class="kpi-title">Total Income</div>
+                        <div class="kpi-value">{{TotalIncome.Value}} UAH</div>
+                    </div>
+
+                    <div class="kpi-card expense">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </div>
+                        <div class="kpi-title">Total Expenses</div>
+                        <div class="kpi-value">{{TotalExpenses.Value}} UAH</div>
+                    </div>
+
+                    <div class="kpi-card balance">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <div class="kpi-title">Net Balance</div>
+                        <div class="kpi-value">{{NetBalance.Value}} UAH</div>
+                    </div>
+
+                    <div class="kpi-card savings">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-piggy-bank"></i>
+                        </div>
+                        <div class="kpi-title">Savings Percentage</div>
+                        <div class="kpi-value">{{SavingsPercentage}}%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Summary Section -->
+            <div class="section">
+                <div class="section-header">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div class="section-title">Report Summary</div>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <div class="summary-text">
+                            <strong>Generated At</strong>
+                            {{GeneratedAt}}
+                        </div>
+                    </div>
+
+                    <div class="summary-item">
+                        <i class="fa-solid fa-exchange-alt"></i>
+                        <div class="summary-text">
+                            <strong>Total Transactions</strong>
+                            {{TotalTransactionCount}}
+                        </div>
+                    </div>
+
+                    <div class="summary-item">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <div class="summary-text">
+                            <strong>Accounts</strong>
+                            {{AccountCount}}
+                        </div>
+                    </div>
+
+                    <div class="summary-item">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <div class="summary-text">
+                            <strong>Budgets</strong>
+                            {{BudgetCount}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Details Section -->
+            <div class="section">
+                <div class="section-header">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <div class="section-title">Account Details</div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Balance</th>
+                                <th>Transactions</th>
+                                <th>Average Transaction</th>
+                                <th>Total Income</th>
+                                <th>Total Expense</th>
+                                <th>Savings %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each AccountDetails}}
+                            <tr>
+                                <td>{{Name}}</td>
+                                <td>{{Balance.Value}} UAH</td>
+                                <td>{{TransactionCount}}</td>
+                                <td>{{AverageSum.Value}} UAH</td>
+                                <td>{{TotalIncome.Value}} UAH</td>
+                                <td>{{TotalExpense.Value}} UAH</td>
+                                <td>{{PercentageSaved.Value}}%</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Budget Details Section -->
+            <div class="section">
+                <div class="section-header">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <div class="section-title">Budget Details</div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount Spent</th>
+                                <th>Limit</th>
+                                <th>Variance</th>
+                                <th>Variance %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each BudgetDetails}}
+                            <tr>
+                                <td>{{Category}}</td>
+                                <td>{{Amount.Value}} UAH</td>
+                                <td>{{Limit.Value}} UAH</td>
+                                <td>{{Variance.Value}} UAH</td>
+                                <td>{{VariancePercentage.Value}}%</td>
+                                <td>
+                                    <span class="status {{#if (lt Variance.Value 0)}}under{{else}}over{{/if}}">
+                                        {{Status}}
+                                    </span>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Generated by SmartLedger reporting system
+        </div>
+    </div>
+</body>
+</html>

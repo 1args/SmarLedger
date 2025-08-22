@@ -19,7 +19,6 @@ public interface IHybridCache
     ValueTask<TData> GetOrCreateAsync<TData>(string key, Func<CancellationToken, ValueTask<TData>> factory, CancellationToken cancellationToken,
         HybridCacheEntryOptions? options = null);
 
-
     /// <summary>
     /// Sets a cache entry with the specified key and data.
     /// </summary>
