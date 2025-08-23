@@ -24,7 +24,7 @@ public static class TransactionsModuleExtensions
     public static IServiceCollection AddTransactionsModule(this IServiceCollection services)
     {
         services
-            .AddInfrastructure()
+            .AddInfrastructures()
             .AddApplications();
 
         return services;
@@ -33,7 +33,7 @@ public static class TransactionsModuleExtensions
     /// <summary>
     /// Registers infrastructure components.
     /// </summary>
-    private static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    private static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
         services
             .AddDataAccess<TransactionsWriteDbContext, TransactionsWriteDbContextConfigurator>()

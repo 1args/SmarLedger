@@ -22,7 +22,7 @@ public static class BudgetsModuleExtensions
     public static IServiceCollection AddBudgetsModule(this IServiceCollection services)
     {
         services
-            .AddInfrastructure()
+            .AddInfrastructures()
             .AddApplications();
 
         return services;
@@ -31,7 +31,7 @@ public static class BudgetsModuleExtensions
     /// <summary>
     /// Registers infrastructure components.
     /// </summary>
-    private static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    private static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
         services
             .AddDataAccess<BudgetsWriteDbContext, BudgetsWriteDbContextConfigurator>()

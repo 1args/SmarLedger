@@ -1,5 +1,5 @@
-﻿using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
-using SmartLedger.Modules.Security.Clients.Keycloak.Converters;
+﻿using SmartLedger.Common.Contracts.Helpers;
+using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Contracts.Responses.Users;
 
 namespace SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
@@ -23,6 +23,6 @@ public static class UserResponseMapper
             userRepresentation.Email!,
             userRepresentation.EmailVerified!.Value,
             userRepresentation.CreatedTimestamp.HasValue
-                ? DateTimeConverter.FromUnixMillisToDateTimeUtc(userRepresentation.CreatedTimestamp.Value)
+                ? DateTimeHelper.ConvertFromUnixMillisToDateTimeUtc(userRepresentation.CreatedTimestamp.Value)
                 : null);
 }

@@ -94,6 +94,8 @@ public sealed class Report : AggregateRoot<Guid>
         _budgets = budgets.ToList();
         Type = type;
         GeneratedAt = generatedAt;
+        StartPeriod = startPeriod ?? generatedAt.Date;
+        EndPeriod = endPeriod ?? generatedAt.Date.AddDays(1);
     }
 
     /// <summary>
@@ -241,39 +243,28 @@ public sealed class Report : AggregateRoot<Guid>
     /// </summary>
     private void GenerateBudgetSummaries()
     {
-        var allTransactions = _accounts
-            .SelectMany(account => account.Transactions
-                .Where(t => t.CreatedAt >= StartPeriod && t.CreatedAt < EndPeriod))
-            .ToList();
-
-        var expensesTransactions = allTransactions
-            .Where(t => t.Type == TransactionType.Expense)
-            .GroupBy(t => t.Category)
-            .ToDictionary(g => g.Key, g => Money.Create(g.Sum(t => t.Amount.Value)));
-
         foreach (var budget in _budgets)
         {
             foreach (var category in budget.Categories)
             {
-                var amount = expensesTransactions.TryGetValue(category.Category, out var totalExpense)
-                    ? totalExpense
-                    : Money.Zero;
+                var amount = Money.Create(category.SpentAmount.Value);
 
                 var limit = Money.Create(category.Limit.Value);
-                var variance = Money.Create(limit.Value - amount.Value);
+                var variance = limit.Value - amount.Value;
                 var variancePercentage = limit.Value > 0
-                    ? (variance.Value / limit.Value) * 100
+                    ? (variance / limit.Value) * 100
                     : 0;
                 var status = amount.Value > limit.Value
                     ? "Exceeded"
                     : "Active";
 
                 var detail = BudgetDetail.Create(
+                    budget.Name.Value,
                     category.Category.ToString(),
                     amount,
                     limit,
                     variance,
-                    Money.Create(variancePercentage),
+                    variancePercentage,
                     status);
 
                 _budgetsDetails.Add(detail);

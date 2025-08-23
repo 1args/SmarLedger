@@ -1,3 +1,4 @@
+using HandlebarsDotNet;
 using SmartLedger.Hosts.Api.Extensions;
 using SmartLedger.Hosts.Api.Extensions.Modules;
 
@@ -10,6 +11,7 @@ services
     .AddTransactionsModule()
     .AddBudgetsModule()
     .AddSecurityModule()
+    .AddReportsModule()
     .AddDecorators();
 
 var app = builder.Build();

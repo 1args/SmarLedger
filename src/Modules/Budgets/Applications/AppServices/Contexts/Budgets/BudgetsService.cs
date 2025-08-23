@@ -158,6 +158,7 @@ public sealed class BudgetsService(
 
         budgets
             .SelectMany(b => b.Categories
+                .Where(bi => bi.Category == request.Category)
                 .Select(bi => new { BudgetItem = bi, b.Period }))
             .ToList()
             .ForEach(x => updateAction(x.BudgetItem, amount, x.Period));

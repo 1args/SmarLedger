@@ -16,11 +16,8 @@
     <ProjectReference Include="..\..\..\Budgets\Applications\AppServices\SmartLedger.Modules.Budgets.Applications.AppServices.csproj" />
     <ProjectReference Include="..\..\..\Security\Clients\SmartLedger.Modules.Security.Clients.csproj" />
     <ProjectReference Include="..\..\..\Transactions\Applications\AppServices\SmartLedger.Modules.Transactions.Applications.AppServices.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Reports.Contracts.csproj" />
     <ProjectReference Include="..\..\Domain\SmartLedger.Modules.Reports.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contexts\Reports\Templates\" />
   </ItemGroup>
 
 </Project>

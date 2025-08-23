@@ -11,6 +11,7 @@ using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
 using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Abstractions;
 using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Models;
+using SmartLedger.Modules.Reports.Contracts.Helpers;
 using SmartLedger.Modules.Reports.Domain.Aggregates;
 using SmartLedger.Modules.Reports.Domain.Enums;
 using SmartLedger.Modules.Reports.Domain.ValueObjects;
@@ -39,6 +40,9 @@ public sealed class ReportsService(
         var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "report.template.hbs");
         var templateContent = await File.ReadAllTextAsync(templatePath, cancellationToken);
 
+        var handlebars = Handlebars.Create();
+        handlebars.RegisterHelpers();
+
         var template = Handlebars.Compile(templateContent);
 
         var user = await keycloakUserApiClient.GetUserAsync(userId, cancellationToken);
@@ -46,10 +50,12 @@ public sealed class ReportsService(
 
         var accounts = await accountsRepository
             .Where(a => a.UserId == userId)
+            .Include(a => a.Transactions)
             .ToListAsync(cancellationToken);
 
         var budgets = await budgetsRepository
             .Where(b => b.UserId == userId)
+            .Include(b => b.Categories)
             .ToListAsync(cancellationToken);
 
         var report = request.Type == ReportType.Custom
@@ -101,16 +107,22 @@ public sealed class ReportsService(
 
             await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = true
+                Headless = true,
+                Args = ["--no-sandbox", "--disable-setuid-sandbox"]
             });
 
             await using var page = await browser.NewPageAsync();
-            await page.SetContentAsync(htmlBody);
+
+            await page.SetContentAsync(htmlBody, new NavigationOptions
+            {
+                WaitUntil = [WaitUntilNavigation.Load, WaitUntilNavigation.Networkidle0]
+            });
 
             var pddOptions = new PdfOptions
             {
                 Format = PaperFormat.A4,
                 PrintBackground = true,
+                PreferCSSPageSize = true,
                 MarginOptions = new MarginOptions
                 {
                     Top = "40px",

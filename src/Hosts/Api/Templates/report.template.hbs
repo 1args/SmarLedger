@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartLedger Financial Report</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-    
+
         :root {
             --primary: #2c3e50;
             --secondary: #34495e;
@@ -23,6 +24,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        .fa-solid {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
         }
 
         body {
@@ -365,28 +377,32 @@
                     <i class="fa-solid fa-chart-line"></i>
                     <div class="logo-text">
                         <h1>Financial Report</h1>
-                        <div class="report-id">Report ID: {{ReportId}}</div>
+                        <div class="report-id">Report ID: {{Id}}</div>
                     </div>
                 </div>
                 <div class="header-info">
-                    Generated: {{GeneratedAt}}<br>
-                    Period: {{StartPeriod}} to {{EndPeriod}}
+                    <strong>SmartLedger</strong><br>
+                    Reliable financial solutions for your business
                 </div>
             </div>
 
             <!-- User Info -->
             <div class="user-info-grid">
                 <div class="user-info-item">
-                    <i class="fa-solid fa-user"></i> {{UserInfo.FirstName}} {{UserInfo.LastName}}
+                    <i class="fa-solid fa-user"></i>
+                    <strong>Name:</strong> {{UserInfo.FirstName}} {{UserInfo.LastName}}
                 </div>
                 <div class="user-info-item">
-                    <i class="fa-solid fa-at"></i> {{UserInfo.Username}}
+                    <i class="fa-solid fa-at"></i>
+                    <strong>Username:</strong> {{UserInfo.Username}}
                 </div>
                 <div class="user-info-item">
-                    <i class="fa-solid fa-file-lines"></i> {{Type}}
+                    <i class="fa-solid fa-file-lines"></i>
+                    <strong>Report Type:</strong> {{Type}}
                 </div>
                 <div class="user-info-item">
-                    <i class="fa-solid fa-calendar-days"></i> {{StartPeriod}} – {{EndPeriod}}
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <strong>Period:</strong> {{formatDateShort StartPeriod}} - {{formatDateShort EndPeriod}}
                 </div>
             </div>
         </div>
@@ -413,7 +429,7 @@
                             <i class="fa-solid fa-arrow-down"></i>
                         </div>
                         <div class="kpi-title">Total Expenses</div>
-                        <div class="kpi-value">{{TotalExpenses.Value}} UAH</div>
+                        <div class="kpi-value">{{toFixed TotalExpenses.Value}} UAH</div>
                     </div>
 
                     <div class="kpi-card balance">
@@ -421,7 +437,7 @@
                             <i class="fa-solid fa-wallet"></i>
                         </div>
                         <div class="kpi-title">Net Balance</div>
-                        <div class="kpi-value">{{NetBalance.Value}} UAH</div>
+                        <div class="kpi-value">{{toFixed NetBalance.Value}} UAH</div>
                     </div>
 
                     <div class="kpi-card savings">
@@ -429,7 +445,7 @@
                             <i class="fa-solid fa-piggy-bank"></i>
                         </div>
                         <div class="kpi-title">Savings Percentage</div>
-                        <div class="kpi-value">{{SavingsPercentage}}%</div>
+                        <div class="kpi-value">{{toFixed SavingsPercentage}}%</div>
                     </div>
                 </div>
             </div>
@@ -446,7 +462,7 @@
                         <i class="fa-solid fa-clock"></i>
                         <div class="summary-text">
                             <strong>Generated At</strong>
-                            {{GeneratedAt}}
+                            {{formatDate GeneratedAt}}
                         </div>
                     </div>
 
@@ -500,12 +516,12 @@
                             {{#each AccountDetails}}
                             <tr>
                                 <td>{{Name}}</td>
-                                <td>{{Balance.Value}} UAH</td>
+                                <td>{{toFixed Balance.Value}} UAH</td>
                                 <td>{{TransactionCount}}</td>
-                                <td>{{AverageSum.Value}} UAH</td>
-                                <td>{{TotalIncome.Value}} UAH</td>
-                                <td>{{TotalExpense.Value}} UAH</td>
-                                <td>{{PercentageSaved.Value}}%</td>
+                                <td>{{toFixed AverageSum.Value}} UAH</td>
+                                <td>{{toFixed TotalIncome.Value}} UAH</td>
+                                <td>{{toFixed TotalExpense.Value}} UAH</td>
+                                <td>{{toFixed PercentageSaved.Value}}%</td>
                             </tr>
                             {{/each}}
                         </tbody>
@@ -524,6 +540,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>Budget Name</th>
                                 <th>Category</th>
                                 <th>Amount Spent</th>
                                 <th>Limit</th>
@@ -535,13 +552,14 @@
                         <tbody>
                             {{#each BudgetDetails}}
                             <tr>
+                                <td>{{BudgetName}}</td>
                                 <td>{{Category}}</td>
-                                <td>{{Amount.Value}} UAH</td>
-                                <td>{{Limit.Value}} UAH</td>
-                                <td>{{Variance.Value}} UAH</td>
-                                <td>{{VariancePercentage.Value}}%</td>
+                                <td>{{toFixed Amount.Value}} UAH</td>
+                                <td>{{toFixed Limit.Value}} UAH</td>
+                                <td>{{toFixed Variance}} UAH</td>
+                                <td>{{toFixed VariancePercentage}}%</td>
                                 <td>
-                                    <span class="status {{#if (lt Variance.Value 0)}}under{{else}}over{{/if}}">
+                                    <span class="status {{#if IsUnderBudget}}under{{else}}over{{/if}}">
                                         {{Status}}
                                     </span>
                                 </td>

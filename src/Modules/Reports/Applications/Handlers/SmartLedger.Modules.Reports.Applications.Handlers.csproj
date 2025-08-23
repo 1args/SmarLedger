@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Applications\Handlers\SmartLedger.Common.Applications.Handlers.csproj" />
+    <ProjectReference Include="..\..\Domain\SmartLedger.Modules.Reports.Domain.csproj" />
+    <ProjectReference Include="..\AppServices\SmartLedger.Modules.Reports.Applications.AppServices.csproj" />
+  </ItemGroup>
+
 </Project>
