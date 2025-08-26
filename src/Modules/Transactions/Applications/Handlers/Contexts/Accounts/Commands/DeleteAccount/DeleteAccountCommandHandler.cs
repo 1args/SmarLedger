@@ -1,10 +1,10 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountDeleted;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountDeleted;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
 
 /// <summary>
 /// Handles the logic for processing <see cref="DeleteAccountCommand"/>.

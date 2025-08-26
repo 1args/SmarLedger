@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 
-namespace SmartLedger.Modules.Transactions.Domain.ValueObjects;
+namespace SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
 /// <summary>
 /// Represents the name of an account as a value object.

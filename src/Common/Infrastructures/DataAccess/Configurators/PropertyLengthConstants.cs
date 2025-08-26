@@ -5,6 +5,9 @@
 /// </summary>
 public readonly struct PropertyLengthConstants
 {
+    /// <summary>Represents a length of 10 characters.</summary>
+    public static readonly int Length10 = 10;
+
     /// <summary>Represents a length of 20 characters.</summary>
     public static readonly int Length20 = 20;
 

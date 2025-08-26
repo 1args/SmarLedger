@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurations;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Configurations;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read.Configurations;
 
-namespace SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
+namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read;
 
 /// <summary>
 /// Contains custom configuration logic for the EF Core read model.

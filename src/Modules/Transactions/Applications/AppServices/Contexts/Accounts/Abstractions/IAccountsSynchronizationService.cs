@@ -1,6 +1,8 @@
-﻿using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+﻿using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Transactions;
+using IdOnlyModel = SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts.IdOnlyModel;
 
-namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
+namespace SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
 
 /// <summary>
 /// Provides functionality for synchronizing changes in accounts between write and read models.

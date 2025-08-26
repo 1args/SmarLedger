@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Transactions.Domain.Enums;
+﻿namespace SmartLedger.Modules.BankAccounts.Domain.Enums;
 
 /// <summary>
 /// Enumeration of predefined transaction categories.

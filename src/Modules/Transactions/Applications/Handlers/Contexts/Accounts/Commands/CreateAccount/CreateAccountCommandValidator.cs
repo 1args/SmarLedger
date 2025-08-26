@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 
 /// <summary>
 /// Validates <see cref="CreateAccountCommand"/> requests.

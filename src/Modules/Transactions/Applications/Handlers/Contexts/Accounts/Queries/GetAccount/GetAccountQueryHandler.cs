@@ -1,8 +1,8 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
 
 /// <summary>
 /// Handles the logic for processing <see cref="GetAccountQuery"/>.

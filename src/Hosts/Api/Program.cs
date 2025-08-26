@@ -1,4 +1,3 @@
-using HandlebarsDotNet;
 using SmartLedger.Hosts.Api.Extensions;
 using SmartLedger.Hosts.Api.Extensions.Modules;
 

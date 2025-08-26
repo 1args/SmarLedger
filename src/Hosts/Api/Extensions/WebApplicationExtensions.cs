@@ -19,7 +19,10 @@ public static class WebApplicationExtensions
         if (application.Environment.IsDevelopment())
         {
             application.MapOpenApi();
-            application.MapScalarApiReference();
+            application.MapScalarApiReference(options =>
+            {
+                options.Title = "SmartLedger API";
+            });
         }
 
         application.UseHttpsRedirection();

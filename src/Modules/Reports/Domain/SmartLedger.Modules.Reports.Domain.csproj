@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Budgets\Domain\SmartLedger.Modules.Budgets.Domain.csproj" />
-    <ProjectReference Include="..\..\Transactions\Domain\SmartLedger.Modules.Transactions.Domain.csproj" />
+    <ProjectReference Include="..\..\Transactions\Domain\SmartLedger.Modules.BankAccounts.Domain.csproj" />
   </ItemGroup>
 
 </Project>

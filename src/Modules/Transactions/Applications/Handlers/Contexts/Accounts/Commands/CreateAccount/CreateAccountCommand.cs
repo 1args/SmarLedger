@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 
 /// <summary>
 /// Represents a command to create a new account.

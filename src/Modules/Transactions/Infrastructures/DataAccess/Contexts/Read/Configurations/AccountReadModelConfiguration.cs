@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurators;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read.Models;
 
-namespace SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Configurations;
+namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read.Configurations;
 
 /// <summary>
 /// Configures the <see cref="AccountReadModelConfiguration"/> entity.

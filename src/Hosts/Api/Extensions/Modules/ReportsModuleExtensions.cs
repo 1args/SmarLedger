@@ -1,7 +1,10 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Extensions;
+using SmartLedger.Common.Infrastructures.DataAccess.Extensions;
 using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports;
 using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Abstractions;
 using SmartLedger.Modules.Reports.Applications.Handlers.Contexts.Reports.Commands.GenerateReport;
+using SmartLedger.Modules.Reports.Infrastructures.DataAccess.Configurators;
+using SmartLedger.Modules.Reports.Infrastructures.DataAccess.Contexts.Read;
 
 namespace SmartLedger.Hosts.Api.Extensions.Modules;
 
@@ -29,6 +32,8 @@ public static class ReportsModuleExtensions
     /// </summary>
     private static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
+        services
+            .AddDataAccess<ReportsReadDbContext, ReportReadDbContextConfigurator>();
 
         return services;
     }
@@ -39,7 +44,10 @@ public static class ReportsModuleExtensions
     private static IServiceCollection AddApplications(this IServiceCollection services)
     {
         services
-            .AddScoped<IReportsService, ReportsService>();
+            .AddScoped<IReportsService, ReportsService>()
+            .AddScoped<IReportStorageService, ReportStorageService>()
+            .AddScoped<IReportTemplateService, ReportTemplateService>()
+            .AddScoped<IPdfGenerator, PdfGenerator>();
 
         services
             .AddHandlersFromAssembly(typeof(GenerateReportCommand).Assembly);

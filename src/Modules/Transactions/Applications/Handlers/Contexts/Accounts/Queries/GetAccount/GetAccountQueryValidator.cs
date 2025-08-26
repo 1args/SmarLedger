@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
 
 /// <summary>
 /// Validates <see cref="GetAccountQuery"/> requests.

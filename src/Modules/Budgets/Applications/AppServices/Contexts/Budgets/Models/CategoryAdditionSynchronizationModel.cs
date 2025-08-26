@@ -1,4 +1,4 @@
-﻿using SmartLedger.Modules.Transactions.Domain.Enums;
+﻿using SmartLedger.Modules.BankAccounts.Domain.Enums;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 

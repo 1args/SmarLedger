@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
 
 /// <summary>
 /// Represents a command to remove a transaction from an account.

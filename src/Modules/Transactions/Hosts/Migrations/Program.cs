@@ -5,9 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartLedger.Common.Hosts.Migrations;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
+using SmartLedger.Modules.BankAccounts.Hosts.Migrations;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
 using SmartLedger.Modules.Transactions.Hosts.Migrations;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
 
 // Entry point for executing database migrations
 var builder = Host.CreateDefaultBuilder(args);
@@ -16,11 +17,11 @@ builder.ConfigureServices((context, services) =>
 {
     var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
 
-    services.AddDbContext<TransactionsWriteDbContext>(contextBuilder => contextBuilder.UseNpgsql(
+    services.AddDbContext<BackAccountsWriteDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,
         optionsBuilder => optionsBuilder.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 
-    services.AddDbContext<TransactionsReadDbContext>(contextBuilder => contextBuilder.UseNpgsql(
+    services.AddDbContext<BackAccountsReadDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,
         optionsBuilder => optionsBuilder.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 

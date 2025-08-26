@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 
-namespace SmartLedger.Modules.Transactions.Domain.Exceptions;
+namespace SmartLedger.Modules.BankAccounts.Domain.Exceptions;
 
 /// <summary>
 /// Exception is thrown when there are insufficient funds for a transaction.

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurations;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write.Configurations;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write.Configurations;
 
-namespace SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
+namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
 
 /// <summary>
 /// Contains custom configuration logic for the EF Core write model.

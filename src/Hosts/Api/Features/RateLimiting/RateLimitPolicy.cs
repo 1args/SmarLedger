@@ -40,4 +40,10 @@ public sealed class RateLimitPolicy
     /// Used for per-source control of incoming requests.
     /// </summary>
     public static readonly string IpAddress = "ip-address";
+
+    /// <summary>
+    /// Restrictions for resource-intensive long-running operations, such as report generation.
+    /// Limits concurrent executions to prevent resource overload.
+    /// </summary>
+    public static readonly string ReportGeneration = "report-generation";
 }

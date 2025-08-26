@@ -6,6 +6,7 @@ using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.BudgetCategories;
@@ -14,7 +15,6 @@ using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Budgets.Domain.Entities;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
 using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
-using SmartLedger.Modules.Transactions.Domain.Enums;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 
@@ -214,13 +214,8 @@ public sealed class BudgetsService(
             ? query.Include(b => b.Categories)
             : query;
        
-        var budget = await query.SingleOrDefaultAsync(cancellationToken);
-
-        if (budget is null)
-        {
-            logger.LogWarning("Budget with ID {AccountId} not found", budgetId);
-            throw new NotFoundException($"Budget with ID '{budgetId}' was not found.");
-        }
+        var budget = await query.SingleOrDefaultAsync(cancellationToken)
+            ?? throw new NotFoundException($"Budget with ID '{budgetId}' was not found.");
 
         return budget;
     }
@@ -232,13 +227,8 @@ public sealed class BudgetsService(
     {
         var category = await budgetItemsRepository
             .Where(bi => bi.Id == budgetItemId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (category is null)
-        {
-            logger.LogWarning("Category with ID {CategoryId} not found", budgetItemId);
-            throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
-        }
+            .SingleOrDefaultAsync(cancellationToken)
+            ?? throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
 
         return category;
     }

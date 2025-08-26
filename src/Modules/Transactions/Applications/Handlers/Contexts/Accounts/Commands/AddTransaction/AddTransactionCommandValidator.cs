@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
 
 /// <summary>
 /// Validates <see cref="AddTransactionCommand"/> requests.

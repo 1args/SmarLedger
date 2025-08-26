@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
-using SmartLedger.Modules.Transactions.Domain.Enums;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.TransactionAdded;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.TransactionAdded;
 
 /// <summary>
 /// Event triggered when a new transaction is added.

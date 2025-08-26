@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
 
-namespace SmartLedger.Modules.Transactions.Hosts.Migrations;
+namespace SmartLedger.Modules.BankAccounts.Hosts.Migrations;
 
 /// <summary>
 /// Initiates database migrations for Transactions module.
@@ -13,7 +13,7 @@ internal sealed class Startup(
     ILoggerFactory loggerFactory)
 {
     /// <summary>
-    /// Executes the database migration using the provided <see cref="TransactionsWriteDbContext"/> and <see cref="TransactionsReadDbContext"/>.
+    /// Executes the database migration using the provided <see cref="BackAccountsWriteDbContext"/> and <see cref="BackAccountsReadDbContext"/>.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     public async Task StartMigrationAsync(CancellationToken cancellationToken)
@@ -21,11 +21,11 @@ internal sealed class Startup(
         var logger = loggerFactory.CreateLogger<Startup>();
 
         // Migrate WriteDbContext first
-        await databaseMigrationsService.ExecuteMigrationAsync<TransactionsWriteDbContext>(
+        await databaseMigrationsService.ExecuteMigrationAsync<BackAccountsWriteDbContext>(
             logger, cancellationToken);
 
         // Then migrate ReadDbContext
-        await databaseMigrationsService.ExecuteMigrationAsync<TransactionsReadDbContext>(
+        await databaseMigrationsService.ExecuteMigrationAsync<BackAccountsReadDbContext>(
             logger, cancellationToken);
     }
 }

@@ -16,10 +16,10 @@ public interface IReportsService
     Task<(Guid ReportId, string ReportPath)> GenerateReportAsync(ReportGenerationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Retrieves a report from the specified path. (temporary solution)
+    /// Retrieves a report. 
     /// </summary>
-    /// <param name="reportPath">Report path.</param>
+    /// <param name="reportId">Report ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Stream containing downloaded report.</returns>
-    Task<Stream> GetReportAsync(string reportPath, CancellationToken cancellationToken);
+    Task<Stream> GetReportAsync(Guid reportId, CancellationToken cancellationToken);
 }

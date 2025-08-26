@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurators;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
-using SmartLedger.Modules.Transactions.Domain.Entities;
+using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
+using SmartLedger.Modules.BankAccounts.Domain.Entities;
 
-namespace SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write.Configurations;
+namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write.Configurations;
 
 /// <summary>
 /// Configures the <see cref="Transaction"/> entity.

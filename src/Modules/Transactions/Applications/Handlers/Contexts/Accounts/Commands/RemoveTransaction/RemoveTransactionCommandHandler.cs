@@ -1,13 +1,13 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Transactions.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.TransactionRemoved;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Transactions.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.TransactionRemoved;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Transactions.Contracts.Events;
-using SmartLedger.Modules.Transactions.Domain.Enums;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
 
 /// <summary>
 /// Handles the logic for processing <see cref="RemoveTransactionCommand"/>.

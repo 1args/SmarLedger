@@ -1,11 +1,11 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
-using SmartLedger.Modules.Transactions.Domain.Enums;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
+using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
-namespace SmartLedger.Modules.Transactions.Domain.Entities;
+namespace SmartLedger.Modules.BankAccounts.Domain.Entities;
 
 /// <summary>
 /// Represents a financial transaction belonging to an account.

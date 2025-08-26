@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 
-namespace SmartLedger.Modules.Transactions.Domain.ValueObjects;
+namespace SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
 /// <summary>
 /// Represents the description or note of a transaction as a value object.

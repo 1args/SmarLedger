@@ -21,12 +21,12 @@ public static class UsersEndpoints
         var endpoints = app.MapGroup("/users")
             .RequireAuthorization()
             .RequireRateLimiting(RateLimitPolicy.Global)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithTags("Users")
             .WithOpenApi();
 
         endpoints.MapGet("/me", GetCurrentUserAsync)
             .RequireRateLimiting(RateLimitPolicy.ReadOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetCurrentUser")
             .WithSummary("Retrieves the current user.")
             .WithDescription("Returns the details of the currently authenticated user.")

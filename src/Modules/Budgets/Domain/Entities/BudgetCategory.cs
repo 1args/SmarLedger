@@ -1,10 +1,9 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
-using SmartLedger.Modules.Transactions.Domain.Enums;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.Budgets.Domain.Entities;
 

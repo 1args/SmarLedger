@@ -49,16 +49,30 @@ internal class ReteLimitingFeature : IAppFeature
                     factory: _ => new FixedWindowRateLimiterOptions
                     {
                         Window = TimeSpan.FromMinutes(1),
-                        PermitLimit = 300,
+                        PermitLimit = 20,
                         QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = 10
+                        QueueLimit = 0
+                    })!;
+            });
+
+            options.AddPolicy<string>(RateLimitPolicy.ReportGeneration, httpContext =>
+            {
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    partitionKey: httpContext.User.Identity?.Name 
+                                  ?? httpContext.Connection.RemoteIpAddress?.ToString() 
+                                  ?? "anonymous",
+                    factory: _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 2,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = 1
                     })!;
             });
 
             options.AddSlidingWindowLimiter(RateLimitPolicy.ReadOperations, limiterOptions =>
             {
                 limiterOptions.Window = TimeSpan.FromSeconds(30);
-                limiterOptions.PermitLimit = 200;
+                limiterOptions.PermitLimit = 100;
                 limiterOptions.SegmentsPerWindow = 10;
                 limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 limiterOptions.QueueLimit = 5;
@@ -93,7 +107,7 @@ internal class ReteLimitingFeature : IAppFeature
 
             options.AddConcurrencyLimiter(RateLimitPolicy.Global, limiterOptions =>
             {
-                limiterOptions.PermitLimit = 100;
+                limiterOptions.PermitLimit = 50;
                 limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 limiterOptions.QueueLimit = 15;
             });

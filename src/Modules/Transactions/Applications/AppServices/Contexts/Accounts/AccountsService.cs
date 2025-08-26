@@ -5,19 +5,21 @@ using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
-using SmartLedger.Modules.Transactions.Domain.Entities;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Write;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Transactions;
+using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
+using SmartLedger.Modules.BankAccounts.Domain.Entities;
+using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
+using IdOnlyModel = SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts.IdOnlyModel;
 
-namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
+namespace SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts;
 
 /// <inheritdoc />
 public sealed class AccountsService(
-    IRepository<Account, TransactionsWriteDbContext> accountsRepository,
-    IRepository<Transaction, TransactionsWriteDbContext> transactionsRepository,
+    IRepository<Account, BackAccountsWriteDbContext> accountsRepository,
+    IRepository<Transaction, BackAccountsWriteDbContext> transactionsRepository,
     Lazy<IAuthorizationData> authorizationData,
     ITransactionManager transactionManager,
     ILogger<AccountsService> logger): IAccountsService
@@ -127,13 +129,8 @@ public sealed class AccountsService(
     {
         var account = await accountsRepository
             .Where(a => a.Id == accountId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (account is null)
-        {
-            logger.LogWarning("Account with ID {AccountId} not found", accountId);
-            throw new NotFoundException($"Account with ID '{accountId}' was not found.");
-        }
+            .SingleOrDefaultAsync(cancellationToken)
+            ?? throw new NotFoundException($"Account with ID '{accountId}' was not found.");
 
         return account;
     }
@@ -145,13 +142,8 @@ public sealed class AccountsService(
     {
         var transaction = await transactionsRepository
             .Where(t => t.Id == transactionId)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (transaction is null)
-        {
-            logger.LogWarning("Transaction with ID {TransactionId} not found", transactionId);
-            throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
-        }
+            .SingleOrDefaultAsync(cancellationToken) 
+            ?? throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
 
         return transaction;
     }

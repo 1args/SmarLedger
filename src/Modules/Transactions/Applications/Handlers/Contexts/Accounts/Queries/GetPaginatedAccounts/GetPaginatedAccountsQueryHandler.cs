@@ -1,10 +1,10 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
 
 /// <summary>
 /// Handles the logic for processing <see cref="GetPaginatedAccountsQuery"/>.

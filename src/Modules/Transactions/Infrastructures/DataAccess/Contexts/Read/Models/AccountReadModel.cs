@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
+﻿namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read.Models;
 
 /// <summary>
 /// Represents a read model for an account.

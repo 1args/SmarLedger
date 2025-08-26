@@ -31,13 +31,12 @@ public static class BudgetsEndpoints
     {
         var endpoints = app.MapGroup("/budgets")
             .RequireAuthorization()
-            .RequireRateLimiting(RateLimitPolicy.Global)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithTags("Budgets")
             .WithOpenApi();
 
         endpoints.MapPost("/", CreateBudgetAsync)
             .RequireRateLimiting(RateLimitPolicy.WriteOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("CreateBudget")
             .WithSummary("Creates a new budget.")
             .WithDescription("Creates a new budget for the specified user, with name, start date, and end date.")
@@ -46,6 +45,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapPost("/{budgetId:guid}/categories", AddCategoryAsync)
             .RequireRateLimiting(RateLimitPolicy.WriteOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("AddCategoryToBudget")
             .WithSummary("Adds a category to a budget.")
             .WithDescription("Adds a new category with a limit to the specified budget.")
@@ -55,6 +55,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapDelete("/{budgetId:guid}/categories/{categoryId:guid}", RemoveCategoryAsync)
             .RequireRateLimiting(RateLimitPolicy.WriteOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("RemoveCategoryFromBudget")
             .WithSummary("Removes a category from a budget.")
             .WithDescription("Removes an existing category from the specified budget by its unique category ID.")
@@ -63,6 +64,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapDelete("/{budgetId:guid}", DeleteBudgetAsync)
             .RequireRateLimiting(RateLimitPolicy.WriteOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("DeleteBudget")
             .WithSummary("Deletes a budget by its identifier.")
             .WithDescription("Removes an existing budget identified by its unique budget ID.")
@@ -71,6 +73,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapPost("/search", GetPaginatedBudgetsAsync)
             .RequireRateLimiting(RateLimitPolicy.SearchOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetPaginatedBudgets")
             .WithSummary("Retrieves a paginated list of budgets for the specified user.")
             .WithDescription("Returns a paginated list of budgets associated with the given user ID, with optional filters for start and end dates.")
@@ -79,6 +82,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapGet("/{budgetId:guid}", GetBudgetAsync)
             .RequireRateLimiting(RateLimitPolicy.ReadOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetBudget")
             .WithSummary("Retrieves a budget by its identifier.")
             .WithDescription("Retrieves the budget details for the specified budget ID.")
@@ -88,6 +92,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapPost("/{budgetId:guid}/categories/search", GetPaginatedBudgetCategoriesAsync)
             .RequireRateLimiting(RateLimitPolicy.SearchOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetPaginatedBudgetCategories")
             .WithSummary("Retrieves a paginated list of budget categories for the specified budget.")
             .WithDescription("Returns a paginated list of budget categories associated with the given budget ID, with optional filters for category, limits, spent amounts, status, and dates.")
@@ -97,6 +102,7 @@ public static class BudgetsEndpoints
 
         endpoints.MapGet("/{budgetId:guid}/categories/{budgetCategoryId:guid}", GetBudgetCategoryAsync)
             .RequireRateLimiting(RateLimitPolicy.ReadOperations)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetBudgetCategory")
             .WithSummary("Retrieves a budget category by its identifier.")
             .WithDescription("Retrieves the budget category details for the specified budget and category IDs.")

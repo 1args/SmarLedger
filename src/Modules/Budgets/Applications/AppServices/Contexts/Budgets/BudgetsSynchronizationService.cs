@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.BudgetCategories;
@@ -10,7 +11,6 @@ using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Spec
 using SmartLedger.Modules.Budgets.Domain.Enums;
 using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read;
 using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Read.Models;
-using SmartLedger.Modules.Transactions.Domain.Enums;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 

@@ -1,11 +1,11 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Reports.Domain.Enums;
 using SmartLedger.Modules.Reports.Domain.ValueObjects;
-using SmartLedger.Modules.Transactions.Domain.Aggregates;
-using SmartLedger.Modules.Transactions.Domain.Enums;
 
 namespace SmartLedger.Modules.Reports.Domain.Aggregates;
 
@@ -121,11 +121,11 @@ public sealed class Report : AggregateRoot<Guid>
     {
         if (accounts is null || !accounts.Any())
         {
-            throw new DomainValidationException(nameof(accounts), "Accounts collection cannot be null or empty.");
+            throw new DomainValidationException(nameof(accounts), "At least 1 account must be created.");
         }
         if (budgets is null || !budgets.Any())
         {
-            throw new DomainValidationException(nameof(budgets), "Budgets collection cannot be null or empty.");
+            throw new DomainValidationException(nameof(budgets), "At least 1 budget must be created.");
         }
         ArgumentNullException.ThrowIfNull(userInfo);
 
@@ -243,7 +243,10 @@ public sealed class Report : AggregateRoot<Guid>
     /// </summary>
     private void GenerateBudgetSummaries()
     {
-        foreach (var budget in _budgets)
+        var filteredBudgets = _budgets
+            .Where(b => b.CreatedAt >= StartPeriod && b.CreatedAt < EndPeriod);
+
+        foreach (var budget in filteredBudgets)
         {
             foreach (var category in budget.Categories)
             {

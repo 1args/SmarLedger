@@ -1,9 +1,8 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbContext
+namespace SmartLedger.Modules.BankAccounts.Hosts.Migrations.Migrations.ReadDbContext
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

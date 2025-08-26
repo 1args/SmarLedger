@@ -3,17 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read;
-using SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Transactions;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read.Models;
+using IdOnlyModel = SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts.IdOnlyModel;
 
-namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts;
+namespace SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts;
 
 /// <inheritdoc />
 public sealed class AccountsSynchronizationService(
-    IRepository<AccountReadModel, TransactionsReadDbContext> accountsRepository,
-    IRepository<TransactionReadModel, TransactionsReadDbContext> transactionsRepository,
+    IRepository<AccountReadModel, BackAccountsReadDbContext> accountsRepository,
+    IRepository<TransactionReadModel, BackAccountsReadDbContext> transactionsRepository,
     ITransactionManager transactionManager,
     IHybridCache cache,
     ILogger<AccountsSynchronizationService> logger) : IAccountsSynchronizationService

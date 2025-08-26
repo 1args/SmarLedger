@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Transactions.Infrastructures.DataAccess.Contexts.Read.Models;
+﻿namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read.Models;
 
 /// <summary>
 /// Represents a read model for a transaction.
@@ -16,7 +16,7 @@ public sealed class TransactionReadModel
 
     /// <summary>Transaction amount.</summary>
     public decimal Amount { get; set; }
-
+    
     /// <summary>Type of transaction (Income or Expense).</summary>
     public string Type { get; set; } = string.Empty;
 

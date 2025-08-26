@@ -1,12 +1,12 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
-using SmartLedger.Modules.Transactions.Domain.Entities;
-using SmartLedger.Modules.Transactions.Domain.Enums;
-using SmartLedger.Modules.Transactions.Domain.Exceptions;
-using SmartLedger.Modules.Transactions.Domain.ValueObjects;
+using SmartLedger.Modules.BankAccounts.Domain.Entities;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
+using SmartLedger.Modules.BankAccounts.Domain.Exceptions;
+using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
-namespace SmartLedger.Modules.Transactions.Domain.Aggregates;
+namespace SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 
 /// <summary>
 /// Represents a user's account.

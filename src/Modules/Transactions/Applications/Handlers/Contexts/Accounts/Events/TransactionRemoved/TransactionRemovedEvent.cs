@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.TransactionRemoved;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.TransactionRemoved;
 
 /// <summary>
 /// Event triggered when a transaction is removed.

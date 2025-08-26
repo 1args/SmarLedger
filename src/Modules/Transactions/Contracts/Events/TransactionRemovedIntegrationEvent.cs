@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
-using SmartLedger.Modules.Transactions.Domain.Enums;
+using SmartLedger.Modules.BankAccounts.Domain.Enums;
 
 namespace SmartLedger.Modules.Transactions.Contracts.Events;
 

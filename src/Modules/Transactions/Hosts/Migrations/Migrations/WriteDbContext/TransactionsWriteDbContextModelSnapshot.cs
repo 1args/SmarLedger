@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Write;
 
 #nullable disable
 
 namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.WriteDbContext
 {
-    [DbContext(typeof(TransactionsWriteDbContext))]
+    [DbContext(typeof(BackAccountsWriteDbContext))]
     partial class TransactionsWriteDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

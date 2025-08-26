@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Common.Cqrs", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{B22AC098-0BA3-4FFE-97F8-6A22FE29CCA2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transactions", "{4527C80D-EAD2-46B3-8443-76B666AC3131}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BankAccounts", "BankAccounts", "{4527C80D-EAD2-46B3-8443-76B666AC3131}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D923C858-DFC8-4E4A-B875-3508E90B2246}"
 EndProject
@@ -33,9 +33,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{B0B48BB0-3400-49F6-8C52-00C8235CDABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Contracts", "Modules\Transactions\Contracts\SmartLedger.Modules.Transactions.Contracts.csproj", "{A422D197-4041-443A-88E6-04AC0F18BD86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.BankAccounts.Contracts", "Modules\Transactions\Contracts\SmartLedger.Modules.BankAccounts.Contracts.csproj", "{A422D197-4041-443A-88E6-04AC0F18BD86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Domain", "Modules\Transactions\Domain\SmartLedger.Modules.Transactions.Domain.csproj", "{A35EB4A2-83E2-483F-8490-3675A5CE36A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.BankAccounts.Domain", "Modules\Transactions\Domain\SmartLedger.Modules.BankAccounts.Domain.csproj", "{A35EB4A2-83E2-483F-8490-3675A5CE36A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{533C8D62-454C-4398-9173-4777FA889CC9}"
 	ProjectSection(SolutionItems) = preProject
@@ -66,7 +66,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Hosts.Migration
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{0FEE806D-0203-4AE6-A8D6-3D6CA004555C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Hosts.Migrations", "Modules\Transactions\Hosts\Migrations\SmartLedger.Modules.Transactions.Hosts.Migrations.csproj", "{BAE83DD2-0D32-4FC0-A457-E7B00237FB38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.BankAccounts.Hosts.Migrations", "Modules\Transactions\Hosts\Migrations\SmartLedger.Modules.BankAccounts.Hosts.Migrations.csproj", "{BAE83DD2-0D32-4FC0-A457-E7B00237FB38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Handlers", "Handlers", "{9FC7406C-D8E9-4CAF-9FD9-65E876453D89}"
 EndProject
@@ -80,9 +80,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppServices", "AppServices"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Handlers", "Handlers", "{2058631F-FF51-40DB-A7E7-F1191E036EA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Applications.AppServices", "Modules\Transactions\Applications\AppServices\SmartLedger.Modules.Transactions.Applications.AppServices.csproj", "{A1217DFC-8781-4AD5-B0CD-8C3DA56B5445}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.BankAccounts.Applications.AppServices", "Modules\Transactions\Applications\AppServices\SmartLedger.Modules.BankAccounts.Applications.AppServices.csproj", "{A1217DFC-8781-4AD5-B0CD-8C3DA56B5445}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Applications.Handlers", "Modules\Transactions\Applications\Handlers\SmartLedger.Modules.Transactions.Applications.Handlers.csproj", "{F3891547-4443-4195-9092-4A7FEBD76D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.BankAccounts.Applications.Handlers", "Modules\Transactions\Applications\Handlers\SmartLedger.Modules.BankAccounts.Applications.Handlers.csproj", "{F3891547-4443-4195-9092-4A7FEBD76D6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Budgets", "Budgets", "{C11C76D3-5798-474E-A1CA-FE43B43A034E}"
 EndProject
@@ -172,7 +172,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Budgets.Infrastructures.DataAccess", "Modules\Budgets\Infrastructures\DataAccess\SmartLedger.Modules.Budgets.Infrastructures.DataAccess.csproj", "{8B8C51E9-DDD1-4AE6-B3CB-CDBF432C1014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Transactions.Infrastructures.DataAccess", "Modules\Transactions\Infrastructures\DataAccess\SmartLedger.Modules.Transactions.Infrastructures.DataAccess.csproj", "{A3F6462C-8455-4011-B3E5-34956B6A199C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess", "Modules\Transactions\Infrastructures\DataAccess\SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.csproj", "{A3F6462C-8455-4011-B3E5-34956B6A199C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{08A94D6A-D89C-42E1-B4D9-B8F40405FD20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundJobs", "BackgroundJobs", "{9C1AE257-B309-4481-9321-9D978217C436}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Reports.Infrastructures.DataAccess", "Modules\Reports\Infrastructures\DataAccess\SmartLedger.Modules.Reports.Infrastructures.DataAccess.csproj", "{73EAB380-1E21-416F-8048-936D58758554}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs", "Modules\Reports\Infrastructures\BackgroundJobs\SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs.csproj", "{FBC61EB5-4910-4260-94A7-3BBE2E3062B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -304,6 +312,14 @@ Global
 		{A3F6462C-8455-4011-B3E5-34956B6A199C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3F6462C-8455-4011-B3E5-34956B6A199C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3F6462C-8455-4011-B3E5-34956B6A199C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73EAB380-1E21-416F-8048-936D58758554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73EAB380-1E21-416F-8048-936D58758554}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73EAB380-1E21-416F-8048-936D58758554}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73EAB380-1E21-416F-8048-936D58758554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC61EB5-4910-4260-94A7-3BBE2E3062B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC61EB5-4910-4260-94A7-3BBE2E3062B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC61EB5-4910-4260-94A7-3BBE2E3062B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC61EB5-4910-4260-94A7-3BBE2E3062B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -387,5 +403,9 @@ Global
 		{573F056F-9B15-47BA-9D33-EBFC8D56CD85} = {43EDDDA8-3200-4910-AD6D-05DC2A58727E}
 		{8B8C51E9-DDD1-4AE6-B3CB-CDBF432C1014} = {E97724A9-5B8A-42B1-B1BD-1D9B119D1898}
 		{A3F6462C-8455-4011-B3E5-34956B6A199C} = {573F056F-9B15-47BA-9D33-EBFC8D56CD85}
+		{08A94D6A-D89C-42E1-B4D9-B8F40405FD20} = {875D8A8D-A724-4283-A577-F408999484C7}
+		{9C1AE257-B309-4481-9321-9D978217C436} = {875D8A8D-A724-4283-A577-F408999484C7}
+		{73EAB380-1E21-416F-8048-936D58758554} = {08A94D6A-D89C-42E1-B4D9-B8F40405FD20}
+		{FBC61EB5-4910-4260-94A7-3BBE2E3062B4} = {9C1AE257-B309-4481-9321-9D978217C436}
 	EndGlobalSection
 EndGlobal

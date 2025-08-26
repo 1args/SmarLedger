@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Transactions.Domain.Enums;
+﻿namespace SmartLedger.Modules.BankAccounts.Domain.Enums;
 
 /// <summary>
 /// Represents the type of financial transaction.

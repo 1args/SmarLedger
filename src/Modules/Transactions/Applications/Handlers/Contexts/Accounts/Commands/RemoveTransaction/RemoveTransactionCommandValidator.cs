@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.RemoveTransaction;
 
 /// <summary>
 /// Validates <see cref="RemoveTransactionCommand"/> requests.

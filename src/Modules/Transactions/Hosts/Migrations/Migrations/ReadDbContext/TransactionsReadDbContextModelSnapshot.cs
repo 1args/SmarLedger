@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read;
 using SmartLedger.Modules.Transactions.Infrastructure.Contexts.Read;
 
 #nullable disable
 
 namespace SmartLedger.Modules.Transactions.Hosts.Migrations.Migrations.ReadDbContext
 {
-    [DbContext(typeof(TransactionsReadDbContext))]
+    [DbContext(typeof(BackAccountsReadDbContext))]
     partial class TransactionsReadDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

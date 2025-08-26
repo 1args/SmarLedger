@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 
 /// <summary>
 /// Event triggered when a new account is created.

@@ -14,11 +14,13 @@ public static class ReportsEndpoints
         var endpoints = app.MapGroup("/reports")
             .RequireAuthorization()
             .RequireRateLimiting(RateLimitPolicy.Global)
+            .RequireRateLimiting(RateLimitPolicy.ReportGeneration);
+
+        endpoints.MapPost("/generate", GenerateReportAsync)
             .RequireRateLimiting(RateLimitPolicy.IpAddress);
 
-        endpoints.MapPost("/generate", GenerateReportAsync);
-
-        endpoints.MapGet("/get", GetReportAsync);
+        endpoints.MapGet("/get", GetReportAsync)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress);
 
         return app;
     }

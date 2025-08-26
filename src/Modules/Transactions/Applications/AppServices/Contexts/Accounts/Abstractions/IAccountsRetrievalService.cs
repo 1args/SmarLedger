@@ -1,8 +1,10 @@
 ﻿using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Transactions;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
+using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
 
-namespace SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
+namespace SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
 
 /// <summary>
 /// Provides functionality for receiving transactions.
@@ -24,5 +26,22 @@ public interface IAccountsRetrievalService
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Paginated list of accounts.</returns>
     Task<PaginatedList<AccountListItem>> GetPaginatedAccountsAsync(GetPaginatedAccountsModel filter,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Retrieves a transaction by its identifier.
+    /// </summary>
+    /// <param name="request">Model containing account ID and transaction ID.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>Returns a <see cref="TransactionResponse"/> containing the transaction details.</returns>
+    Task<TransactionResponse> GetTransactionAsync(GetTransactionModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Retrieves a paginated list of transactions for a specific account.
+    /// </summary>
+    /// <param name="filter">Filter.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>Paginated list of transactions.</returns>
+    Task<PaginatedList<TransactionListItem>> GetPaginatedTransactionsAsync(GetPaginatedTransactionsModel filter,
         CancellationToken cancellationToken);
 }

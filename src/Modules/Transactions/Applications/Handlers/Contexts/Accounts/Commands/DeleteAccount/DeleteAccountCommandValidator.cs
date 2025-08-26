@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
 
 /// <summary>
 /// Validates <see cref="DeleteAccountCommand"/> requests.

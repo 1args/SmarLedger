@@ -1,11 +1,11 @@
 ﻿using SmartLedger.Common.Applications.AppServices.Services.DateTimeProvider.Abstractions;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Abstractions;
-using SmartLedger.Modules.Transactions.Applications.AppServices.Contexts.Accounts.Models;
-using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
+using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models;
+using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 
 /// <summary>
 /// Handles the logic for processing <see cref="CreateAccountCommand"/>.

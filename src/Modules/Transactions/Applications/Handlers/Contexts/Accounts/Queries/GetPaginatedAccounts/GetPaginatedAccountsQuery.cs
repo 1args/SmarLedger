@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Cqrs.Queries;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
 
 /// <summary>
 /// Represents a query to retrieve paginated transactions with filter.

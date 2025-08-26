@@ -1,7 +1,7 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
 
-namespace SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
+namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetAccount;
 
 /// <summary>
 /// Represents a query to retrieve an account.
