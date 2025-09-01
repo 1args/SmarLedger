@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Transactions\Domain\SmartLedger.Modules.BankAccounts.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Domain\SmartLedger.Common.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,8 +5,8 @@ using Microsoft.Extensions.Options;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
+using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.BudgetCreated;
-using SmartLedger.Modules.Transactions.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 

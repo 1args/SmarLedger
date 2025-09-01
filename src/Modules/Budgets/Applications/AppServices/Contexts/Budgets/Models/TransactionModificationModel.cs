@@ -1,4 +1,4 @@
-﻿using SmartLedger.Modules.BankAccounts.Domain.Enums;
+﻿using SmartLedger.Common.Domain.Enums;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 
@@ -14,5 +14,5 @@ public sealed record TransactionModificationModel(
     Guid UserId,
     decimal Amount,
     TransactionType Type,
-    TransactionCategory Category,
+    FinancialCategory Category,
     DateTime CreatedAt);

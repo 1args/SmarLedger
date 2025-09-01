@@ -127,6 +127,9 @@ public static class BudgetsEndpoints
         return Results.Ok(response);
     }
 
+    /// <summary>
+    /// Handles adding a new category to an existing budget.
+    /// </summary>
     private static async Task<IResult> AddCategoryAsync(
         [FromRoute] Guid budgetId,
         [FromBody] AddCategoryRequest request,
@@ -140,6 +143,9 @@ public static class BudgetsEndpoints
         return Results.Ok(response);
     }
 
+    /// <summary>
+    /// Handles removing a category from an existing budget.
+    /// </summary>
     private static async Task<IResult> RemoveCategoryAsync(
         [FromRoute] Guid budgetId,
         [FromRoute] Guid categoryId,

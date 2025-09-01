@@ -13,9 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Infrastructures\FileStorage\SmartLedger.Common.Infrastructures.FileStorage.csproj" />
+    <ProjectReference Include="..\..\..\BankAccounts\Infrastructures\DataAccess\SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.csproj" />
     <ProjectReference Include="..\..\..\Budgets\Applications\AppServices\SmartLedger.Modules.Budgets.Applications.AppServices.csproj" />
     <ProjectReference Include="..\..\..\Security\Clients\SmartLedger.Modules.Security.Clients.csproj" />
-    <ProjectReference Include="..\..\..\Transactions\Applications\AppServices\SmartLedger.Modules.BankAccounts.Applications.AppServices.csproj" />
     <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Reports.Contracts.csproj" />
     <ProjectReference Include="..\..\Domain\SmartLedger.Modules.Reports.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructures\DataAccess\SmartLedger.Modules.Reports.Infrastructures.DataAccess.csproj" />

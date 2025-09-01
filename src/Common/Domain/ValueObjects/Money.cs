@@ -9,6 +9,9 @@ namespace SmartLedger.Common.Domain.ValueObjects;
 /// </summary>
 public sealed class Money : ValueObject
 {
+    /// <summary>Maximum allowable transaction amount.</summary>
+    public const decimal MaxTransactionAmount = 100_000m;
+
     /// <summary>Amount.</summary>
     public decimal Value { get; }
 

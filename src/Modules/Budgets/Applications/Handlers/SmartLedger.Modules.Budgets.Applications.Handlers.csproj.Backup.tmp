@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contexts\Budgets\Events\Новая папка\**" />
+    <EmbeddedResource Remove="Contexts\Budgets\Events\Новая папка\**" />
+    <None Remove="Contexts\Budgets\Events\Новая папка\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Applications\Handlers\SmartLedger.Common.Applications.Handlers.csproj" />
+    <ProjectReference Include="..\..\..\..\Common\Cqrs\SmartLedger.Common.Cqrs.csproj" />
+    <ProjectReference Include="..\..\..\BackAccounts\Contracts\SmartLedger.Modules.BankAccounts.Contracts.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Budgets.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

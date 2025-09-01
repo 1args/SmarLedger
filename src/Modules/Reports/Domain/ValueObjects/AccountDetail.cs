@@ -1,8 +1,8 @@
-﻿using SmartLedger.Common.Domain.Primitives;
+﻿using SmartLedger.Common.Domain.Enums;
+using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 using SmartLedger.Modules.BankAccounts.Domain.Entities;
-using SmartLedger.Modules.BankAccounts.Domain.Enums;
 
 namespace SmartLedger.Modules.Reports.Domain.ValueObjects;
 

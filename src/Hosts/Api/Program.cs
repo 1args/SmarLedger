@@ -7,7 +7,7 @@ var configuration = builder.Configuration;
 
 services
     .AddApi(configuration)
-    .AddTransactionsModule()
+    .AddBankAccountsModule()
     .AddBudgetsModule()
     .AddSecurityModule()
     .AddReportsModule()

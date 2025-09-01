@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Applications\Handlers\SmartLedger.Common.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\..\..\Common\Cqrs\SmartLedger.Common.Cqrs.csproj" />
-    <ProjectReference Include="..\..\..\Transactions\Contracts\SmartLedger.Modules.BankAccounts.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\BankAccounts\Contracts\SmartLedger.Modules.BankAccounts.Contracts.csproj" />
     <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Budgets.Contracts.csproj" />
     <ProjectReference Include="..\AppServices\SmartLedger.Modules.Budgets.Applications.AppServices.csproj" />
   </ItemGroup>

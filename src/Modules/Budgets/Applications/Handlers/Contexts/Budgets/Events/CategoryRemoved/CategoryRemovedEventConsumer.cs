@@ -5,7 +5,8 @@ using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.
 
 namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.CategoryRemoved;
 
-/// Consumes the <see cref="BudgetCreatedEvent"/>.CreatedEvent"/>.
+/// <summary>
+/// Consumes the <see cref="BudgetCreatedEvent"/>.
 /// </summary>
 public sealed class CategoryRemovedEventConsumer(
     IBudgetsSynchronizationService budgetsSynchronizationService) : IEventConsumer<CategoryRemovedEvent>

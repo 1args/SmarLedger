@@ -3,9 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SmartLedger.Common.Infrastructure.Events;
+using SmartLedger.Common.Infrastructures.DataAccess.Events;
 
 #nullable disable
 

@@ -9,6 +9,6 @@ public sealed class GetReportQueryHandler(
 {
     public async Task<Stream> HandleAsync(GetReportQuery query, CancellationToken cancellationToken)
     {
-        return await reportsService.GetReportAsync(query.ReportPath, cancellationToken);
+        return await reportsService.GetReportAsync(query.ReportId, cancellationToken);
     }
 }

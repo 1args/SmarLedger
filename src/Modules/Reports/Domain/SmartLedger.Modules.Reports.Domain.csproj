@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BankAccounts\Domain\SmartLedger.Modules.BankAccounts.Domain.csproj" />
     <ProjectReference Include="..\..\Budgets\Domain\SmartLedger.Modules.Budgets.Domain.csproj" />
-    <ProjectReference Include="..\..\Transactions\Domain\SmartLedger.Modules.BankAccounts.Domain.csproj" />
   </ItemGroup>
 
 </Project>

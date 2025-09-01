@@ -1,12 +1,11 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
-using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.BudgetCreated;
 
 namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.CategoryAdded;
 
 /// <summary>
-/// Consumes the <see cref="BudgetCreatedEvent"/>.
+/// Consumes the <see cref="CategoryAddedEvent"/>.
 /// </summary>
 public sealed class CategoryAddedEventConsumer(
     IBudgetsSynchronizationService budgetsSynchronizationService) : IEventConsumer<CategoryAddedEvent>

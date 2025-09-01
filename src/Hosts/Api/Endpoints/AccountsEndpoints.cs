@@ -10,10 +10,10 @@ using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Q
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedAccounts;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetPaginatedTransactions;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Queries.GetTransaction;
-using SmartLedger.Modules.Transactions.Contracts.Requests.Accounts;
-using SmartLedger.Modules.Transactions.Contracts.Requests.Transactions;
-using SmartLedger.Modules.Transactions.Contracts.Responses.Accounts;
-using SmartLedger.Modules.Transactions.Contracts.Responses.Transactions;
+using SmartLedger.Modules.BankAccounts.Contracts.Requests.Accounts;
+using SmartLedger.Modules.BankAccounts.Contracts.Requests.Transactions;
+using SmartLedger.Modules.BankAccounts.Contracts.Responses.Accounts;
+using SmartLedger.Modules.BankAccounts.Contracts.Responses.Transactions;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
@@ -81,7 +81,6 @@ public static class AccountsEndpoints
             .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
-
 
         endpoints.MapGet("/{accountId:guid}", GetAccountAsync)
             .RequireRateLimiting(RateLimitPolicy.ReadOperations)

@@ -7,24 +7,47 @@ using SmartLedger.Modules.Reports.Contracts.Requests;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
+/// <summary>
+/// Maps endpoints related to reports operations.
+/// </summary>
 public static class ReportsEndpoints
 {
+    /// <summary>
+    /// Registers all report-related routes.
+    /// </summary>
+    /// <param name="app">Application's endpoint route builder.</param>
+    /// <returns>Modified <see cref="IEndpointRouteBuilder"/>.</returns>
     public static IEndpointRouteBuilder MapReportsEndpoints(this IEndpointRouteBuilder app)
     {
         var endpoints = app.MapGroup("/reports")
             .RequireAuthorization()
+            .WithTags("Reports")
+            .WithOpenApi()
             .RequireRateLimiting(RateLimitPolicy.Global)
             .RequireRateLimiting(RateLimitPolicy.ReportGeneration);
 
         endpoints.MapPost("/generate", GenerateReportAsync)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress);
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
+            .WithName("GenerateReport")
+            .WithSummary("Generates a new report.")
+            .WithDescription("Creates a new report for the specified period and type. Returns the unique report identifier.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest);
 
-        endpoints.MapGet("/get", GetReportAsync)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress);
+        endpoints.MapGet("/{reportId:guid}", GetReportAsync)
+            .RequireRateLimiting(RateLimitPolicy.IpAddress)
+            .WithName("GetReport")
+            .WithSummary("Retrieves a report by its identifier.")
+            .WithDescription("Fetches the generated report in PDF format using its unique identifier.")
+            .Produces(StatusCodes.Status200OK, contentType: "application/pdf")
+            .ProducesProblem(StatusCodes.Status404NotFound);
 
         return app;
     }
 
+    /// <summary>
+    /// Handles report generation request.
+    /// </summary>
     private static async Task<IResult> GenerateReportAsync(
         [FromBody] GenerateReportRequest request,
         [FromServices] ICommandHandler<GenerateReportCommand, Guid> handler,
@@ -39,12 +62,15 @@ public static class ReportsEndpoints
         return Results.Ok(reportId);
     }
 
+    /// <summary>
+    /// Retrieves a report file by its ID.
+    /// </summary>
     private static async Task<IResult> GetReportAsync(
-        [FromQuery] string reportPath,
+        [FromRoute] Guid reportId,
         [FromServices] IQueryHandler<GetReportQuery, Stream> handler,
         CancellationToken cancellationToken)
     {
-        var query = new GetReportQuery(reportPath);
+        var query = new GetReportQuery(reportId);
         var reportStream = await handler.HandleAsync(query, cancellationToken);
 
         return Results.File(reportStream, "application/pdf");

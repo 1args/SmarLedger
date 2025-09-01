@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
-using SmartLedger.Modules.BankAccounts.Domain.Enums;
+using SmartLedger.Common.Domain.Enums;
 
 namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.CategoryAdded;
 
@@ -14,6 +14,6 @@ namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Eve
 public sealed record CategoryAddedEvent(
     Guid CategoryId,
     Guid BudgetId,
-    TransactionCategory Category,
+    FinancialCategory Category,
     decimal Limit,
     DateTime CreatedAt) : Event;

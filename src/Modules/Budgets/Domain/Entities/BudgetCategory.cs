@@ -1,7 +1,7 @@
-﻿using SmartLedger.Common.Domain.Exceptions;
+﻿using SmartLedger.Common.Domain.Enums;
+using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
-using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
 
@@ -13,7 +13,7 @@ namespace SmartLedger.Modules.Budgets.Domain.Entities;
 public sealed class BudgetCategory : Entity<Guid>
 {
     /// <summary>Category this item represents.</summary>
-    public TransactionCategory Category { get; private set; }
+    public FinancialCategory Category { get; private set; }
 
     /// <summary>Spending limit for this category.</summary>
     public BudgetCategoryLimit Limit { get; private set; }
@@ -38,7 +38,7 @@ public sealed class BudgetCategory : Entity<Guid>
     /// <summary>
     /// Private constructor used by factory method.
     /// </summary>
-    private BudgetCategory(TransactionCategory category, BudgetCategoryLimit limit, DateTime createdAt)
+    private BudgetCategory(FinancialCategory category, BudgetCategoryLimit limit, DateTime createdAt)
     {
         Category = category;
         Limit = limit;
@@ -55,13 +55,13 @@ public sealed class BudgetCategory : Entity<Guid>
     /// <param name="createdAt">Date and time when budget item was created.</param>
     /// <returns>New instance of <see cref="BudgetCategory"/>.</returns>
     /// <exception cref="DomainValidationException">Thrown if category is 'Unknown' or limit is null.</exception>
-    public static BudgetCategory Create(TransactionCategory category, BudgetCategoryLimit limit, DateTime createdAt)
+    public static BudgetCategory Create(FinancialCategory category, BudgetCategoryLimit limit, DateTime createdAt)
     {
         ArgumentNullException.ThrowIfNull(limit, nameof(limit));
 
-        if (category == TransactionCategory.Unknown)
+        if (category == FinancialCategory.Unknown)
         {
-            throw new DomainValidationException(nameof(category), "Transaction category cannot be 'Unknown'.");
+            throw new DomainValidationException(nameof(category), "Financial category cannot be 'Unknown'.");
         }
 
         return new(category, limit, createdAt);

@@ -33,9 +33,13 @@ public interface IBudgetsSynchronizationService
     /// </summary>
     /// <param name="request">Model containing transaction details.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    /// <returns></returns>
     Task SynchronizeAdditionSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken);
 
+    /// <summary>
+    /// Synchronizes the reversion of a spending amount by reverting a transaction in the budget context.
+    /// </summary>
+    /// <param name="request">Model containing transaction details to revert.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
     Task SynchronizeReversionSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken);
 
     /// <summary>

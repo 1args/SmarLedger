@@ -1,8 +1,8 @@
-﻿using SmartLedger.Common.Domain.Exceptions;
+﻿using SmartLedger.Common.Domain.Enums;
+using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
-using SmartLedger.Modules.BankAccounts.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Reports.Domain.Enums;
 using SmartLedger.Modules.Reports.Domain.ValueObjects;

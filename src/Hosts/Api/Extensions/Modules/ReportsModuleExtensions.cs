@@ -33,7 +33,7 @@ public static class ReportsModuleExtensions
     private static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
         services
-            .AddDataAccess<ReportsReadDbContext, ReportReadDbContextConfigurator>();
+            .AddDataAccess<ReportsReadDbContext, ReportsReadDbContextConfigurator>();
 
         return services;
     }

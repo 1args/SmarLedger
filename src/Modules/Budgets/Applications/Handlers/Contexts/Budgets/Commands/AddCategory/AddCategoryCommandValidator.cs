@@ -16,7 +16,7 @@ public sealed class AddCategoryCommandValidator : AbstractValidator<AddCategoryC
             .NotEmpty().WithMessage("Budget ID cannot be empty.");
 
         RuleFor(c => c.Category)
-            .NotEmpty().WithMessage("Category cannot be empty.");
+            .IsInEnum().WithMessage("Select the correct budget category from the available values.");
 
         RuleFor(c => c.Limit)
             .Cascade(CascadeMode.Stop)

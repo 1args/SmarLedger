@@ -1,5 +1,4 @@
-﻿using System.Net;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Queries.RefreshToken;
 
@@ -14,7 +13,6 @@ public sealed class RefreshTokenQueryValidator : AbstractValidator<RefreshTokenQ
     public RefreshTokenQueryValidator()
     {
         RuleFor(q => q.RefreshToken)
-            .NotEmpty().WithMessage("Refresh token cannot be empty.")
-            .WithErrorCode(HttpStatusCode.Unauthorized.ToString());
+            .NotEmpty().WithMessage("Refresh token cannot be empty.");
     }
 }

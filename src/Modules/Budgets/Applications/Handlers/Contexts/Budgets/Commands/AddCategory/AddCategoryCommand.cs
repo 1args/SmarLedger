@@ -1,5 +1,5 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
-using SmartLedger.Modules.BankAccounts.Domain.Enums;
+using SmartLedger.Common.Domain.Enums;
 
 namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.AddCategory;
 
@@ -11,5 +11,5 @@ namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Com
 /// <param name="Limit">Spending limit for the category.</param>
 public sealed record AddCategoryCommand(
     Guid BudgetId,
-    TransactionCategory Category,
+    FinancialCategory Category,
     decimal Limit) : ICommand<Guid>;
