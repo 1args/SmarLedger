@@ -16,7 +16,7 @@ public sealed class ReportTemplateService : IReportTemplateService
         var templateContent = await File.ReadAllTextAsync(templatePath, cancellationToken);
 
         var handlebars = Handlebars.Create();
-        handlebars.RegisterHelpers();
+        CustomHandlebarsHelper.RegisterHelpers(handlebars);
 
         var compiled = handlebars.Compile(templateContent);
 

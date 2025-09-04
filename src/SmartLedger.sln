@@ -212,9 +212,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhook
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhooks.Contracts", "Modules\Webhooks\Contracts\SmartLedger.Modules.Webhooks.Contracts.csproj", "{89302412-D173-450F-90D9-9DC40E927A71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhooks.Hosts.Migrations", "Modules\Webhooks\Hosts\Migrations\SmartLedger.Modules.Webhooks.Hosts.Migrations.csproj", "{D108DA8F-894C-4D8C-A072-123589BA16AA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhooks.Infrastructures.DataAccess", "Modules\Webhooks\Infrastructures\DataAccess\SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.csproj", "{660BC5CD-0D97-40FE-AEA0-66934D992B3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhooks.Hosts.Migrations", "Modules\Webhooks\Hosts\Migrations\SmartLedger.Modules.Webhooks.Hosts.Migrations.csproj", "{7D125F4E-756C-4CAF-A552-935F85B45EF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -370,14 +370,14 @@ Global
 		{89302412-D173-450F-90D9-9DC40E927A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89302412-D173-450F-90D9-9DC40E927A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89302412-D173-450F-90D9-9DC40E927A71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D108DA8F-894C-4D8C-A072-123589BA16AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D108DA8F-894C-4D8C-A072-123589BA16AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D108DA8F-894C-4D8C-A072-123589BA16AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D108DA8F-894C-4D8C-A072-123589BA16AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{660BC5CD-0D97-40FE-AEA0-66934D992B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{660BC5CD-0D97-40FE-AEA0-66934D992B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{660BC5CD-0D97-40FE-AEA0-66934D992B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{660BC5CD-0D97-40FE-AEA0-66934D992B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -480,7 +480,7 @@ Global
 		{A716ABC9-1B7F-49D6-A65F-4CA18FDB3F77} = {694ABF10-6687-4A73-9208-32A9025C4EE7}
 		{3EB3B720-3974-4784-8C92-DFB59DEE964C} = {581002DC-7612-42F6-9924-94A858934940}
 		{89302412-D173-450F-90D9-9DC40E927A71} = {3D813BDD-4B4D-4A40-958B-1B25CBD6C3EB}
-		{D108DA8F-894C-4D8C-A072-123589BA16AA} = {F2571341-081B-491E-8495-D6B3F6DF2F97}
 		{660BC5CD-0D97-40FE-AEA0-66934D992B3C} = {30DB2491-4A96-4C50-8639-38EDFFB743EA}
+		{7D125F4E-756C-4CAF-A552-935F85B45EF9} = {F2571341-081B-491E-8495-D6B3F6DF2F97}
 	EndGlobalSection
 EndGlobal

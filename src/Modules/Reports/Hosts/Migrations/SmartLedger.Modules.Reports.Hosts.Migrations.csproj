@@ -27,11 +27,10 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup>		
 		<Content Include="appsettings.Development.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
-
 
 </Project>

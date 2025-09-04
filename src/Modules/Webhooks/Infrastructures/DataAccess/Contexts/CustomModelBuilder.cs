@@ -16,9 +16,10 @@ public static class CustomModelBuilder
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .SetDefaultDateTimeKind(DateTimeKind.Utc);
+            .HasDefaultSchema("webhooks")
+            .SetDefaultDateTimeKind(DateTimeKind.Utc); 
 
         modelBuilder
-            .ApplyConfiguration(new WebhookSubscriptionConfiguration());
+            .ApplyConfiguration(new WebhookConfiguration());
     }
 }

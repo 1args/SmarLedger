@@ -12,7 +12,7 @@ namespace SmartLedger.Hosts.Api.Endpoints;
 public static class UsersEndpoints
 {
     /// <summary>
-    /// Registers all budgets-related routes.
+    /// Registers all users-related routes.
     /// </summary>
     /// <param name="app">Application's endpoint route builder.</param>
     /// <returns>Modified <see cref="IEndpointRouteBuilder"/>.</returns>

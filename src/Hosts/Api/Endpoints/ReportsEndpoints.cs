@@ -4,6 +4,7 @@ using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Reports.Applications.Handlers.Contexts.Reports.Commands.GenerateReport;
 using SmartLedger.Modules.Reports.Applications.Handlers.Contexts.Reports.Queries.GetReport;
 using SmartLedger.Modules.Reports.Contracts.Requests;
+using SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
 
@@ -51,13 +52,16 @@ public static class ReportsEndpoints
     private static async Task<IResult> GenerateReportAsync(
         [FromBody] GenerateReportRequest request,
         [FromServices] ICommandHandler<GenerateReportCommand, Guid> handler,
+        [FromServices] IWebhooksDispatcher webhooksDispatcher,
         CancellationToken cancellationToken)
     {
         var command = new GenerateReportCommand(
             request.Type,
             request.StartPeriod,
             request.EndPeriod);
+
         var reportId = await handler.HandleAsync(command, cancellationToken);
+        await webhooksDispatcher.DispatchAsync("report.generated", reportId, cancellationToken);
 
         return Results.Ok(reportId);
     }

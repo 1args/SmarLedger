@@ -10,8 +10,8 @@ namespace SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts;
 public sealed class WebhooksDbContext(
     DbContextOptions<WebhooksDbContext> options) : DbContext(options)
 {
-    /// <summary>WebhookSubscriptions.</summary>
-    public DbSet<WebhookSubscription> WebhookSubscriptions { get; set; }
+    /// <summary>Webhooks.</summary>
+    public DbSet<Webhook> Webhooks { get; set; }
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

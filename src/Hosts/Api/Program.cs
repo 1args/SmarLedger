@@ -11,6 +11,7 @@ services
     .AddBudgetsModule()
     .AddSecurityModule()
     .AddReportsModule()
+    .AddWebhooksModule()
     .AddDecorators();
 
 var app = builder.Build();

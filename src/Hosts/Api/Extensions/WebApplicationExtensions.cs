@@ -45,7 +45,8 @@ public static class WebApplicationExtensions
             .MapBudgetsEndpoints()
             .MapIdentifyEndpoints()
             .MapUsersEndpoints()
-            .MapReportsEndpoints();
+            .MapReportsEndpoints()
+            .MapWebhooksEndpoints();
 
         return endpoints;
     }

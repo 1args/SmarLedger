@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Applications\Handlers\SmartLedger.Common.Applications.Handlers.csproj" />
+    <ProjectReference Include="..\AppServices\SmartLedger.Modules.Webhooks.Applications.AppServices.csproj" />
+  </ItemGroup>
+
 </Project>

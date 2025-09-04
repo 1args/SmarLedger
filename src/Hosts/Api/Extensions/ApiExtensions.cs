@@ -11,10 +11,13 @@ using SmartLedger.Common.Hosts.Features;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Common.Infrastructures.FileStorage;
 using SmartLedger.Common.Infrastructures.FileStorage.Abstractions;
+using SmartLedger.Modules.Reports.Contracts.Helpers;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 using SmartLedger.Modules.Security.Contracts.Options;
+using SmartLedger.Modules.Webhooks.Applications.AppServices;
+using SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -40,6 +43,9 @@ public static class ApiExtensions
             .AddHttpClient()
             .AddAuthenticationViaKeycloak(configuration)
             .AddControllers();
+
+        services
+            .AddHttpClient<IWebhooksDispatcher, WebhooksDispatcher>();
 
         var featureRegistry = new FeaturesRegistry()
             .RegisterFeaturesFromAssembly(Assembly.GetExecutingAssembly());

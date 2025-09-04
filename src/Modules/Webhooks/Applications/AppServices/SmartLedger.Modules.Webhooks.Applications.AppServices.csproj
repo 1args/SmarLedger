@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Applications\AppServices\SmartLedger.Common.Applications.AppServices.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Webhooks.Contracts.csproj" />
+    <ProjectReference Include="..\..\Infrastructures\DataAccess\SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
