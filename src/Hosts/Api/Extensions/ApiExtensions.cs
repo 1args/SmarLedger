@@ -12,6 +12,7 @@ using SmartLedger.Common.Hosts.Features;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Common.Infrastructures.FileStorage;
 using SmartLedger.Common.Infrastructures.FileStorage.Abstractions;
+using SmartLedger.Modules.Notifications.Contracts.Options;
 using SmartLedger.Modules.Reports.Contracts.Helpers;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak;
@@ -84,7 +85,8 @@ public static class ApiExtensions
             .Configure<RabbitMqOptions>(configuration.GetSection(nameof(RabbitMqOptions)))
             .Configure<KeycloakAuthorizationOptions>(configuration.GetSection(nameof(KeycloakAuthorizationOptions)))
             .Configure<MinioOptions>(configuration.GetSection(nameof(MinioOptions)))
-            .Configure<HybridCacheOptions>(configuration.GetSection(nameof(HybridCacheOptions)));
+            .Configure<HybridCacheOptions>(configuration.GetSection(nameof(HybridCacheOptions)))
+            .Configure<EmailSendingOptions>(configuration.GetSection(nameof(EmailSendingOptions)));
 
         return services;
     }

@@ -1,8 +1,8 @@
 ﻿using SmartLedger.Common.Applications.Handlers.Extensions;
 using SmartLedger.Common.Infrastructures.DataAccess.Extensions;
-using SmartLedger.Modules.Webhooks.Applications.AppServices;
-using SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
-using SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhook;
+using SmartLedger.Modules.Webhooks.Applications.AppServices.Contexts.Webhooks.Services;
+using SmartLedger.Modules.Webhooks.Applications.AppServices.Contexts.Webhooks.Services.Abstractions;
+using SmartLedger.Modules.Webhooks.Applications.Handlers.Contexts.Webhooks.Commands.CreateWebhook;
 using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Configurators;
 using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts;

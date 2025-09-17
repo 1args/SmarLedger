@@ -18,7 +18,7 @@ public sealed class ReportPublisher(
     /// <inheritdoc/>
     public async Task PublishAsync(Report report, Stream pdfStream, CancellationToken cancellationToken)
     {
-        var filePath = string.Format(ReportConstants.ReportFilePathFormat, report.UserInfo.UserId, report.Id, report.Type);
+        var filePath = string.Format(ReportPaths.ReportFilePathFormat, report.UserInfo.UserId, report.Id, report.Type);
 
         await transactionManager.StartEffect(async ct =>
         {

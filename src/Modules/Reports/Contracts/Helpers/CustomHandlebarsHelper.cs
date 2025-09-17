@@ -25,7 +25,6 @@ public static class CustomHandlebarsHelper
         RegisterFormatDateShortHelper(handlebars);
     }
 
-   
     /// <summary>
     /// Registers the "toFixed" helper, enabling formatting of numeric values to two decimal places within templates.
     /// </summary>

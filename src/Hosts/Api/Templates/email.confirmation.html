@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Confirmation</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f8f9fa;font-family:Arial,Helvetica,sans-serif;">
+  <table align="center" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f8f9fa;padding:20px 0;">
+    <tr>
+      <td>
+        <table align="center" cellpadding="0" cellspacing="0" width="600" style="background-color:#ffffff;border:1px solid #dce1e5;border-radius:6px;box-shadow:0 0 6px rgba(0,0,0,0.05);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#ffffff;border-bottom:2px solid #2c3e50;padding:20px;text-align:center;">
+              <h1 style="margin:0;font-size:24px;color:#2c3e50;font-weight:700;">SmartLedger</h1>
+              <p style="margin:4px 0 0 0;color:#34495e;font-size:13px;">Reliable financial solutions for your business</p>
+            </td>
+          </tr>
+          
+          <!-- Main content -->
+          <tr>
+            <td style="padding:30px;text-align:center;">
+              <h2 style="margin:0 0 20px 0;color:#2c3e50;font-size:20px;">Confirm Your Email Address</h2>
+              <p style="margin:0 0 25px 0;color:#34495e;font-size:14px;line-height:1.6;">
+                Hello {{UserName}},<br>
+                To complete your registration and start using <strong>SmartLedger</strong>, please confirm your email address by clicking the button below.
+              </p>
+              <a href="{{ConfirmationLink}}" target="_blank" style="display:inline-block;background-color:#2980b9;color:#ffffff;text-decoration:none;font-size:15px;font-weight:bold;padding:12px 28px;border-radius:4px;">
+                Confirm Email
+              </a>
+            </td>
+          </tr>
+          
+          <!-- Info -->
+          <tr>
+            <td style="padding:20px 30px;color:#34495e;font-size:12px;line-height:1.5;text-align:center;background-color:#f8f9fa;border-top:1px solid #dce1e5;">
+              If you did not sign up for SmartLedger, please ignore this message.<br>
+              This link will expire in 24 hours for security reasons.
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="padding:15px;text-align:center;color:#34495e;font-size:11px;background-color:#ffffff;border-top:1px solid #dce1e5;">
+              &copy; {{Year}} SmartLedger. All rights reserved.
+            </td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

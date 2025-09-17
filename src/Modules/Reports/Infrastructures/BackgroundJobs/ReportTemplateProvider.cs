@@ -13,7 +13,7 @@ public sealed class ReportTemplateProvider(
     /// <inheritdoc/>
     public async Task<string> CompileTemplateAsync(object model, CancellationToken cancellationToken)
     {
-        var templatePath = Path.Combine(Directory.GetCurrentDirectory(), ReportConstants.TemplatePath);
+        var templatePath = Path.Combine(Directory.GetCurrentDirectory(), ReportPaths.TemplatePath);
         var templateContent = await File.ReadAllTextAsync(templatePath, cancellationToken);
         var template = handlebars.Compile(templateContent);
 

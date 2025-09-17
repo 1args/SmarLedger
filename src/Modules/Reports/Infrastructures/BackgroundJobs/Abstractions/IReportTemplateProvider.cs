@@ -10,6 +10,6 @@ public interface IReportTemplateProvider
     /// </summary>
     /// <param name="templateName">Template name.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    /// <returns>Function that can be used to generate the report content</returns>
+    /// <returns>Compiled template as a string.</returns>
     Task<string> CompileTemplateAsync(object model, CancellationToken cancellationToken);
 }

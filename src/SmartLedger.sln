@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11005.162 d18.0
+VisualStudioVersion = 18.0.11005.162
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DA61FCC8-033D-4211-AFE7-87B79ED0AB63}"
 EndProject
@@ -216,6 +216,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhook
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Webhooks.Hosts.Migrations", "Modules\Webhooks\Hosts\Migrations\SmartLedger.Modules.Webhooks.Hosts.Migrations.csproj", "{7D125F4E-756C-4CAF-A552-935F85B45EF9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{774792C4-DD06-41D2-A0BB-0ABE0D5023E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{C9C4222B-E8F7-4F63-B060-8AFA9823D934}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{D48A73C1-D45A-4A68-90D1-F208B8427A28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppServices", "AppServices", "{8EEF4D36-198F-489E-BE93-AC3AF91E86CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Handlers", "Handlers", "{A7515260-FDA2-403B-9567-7AA4F841E11C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Notifications.Applications.AppServices", "Modules\Notifications\Applications\AppServices\SmartLedger.Modules.Notifications.Applications.AppServices.csproj", "{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Notifications.Applications.Handlers", "Modules\Notifications\Applications\Handlers\SmartLedger.Modules.Notifications.Applications.Handlers.csproj", "{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Modules.Notifications.Contracts", "Modules\Notifications\Contracts\SmartLedger.Modules.Notifications.Contracts.csproj", "{591165AE-F001-BDD1-6EF6-7031A4158736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -378,6 +394,18 @@ Global
 		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D125F4E-756C-4CAF-A552-935F85B45EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591165AE-F001-BDD1-6EF6-7031A4158736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591165AE-F001-BDD1-6EF6-7031A4158736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591165AE-F001-BDD1-6EF6-7031A4158736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591165AE-F001-BDD1-6EF6-7031A4158736}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -482,6 +510,14 @@ Global
 		{89302412-D173-450F-90D9-9DC40E927A71} = {3D813BDD-4B4D-4A40-958B-1B25CBD6C3EB}
 		{660BC5CD-0D97-40FE-AEA0-66934D992B3C} = {30DB2491-4A96-4C50-8639-38EDFFB743EA}
 		{7D125F4E-756C-4CAF-A552-935F85B45EF9} = {F2571341-081B-491E-8495-D6B3F6DF2F97}
+		{774792C4-DD06-41D2-A0BB-0ABE0D5023E0} = {B22AC098-0BA3-4FFE-97F8-6A22FE29CCA2}
+		{C9C4222B-E8F7-4F63-B060-8AFA9823D934} = {774792C4-DD06-41D2-A0BB-0ABE0D5023E0}
+		{D48A73C1-D45A-4A68-90D1-F208B8427A28} = {774792C4-DD06-41D2-A0BB-0ABE0D5023E0}
+		{8EEF4D36-198F-489E-BE93-AC3AF91E86CF} = {C9C4222B-E8F7-4F63-B060-8AFA9823D934}
+		{A7515260-FDA2-403B-9567-7AA4F841E11C} = {C9C4222B-E8F7-4F63-B060-8AFA9823D934}
+		{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF} = {8EEF4D36-198F-489E-BE93-AC3AF91E86CF}
+		{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2} = {A7515260-FDA2-403B-9567-7AA4F841E11C}
+		{591165AE-F001-BDD1-6EF6-7031A4158736} = {D48A73C1-D45A-4A68-90D1-F208B8427A28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28198F6E-4065-4AE6-8060-F9BC53167EE7}

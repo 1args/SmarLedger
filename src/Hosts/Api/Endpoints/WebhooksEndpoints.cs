@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Hosts.Api.Features.RateLimiting;
-using SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhook;
+using SmartLedger.Modules.Webhooks.Applications.Handlers.Contexts.Webhooks.Commands.CreateWebhook;
 using SmartLedger.Modules.Webhooks.Contracts.Requests;
 
 namespace SmartLedger.Hosts.Api.Endpoints;
