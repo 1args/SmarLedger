@@ -12,7 +12,7 @@ using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts;
 namespace SmartLedger.Modules.Webhooks.Hosts.Migrations.Migrations
 {
     [DbContext(typeof(WebhooksDbContext))]
-    [Migration("20250902215742_InitialCreate")]
+    [Migration("20250914225243_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,16 +20,23 @@ namespace SmartLedger.Modules.Webhooks.Hosts.Migrations.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("webhooks")
                 .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts.Models.WebhookSubscription", b =>
+            modelBuilder.Entity("SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts.Models.Webhook", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("uuid");
+
+                    b.Property<string>("CallbackUrl")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -41,14 +48,36 @@ namespace SmartLedger.Modules.Webhooks.Hosts.Migrations.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<string>("WebhookUrl")
+                    b.HasKey("Id");
+
+                    b.ToTable("Webhooks", "webhooks");
+                });
+
+            modelBuilder.Entity("SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts.Models.WebhookDeliveryAttempt", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("AttemptedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsSuccess")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Payload")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ResponseStatusCode")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("WebhookId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.ToTable("WebhookSubscriptions");
+                    b.ToTable("WebhookDeliveryAttempts", "webhooks");
                 });
 #pragma warning restore 612, 618
         }

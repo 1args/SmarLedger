@@ -19,11 +19,11 @@ public sealed class WebhookConfiguration : IEntityTypeConfiguration<Webhook>
             .IsGuid();
 
         builder.Property(w => w.EventType)
-            .HasMaxLength(100)
+            .HasMaxLength(PropertyLengthConstants.Length100)
             .IsRequired();
 
         builder.Property(w => w.CallbackUrl)
-            .HasMaxLength(200)
+            .HasMaxLength(PropertyLengthConstants.Length200)
             .IsRequired();
 
         builder.Property(w => w.CreatedAt)

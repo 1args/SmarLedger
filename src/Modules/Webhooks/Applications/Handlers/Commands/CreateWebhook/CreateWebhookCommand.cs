@@ -1,6 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Abstractions;
 
-namespace SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhookSubscription;
+namespace SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhook;
 
 /// <summary>
 /// Represents a command to create a new webhook.

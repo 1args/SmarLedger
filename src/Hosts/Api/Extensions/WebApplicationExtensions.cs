@@ -1,4 +1,5 @@
-﻿using Scalar.AspNetCore;
+﻿using Hangfire;
+using Scalar.AspNetCore;
 using SmartLedger.Hosts.Api.Endpoints;
 using SmartLedger.Hosts.Api.Middlewares;
 
@@ -13,7 +14,7 @@ public static class WebApplicationExtensions
     /// Configures http request pipeline.
     /// </summary>
     /// <param name="application">Current <see cref="WebApplication"/> instance.</param>
-    /// <returns><see cref="WebApplication"/> instance.</returns>
+    /// <returns><see cref="WebApplicstion"/> instance.</returns>
     public static WebApplication UseApiMiddlewares(this WebApplication application)
     {
         if (application.Environment.IsDevelopment())
@@ -31,6 +32,7 @@ public static class WebApplicationExtensions
         application.UseMiddleware<AuthorizationMiddleware>();
         application.UseRateLimiter();
         application.MapApiEndpoints();
+        application.UseHangfireDashboard();
 
         return application;
     }

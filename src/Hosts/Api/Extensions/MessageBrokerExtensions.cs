@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using HandlebarsDotNet;
+using MassTransit;
 using MassTransit.Observables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -7,6 +8,8 @@ using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.BudgetCreated;
+using SmartLedger.Modules.Webhooks.Applications.Handlers.Events.WebhookDispatched;
+using SmartLedger.Modules.Webhooks.Applications.Handlers.Events.WebhookTriggered;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -25,6 +28,7 @@ public static class MessageBrokerExtensions
     /// <returns>Modified <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddMessageBroker<TDbContext>(
         this IServiceCollection services,
+        IConfiguration configuration,
         string connectionString)
         where TDbContext : DbContext
     {
@@ -37,16 +41,19 @@ public static class MessageBrokerExtensions
         {
             using var serviceProvider = services.BuildServiceProvider();
 
-            var rabbitMqOptions = serviceProvider.GetRequiredService<IOptions<RabbitMqOptions>>().Value;
+            var rabbitMqOptions = configuration.GetSection(nameof(RabbitMqOptions)).Get<RabbitMqOptions>();
 
             cfg.SetKebabCaseEndpointNameFormatter();
 
             cfg.AddConsumers(typeof(AccountCreatedEventConsumer).Assembly);
             cfg.AddConsumers(typeof(BudgetCreatedEventConsumer).Assembly);
+            cfg.AddConsumers(typeof(WebhookDispatchedEventConsumer).Assembly);
+
+            cfg.AddTelemetryListener();
 
             cfg.UsingRabbitMq((context, rmqCfg) =>
             {
-                rmqCfg.Host(rabbitMqOptions.HostName, rabbitMqOptions.VirtualHost, hostCfg =>
+                rmqCfg.Host(rabbitMqOptions!.HostName, rabbitMqOptions.VirtualHost, hostCfg =>
                 {
                     rmqCfg.ConnectReceiveObserver(new ReceiveObservable());
                     rmqCfg.ConnectSendObserver(new SendObservable());

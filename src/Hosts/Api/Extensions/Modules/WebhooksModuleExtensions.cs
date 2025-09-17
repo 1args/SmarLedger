@@ -2,9 +2,11 @@
 using SmartLedger.Common.Infrastructures.DataAccess.Extensions;
 using SmartLedger.Modules.Webhooks.Applications.AppServices;
 using SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
-using SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhookSubscription;
+using SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhook;
+using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Configurators;
 using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts;
+using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Dispatchers;
 
 namespace SmartLedger.Hosts.Api.Extensions.Modules;
 
@@ -33,7 +35,8 @@ public static class WebhooksModuleExtensions
     private static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
         services
-            .AddDataAccess<WebhooksDbContext, WebhooksDbContextConfigurator>();
+            .AddDataAccess<WebhooksDbContext, WebhooksDbContextConfigurator>()
+            .AddScoped<IWebhooksDispatcher, WebhooksDispatcher>();
 
         return services;
     }
@@ -44,11 +47,10 @@ public static class WebhooksModuleExtensions
     private static IServiceCollection AddApplications(this IServiceCollection services)
     {
         services
-            .AddScoped<IWebhooksService, WebhooksService>()
-            .AddScoped<IWebhooksDispatcher, WebhooksDispatcher>();
+            .AddScoped<IWebhooksService, WebhooksService>();
 
         services
-            .AddHandlersFromAssembly(typeof(CreateWebhookSubscriptionCommand).Assembly);
+            .AddHandlersFromAssembly(typeof(CreateWebhookCommand).Assembly);
 
         return services;
     }

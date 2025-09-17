@@ -1,33 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartLedger.Common.Contracts.Constants;
-using SmartLedger.Common.Contracts.Exceptions;
+﻿using SmartLedger.Common.Contracts.Constants;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Common.Infrastructures.FileStorage.Abstractions;
-using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Abstractions;
 using SmartLedger.Modules.Reports.Domain.Aggregates;
+using SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs.Abstractions;
 using SmartLedger.Modules.Reports.Infrastructures.DataAccess.Contexts.Read;
 using SmartLedger.Modules.Reports.Infrastructures.DataAccess.Contexts.Read.Models;
 
-namespace SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports;
+namespace SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs;
 
 /// <summary>
 /// Service for report storing reports and information about them.
 /// </summary>
-public sealed class ReportStorageService(
+public sealed class ReportStorage(
     IMinioFileStorage minioFileStorage,
-    IRepository<ReportReadModel, ReportsReadDbContext> reportsRepository): IReportStorageService
+    IRepository<ReportReadModel, ReportsReadDbContext> reportsRepository): IReportStorage
 {
     /// <inheritdoc/>
-    public async Task SaveAsync(Report report, Stream pdfStream, string filePath, CancellationToken cancellationToken)
+    public async Task SaveAsync(Report report, Stream pdfStream, string reportPath, CancellationToken cancellationToken)
     {
         await Task.WhenAll(
             minioFileStorage.UploadFileAsync(
                 MinioBuckets.ReportsBucket,
-                filePath,
+                reportPath,
                 "application/pdf",
                 pdfStream,
                 cancellationToken),
-            SaveReportInfoAsync(report, filePath, cancellationToken));
+            SaveReportInfoAsync(report, reportPath, cancellationToken));
     }
 
     /// <summary>
@@ -45,19 +43,5 @@ public sealed class ReportStorageService(
         };
 
         await reportsRepository.AddAsync(reportInfo, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public async Task<Stream> GetReportStreamAsync(Guid reportId, CancellationToken cancellationToken)
-    {
-        var reportInfo = await reportsRepository
-            .Where(r => r.Id == reportId)
-            .FirstOrDefaultAsync(cancellationToken)
-            ?? throw new NotFoundException($"Report with ID '{reportId}' was not found.");
-
-        return await minioFileStorage.DownloadFileAsync(
-            MinioBuckets.ReportsBucket,
-            reportInfo.Path,
-            cancellationToken);
     }
 }

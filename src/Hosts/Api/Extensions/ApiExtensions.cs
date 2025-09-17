@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using HandlebarsDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -16,8 +17,8 @@ using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 using SmartLedger.Modules.Security.Contracts.Options;
-using SmartLedger.Modules.Webhooks.Applications.AppServices;
-using SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
+using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Abstractions;
+using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Dispatchers;
 
 namespace SmartLedger.Hosts.Api.Extensions;
 
@@ -51,6 +52,13 @@ public static class ApiExtensions
             .RegisterFeaturesFromAssembly(Assembly.GetExecutingAssembly());
 
         featureRegistry.ApplyFeatures(services, configuration);
+
+        services.AddSingleton<IHandlebars>(_ =>
+        {
+            var handlebars = Handlebars.Create();
+            CustomHandlebarsHelper.RegisterHelpers(handlebars);
+            return handlebars;
+        });
 
         return services;
     }
@@ -93,7 +101,7 @@ public static class ApiExtensions
             throw new InvalidOperationException($"Connection string '{connectionString}' could not be found for message broker.");
         }
 
-        services.AddMessageBroker<OutboxDbContext>(connectionString);
+        services.AddMessageBroker<OutboxDbContext>(configuration, connectionString);
 
         return services;
     }

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Infrastructures\DataAccess\SmartLedger.Common.Infrastructures.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Webhooks.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

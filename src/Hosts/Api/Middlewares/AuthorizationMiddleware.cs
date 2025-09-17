@@ -11,6 +11,9 @@ public class AuthorizationMiddleware(RequestDelegate next)
     /// <summary>Path to the register endpoint.</summary>
     private const string RegisterPath = "/identify/register";
 
+    /// <summary>Path to the hangfire endpoint.</summary>
+    private const string HangfirePath = "/hangfire";
+
     /// <summary>Path to the login endpoint.</summary>
     private const string LoginPath = "/identify/login";
 
@@ -20,6 +23,7 @@ public class AuthorizationMiddleware(RequestDelegate next)
     /// <summary>List of allowed paths that do not require authorization.</summary>
     private static readonly string[] AllowedPaths =
     [
+        HangfirePath,
         RegisterPath,
         LoginPath,
         RefreshTokenPath

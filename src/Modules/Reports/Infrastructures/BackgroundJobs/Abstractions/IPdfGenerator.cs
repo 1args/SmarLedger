@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Abstractions;
+﻿namespace SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs.Abstractions;
 
 /// <summary>
 /// Interface for generating PDF documents from HTML content.

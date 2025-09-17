@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Infrastructures\DataAccess\SmartLedger.Common.Infrastructures.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Domain\SmartLedger.Modules.Reports.Domain.csproj" />
   </ItemGroup>
 
 </Project>

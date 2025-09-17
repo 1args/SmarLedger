@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
+﻿namespace SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Abstractions;
 
 /// <summary>
 /// Provides functionality for dispatching webhooks.
@@ -8,9 +8,10 @@ public interface IWebhooksDispatcher
     /// <summary>
     /// Dispatches a webhook event with the specified type and payload.
     /// </summary>
-    /// <typeparam name="TData">type of the data payload.</typeparam>
+    /// <typeparam name="TData">Type of the data.</typeparam>
     /// <param name="eventType">Event type.</param>
-    /// <param name="payload">Data payload associated with the event.</param>
+    /// <param name="data">Data payload associated with the event.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task DispatchAsync<TData>(string eventType, TData payload, CancellationToken cancellationToken);
+    Task DispatchAsync<TData>(string eventType, TData data, CancellationToken cancellationToken) 
+        where TData : notnull;
 }

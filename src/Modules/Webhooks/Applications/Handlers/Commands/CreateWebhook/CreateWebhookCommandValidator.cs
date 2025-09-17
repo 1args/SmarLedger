@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SmartLedger.Modules.Webhooks.Contracts.Common;
 
-namespace SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhookSubscription;
+namespace SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhook;
 
 /// <summary>
 /// Validates <see cref="CreateWebhookCommand"/> requests.

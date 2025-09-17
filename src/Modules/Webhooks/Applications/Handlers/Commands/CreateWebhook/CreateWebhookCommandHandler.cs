@@ -3,12 +3,12 @@ using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Webhooks.Applications.AppServices.Abstractions;
 using SmartLedger.Modules.Webhooks.Applications.AppServices.Models;
 
-namespace SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhookSubscription;
+namespace SmartLedger.Modules.Webhooks.Applications.Handlers.Commands.CreateWebhook;
 
 /// <summary>
 /// Handles the logic for processing <see cref="CreateWebhookCommand"/>.
 /// </summary>
-public sealed class CreateWebhookSubscriptionCommandHandler(
+public sealed class CreateWebhookCommandHandler(
     IWebhooksService webhookService,
     IDateTimeProvider dateTimeProvider) : ICommandHandler<CreateWebhookCommand>
 {

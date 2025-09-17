@@ -1,14 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using PuppeteerSharp.Media;
 using PuppeteerSharp;
-using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Abstractions;
+using PuppeteerSharp.Media;
+using SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs.Abstractions;
 
-namespace SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports;
+namespace SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs;
 
 /// <summary>
 /// Service for generating PDF documents from HTML content.
 /// </summary>
-/// <param name="logger"></param>
 public sealed class PdfGenerator(
     ILogger<PdfGenerator> logger) : IPdfGenerator
 {

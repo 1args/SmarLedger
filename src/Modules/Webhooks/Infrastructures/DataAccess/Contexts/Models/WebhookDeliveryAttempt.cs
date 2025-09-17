@@ -11,7 +11,7 @@ public sealed class WebhookDeliveryAttempt
     /// <summary>Webhook ID.</summary>
     public Guid WebhookId { get; set; }
 
-    /// <summary>payload that was sent in the webhook request.</summary>
+    /// <summary>JSON payload that was sent in the webhook request.</summary>
     public string Payload { get; set; } = string.Empty;
 
     /// <summary>HTTP response status code received from the target endpoint.</summary>

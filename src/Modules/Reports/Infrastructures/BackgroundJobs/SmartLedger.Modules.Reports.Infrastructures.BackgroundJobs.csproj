@@ -6,4 +6,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Handlebars.Net" Version="2.1.6" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.21" />
+    <PackageReference Include="Hangfire.PostgreSql" Version="1.20.12" />
+    <PackageReference Include="PuppeteerSharp" Version="20.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Infrastructures\FileStorage\SmartLedger.Common.Infrastructures.FileStorage.csproj" />
+    <ProjectReference Include="..\..\..\BankAccounts\Infrastructures\DataAccess\SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\Budgets\Infrastructures\DataAccess\SmartLedger.Modules.Budgets.Infrastructures.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\Security\Clients\SmartLedger.Modules.Security.Clients.csproj" />
+    <ProjectReference Include="..\..\..\Webhooks\Contracts\SmartLedger.Modules.Webhooks.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Webhooks\Infrastructures\DataAccess\SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Contracts\SmartLedger.Modules.Reports.Contracts.csproj" />
+    <ProjectReference Include="..\..\Domain\SmartLedger.Modules.Reports.Domain.csproj" />
+    <ProjectReference Include="..\DataAccess\SmartLedger.Modules.Reports.Infrastructures.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

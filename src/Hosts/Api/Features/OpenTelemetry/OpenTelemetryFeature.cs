@@ -14,9 +14,7 @@ internal class OpenTelemetryFeature : IAppFeature
     /// <inheritdoc />
     public void UseFeature(IServiceCollection services, IConfiguration configuration)
     {
-        var openTelemetryOptions = configuration
-            .GetSection(nameof(OpenTelemetryFeatureOptions))
-            .Get<OpenTelemetryFeatureOptions>();
+        var openTelemetryOptions = configuration.GetSection(nameof(OpenTelemetryFeatureOptions)).Get<OpenTelemetryFeatureOptions>();
 
         if (string.IsNullOrWhiteSpace(openTelemetryOptions?.ApplicationName))
         {

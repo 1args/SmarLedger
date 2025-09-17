@@ -5,11 +5,14 @@ using SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports.Mode
 
 namespace SmartLedger.Modules.Reports.Applications.Handlers.Contexts.Reports.Commands.GenerateReport;
 
-// temp
+/// <summary>
+/// Handles the logic for processing <see cref="GenerateReportCommand"/>.
+/// </summary>
 public sealed class GenerateReportCommandHandler(
     IReportsService reportsService,
     IDateTimeProvider dateTimeProvider) : ICommandHandler<GenerateReportCommand, Guid>
 {
+    /// <inheritdoc />
     public async Task<Guid> HandleAsync(GenerateReportCommand command, CancellationToken cancellationToken)
     {
        var request = new ReportGenerationModel(
@@ -18,8 +21,7 @@ public sealed class GenerateReportCommandHandler(
            command.StartPeriod,
            command.EndPeriod);
 
-        var (reportId, reportPath) = await reportsService.GenerateReportAsync(request, cancellationToken);
-
+        var reportId = await reportsService.GenerateReportAsync(request, cancellationToken);
         return reportId;
     }
 }

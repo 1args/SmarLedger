@@ -1,4 +1,6 @@
-﻿namespace SmartLedger.Modules.Reports.Infrastructures.DataAccess.Contexts.Read.Models;
+﻿using SmartLedger.Modules.Reports.Domain.Enums;
+
+namespace SmartLedger.Modules.Reports.Infrastructures.DataAccess.Contexts.Read.Models;
 
 /// <summary>
 /// Represents a read model for a report.

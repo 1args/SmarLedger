@@ -100,7 +100,7 @@ services:
 
   # MinIO
   minio:
-    container_name: postit-minio
+    container_name: smartledger-minio
     image: minio/minio:latest
     restart: on-failure
     command: server /data --console-address ":9001"

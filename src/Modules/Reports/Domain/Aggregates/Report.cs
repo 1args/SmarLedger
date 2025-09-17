@@ -77,9 +77,15 @@ public sealed class Report : AggregateRoot<Guid>
     public DateTime GeneratedAt { get; private set; }
 
     /// <summary>
+    /// Constructor for EF Core.
+    /// </summary>
+    public Report() { }
+
+    /// <summary>
     /// Private constructor used by factory method.
     /// </summary>
     private Report(
+        Guid reportId,
         UserInfo userInfo,
         IReadOnlyCollection<Account> accounts,
         IReadOnlyCollection<Budget> budgets,
@@ -101,6 +107,7 @@ public sealed class Report : AggregateRoot<Guid>
     /// <summary>
     /// Factory method to create a new <see cref="Report"/>.
     /// </summary>
+    /// <param name="reportId">Report ID.</param>
     /// <param name="userInfo">List of accounts.</param>
     /// <param name="accounts">List of accounts.</param>
     /// <param name="budgets">List of budgets.</param>
@@ -111,6 +118,7 @@ public sealed class Report : AggregateRoot<Guid>
     /// <returns>New instance of <see cref="Report"/>.</returns>
     /// <exception cref="DomainValidationException"></exception>
     public static Report Create(
+        Guid reportId,
         UserInfo userInfo,
         IReadOnlyCollection<Account> accounts,
         IReadOnlyCollection<Budget> budgets,
@@ -134,7 +142,7 @@ public sealed class Report : AggregateRoot<Guid>
 
         ValidatePeriod(startPeriod, endPeriod);
 
-        var report =  new Report(userInfo, accounts, budgets, type, generatedAt, receivedStartPeriod, receivedEndPeriod);
+        var report =  new Report(reportId, userInfo, accounts, budgets, type, generatedAt, receivedStartPeriod, receivedEndPeriod);
 
         report.ComputeFinancialMetrics();
         report.ComputeSavingsPercentage();

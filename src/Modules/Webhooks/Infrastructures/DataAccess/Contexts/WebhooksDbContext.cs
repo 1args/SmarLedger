@@ -13,6 +13,9 @@ public sealed class WebhooksDbContext(
     /// <summary>Webhooks.</summary>
     public DbSet<Webhook> Webhooks { get; set; }
 
+    /// <summary>Webhook delivery attempts.</summary>
+    public DbSet<WebhookDeliveryAttempt> WebhookDeliveryAttempts { get; set; }
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -41,6 +41,8 @@
     <ProjectReference Include="..\..\Modules\Budgets\Applications\Handlers\SmartLedger.Modules.Budgets.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Budgets\Infrastructures\DataAccess\SmartLedger.Modules.Budgets.Infrastructures.DataAccess.csproj" />
     <ProjectReference Include="..\..\Modules\Reports\Applications\Handlers\SmartLedger.Modules.Reports.Applications.Handlers.csproj" />
+    <ProjectReference Include="..\..\Modules\Reports\Infrastructures\BackgroundJobs\SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs.csproj" />
+    <ProjectReference Include="..\..\Modules\Reports\Infrastructures\DataAccess\SmartLedger.Modules.Reports.Infrastructures.DataAccess.csproj" />
     <ProjectReference Include="..\..\Modules\Security\Applications\Handlers\SmartLedger.Modules.Security.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Webhooks\Applications\Handlers\SmartLedger.Modules.Webhooks.Applications.Handlers.csproj" />
     <ProjectReference Include="..\..\Modules\Webhooks\Infrastructures\DataAccess\SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.csproj" />
