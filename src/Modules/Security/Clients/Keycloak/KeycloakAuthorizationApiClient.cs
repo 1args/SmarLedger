@@ -1,7 +1,10 @@
 ﻿using System.Net;
+using Flurl;
 using Flurl.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SmartLedger.Common.Contracts.Exceptions;
+using SmartLedger.Common.Contracts.Helpers;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 using SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
@@ -24,14 +27,21 @@ public sealed class KeycloakAuthorizationApiClient(
     /// <summary>Message indicating that the authorization server failed to provide necessary information.</summary>
     private const string AuthorizationServerFailedMessage = "Failed to get the necessary information from the authorization server.";
 
-    /// <inheritdoc />
-    public async Task CreateUserAsync(UserCreationModel request, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Initiating creation for user {Username}", request.Username);
+    /// <summary>Default request timeout (in seconds) for HTTP calls to Keycloak.</summary>
+    private const int DefaultTimeoutSeconds = 30;
 
+    /// <summary>Timeout (in seconds) for token-related HTTP requests.</summary>
+    private const int TokenTimeoutSeconds = 10;
+
+    /// <summary>Lifespan (in seconds) of the verification email link sent by Keycloak.</summary>
+    private const int VerificationEmailLifespan = 60 * 5;
+
+    /// <inheritdoc />
+    public async Task<Guid> CreateUserAsync(UserCreationModel request, CancellationToken cancellationToken)
+    {
         try
         {
-            var useRepresentation = new UserRepresentation
+            var userRepresentation = new UserRepresentation
             {
                 Username = request.Username,
                 Email = request.Email,
@@ -48,59 +58,57 @@ public sealed class KeycloakAuthorizationApiClient(
                         Temporary = false
                     }
                 }
-            };
+            }; 
 
             await keycloakGeneratedApiClient.UsersPOSTAsync(
                 _keycloakAuthorizationOptions.Realm,
-                useRepresentation,
+                userRepresentation,
                 cancellationToken: cancellationToken);
 
-            logger.LogInformation("User {Username} successfully created", request.Username);
+            return await GetUserIdByUsername(request.Username, cancellationToken);
         }
-        catch (FlurlHttpException ex) when (ex.StatusCode == (int)HttpStatusCode.Conflict)
+        catch (KeycloakGeneratedApiException ex) when (ex.StatusCode == 409)
         {
-            var errorResponse = await ex.GetResponseStringAsync();
-            var errorMessage = "User with that name or email address already exists."; 
-
-            if (!string.IsNullOrWhiteSpace(errorResponse))
-            {
-                errorMessage = errorResponse.ToLower() switch
-                {
-                    var msg when msg.Contains("username") => "User with that name already exists.",
-                    var msg when msg.Contains("email") => "User with this email address already exists.",
-                    _ => errorMessage
-                };
-            }
-
-            logger.LogWarning("User creation failed: {ErrorMessage}", errorMessage);
-            throw new KeycloakApiException(errorMessage);
+            logger.LogWarning("User creation failed: {ErrorMessage}", ex.Response);
+            throw new ConflictException("User with that name or email address already exists.");
         }
-        catch (FlurlHttpException ex) when (ex.StatusCode == (int)HttpStatusCode.BadRequest)
+        catch (KeycloakGeneratedApiException ex) when (ex.StatusCode == 400)
         {
-            var errorMessage = await ex.GetResponseStringAsync();
-            logger.LogWarning("User creation failed due to validation errors: {ErrorMessage}", errorMessage);
+            logger.LogWarning("Validation error: {ErrorMessage}", ex.Response);
             throw new KeycloakApiException("Registration data is invalid. Please check all fields.");
         }
-        catch (KeycloakApiException ex)
+        catch (KeycloakGeneratedApiException ex)
         {
             logger.LogError(ex, "Creation failed for user {Username}", request.Username);
             throw;
         }
-        catch (Exception ex)
+    }
+
+    /// <inheritdoc />
+    public async Task SendVerificationEmailAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        try
         {
-            logger.LogError(ex, "Unexpected error during creation for user {Username}", request.Username);
-            throw new KeycloakApiException("An error occurred during creation. Please try again.");
+            await keycloakGeneratedApiClient.SendVerifyEmailAsync(
+                _keycloakAuthorizationOptions.Realm,
+                userId.ToString(),
+                client_id: _keycloakAuthorizationOptions.ClientId,
+                lifespan: VerificationEmailLifespan,
+                cancellationToken: cancellationToken);
+        }
+        catch (KeycloakGeneratedApiException ex)
+        {
+            logger.LogError(ex, "Failed to send verification email for user {UserId}", userId);
+            throw new KeycloakApiException("Failed to send verification email. Please try again.");
         }
     }
 
     /// <inheritdoc />
     public async Task<TokenResponse> AuthorizeAsync(string username, string password, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Initiating authorization for user {Username}", username);
-
         try
         {
-            using var httpClient = httpClientFactory.CreateClient();
+            var httpClient = httpClientFactory.CreateClient();
 
             var requestBody = new Dictionary<string, string>
             {
@@ -121,8 +129,6 @@ public sealed class KeycloakAuthorizationApiClient(
                 username,
                 cancellationToken);
 
-            logger.LogInformation("User {Username} successfully authorized", username);
-
             return response;
         }
         catch (KeycloakApiException ex)
@@ -140,11 +146,9 @@ public sealed class KeycloakAuthorizationApiClient(
     /// <inheritdoc />
     public async Task<TokenResponse> RefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Initiating token refresh");
-
         try
         {
-            using var httpClient = httpClientFactory.CreateClient();
+            var httpClient = httpClientFactory.CreateClient();
 
             var requestBody = new Dictionary<string, string>
             {
@@ -164,8 +168,6 @@ public sealed class KeycloakAuthorizationApiClient(
                 null,
                 cancellationToken);
 
-            logger.LogInformation("Token successfully refreshed");
-
             return response;
         }
         catch (KeycloakApiException ex)
@@ -183,18 +185,14 @@ public sealed class KeycloakAuthorizationApiClient(
     /// <inheritdoc />
     public async Task LogoutAsync(Guid userId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Initiating logout for user with ID {UserId}", userId);
-
         try
         {
             await keycloakGeneratedApiClient.LogoutAsync(
                 _keycloakAuthorizationOptions.Realm,
                 userId.ToString(),
                 cancellationToken);
-
-            logger.LogInformation("Successfully logged out user with ID {UserId}", userId);
         }
-        catch (Exception ex)
+        catch (KeycloakGeneratedApiException ex)
         {
             logger.LogError(ex, "Unexpected error during logout for user with ID {UserId}", userId);
             throw new KeycloakApiException("Failed to log out. Please try again.");
@@ -204,8 +202,6 @@ public sealed class KeycloakAuthorizationApiClient(
     /// <inheritdoc />
     public async Task<IReadOnlyCollection<UserSessionResponse>> GetUserSessionsAsync(Guid userId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving user sessions for user with ID {UserId}", userId);
-
         try
         {
             var sessions = await keycloakGeneratedApiClient.SessionsAllAsync(
@@ -217,15 +213,40 @@ public sealed class KeycloakAuthorizationApiClient(
                 .Select(s => s.MapToUserSessionResponse())
                 .ToList();
 
-            logger.LogInformation("Successfully retrieved {SessionCount} sessions for user with ID {UserId}",
-                userSessions.Count, userId);
-
             return userSessions.AsReadOnly();
         }
-        catch (Exception ex)
+        catch (KeycloakGeneratedApiException ex)
         {
             logger.LogError(ex, "Failed to retrieve sessions for user {UserId}", userId);
             throw new KeycloakApiException("The list of user sessions could not be retrieved. Please try again.");
+        }
+    }
+
+    /// <summary>
+    /// Retrieves the Keycloak user ID for the specified username.
+    /// </summary>
+    private async Task<Guid> GetUserIdByUsername(string username, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var users = await keycloakGeneratedApiClient.UsersAll3Async(
+                _keycloakAuthorizationOptions.Realm,
+                username: username,
+                cancellationToken: cancellationToken);
+
+            var user = users.FirstOrDefault();
+
+            if (user is null || string.IsNullOrWhiteSpace(user.Id))
+            {
+                throw new KeycloakApiException($"Failed to retrieve created user ID for {username}");
+            }
+
+            return GuidHelper.ConvertFromStringToGuid(user.Id);
+        }
+        catch (KeycloakGeneratedApiException ex)
+        {
+            logger.LogError(ex, "Failed to get user ID for {Username}", username);
+            throw new KeycloakApiException($"Failed to retrieve user ID: {ex.Message}");
         }
     }
 
@@ -235,10 +256,8 @@ public sealed class KeycloakAuthorizationApiClient(
     private async Task<DiscoveryDocument> GetDiscoveryDocumentAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         var discovery = await _keycloakAuthorizationOptions.MetadataAddress
-            .WithTimeout(TimeSpan.FromSeconds(30))
+            .WithTimeout(TimeSpan.FromSeconds(DefaultTimeoutSeconds))
             .GetJsonAsync<DiscoveryDocument>(cancellationToken: cancellationToken);
-
-        logger.LogInformation("Successfully retrieved discovery document");
 
         return discovery;
     }
@@ -256,7 +275,7 @@ public sealed class KeycloakAuthorizationApiClient(
         try
         {
             var response = await tokenEndpoint
-                .WithTimeout(TimeSpan.FromSeconds(10))
+                .WithTimeout(TokenTimeoutSeconds)
                 .PostUrlEncodedAsync(requestBody, cancellationToken: cancellationToken)
                 .ReceiveJson<TokenResponse>();
 
@@ -273,6 +292,17 @@ public sealed class KeycloakAuthorizationApiClient(
             logger.LogError(ex, "Invalid credentials provided for {Identifier}", identifier ?? "refresh-token");
             throw new KeycloakApiException(
                 "Invalid login or password entered. Please check your credentials.");
+        }
+        catch (FlurlHttpException ex) when (ex.StatusCode == (int)HttpStatusCode.BadRequest)
+        {
+            var errorMessage = await ex.GetResponseStringAsync();
+            if (errorMessage.Contains("Account is not fully set up"))
+            {
+                logger.LogWarning("Authorization failed for {Identifier}. Email not verified", identifier ?? "unknown");
+                throw new KeycloakApiException("Email not verified. Please verify your email before logging in.");
+            }
+            logger.LogError(ex, "An error occurred while executing a token request: {ErrorMessage}", errorMessage);
+            throw new KeycloakApiException(AuthorizationServerFailedMessage);
         }
         catch (FlurlHttpException ex)
         {

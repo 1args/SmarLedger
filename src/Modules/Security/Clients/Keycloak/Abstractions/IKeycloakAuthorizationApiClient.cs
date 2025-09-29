@@ -13,7 +13,14 @@ public interface IKeycloakAuthorizationApiClient
     /// </summary>
     /// <param name="request">Model containing registration data.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task CreateUserAsync(UserCreationModel request, CancellationToken cancellationToken);
+    Task<Guid> CreateUserAsync(UserCreationModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Sends a verification email to the user.
+    /// </summary>
+    /// <param name="userId">User ID.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task SendVerificationEmailAsync(Guid userId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Authorizes a user with the provided username and password.

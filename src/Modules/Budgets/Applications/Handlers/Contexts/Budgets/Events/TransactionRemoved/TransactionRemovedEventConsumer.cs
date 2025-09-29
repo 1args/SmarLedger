@@ -3,17 +3,17 @@ using SmartLedger.Modules.BankAccounts.Contracts.Events;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
 
-namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events;
+namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.TransactionRemoved;
 
 /// <summary>
 /// Consumes the <see cref="TransactionAddedIntegrationEvent"/>.
 /// </summary>
-public sealed class TransactionAddedEventConsumer(
+public sealed class TransactionRemovedEventConsumer(
     IBudgetsService budgetsService,
-    IBudgetsSynchronizationService budgetsSynchronizationService) : IEventConsumer<TransactionAddedIntegrationEvent>
+    IBudgetsSynchronizationService budgetsSynchronizationService) : IEventConsumer<TransactionRemovedIntegrationEvent>
 {
     /// <inheritdoc />
-    public async Task ConsumeAsync(TransactionAddedIntegrationEvent @event, CancellationToken cancellationToken)
+    public async Task ConsumeAsync(TransactionRemovedIntegrationEvent @event, CancellationToken cancellationToken)
     {
         var request = new TransactionModificationModel(
             @event.UserId,
@@ -23,7 +23,7 @@ public sealed class TransactionAddedEventConsumer(
             @event.CreatedAt);
 
         await Task.WhenAll(
-            budgetsService.AddSpendingAmountAsync(request, cancellationToken),
-            budgetsSynchronizationService.SynchronizeAdditionSpendingAmountAsync(request, cancellationToken));
+            budgetsService.RevertSpendingAmountAsync(request, cancellationToken),
+            budgetsSynchronizationService.SynchronizeReversionSpendingAmountAsync(request, cancellationToken));
     }
 }

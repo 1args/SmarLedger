@@ -4,6 +4,7 @@ using SmartLedger.Modules.Notifications.Applications.AppServices.Contexts.Emails
 using SmartLedger.Modules.Notifications.Applications.AppServices.Contexts.Notifications.Services.Abstractions;
 using SmartLedger.Modules.Notifications.Applications.AppServices.Contexts.Templates.Services.Abstractions;
 using SmartLedger.Modules.Notifications.Contracts.Requests;
+using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 
 namespace SmartLedger.Modules.Notifications.Applications.AppServices.Contexts.Notifications.Services;
 
@@ -12,15 +13,18 @@ namespace SmartLedger.Modules.Notifications.Applications.AppServices.Contexts.No
 /// </summary>
 public sealed class NotificationService(
     IEmailSendingService emailSendingService,
+    IKeycloakUserApiClient keycloakUserApiClient,
     ITemplateProvider templateProvider,
     ILogger<NotificationService> logger) : INotificationService
 {
     /// <inheritdoc/>
     public async Task SendEmailAsync(NotificationMessage request, CancellationToken cancellationToken)
     {
+        var user = await keycloakUserApiClient.GetUserAsync(request.UserId, cancellationToken);
+
         logger.LogInformation(
-            "Sending email notification to {Email} of type {Type}", 
-            request.Email, request.Type.ToString());
+            "Sending email notification to {Email} of type {Type}",
+            user.Email, request.Type.ToString());
 
         var (message, subject) = await templateProvider.GetTemplateContentAsync(
             type: request.Type,
@@ -37,8 +41,8 @@ public sealed class NotificationService(
         }
 
         var emailRequest = new EmailSendingModel(
-            request.Username,
-            request.Email,
+            user.Username,
+            user.Email,
             subject,
             message);
 
@@ -46,6 +50,6 @@ public sealed class NotificationService(
 
         logger.LogInformation(
             "Email notification sent to {Email} of type {Type}",
-            request.Email, request.Type.ToString());
+            user.Email, request.Type.ToString());
     }
 }

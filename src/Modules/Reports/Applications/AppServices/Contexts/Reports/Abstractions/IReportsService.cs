@@ -12,7 +12,7 @@ public interface IReportsService
     /// </summary>
     /// <param name="request">Model containing report generation data.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    ValueTask<Guid> GenerateReportAsync(ReportGenerationModel request, CancellationToken cancellationToken);
+    ValueTask<Guid> GenerateReport(ReportGenerationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Retrieves a report. 

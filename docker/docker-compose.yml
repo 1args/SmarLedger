@@ -50,13 +50,13 @@ services:
       --log-level=info
     user: root
     environment:
-      KC_FEATUES: preview
+      KC_FEATURES: preview
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/postgres
       KC_DB_USERNAME: postgres
       KC_DB_PASSWORD: p4ssw0rd
       KC_HOSTNAME: localhost
-      KC_MATRICS_ENABLED: true
+      KC_METRICS_ENABLED: true
       KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: adminp4ss
@@ -72,7 +72,6 @@ services:
       retries: 5
     volumes:
       - ./config/keycloak/import:/opt/keycloak/data/import
-      - ./config/keycloak/providers:/opt/keycloak/providers
       - keycloak-logs:/opt/keycloak/data/log/
     networks:
       - smartledger-network
@@ -174,6 +173,17 @@ services:
     depends_on:
       opensearch:
         condition: service_healthy
+    networks:
+      - smartledger-network
+
+ # Papercut
+  papercut:
+    container_name: smartledger-papercut
+    image: changemakerstudiosus/papercut-smtp:latest
+    restart: on-failure
+    ports:
+      - '25:25'
+      - '8082:80'
     networks:
       - smartledger-network
 

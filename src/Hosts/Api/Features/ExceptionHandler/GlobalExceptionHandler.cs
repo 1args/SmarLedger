@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Common.Domain.Exceptions;
+using SmartLedger.Modules.Security.Contracts.Exceptions;
 
 namespace SmartLedger.Hosts.Api.Features.ExceptionHandler;
 
@@ -54,24 +55,37 @@ public sealed class GlobalExceptionHandler(
     {
         string? title, detail;
 
-        if (environment.IsDevelopment())
+        //if (environment.IsDevelopment())
+        //{
+        //    title = $"$Error '{exception.GetType().FullName}' occurred with the following context: {exception.Message}";
+        //    detail = exception.ToString();
+        //}
+        //else
+        //{
+        //    (title, detail) = exception switch
+        //    {
+        //        ValidationException => ("Validation error", exception.Message),
+        //        NotFoundException => ("Not Found", exception.Message),
+        //        ConflictException => ("Conflict", exception.Message),
+        //        KeycloakApiException => ("Test", exception.Message),
+        //        DomainValidationException => ("Bad Request", exception.Message),
+        //        DomainException => ("Bad Request", exception.Message),
+        //        OperationCanceledException => ("Request Timeout", "The request was canceled due to a timeout."),
+        //        _ => ("Internal Server Error", "Something went wrong while executing the request. Please try again later.")
+        //    };
+        //}
+
+        (title, detail) = exception switch
         {
-            title = $"$Error '{exception.GetType().FullName}' occurred with the following context: {exception.Message}";
-            detail = exception.ToString();
-        }
-        else
-        {
-            (title, detail) = exception switch
-            {
-                ValidationException => ("Validation error", exception.Message),
-                NotFoundException => ("Not Found", exception.Message),
-                ConflictException => ("Conflict", exception.Message),
-                DomainValidationException => ("Bad Request", exception.Message),
-                DomainException => ("Bad Request", exception.Message),
-                OperationCanceledException => ("Request Timeout", "The request was canceled due to a timeout."),
-                _ => ("Internal Server Error", "Something went wrong while executing the request. Please try again later.")
-            };
-        }
+            ValidationException => ("Validation error", exception.Message),
+            NotFoundException => ("Not Found", exception.Message),
+            ConflictException => ("Conflict", exception.Message),
+            KeycloakApiException => ("Bad Request", exception.Message),
+            DomainValidationException => ("Bad Request", exception.Message),
+            DomainException => ("Bad Request", exception.Message),
+            OperationCanceledException => ("Request Timeout", "The request was canceled due to a timeout."),
+            _ => ("Internal Server Error", "Something went wrong while executing the request. Please try again later.")
+        };
 
         return new ProblemDetails
         {
@@ -97,6 +111,7 @@ public sealed class GlobalExceptionHandler(
             ValidationException => HttpStatusCode.BadRequest,
             NotFoundException => HttpStatusCode.NotFound,
             ConflictException => HttpStatusCode.Conflict,
+            KeycloakApiException => HttpStatusCode.BadRequest,
             DomainValidationException => HttpStatusCode.BadRequest,
             DomainException => HttpStatusCode.BadRequest,
             OperationCanceledException => HttpStatusCode.RequestTimeout,

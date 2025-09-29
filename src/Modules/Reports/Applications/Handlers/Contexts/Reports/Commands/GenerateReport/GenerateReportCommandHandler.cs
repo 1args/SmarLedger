@@ -13,7 +13,7 @@ public sealed class GenerateReportCommandHandler(
     IDateTimeProvider dateTimeProvider) : ICommandHandler<GenerateReportCommand, Guid>
 {
     /// <inheritdoc />
-    public async Task<Guid> HandleAsync(GenerateReportCommand command, CancellationToken cancellationToken)
+    public Task<Guid> HandleAsync(GenerateReportCommand command, CancellationToken cancellationToken)
     {
        var request = new ReportGenerationModel(
            command.Type,
@@ -21,7 +21,6 @@ public sealed class GenerateReportCommandHandler(
            command.StartPeriod,
            command.EndPeriod);
 
-        var reportId = await reportsService.GenerateReportAsync(request, cancellationToken);
-        return reportId;
+        return reportsService.GenerateReport(request, cancellationToken).AsTask();
     }
 }

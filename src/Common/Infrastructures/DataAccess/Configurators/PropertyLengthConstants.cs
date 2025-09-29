@@ -20,6 +20,9 @@ public readonly struct PropertyLengthConstants
     /// <summary>Represents a length of 200 characters.</summary>
     public static readonly int Length200 = 200;
 
+    /// <summary>Represents a length of 254 characters.</summary>
+    public static readonly int Length254 = 254;
+
     /// <summary>Represents a length of 500 characters.</summary>
     public static readonly int Length500 = 500;
 }

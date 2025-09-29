@@ -7,11 +7,9 @@ namespace SmartLedger.Modules.Notifications.Contracts.Events;
 /// Event triggered when a notification has been sent.
 /// </summary>
 /// <param name="Type">Type of notification.</param>
-/// <param name="Username">User name.</param>
-/// <param name="Email">Email address.</param>
+/// <param name="UserId">User ID.</param>
 /// <param name="Data">Optional placeholder data for templates.</param>
 public sealed record NotificationSentEvent(
     NotificationType Type,
-    string Username,
-    string Email,
+    Guid UserId,
     Dictionary<string, string>? Data = null) : Event;

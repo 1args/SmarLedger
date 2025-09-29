@@ -39,7 +39,7 @@ public sealed class SmtpEmailSendingStrategy(
             using var client = new SmtpClient();
 
             await client.ConnectAsync(
-                _options.Server, 
+                _options.Server,
                 _options.Port,
                 _options.UseSsl ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls,
                 cancellationToken);

@@ -16,8 +16,7 @@ public sealed class NotificationSentEventConsumer(
     {
         var request = new NotificationMessage(
             @event.Type,
-            @event.Username,
-            @event.Email,
+            @event.UserId,
             @event.Data);
 
         await notificationService.SendEmailAsync(request, cancellationToken);

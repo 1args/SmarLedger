@@ -29,6 +29,7 @@ public static class WebApplicationExtensions
         application.UseHttpsRedirection();
         application.UseAuthentication();
         application.UseAuthorization();
+        application.UseExceptionHandler();
         application.UseMiddleware<AuthorizationMiddleware>();
         application.UseRateLimiter();
         application.MapApiEndpoints();

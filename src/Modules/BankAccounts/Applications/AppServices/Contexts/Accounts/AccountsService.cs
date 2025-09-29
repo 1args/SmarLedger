@@ -71,7 +71,7 @@ public sealed class AccountsService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction added successfully to account {AccountId} with transaction ID {TransactionId}",
+            "Transaction added successfully to account with ID {AccountId} with transaction ID {TransactionId}",
             account.Id, transaction.Id);
 
         return (transaction.Id, account.UserId);
@@ -89,13 +89,8 @@ public sealed class AccountsService(
         var account = await accountsRepository
             .Where(a => a.Id == request.AccountId)
             .Include(a => a.Transactions)
-            .SingleOrDefaultAsync(cancellationToken);
-
-        if (account is null)
-        {
-            logger.LogWarning("Account with ID {AccountId} not found", transaction.AccountId);
-            throw new NotFoundException($"Account with ID '{transaction.AccountId}' was not found");
-        }
+            .SingleOrDefaultAsync(cancellationToken) 
+            ?? throw new NotFoundException($"Account with ID '{transaction.AccountId}' was not found"); ;
 
         account.RevertTransaction(transaction);
 
@@ -106,7 +101,7 @@ public sealed class AccountsService(
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID {TransactionId} removed successfully from account {AccountId}",
+            "Transaction with ID {TransactionId} removed successfully from account with ID {AccountId}",
             transaction.Id,
             account.Id);
     }

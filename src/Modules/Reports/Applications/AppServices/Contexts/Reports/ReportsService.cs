@@ -24,7 +24,7 @@ public sealed class ReportsService(
     ILogger<ReportsService> logger) : IReportsService
 {
     /// <inheritdoc/>
-    public async ValueTask<Guid> GenerateReportAsync(ReportGenerationModel request, CancellationToken cancellationToken)
+    public ValueTask<Guid> GenerateReport(ReportGenerationModel request, CancellationToken cancellationToken)
     {
         var userId = authorizationData.Value.UserId;
 
@@ -43,7 +43,7 @@ public sealed class ReportsService(
         backgroundJobClient.Enqueue<ReportGenerationJob>(
             job => job.ExecuteAsync(parameters, cancellationToken));
 
-        return parameters.ReportId;
+        return ValueTask.FromResult(parameters.ReportId);
     }
 
     /// <inheritdoc/>

@@ -21,11 +21,4 @@ public sealed class UsersService(
         var userId = authorizationData.Value.UserId;
         return await keycloakUserApiClient.GetUserAsync(userId, cancellationToken);
     }
-
-    /// <inheritdoc />
-    public async Task EmailVerificationAsync(EmailOnlyModel request, CancellationToken cancellationToken)
-    {
-        var userId = authorizationData.Value.UserId;
-        await keycloakUserApiClient.EmailVerificationAsync(userId, request.Email, cancellationToken);
-    }
 }

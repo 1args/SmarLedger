@@ -8,7 +8,7 @@
 /// <param name="FirstName">First name.</param>
 /// <param name="LastName">Last name.</param>
 /// <param name="Password">Password.</param>
-public sealed record UserCreationModel(
+public sealed record UserCreationModel( 
     string Username,
     string Email,
     string FirstName,

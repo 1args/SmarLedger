@@ -14,12 +14,4 @@ public interface IKeycloakUserApiClient
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Response containing user information.</returns>
     Task<UserResponse> GetUserAsync(Guid userId, CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Confirms user's email.
-    /// </summary>
-    /// <param name="userId">User ID.</param>
-    /// <param name="email">Email.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task EmailVerificationAsync(Guid userId, string email, CancellationToken cancellationToken);
 }

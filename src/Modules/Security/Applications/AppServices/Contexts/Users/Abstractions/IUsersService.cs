@@ -14,11 +14,4 @@ public interface IUsersService
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Response containing </returns>
     Task<UserResponse> GetCurrentUserAsync(CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Confirms the email address of the current user.
-    /// </summary>
-    /// <param name="request">Model containing user email.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task EmailVerificationAsync(EmailOnlyModel request, CancellationToken cancellationToken);
 }

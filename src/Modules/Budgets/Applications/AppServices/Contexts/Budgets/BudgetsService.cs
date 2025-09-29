@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Applications.AppServices.Extensions;
 using SmartLedger.Common.Contracts.Authorization;
@@ -13,8 +12,14 @@ using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Spec
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.Budgets;
 using SmartLedger.Modules.Budgets.Domain.Aggregates;
 using SmartLedger.Modules.Budgets.Domain.Entities;
+using SmartLedger.Modules.Budgets.Domain.Enums;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
 using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
+using SmartLedger.Modules.Notifications.Contracts.Common.Notifications;
+using SmartLedger.Modules.Notifications.Contracts.Enums;
+using SmartLedger.Modules.Notifications.Contracts.Events;
+using SmartLedger.Modules.Notifications.Contracts.Requests;
+using System.Data;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 
@@ -22,6 +27,7 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsService(
     IRepository<Budget, BudgetsWriteDbContext> budgetsRepository,
     IRepository<BudgetCategory, BudgetsWriteDbContext> budgetItemsRepository,
+    IEventBus eventBus,
     Lazy<IAuthorizationData> authorizationData,
     ITransactionManager transactionManager,
     ILogger<BudgetsService> logger) : IBudgetsService
@@ -163,7 +169,9 @@ public sealed class BudgetsService(
             .ToList()
             .ForEach(x => updateAction(x.BudgetItem, amount, x.Period));
 
-        await budgetsRepository.UpdateRangeAsync(budgets.ToArray(), cancellationToken);
+        await Task.WhenAll(
+            budgetsRepository.UpdateRangeAsync(budgets.ToArray(), cancellationToken),
+            NotifyAsync(budgets, cancellationToken));
 
         logger.LogInformation(
             "Spending amount updated for category {request.Category} with amount {request.Amount} for user with ID {request.UserId}",
@@ -231,5 +239,30 @@ public sealed class BudgetsService(
             ?? throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
 
         return category;
+    }
+
+
+    private async Task NotifyAsync(List<Budget> budgets, CancellationToken cancellationToken)
+    {
+        var userId = authorizationData.Value.UserId;
+
+        var exceededCategories = budgets
+            .SelectMany(b => b.Categories)
+            .Where(c => c.Status == BudgetCategoryStatus.Exceeded);
+
+        foreach (var category in exceededCategories)
+        {
+            var limitExceededEvent = new NotificationSentEvent(
+                NotificationType.LimitExceeded,
+                userId,
+                new Dictionary<string, string>
+                {
+                    { NotificationKeys.LimitAmount, category.Limit.Value.ToString() },
+                    { NotificationKeys.CurrentAmount, category.SpentAmount.Value.ToString() },
+                    { NotificationKeys.ExceededAmount, (category.SpentAmount.Value - category.Limit.Value).ToString() }
+                });
+
+            await eventBus.PublishAsync(limitExceededEvent, cancellationToken);
+        }
     }
 }

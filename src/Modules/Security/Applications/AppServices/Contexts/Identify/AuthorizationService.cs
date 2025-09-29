@@ -20,6 +20,10 @@ public sealed class AuthorizationService(
     /// <inheritdoc />
     public async Task RegisterAsync(UserRegistrationModel request, CancellationToken cancellationToken)
     {
+        logger.LogInformation(
+            "Ininiating user registration for user with username {Username} and email {Email}",
+            request.Username, request.Email);
+
         var userCreationModel = new UserCreationModel
         (
             request.Username,
@@ -29,16 +33,25 @@ public sealed class AuthorizationService(
             request.Password
         );
 
-        await keycloakAuthorizationApiClient.CreateUserAsync(userCreationModel, cancellationToken);
+        var userId = await keycloakAuthorizationApiClient.CreateUserAsync(userCreationModel, cancellationToken);
+        await keycloakAuthorizationApiClient.SendVerificationEmailAsync(userId, cancellationToken);
+
+        logger.LogInformation(
+            "Registration successfully completed for user with username {Username} and ID {UserId}", 
+            request.Username, userId);
     }
 
     /// <inheritdoc />
     public async Task<LoginResponse> AuthorizeAsync(LoginModel request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Initiating an authorization attempt for a username {Username}", request.Username);
+
         var tokenResponse = await keycloakAuthorizationApiClient.AuthorizeAsync(
             request.Username,
             request.Password, 
             cancellationToken);
+
+        logger.LogInformation("User with username {Username} successfully authorized", request.Username);
 
         return tokenResponse.MapToLoginResponse();
     }
@@ -55,7 +68,11 @@ public sealed class AuthorizationService(
     {
         var userId = authorizationData.Value.UserId;
 
+        logger.LogInformation("Initiating logout from all sessions for user with ID {UserId}", userId);
+
         await keycloakAuthorizationApiClient.LogoutAsync(userId, cancellationToken);
+
+        logger.LogInformation("Successfully logged out of all sessions for user with ID {UserId}", userId);
     }
 
     /// <inheritdoc />

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SmartLedger.Common.Contracts.Exceptions;
 using SmartLedger.Modules.Secirity.Clients.Keycloak.Generated;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 using SmartLedger.Modules.Security.Clients.Keycloak.Mappers;
@@ -12,7 +13,6 @@ namespace SmartLedger.Modules.Security.Clients.Keycloak;
 
 /// <inheritdoc />
 public sealed class KeycloakUserApiClient(
-    IHttpClientFactory httpClientFactory,
     IKeycloakGeneratedApiClient keycloakGeneratedApiClient,
     IOptions<KeycloakAuthorizationOptions> keycloakAuthorizationOptions,
     ILogger<KeycloakUserApiClient> logger) : IKeycloakUserApiClient
@@ -22,38 +22,8 @@ public sealed class KeycloakUserApiClient(
     /// <inheritdoc />
     public async Task<UserResponse> GetUserAsync(Guid userId, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving user information for user with ID {UserId}", userId);
-
         var userRepresentation = await GetKeycloakUserAsync(userId, cancellationToken);
-
-        if (userRepresentation is null)
-        {
-            logger.LogWarning("User with ID {UserId} not found for retrieving user information", userId);
-            throw new KeycloakApiException($"User with ID {userId} not found.");
-        }
-
-        logger.LogInformation("Successfully retrieved user information for user with ID {UserId}", userId);
-
         return userRepresentation.MapToUserResponse(userId);
-    }
-
-    /// <inheritdoc />
-    public async Task EmailVerificationAsync(Guid userId, string email, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Verifying email for user with ID {UserId} and email {Email}", userId, email);
-
-        var userRepresentation = await GetKeycloakUserAsync(userId, cancellationToken);
-
-        if (userRepresentation is null)
-        {
-            logger.LogWarning("User with ID {UserId} not found for email verification", userId);
-            throw new KeycloakApiException($"User with ID {userId} not found.");
-        }
-
-        userRepresentation.EmailVerified = email == userRepresentation.Email;
-        await UpdateUserAsync(userRepresentation, cancellationToken);
-
-        logger.LogInformation("Email verification completed for user with ID {UserId} and email {Email}", userId, email);
     }
 
     /// <summary>
@@ -66,12 +36,13 @@ public sealed class KeycloakUserApiClient(
             var userRepresentation = await keycloakGeneratedApiClient.UsersGET2Async(
                 _keycloakAuthorizationOptions.Realm,
                 userId.ToString(),
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken) 
+                ?? throw new NotFoundException($"User with ID {userId} not found.");
 
             return userRepresentation;
 
         }
-        catch (Exception ex)
+        catch (KeycloakGeneratedApiException ex)
         {
             const string errorMessage = "Failed to retrieve user information for user with ID";
             logger.LogError(ex, errorMessage + " {UserId}", userId);
@@ -92,7 +63,7 @@ public sealed class KeycloakUserApiClient(
                 userRepresentation,
                 cancellationToken);
         }
-        catch (Exception ex)
+        catch (KeycloakGeneratedApiException ex)
         {
             const string errorMessage = "Failed to update user information for user with ID";
             var data = new { userRepresentation.Email, userRepresentation.EmailVerified };
