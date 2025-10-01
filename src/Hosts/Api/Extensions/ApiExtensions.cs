@@ -9,6 +9,7 @@ using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Options;
 using SmartLedger.Common.Cqrs.Extensions;
 using SmartLedger.Common.Hosts.Features;
+using SmartLedger.Common.Hosts.RateLimiting;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Common.Infrastructures.FileStorage;
 using SmartLedger.Common.Infrastructures.FileStorage.Abstractions;
@@ -86,7 +87,8 @@ public static class ApiExtensions
             .Configure<KeycloakAuthorizationOptions>(configuration.GetSection(nameof(KeycloakAuthorizationOptions)))
             .Configure<MinioOptions>(configuration.GetSection(nameof(MinioOptions)))
             .Configure<HybridCacheOptions>(configuration.GetSection(nameof(HybridCacheOptions)))
-            .Configure<EmailSendingOptions>(configuration.GetSection(nameof(EmailSendingOptions)));
+            .Configure<EmailSendingOptions>(configuration.GetSection(nameof(EmailSendingOptions)))
+            .Configure<RateLimitOptions>(configuration.GetSection(nameof(RateLimitOptions)));
 
         return services;
     }

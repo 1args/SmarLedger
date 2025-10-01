@@ -9,16 +9,16 @@ namespace SmartLedger.Hosts.Api.Middlewares;
 public class AuthorizationMiddleware(RequestDelegate next)
 {
     /// <summary>Path to the register endpoint.</summary>
-    private const string RegisterPath = "/identify/register";
+    private static readonly string RegisterPath = "/identify/register";
 
     /// <summary>Path to the hangfire endpoint.</summary>
-    private const string HangfirePath = "/hangfire";
+    private static readonly string HangfirePath = "/hangfire";
 
     /// <summary>Path to the login endpoint.</summary>
-    private const string LoginPath = "/identify/login";
+    private static readonly string LoginPath = "/identify/login";
 
     /// <summary>Path to the refresh token endpoint.</summary>
-    private const string RefreshTokenPath = "/identify/refresh-token";
+    private static readonly string RefreshTokenPath = "/identify/refresh-token";
 
     /// <summary>List of allowed paths that do not require authorization.</summary>
     private static readonly string[] AllowedPaths =
@@ -33,36 +33,36 @@ public class AuthorizationMiddleware(RequestDelegate next)
     /// Invokes the middleware to handle authorization by checking the user ID in the request context.
     /// </summary>
     /// <param name="context">Http Context.</param>
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext httpContext)
     {
-        if (IsPathAllowed(context.Request.Path))
+        if (IsPathAllowed(httpContext.Request.Path))
         {
-            await next(context);
+            await next(httpContext);
             return;
         }
 
-        var userId = FindUserId(context.User);
+        var userId = FindUserId(httpContext.User);
 
         if (string.IsNullOrEmpty(userId))
         {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync("Missing 'sub' claim in token.");
+            httpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await httpContext.Response.WriteAsync("Missing 'sub' claim in token.");
 
             return;
         }
 
         if (!Guid.TryParse(userId, out var passedUserId))
         {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync($"Invalid user ID format: {userId}");
+            httpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await httpContext.Response.WriteAsync($"Invalid user ID format: {userId}");
 
             return;
         }
 
-        var authorizationData = context.RequestServices.GetRequiredService<Lazy<IAuthorizationData>>();
+        var authorizationData = httpContext.RequestServices.GetRequiredService<Lazy<IAuthorizationData>>();
         authorizationData.Value.UserId = passedUserId;
 
-        await next(context);
+        await next(httpContext);
     }
 
     /// <summary>
