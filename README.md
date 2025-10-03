@@ -6,11 +6,12 @@ API for tracking financial expenses and income for both individuals and small bu
 
 ## Content
 
-- i. [Introduction](https://www.google.com/)
-- ii. [Architecture](https://www.google.com/)
-    - a. [Domain-Driven Design](https://www.google.com/)
-    - b. [Event-Driven Design](https://www.google.com/)
-    - c. [CQRS](https://www.google.com/)
+- i. [Introduction](https://github.com/1args/SmartLedger?tab=readme-ov-file#introduction/)
+- ii. [Architecture](https://github.com/1args/SmartLedger/blob/main/docs/architecture.md#architecture/)
+    - a. [Layers](https://github.com/1args/SmartLedger/blob/main/docs/architecture.md#layers)
+    - b. [Domain-Driven Design](https://www.google.com/)
+    - c. [Event-Driven Design](https://www.google.com/)
+    - d. [CQRS](https://www.google.com/)
 - iii. [Modules](https://www.google.com/)
     - a. [Security](https://www.google.com/)
     - b. [BankAccounts](https://www.google.com/)
