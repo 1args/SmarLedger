@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Webhooks.Applications.Handlers.Contexts.Webhooks.Commands.CreateWebhook;
 using SmartLedger.Modules.Webhooks.Contracts.Requests;
 
@@ -24,8 +23,6 @@ public static class WebhooksEndpoints
             .WithOpenApi();
 
         endpoints.MapPost("/", CreateWebhookAsync)
-             .RequireRateLimiting(RateLimitPolicy.WriteOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("CreateWebhook")
             .WithSummary("Creates a new webhook subscription.")
             .WithDescription("Creates a new webhook subscription for the specified event type and callback URL.")

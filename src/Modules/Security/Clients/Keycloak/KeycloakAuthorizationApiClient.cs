@@ -25,7 +25,7 @@ public sealed class KeycloakAuthorizationApiClient(
     private readonly KeycloakAuthorizationOptions _keycloakAuthorizationOptions = keycloakAuthorizationOptions.Value;
 
     /// <summary>Message indicating that the authorization server failed to provide necessary information.</summary>
-    private const string AuthorizationServerFailedMessage = "Failed to get the necessary information from the authorization server.";
+    private static readonly string AuthorizationServerFailedMessage = "Failed to get the necessary information from the authorization server.";
 
     /// <summary>Default request timeout (in seconds) for HTTP calls to Keycloak.</summary>
     private const int DefaultTimeoutSeconds = 30;

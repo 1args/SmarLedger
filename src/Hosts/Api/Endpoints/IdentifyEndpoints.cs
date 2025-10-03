@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Hosts.Api.Helpers;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Login;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Identify.Commands.Logout;
@@ -30,8 +29,6 @@ public static class IdentifyEndpoints
             .WithOpenApi();
 
         endpoints.MapPost("/register", RegisterAsync)
-            .RequireRateLimiting(RateLimitPolicy.Authentication)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("Register")
             .WithSummary("Registers a new user.")
             .WithDescription("Creates a new user account with the provided username, email, first name, last name, and password.")
@@ -39,8 +36,6 @@ public static class IdentifyEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapPost("/login", LoginAsync)
-            .RequireRateLimiting(RateLimitPolicy.Authentication)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("Login")
             .WithSummary("Authenticates a user.")
             .WithDescription("Authenticates a user using username and password, returning access and refresh tokens.")
@@ -49,7 +44,6 @@ public static class IdentifyEndpoints
             .ProducesProblem(StatusCodes.Status401Unauthorized);
 
         endpoints.MapPost("/refresh-token", RefreshTokenAsync)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("RefreshToken")
             .WithSummary("Refreshes the access token.")
             .WithDescription("Uses a valid refresh token to generate a new access token.")
@@ -58,9 +52,7 @@ public static class IdentifyEndpoints
             .ProducesProblem(StatusCodes.Status401Unauthorized);
 
         endpoints.MapPost("/logout", LogoutAsync)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .RequireAuthorization()
-            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
             .WithName("Logout")
             .WithSummary("Logs out the current user.")
             .WithDescription("Ends the current user's session and invalidates active tokens.")
@@ -69,8 +61,6 @@ public static class IdentifyEndpoints
 
         endpoints.MapGet("/me/sessions", GetUserSessionsAsync)
             .RequireAuthorization()
-            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetUserSessions")
             .WithSummary("Retrieves the current user's active sessions.")
             .WithDescription("Returns a list of all active sessions associated with the currently authenticated user.")

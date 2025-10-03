@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Reports.Applications.Handlers.Contexts.Reports.Commands.GenerateReport;
 using SmartLedger.Modules.Reports.Applications.Handlers.Contexts.Reports.Queries.GetReport;
 using SmartLedger.Modules.Reports.Contracts.Requests;
@@ -23,12 +22,9 @@ public static class ReportsEndpoints
         var endpoints = app.MapGroup("/reports")
             .RequireAuthorization()
             .WithTags("Reports")
-            .WithOpenApi()
-            .RequireRateLimiting(RateLimitPolicy.Global)
-            .RequireRateLimiting(RateLimitPolicy.ReportGeneration);
+            .WithOpenApi();
 
         endpoints.MapPost("/generate", GenerateReportAsync)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GenerateReport")
             .WithSummary("Generates a new report.")
             .WithDescription("Creates a new report for the specified period and type. Returns the unique report identifier.")
@@ -36,7 +32,6 @@ public static class ReportsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapGet("/{reportId:guid}", GetReportAsync)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetReport")
             .WithSummary("Retrieves a report by its identifier.")
             .WithDescription("Fetches the generated report in PDF format using its unique identifier.")

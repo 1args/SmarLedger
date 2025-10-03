@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.AddTransaction;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
@@ -35,8 +34,6 @@ public static class AccountsEndpoints
             .WithOpenApi();
 
         endpoints.MapPost("/", CreateAccountAsync)
-            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("CreateAccount")
             .WithSummary("Creates a new account.")
             .WithDescription("Creates a new account with the specified name and user ID.")
@@ -44,8 +41,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         endpoints.MapDelete("/{accountId:guid}", DeleteAccountAsync)
-            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("DeleteAccount")
             .WithSummary("Deletes an account.")
             .WithDescription("Removes an account specified by its unique ID.")
@@ -53,8 +48,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/{accountId:guid}/transactions", AddTransactionAsync)
-            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("AddTransaction")
             .WithSummary("Adds a transaction to an account.")
             .WithDescription("Adds a new transaction to the specified account with details such as amount, type, category, and notes.")
@@ -63,8 +56,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapDelete("/{accountId:guid}/transactions/{transactionId:guid}", RemoveTransactionAsync)
-            .RequireRateLimiting(RateLimitPolicy.WriteOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("RemoveTransaction")
             .WithSummary("Removes a transaction from an account")
             .WithDescription("Removes a specific transaction from the specified account.")
@@ -73,8 +64,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{accountId:guid}/{transactionId:guid}", GetTransactionAsync)
-            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetTransaction")
             .WithSummary("Retrieves a transaction by its identifier.")
             .WithDescription("Retrieves the transaction details for the specified transaction ID.")
@@ -83,8 +72,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapGet("/{accountId:guid}", GetAccountAsync)
-            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetAccount")
             .WithSummary("Retrieves an account by its identifier.")
             .WithDescription("Retrieves the account details for the specified account ID.")
@@ -93,8 +80,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         app.MapPost("/accounts/me/search", GetPaginatedAccountsAsync)
-            .RequireRateLimiting(RateLimitPolicy.SearchOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetPaginatedAccounts")
             .WithSummary("Retrieves a paginated list of accounts for the specified user.")
             .WithDescription("Returns a paginated list of accounts associated with the given user ID.")
@@ -104,8 +89,6 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         endpoints.MapPost("/{accountId:guid}/transactions/search", GetPaginatedTransactionsAsync)
-            .RequireRateLimiting(RateLimitPolicy.SearchOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetPaginatedTransactions")
             .WithSummary("Retrieves a paginated list of transactions for the specified account.")
             .WithDescription("Returns a paginated list of transactions associated with the given account ID.")

@@ -5,12 +5,16 @@ using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 
 namespace SmartLedger.Common.Hosts.RateLimiting;
 
-public sealed class RateLimiter(
+/// <summary>
+/// Class used to represent the rate limiter.
+/// </summary>
+public sealed class DefaultRateLimiter(
     IHybridCache hybridCache,
     IOptions<RateLimitOptions> rateLimitOptions) : IRateLimiter
 {
     private readonly RateLimitOptions _rateLimitOptions = rateLimitOptions.Value;
 
+    /// <inheritdoc/>
     public async Task<bool> IsAllowedAsync(string ipAddress, string method, string path, CancellationToken cancellationToken)
     {
         if(string.IsNullOrWhiteSpace(ipAddress))
@@ -69,6 +73,9 @@ public sealed class RateLimiter(
     private string GenerateKey(string ipAddress, string method, string path, long window) =>
          $"rate_limit:{ipAddress}:{method}:{path}:{window}";
 
+    /// <summary>
+    /// Calculates the current and previous window numbers based on the current time.
+    /// </summary>
     private (long currentWindow, long previousWindow) GetCurrentAndPreviousWindows()
     {
         var windowSizeInSeconds = _rateLimitOptions.WindowSizeInSeconds;
@@ -80,6 +87,10 @@ public sealed class RateLimiter(
         return (currentWindow, previousWindow);
     }
 
+    /// <summary>
+    /// Calculates the weight of the previous window based on how much time has elapsed
+    /// in the current window.
+    /// </summary>
     private double GetOverlapWeight()
     {
         var windowSizeInSeconds = _rateLimitOptions.WindowSizeInSeconds;

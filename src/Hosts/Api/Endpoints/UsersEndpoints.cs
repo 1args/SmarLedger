@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartLedger.Common.Applications.Handlers.Abstractions;
-using SmartLedger.Hosts.Api.Features.RateLimiting;
 using SmartLedger.Modules.Security.Applications.Handlers.Contexts.Users.Queries.GetCurrentUser;
 using SmartLedger.Modules.Security.Contracts.Responses.Users;
 
@@ -20,13 +19,10 @@ public static class UsersEndpoints
     {
         var endpoints = app.MapGroup("/users")
             .RequireAuthorization()
-            .RequireRateLimiting(RateLimitPolicy.Global)
             .WithTags("Users")
             .WithOpenApi();
 
         endpoints.MapGet("/me", GetCurrentUserAsync)
-            .RequireRateLimiting(RateLimitPolicy.ReadOperations)
-            .RequireRateLimiting(RateLimitPolicy.IpAddress)
             .WithName("GetCurrentUser")
             .WithSummary("Retrieves the current user.")
             .WithDescription("Returns the details of the currently authenticated user.")
