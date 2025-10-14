@@ -14,14 +14,17 @@ public abstract class BaseDbContextConfigurator<TDbContext>(
     ILoggerFactory loggerFactory)
     : IDbContextOptionsConfigurator<TDbContext> where TDbContext : DbContext
 {
+    /// <summary> Database connection string.</summary>
+    protected abstract string ConnectionStringName { get; }
+
     /// <inheritdoc />
     public void Configure(DbContextOptionsBuilder<TDbContext> optionsBuilder)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = configuration.GetConnectionString(ConnectionStringName);
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
-            throw new InvalidOperationException($"Connection string '{connectionString}' could not be found.");
+            throw new InvalidOperationException($"Connection string '{ConnectionStringName}' could not be found.");
         }
 
         optionsBuilder.UseLoggerFactory(loggerFactory)

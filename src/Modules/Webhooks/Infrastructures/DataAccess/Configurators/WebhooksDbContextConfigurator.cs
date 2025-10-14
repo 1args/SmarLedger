@@ -11,4 +11,8 @@ namespace SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Configurators;
 public sealed class WebhooksDbContextConfigurator(
     IConfiguration configuration,
     ILoggerFactory loggerFactory)
-    : BaseDbContextConfigurator<WebhooksDbContext>(configuration, loggerFactory);
+    : BaseDbContextConfigurator<WebhooksDbContext>(configuration, loggerFactory)
+{
+    /// <inheritdoc />
+    protected override string ConnectionStringName => "Webhooks";
+}

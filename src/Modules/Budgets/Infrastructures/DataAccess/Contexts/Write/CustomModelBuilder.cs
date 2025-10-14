@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurations;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
 using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write.Configurations;
@@ -21,7 +22,8 @@ public static class CustomModelBuilder
             .SetDefaultDateTimeKind(DateTimeKind.Utc);
 
         modelBuilder
-            .Ignore<BudgetPeriod>();
+            .Ignore<BudgetPeriod>()
+            .Ignore<CreationDate>();
 
         modelBuilder
             .ApplyConfiguration(new BudgetConfiguration())

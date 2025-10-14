@@ -10,8 +10,11 @@ namespace SmartLedger.Modules.Budgets.Domain.Entities;
 /// <summary>
 /// Represents a single category within a budget, tracking limit and spending.
 /// </summary>
-public sealed class BudgetCategory : Entity<Guid>
+public sealed class BudgetCategory
 {
+    /// <summary>Budget ID.</summary>
+    public BudgetCategoryId Id { get; private set; }
+
     /// <summary>Category this item represents.</summary>
     public FinancialCategory Category { get; private set; }
 
@@ -24,11 +27,11 @@ public sealed class BudgetCategory : Entity<Guid>
     /// <summary>Current status of the item (e.g., Active, Exceeded).</summary>
     public BudgetCategoryStatus Status { get; private set; }
 
-    /// <summary>Date and time when budget item was created.</summary>
-    public DateTime CreatedAt { get; private set; }
-
     /// <summary>ID of the budget this item belongs to.</summary>
-    public Guid BudgetId { get; private set; }
+    public BudgetId BudgetId { get; private set; }
+
+    /// <summary>Date and time when budget item was created.</summary>
+    public CreationDate CreatedAt { get; private set; }
 
     /// <summary>
     /// Constructor for EF Core.
@@ -38,33 +41,45 @@ public sealed class BudgetCategory : Entity<Guid>
     /// <summary>
     /// Private constructor used by factory method.
     /// </summary>
-    private BudgetCategory(FinancialCategory category, BudgetCategoryLimit limit, DateTime createdAt)
+    private BudgetCategory(
+        BudgetCategoryId budgetCategoryId,
+        FinancialCategory category, 
+        BudgetCategoryLimit limit,
+        BudgetId budgetId,
+        CreationDate createdAt)
     {
+        Id = budgetCategoryId;
         Category = category;
         Limit = limit;
         SpentAmount = Money.Zero;
         Status = BudgetCategoryStatus.Active;
+        BudgetId = budgetId;
         CreatedAt = createdAt;
     }
 
     /// <summary>
     /// Factory method to create a new <see cref="BudgetCategory"/>.
     /// </summary>
-    /// <param name="category">Transaction category.</param>
+    /// <param name="budgetCategoryId">Budget category ID.</param>
+    /// <param name="category">Financial category.</param>
     /// <param name="limit">Spending limit for the category.</param>
+    /// <param name="budgetId">Budget ID.</param>
     /// <param name="createdAt">Date and time when budget item was created.</param>
     /// <returns>New instance of <see cref="BudgetCategory"/>.</returns>
     /// <exception cref="DomainValidationException">Thrown if category is 'Unknown' or limit is null.</exception>
-    public static BudgetCategory Create(FinancialCategory category, BudgetCategoryLimit limit, DateTime createdAt)
+    public static BudgetCategory Create(
+        Guid budgetCategoryId,
+        FinancialCategory category,
+        decimal limit,
+        Guid budgetId,
+        DateTime createdAt)
     {
-        ArgumentNullException.ThrowIfNull(limit, nameof(limit));
-
-        if (category == FinancialCategory.Unknown)
-        {
-            throw new DomainValidationException(nameof(category), "Financial category cannot be 'Unknown'.");
-        }
-
-        return new(category, limit, createdAt);
+        return new(
+            BudgetCategoryId.Create(budgetCategoryId),
+            category,
+            BudgetCategoryLimit.Create(limit),
+            BudgetId.Create(budgetId),
+            CreationDate.Create(createdAt));
     }
 
     /// <summary>

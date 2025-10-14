@@ -28,37 +28,46 @@ public sealed class BudgetCategoryReadModelConfiguration : IEntityTypeConfigurat
             .IsRequired();
 
         builder.Property(bc => bc.Category)
+            .HasColumnName("Category")
             .HasMaxLength(PropertyLengthConstants.Length20)
             .IsRequired();
 
         builder.Property(bc => bc.Limit)
+            .HasColumnName("Limit")
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(bc => bc.SpentAmount)
+            .HasColumnName("SpentAmount")
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(bc => bc.Status)
+            .HasColumnName("Status")
             .HasMaxLength(PropertyLengthConstants.Length20)
             .IsRequired();
 
         builder.Property(bc => bc.BudgetName)
+            .HasColumnName("BudgetName")
             .HasMaxLength(PropertyLengthConstants.Length100);
 
         builder.Property(b => b.StartDate)
+            .HasColumnName("StartDate")
             .IsDateTime()
             .IsRequired();
 
         builder.Property(b => b.EndDate)
+            .HasColumnName("EndDate")
             .IsDateTime()
             .IsRequired();
 
         builder.Property(bc => bc.CreatedAt)
+            .HasColumnName("CreatedAt")
             .IsDateTime()
             .IsRequired();
 
         builder.Property(bc => bc.LastUpdatedAt)
+            .HasColumnName("LastUpdatedAt")
             .IsDateTime()
             .IsRequired();
 

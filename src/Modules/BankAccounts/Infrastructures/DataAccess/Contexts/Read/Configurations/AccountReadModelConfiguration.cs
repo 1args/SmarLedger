@@ -25,18 +25,22 @@ public sealed class AccountReadModelConfiguration : IEntityTypeConfiguration<Acc
             .IsRequired();
 
         builder.Property(a => a.Name)
+            .HasColumnName("Name")
             .HasMaxLength(PropertyLengthConstants.Length100)
             .IsRequired();
 
         builder.Property(a => a.Balance)
+            .HasColumnName("Balance")
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(a => a.CreatedAt)
+            .HasColumnName("CreatedAt")
             .IsDateTime()
             .IsRequired();
 
         builder.Property(a => a.LastUpdatedAt)
+            .HasColumnName("LastUpdatedAt")
             .IsDateTime()
             .IsRequired();
 

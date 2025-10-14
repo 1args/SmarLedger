@@ -32,7 +32,6 @@ public static class WebApplicationExtensions
         application.UseExceptionHandler();
         application.UseMiddleware<AuthorizationMiddleware>();
         application.UseMiddleware<RateLimitingMiddleware>();
-        application.UseRateLimiter();
         application.MapApiEndpoints();
         application.UseHangfireDashboard();
 

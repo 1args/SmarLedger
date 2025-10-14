@@ -35,7 +35,7 @@ public static class BankAccountsModuleExtensions
     {
         services
             .AddDataAccess<BackAccountsWriteDbContext, BankAccountsWriteDbContextConfigurator>()
-            .AddDataAccess<BackAccountsReadDbContext, BankAccountsDbContextConfigurator>();
+            .AddDataAccess<BackAccountsReadDbContext, BankAccountsReadDbContextConfigurator>();
 
         return services;
     }

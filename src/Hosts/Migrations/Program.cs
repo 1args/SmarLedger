@@ -6,14 +6,14 @@ using Microsoft.Extensions.Hosting;
 using SmartLedger.Common.Hosts.Migrations;
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
-using SmartLedger.Hosts.Migrations;
+using SmartLedger.Hosts.Outbox.Migrations;
 
 // Entry point for executing database migrations
 var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureServices((context, services) =>
 {
-    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = context.Configuration.GetConnectionString("Events");
 
     services.AddDbContext<OutboxDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,

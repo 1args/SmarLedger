@@ -63,7 +63,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
-        endpoints.MapGet("/{accountId:guid}/{transactionId:guid}", GetTransactionAsync)
+        endpoints.MapGet("/{accountId:guid}/transactions/{transactionId:guid}", GetTransactionAsync)
             .WithName("GetTransaction")
             .WithSummary("Retrieves a transaction by its identifier.")
             .WithDescription("Retrieves the transaction details for the specified transaction ID.")
@@ -79,7 +79,7 @@ public static class AccountsEndpoints
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
-        app.MapPost("/accounts/me/search", GetPaginatedAccountsAsync)
+        app.MapPost("/accounts/me", GetPaginatedAccountsAsync)
             .WithName("GetPaginatedAccounts")
             .WithSummary("Retrieves a paginated list of accounts for the specified user.")
             .WithDescription("Returns a paginated list of accounts associated with the given user ID.")

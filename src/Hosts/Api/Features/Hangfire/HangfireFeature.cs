@@ -5,11 +5,15 @@ using SmartLedger.Common.Hosts.Features.Abstractions;
 
 namespace SmartLedger.Hosts.Api.Features.Hangfire;
 
+/// <summary>
+/// Feature for configuring Hangfire.
+/// </summary>
 public class HangfireFeature : IAppFeature
 {
+    /// <inheritdoc />
     public void UseFeature(IServiceCollection services, IConfiguration configuration)
     {
-        var connectingString = configuration.GetConnectionString("DefaultConnection");
+        var connectingString = configuration.GetConnectionString("BackgroundJobs");
         var connectionFactory = new NpgsqlConnectionFactory(connectingString, new PostgreSqlStorageOptions());
 
         services.AddHangfire(hangfireConfiguration =>

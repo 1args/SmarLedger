@@ -10,10 +10,13 @@ namespace SmartLedger.Modules.BankAccounts.Domain.Entities;
 /// <summary>
 /// Represents a financial transaction belonging to an account.
 /// </summary>
-public sealed class Transaction : Entity<Guid>
+public sealed class Transaction
 {
+    /// <summary>Transaction ID.</summary>
+    public TransactionId Id { get; private set; }
+
     /// <summary>Account ID.</summary>
-    public Guid AccountId { get; private set; }
+    public AccountId AccountId { get; private set; }
 
     /// <summary>Transaction amount.</summary>
     public Money Amount { get; private set; }
@@ -25,7 +28,7 @@ public sealed class Transaction : Entity<Guid>
     public FinancialCategory Category { get; private set; }
 
     /// <summary>Date and time when transaction was created.</summary>
-    public DateTime CreatedAt { get; private set; }
+    public CreationDate CreatedAt { get; private set; }
 
     /// <summary>Description or notes of the transaction.</summary>
     public TransactionDescription Notes { get; private set; }
@@ -39,13 +42,15 @@ public sealed class Transaction : Entity<Guid>
     /// Private constructor used by the factory Create method.
     /// </summary>
     private Transaction(
-        Guid accountId,
+        TransactionId transactionId,
+        AccountId accountId,
         Money amount,
         TransactionType type,
         FinancialCategory category,
-        DateTime createdAt,
+        CreationDate createdAt,
         TransactionDescription notes)
     {
+        Id = transactionId;
         AccountId = accountId;
         Amount = amount;
         Type = type;
@@ -57,7 +62,8 @@ public sealed class Transaction : Entity<Guid>
     /// <summary>
     /// Factory method to create a new instance of the <see cref="Transaction"/> class.
     /// </summary>
-    /// <param name="accountId">Account identifier.</param>
+    /// <param name="transactionId">Transaction ID.</param>
+    /// <param name="accountId">Account ID.</param>
     /// <param name="amount">Transaction amount.</param>
     /// <param name="type">Type of the transaction.</param>
     /// <param name="category">Category.</param>
@@ -66,31 +72,27 @@ public sealed class Transaction : Entity<Guid>
     /// <returns>New <see cref="Transaction"/> instance.</returns>
     /// <exception cref="DomainValidationException">Thrown when input data is invalid.</exception>
     public static Transaction Create(
+        Guid transactionId,
         Guid accountId,
-        Money amount,
+        decimal amount,
         TransactionType type,
         FinancialCategory category,
         DateTime createdAt,
-        TransactionDescription notes)
+        string notes)
     {
-        if (accountId == Guid.Empty)
+        if (amount > Money.MaxTransactionAmount)
         {
-            throw new DomainValidationException(nameof(accountId), "Account ID cannot be empty.");
-        }
-        if (category == FinancialCategory.Unknown)
-        {
-            throw new DomainValidationException(nameof(category), "Transaction category cannot be 'Unknown'.");
-        }
-        if (amount.Value > Money.MaxTransactionAmount)
-        {
-            throw new DomainValidationException(nameof(amount),
-                $"Transaction amount cannot exceed {Money.MaxTransactionAmount:N0}.");
+            throw new DomainValidationException(nameof(amount), $"Transaction amount cannot exceed {Money.MaxTransactionAmount:N0}.");
         }
 
-        ArgumentNullException.ThrowIfNull(amount, nameof(amount));
-        ArgumentNullException.ThrowIfNull(notes, nameof(notes));
-
-        return new(accountId, amount, type, category, createdAt, notes);
+        return new Transaction(
+            TransactionId.Create(transactionId),
+            AccountId.Create(accountId),
+            Money.Create(amount),
+            type,
+            category,
+            CreationDate.Create(createdAt),
+            TransactionDescription.Create(notes));
     }
 
     /// <summary>

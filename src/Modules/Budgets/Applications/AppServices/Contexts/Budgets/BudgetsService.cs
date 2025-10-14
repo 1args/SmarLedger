@@ -41,18 +41,21 @@ public sealed class BudgetsService(
             "Creating budget with name {Name} for user with ID {UserId}", 
             request.Name, userId);
 
-        var name = BudgetName.Create(request.Name);
-        var period = BudgetPeriod.Create(request.StartDate, request.EndDate);
-
-        var budget = Budget.Create(userId, name, period, request.CreatedAt);
+        var budget = Budget.Create(
+            Guid.NewGuid(),
+            userId,
+            request.Name,
+            request.StartDate,
+            request.EndDate,
+            request.CreatedAt);
 
         await budgetsRepository.AddAsync(budget, cancellationToken);
 
         logger.LogInformation(
             "Budget with ID {BudgetId} created successfully for user with ID {UserId}",
-            budget.Id, userId);
+            budget.Id.Value, userId);
 
-        return (budget.Id, userId);
+        return (budget.Id.Value, userId);
     }
 
     /// <inheritdoc />
@@ -64,8 +67,12 @@ public sealed class BudgetsService(
 
         var budget = await GetBudgetAsync(request.BudgetId, useInclude: true, cancellationToken : cancellationToken);
 
-        var limit = BudgetCategoryLimit.Create(request.Limit);
-        var category = BudgetCategory.Create(request.Category, limit, request.CreatedAt);
+        var category = BudgetCategory.Create(
+            Guid.NewGuid(),
+            request.Category, 
+            request.Limit,
+            budget.Id.Value, 
+            request.CreatedAt);
 
         budget.AddCategory(category);
 
@@ -77,9 +84,9 @@ public sealed class BudgetsService(
 
         logger.LogInformation(
             "Category {Category} with limit {Limit} added to budget with ID {BudgetId}",
-            request.Category, request.Limit, request.BudgetId);
+            category.Category, category.Limit, budget.Id.Value);
 
-        return category.Id;
+        return category.Id.Value;
     }
 
     /// <inheritdoc />
@@ -103,7 +110,7 @@ public sealed class BudgetsService(
 
         logger.LogInformation(
             "Category with ID {CategoryId} removed from budget with ID {BudgetId}",
-            request.CategoryId, category.BudgetId);
+            category.Id.Value, budget.Id.Value);
     }
 
     /// <inheritdoc />
@@ -183,17 +190,17 @@ public sealed class BudgetsService(
     /// </summary>
     private async Task<List<Budget>> GetActiveBudgetsAsync(TransactionModificationModel request, CancellationToken cancellationToken)
     {
-        var combinedSpecification = new BudgetByUserIdSpecification(request.UserId)
+        var uid = UserId.Create(request.UserId);
+
+        var combinedSpecification = new BudgetByUserIdSpecification(uid)
             .And(new ActiveBudgetSpecification(request.CreatedAt))
             .And(new BudgetByCategorySpecification(request.Category));
 
-        var budget = await budgetsRepository
+        return await budgetsRepository
             .AsQueryable()
             .Where(combinedSpecification)
             .Include(b => b.Categories)
             .ToListAsync(cancellationToken);
-
-        return budget;
     }
 
     /// <summary>
@@ -215,17 +222,17 @@ public sealed class BudgetsService(
     /// </summary>
     private async Task<Budget> GetBudgetAsync(Guid budgetId, CancellationToken cancellationToken, bool useInclude = false)
     {
+        var bid = BudgetId.Create(budgetId);
+
         var query = budgetsRepository
-            .Where(b => b.Id == budgetId);
+            .Where(b => b.Id == bid);
 
         query = useInclude
             ? query.Include(b => b.Categories)
             : query;
        
-        var budget = await query.SingleOrDefaultAsync(cancellationToken)
+        return await query.SingleOrDefaultAsync(cancellationToken)
             ?? throw new NotFoundException($"Budget with ID '{budgetId}' was not found.");
-
-        return budget;
     }
 
     /// <summary>
@@ -233,12 +240,12 @@ public sealed class BudgetsService(
     /// </summary>
     private async Task<BudgetCategory> GetCategoryAsync(Guid budgetItemId, CancellationToken cancellationToken)
     {
-        var category = await budgetItemsRepository
-            .Where(bi => bi.Id == budgetItemId)
+        var bcid = BudgetCategoryId.Create(budgetItemId);
+
+        return await budgetItemsRepository
+            .Where(bi => bi.Id == bcid)
             .SingleOrDefaultAsync(cancellationToken)
             ?? throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
-
-        return category;
     }
 
 

@@ -7,16 +7,18 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: p4ssw0rd
-      POSTGRES_DB: smartledger_db
+      POSTGRES_DB: smartledger_main
+      POSTGRES_MULTIPLE_DATABASES: bank_accounts,budgets,keycloak,reports,webhooks,background_jobs,events
     ports:
       - 5434:5432
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d smartledger_main"]
       interval: 10s
       timeout: 5s
       retries: 5
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./scripts/init-multiple-dbs.sh:/docker-entrypoint-initdb.d/init-multiple-dbs.sh
     networks:
       - smartledger-network
 
@@ -52,7 +54,7 @@ services:
     environment:
       KC_FEATURES: preview
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres:5432/postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
       KC_DB_USERNAME: postgres
       KC_DB_PASSWORD: p4ssw0rd
       KC_HOSTNAME: localhost
@@ -71,7 +73,7 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - ./config/keycloak/import:/opt/keycloak/data/import
+      - ./keycloak/import:/opt/keycloak/data/import
       - keycloak-logs:/opt/keycloak/data/log/
     networks:
       - smartledger-network
@@ -122,7 +124,7 @@ services:
   # Redis
   redis:
     container_name: smartledger-redis
-    image: redis:7.2-alpine
+    image: redis:8.0.4-alpine
     restart: on-failure
     command: >
       --requirepass p4ssword

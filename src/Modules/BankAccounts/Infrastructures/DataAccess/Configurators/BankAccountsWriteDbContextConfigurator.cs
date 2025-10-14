@@ -11,4 +11,8 @@ namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Configurat
 public sealed class BankAccountsWriteDbContextConfigurator(
     IConfiguration configuration,
     ILoggerFactory loggerFactory)
-    : BaseDbContextConfigurator<BackAccountsWriteDbContext>(configuration, loggerFactory);
+    : BaseDbContextConfigurator<BackAccountsWriteDbContext>(configuration, loggerFactory)
+{
+    /// <inheritdoc />
+    protected override string ConnectionStringName => "BankAccounts";
+}

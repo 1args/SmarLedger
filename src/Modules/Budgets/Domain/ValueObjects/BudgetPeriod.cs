@@ -22,7 +22,7 @@ public sealed class BudgetPeriod : ValueObject
     /// <summary>
     /// Private constructor used by factory method.
     /// </summary>
-    public BudgetPeriod(DateTime startDate, DateTime endDate) =>
+    private BudgetPeriod(DateTime startDate, DateTime endDate) =>
         (StartDate, EndDate) = (startDate, endDate);
 
     /// <summary>

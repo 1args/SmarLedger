@@ -13,7 +13,7 @@ var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureServices((context, services) =>
 {
-    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = context.Configuration.GetConnectionString("Webhooks");
 
     services.AddDbContext<WebhooksDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,

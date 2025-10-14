@@ -13,9 +13,9 @@ var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureServices((context, services) =>
 {
-    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = context.Configuration.GetConnectionString("Reports");
 
-    services.AddDbContext<ReportsReadDbContext>(contextBuilder => contextBuilder.UseNpgsql(
+    services.AddDbContext<ReportsDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,
         optionsBuilder => optionsBuilder.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 

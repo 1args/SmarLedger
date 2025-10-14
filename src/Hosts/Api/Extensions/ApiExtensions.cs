@@ -98,7 +98,7 @@ public static class ApiExtensions
     /// </summary>
     private static IServiceCollection AddConfiguredMessageBroker(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = configuration.GetConnectionString("Events");
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {

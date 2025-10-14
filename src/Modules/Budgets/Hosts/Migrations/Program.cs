@@ -14,7 +14,7 @@ var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureServices((context, services) =>
 {
-    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = context.Configuration.GetConnectionString("Budgets");
 
     services.AddDbContext<BudgetsWriteDbContext>(contextBuilder => contextBuilder.UseNpgsql(
         connectionString,

@@ -35,7 +35,7 @@ public static class ReportsModuleExtensions
     private static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
         services
-            .AddDataAccess<ReportsReadDbContext, ReportsReadDbContextConfigurator>()
+            .AddDataAccess<ReportsDbContext, ReportsDbContextConfigurator>()
             .AddScoped<IReportStorage, ReportStorage>()
             .AddScoped<IReportTemplateProvider, ReportTemplateProvider>()
             .AddScoped<IPdfGenerator, PdfGenerator>()

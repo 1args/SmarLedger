@@ -13,7 +13,7 @@ namespace SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs;
 /// </summary>
 public sealed class ReportStorage(
     IMinioFileStorage minioFileStorage,
-    IRepository<ReportReadModel, ReportsReadDbContext> reportsRepository): IReportStorage
+    IRepository<ReportDetailsModel, ReportsDbContext> reportsRepository): IReportStorage
 {
     /// <inheritdoc/>
     public async Task SaveAsync(Report report, Stream pdfStream, string reportPath, CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ public sealed class ReportStorage(
     /// </summary>
     private async Task SaveReportInfoAsync(Report report, string reportPath, CancellationToken cancellationToken)
     {
-        var reportInfo = new ReportReadModel
+        var reportInfo = new ReportDetailsModel
         {
             Id = report.Id,
             UserId = report.UserInfo.UserId,

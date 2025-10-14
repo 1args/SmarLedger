@@ -11,4 +11,8 @@ namespace SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Configurators;
 public sealed class BudgetsWriteDbContextConfigurator(
     IConfiguration configuration,
     ILoggerFactory loggerFactory)
-    : BaseDbContextConfigurator<BudgetsWriteDbContext>(configuration, loggerFactory);
+    : BaseDbContextConfigurator<BudgetsWriteDbContext>(configuration, loggerFactory)
+{
+    /// <inheritdoc />
+    protected override string ConnectionStringName => "Budgets";
+}

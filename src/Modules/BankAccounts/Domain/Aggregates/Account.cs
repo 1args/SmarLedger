@@ -5,14 +5,18 @@ using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Modules.BankAccounts.Domain.Entities;
 using SmartLedger.Modules.BankAccounts.Domain.Exceptions;
 using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
+using System.ComponentModel;
 
 namespace SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 
 /// <summary>
 /// Represents a user's account.
 /// </summary>
-public sealed class Account : AggregateRoot<Guid>
+public sealed class Account
 {
+    /// <summary>Account ID.</summary>
+    public AccountId Id { get; private set; }
+
     /// <summary>Account name.</summary>
     public AccountName Name { get; private set; }
 
@@ -20,10 +24,10 @@ public sealed class Account : AggregateRoot<Guid>
     public Money Balance { get; private set; }
 
     /// <summary>ID of the user who owns this account.</summary>
-    public Guid UserId { get; private set; }
+    public UserId UserId { get; private set; }
 
     /// <summary>Date and time when account was created.</summary>
-    public DateTime CreatedAt { get; private set; }
+    public CreationDate CreatedAt { get; private set; }
 
     private readonly List<Transaction> _transactions = [];
 
@@ -38,8 +42,14 @@ public sealed class Account : AggregateRoot<Guid>
     /// <summary>
     /// Private constructor used by the factory Create method.
     /// </summary>
-    private Account(AccountName name, Money balance, Guid userId, DateTime createdAt)
+    private Account(
+        AccountId accountId, 
+        AccountName name, 
+        Money balance,
+        UserId userId,
+        CreationDate createdAt)
     {
+        Id = accountId;
         Name = name;
         Balance = balance;
         UserId = userId;
@@ -49,21 +59,20 @@ public sealed class Account : AggregateRoot<Guid>
     /// <summary>
     /// Factory method to create a new instance of the <see cref="Account"/> class.
     /// </summary>
+    /// <param name="accountid">Account ID.</param>
     /// <param name="name">Account name.</param>
     /// <param name="userId">User ID.</param>
     /// <param name="createdAt">Date and time of creation.</param>
     /// <returns>New <see cref="Account"/> instance.</returns>
     /// <exception cref="DomainValidationException">Thrown if name is null or userId is empty.</exception>
-    public static Account Create(AccountName name, Guid userId, DateTime createdAt)
+    public static Account Create(Guid accountid, string name, Guid userId, DateTime createdAt)
     {
-        if (userId == Guid.Empty)
-        {
-            throw new DomainValidationException(nameof(userId), "User ID cannot be empty.");
-        }
-
-        ArgumentNullException.ThrowIfNull(name, nameof(name));
-
-        return new(name, Money.Zero, userId, createdAt);
+        return new Account(
+            AccountId.Create(accountid),
+            AccountName.Create(name),
+            Money.Zero,
+            UserId.Create(userId),
+            CreationDate.Create(createdAt));
     }
 
     /// <summary>

@@ -33,17 +33,20 @@ namespace SmartLedger.Modules.Webhooks.Hosts.Migrations.Migrations
                     b.Property<string>("CallbackUrl")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("CallbackUrl");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
+                        .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("EventType")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("EventType");
 
                     b.HasKey("Id");
 

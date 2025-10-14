@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
@@ -54,17 +55,19 @@ public sealed class ReportFactory(
         Guid userId,
         CancellationToken cancellationToken)
     {
+        var uid = UserId.Create(userId);
+
         var accounts = await accountsRepository
             .AsQueryable()
             .AsNoTracking()
-            .Where(a => a.UserId == userId)
+            .Where(a => a.UserId == uid)
             .Include(a => a.Transactions)
             .ToListAsync(cancellationToken);
 
         var budgets = await budgetsRepository
             .AsQueryable()
             .AsNoTracking()
-            .Where(b => b.UserId == userId)
+            .Where(b => b.UserId == uid)
             .Include(b => b.Categories)
             .ToListAsync(cancellationToken);
 

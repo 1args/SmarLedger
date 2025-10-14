@@ -28,28 +28,34 @@ public sealed class TransactionReadModelConfiguration : IEntityTypeConfiguration
             .IsRequired();
 
         builder.Property(t => t.Amount)
+            .HasColumnName("Amount")
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(t => t.Type)
+            .HasColumnName("Type")
             .HasConversion<string>()
             .HasMaxLength(PropertyLengthConstants.Length20)
             .IsRequired();
 
         builder.Property(t => t.Category)
+            .HasColumnName("Category")
             .HasConversion<string>()
             .HasMaxLength(PropertyLengthConstants.Length20)
             .IsRequired();
 
         builder.Property(t => t.Notes)
+            .HasColumnName("Notes")
             .HasMaxLength(PropertyLengthConstants.Length200)
             .IsRequired();
 
         builder.Property(t => t.AccountName)
+            .HasColumnName("AccountName")
             .HasMaxLength(PropertyLengthConstants.Length100)
             .IsRequired();
 
         builder.Property(t => t.CreatedAt)
+            .HasColumnName("CreatedAt")
             .IsDateTime()
             .IsRequired();
 

@@ -16,10 +16,10 @@ public static class CustomModelBuilder
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .HasDefaultSchema("read")
+            .HasDefaultSchema("reports")
             .SetDefaultDateTimeKind(DateTimeKind.Utc);
 
         modelBuilder
-            .ApplyConfiguration(new ReportReadModelConfiguration());
+            .ApplyConfiguration(new ReportDetailsModelConfiguration());
     }
 }

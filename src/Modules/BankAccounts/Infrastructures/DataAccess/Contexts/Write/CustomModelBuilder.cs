@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurations;
 using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write.Configurations;
 
@@ -18,6 +19,9 @@ public static class CustomModelBuilder
         modelBuilder
             .HasDefaultSchema("write")
             .SetDefaultDateTimeKind(DateTimeKind.Utc);
+
+        modelBuilder
+           .Ignore<CreationDate>();
 
         modelBuilder
             .ApplyConfiguration(new AccountConfiguration())

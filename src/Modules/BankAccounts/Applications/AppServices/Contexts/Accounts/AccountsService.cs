@@ -33,8 +33,7 @@ public sealed class AccountsService(
             "Creating account with name {Name} for user with ID {UserId}", 
             request.Name, userId);
 
-        var name = AccountName.Create(request.Name);
-        var account = Account.Create(name, userId, request.CreatedAt);
+        var account = Account.Create(Guid.NewGuid(), request.Name, userId, request.CreatedAt);
 
         await accountsRepository.AddAsync(account, cancellationToken);
 
@@ -42,7 +41,7 @@ public sealed class AccountsService(
             "Account with ID {AccountId} created successfully for user with ID {UserId}",
             account.Id, userId);
 
-        return (account.Id, userId);
+        return (account.Id.Value, userId);
     }
 
     /// <inheritdoc />
@@ -55,12 +54,13 @@ public sealed class AccountsService(
         var account = await GetAccountAsync(request.AccountId, cancellationToken);
 
         var transaction = Transaction.Create(
-            account.Id,
-            Money.Create(request.Amount),
+            Guid.NewGuid(),
+            account.Id.Value,
+            request.Amount,
             request.Type,
             request.Category,
             request.CreatedAt,
-            TransactionDescription.Create(request.Notes));
+            request.Notes);
 
         account.ApplyTransaction(transaction);
 
@@ -72,9 +72,9 @@ public sealed class AccountsService(
 
         logger.LogInformation(
             "Transaction added successfully to account with ID {AccountId} with transaction ID {TransactionId}",
-            account.Id, transaction.Id);
+            account.Id.Value, transaction.Id.Value);
 
-        return (transaction.Id, account.UserId);
+        return (transaction.Id.Value, account.UserId.Value);
     }
 
     /// <inheritdoc />
@@ -84,13 +84,15 @@ public sealed class AccountsService(
 
         logger.LogInformation(
             "Removing transaction with ID {TransactionId} from account with ID {AccountId}",
-            transaction.Id, transaction.AccountId);
+            transaction.Id.Value, transaction.AccountId.Value);
+
+        var aid = AccountId.Create(request.AccountId);
 
         var account = await accountsRepository
-            .Where(a => a.Id == request.AccountId)
+            .Where(a => a.Id == aid)
             .Include(a => a.Transactions)
             .SingleOrDefaultAsync(cancellationToken) 
-            ?? throw new NotFoundException($"Account with ID '{transaction.AccountId}' was not found"); ;
+            ?? throw new NotFoundException($"Account with ID '{transaction.AccountId.Value}' was not found"); ;
 
         account.RevertTransaction(transaction);
 
@@ -102,8 +104,8 @@ public sealed class AccountsService(
 
         logger.LogInformation(
             "Transaction with ID {TransactionId} removed successfully from account with ID {AccountId}",
-            transaction.Id,
-            account.Id);
+            transaction.Id.Value,
+            account.Id.Value);
     }
 
     /// <inheritdoc />
@@ -122,12 +124,12 @@ public sealed class AccountsService(
     /// </summary>
     private async Task<Account> GetAccountAsync(Guid accountId, CancellationToken cancellationToken)
     {
-        var account = await accountsRepository
-            .Where(a => a.Id == accountId)
+        var aid = AccountId.Create(accountId);
+
+        return await accountsRepository
+            .Where(a => a.Id == aid)
             .SingleOrDefaultAsync(cancellationToken)
             ?? throw new NotFoundException($"Account with ID '{accountId}' was not found.");
-
-        return account;
     }
 
     /// <summary>
@@ -135,11 +137,11 @@ public sealed class AccountsService(
     /// </summary>
     private async Task<Transaction> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
     {
-        var transaction = await transactionsRepository
-            .Where(t => t.Id == transactionId)
+        var tid = TransactionId.Create(transactionId);
+
+        return await transactionsRepository
+            .Where(t => t.Id == tid)
             .SingleOrDefaultAsync(cancellationToken) 
             ?? throw new NotFoundException($"Transaction with ID '{transactionId}' was not found.");
-
-        return transaction;
     }
 }

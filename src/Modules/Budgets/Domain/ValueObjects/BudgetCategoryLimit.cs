@@ -12,7 +12,7 @@ public sealed class BudgetCategoryLimit : ValueObject
     public const int MaxValue = 1_000_000;
 
     /// <summary>Limit.</summary>
-    public decimal Value { get; set; }
+    public decimal Value { get; }
 
     /// <summary>
     /// Constructor for EF Core.
@@ -22,7 +22,7 @@ public sealed class BudgetCategoryLimit : ValueObject
     /// <summary>
     /// Private constructor used by factory method.
     /// </summary>
-    public BudgetCategoryLimit(decimal value) => Value = value;
+    private BudgetCategoryLimit(decimal value) => Value = value;
 
     /// <summary>
     /// Creates a new <see cref="BudgetCategoryLimit"/> instance.

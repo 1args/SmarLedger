@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurators;
 using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
@@ -19,36 +20,37 @@ public sealed class AccountConfiguration : IEntityTypeConfiguration<Account>
         builder.HasKey(a => a.Id);
 
         builder.Property(a => a.Id)
-            .IsGuid()
-            .ValueGeneratedOnAdd();
+            .HasConversion(id => id.Value, value => AccountId.Create(value))
+            .ValueGeneratedNever();
+
+        builder.Property(a => a.Name)
+            .HasColumnName("Name")
+            .HasConversion(name => name.Value, value => AccountName.Create(value))
+            .HasMaxLength(AccountName.MaxLength)
+            .IsRequired();
+
+        builder.Property(a => a.Balance)
+            .HasColumnName("Balance")
+            .HasConversion(balance => balance.Value, value => Money.Create(value))
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
 
         builder.Property(a => a.UserId)
+            .HasConversion(id => id.Value, value => UserId.Create(value))
             .IsRequired();
 
         builder.Property(a => a.CreatedAt)
-            .IsDateTime()
+            .HasColumnName("CreatedAt")
+            .HasConversion(date => date.Value, value => CreationDate.Create(value))
             .IsRequired();
-
-        builder.OwnsOne(a => a.Name, name =>
-        {
-            name.Property(n => n.Value)
-                .HasColumnName("Name")
-                .HasMaxLength(AccountName.MaxLength)
-                .IsRequired();
-        });
-
-        builder.OwnsOne(a => a.Balance, balance =>
-        {
-            balance.Property(b => b.Value)
-                .HasColumnName("Balance")
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
-        });
 
         builder.HasMany(a => a.Transactions)
             .WithOne()
             .HasForeignKey(t => t.AccountId)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
+
+        builder.Navigation(a => a.Transactions)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

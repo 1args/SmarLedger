@@ -1,18 +1,23 @@
 ﻿using SmartLedger.Common.Domain.Exceptions;
 using SmartLedger.Common.Domain.Primitives;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Modules.Budgets.Domain.Entities;
 using SmartLedger.Modules.Budgets.Domain.Exceptions;
 using SmartLedger.Modules.Budgets.Domain.ValueObjects;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SmartLedger.Modules.Budgets.Domain.Aggregates;
 
 /// <summary>
 /// Represents a user's budget.
 /// </summary>
-public sealed class Budget : AggregateRoot<Guid>
+public sealed class Budget
 {
+    /// <summary>Budget ID.</summary>
+    public BudgetId Id { get; private set; }
+
     /// <summary>User ID who owns this budget.</summary>
-    public Guid UserId { get; private set; }
+    public UserId UserId { get; private set; }
 
     /// <summary>Budget name.</summary>
     public BudgetName Name { get; private set; }
@@ -26,7 +31,7 @@ public sealed class Budget : AggregateRoot<Guid>
     public IReadOnlyCollection<BudgetCategory> Categories => _categories.AsReadOnly();
 
     /// <summary>Date and time when budget was created.</summary>
-    public DateTime CreatedAt { get; private set; }
+    public CreationDate CreatedAt { get; private set; }
 
     /// <summary>
     /// Constructor for EF Core.
@@ -37,11 +42,13 @@ public sealed class Budget : AggregateRoot<Guid>
     /// Private constructor used by factory method.
     /// </summary>
     private Budget(
-        Guid userId,
+        BudgetId budgetId,
+        UserId userId,
         BudgetName name,
         BudgetPeriod period,
-        DateTime createAt)
+        CreationDate createAt)
     {
+        Id = budgetId;
         UserId = userId;
         Name = name;
         Period = period;
@@ -51,27 +58,26 @@ public sealed class Budget : AggregateRoot<Guid>
     /// <summary>
     /// Factory method to create a new <see cref="Budget"/>.
     /// </summary>
-    /// <param name="name">Budget name.</param>
-    /// <param name="period">Time period covered by the budget.</param>
+    /// <param name="budgetId">Budget ID.</param>
     /// <param name="userId">User ID.</param>
+    /// <param name="budgetName">Budget name.</param>
+    /// <param name="period">Time period covered by the budget.</param>
     /// <param name="createdAt">Date and time of creation.</param>
     /// <returns>New instance of <see cref="Budget"/>.</returns>
-    /// <exception cref="DomainValidationException">Thrown when userId is empty or arguments are null.</exception>
     public static Budget Create(
+        Guid budgetId,
         Guid userId,
-        BudgetName name,
-        BudgetPeriod period,
+        string budgetName,
+        DateTime startDate,
+        DateTime endDate,
         DateTime createdAt)
     {
-        if (userId == Guid.Empty)
-        {
-            throw new DomainValidationException(nameof(userId), "User ID cannot be empty.");
-        }
-
-        ArgumentNullException.ThrowIfNull(name, nameof(name));
-        ArgumentNullException.ThrowIfNull(period, nameof(period));
-
-        return new(userId, name, period, createdAt);
+        return new(
+            BudgetId.Create(budgetId),
+            UserId.Create(userId),
+            BudgetName.Create(budgetName),
+            BudgetPeriod.Create(startDate, endDate),
+            CreationDate.Create(createdAt));
     }
 
     /// <summary>

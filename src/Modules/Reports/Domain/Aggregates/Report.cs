@@ -12,10 +12,13 @@ namespace SmartLedger.Modules.Reports.Domain.Aggregates;
 /// <summary>
 /// Represents a financial report for a user.
 /// </summary>
-public sealed class Report : AggregateRoot<Guid>
+public sealed class Report
 {
+    /// <summary>Report ID.</summary>
+    public Guid Id { get; set; }
+
     /// <summary>Information about user who owns this report.</summary>
-    public UserInfo UserInfo { get; set; }
+    public UserInfo UserInfo { get; private set; }
 
     private readonly List<Account> _accounts = [];
 
@@ -200,7 +203,7 @@ public sealed class Report : AggregateRoot<Guid>
     {
         var allTransactions = _accounts
             .SelectMany(account => account.Transactions
-                .Where(t => t.CreatedAt >= StartPeriod && t.CreatedAt < EndPeriod))
+                .Where(t => t.CreatedAt.Value >= StartPeriod && t.CreatedAt.Value < EndPeriod))
             .ToList();
 
         TotalIncome = Money.Create(allTransactions
@@ -238,7 +241,7 @@ public sealed class Report : AggregateRoot<Guid>
         foreach (var account in _accounts)
         {
             var transactions = account.Transactions
-                .Where(t => t.CreatedAt >= StartPeriod && t.CreatedAt < EndPeriod)
+                .Where(t => t.CreatedAt.Value >= StartPeriod && t.CreatedAt.Value < EndPeriod)
                 .ToList();
 
             var detail = AccountDetail.Create(account, transactions);
@@ -252,7 +255,7 @@ public sealed class Report : AggregateRoot<Guid>
     private void GenerateBudgetSummaries()
     {
         var filteredBudgets = _budgets
-            .Where(b => b.CreatedAt >= StartPeriod && b.CreatedAt < EndPeriod);
+            .Where(b => b.CreatedAt.Value >= StartPeriod && b.CreatedAt.Value < EndPeriod);
 
         foreach (var budget in filteredBudgets)
         {

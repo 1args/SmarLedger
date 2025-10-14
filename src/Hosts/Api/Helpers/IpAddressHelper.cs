@@ -30,11 +30,6 @@ public static class IpAddressHelper
     /// <summary>
     /// Attempts to extract an IP address from a specific request header.
     /// </summary>
-    /// <param name="httpRequest">Current HTTP request.</param>
-    /// <param name="headerName">The name of the header that may contain the IP address.</param>
-    /// <returns>
-    /// Parsed <see cref="IPAddress"/> if the header is present and valid; otherwise, <c>null</c>.
-    /// </returns>
     private static IPAddress? TryGetIpAddressFromHeader(HttpRequest httpRequest, string headerName)
     {
         if(httpRequest.Headers.TryGetValue(headerName, out var value) 

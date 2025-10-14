@@ -15,8 +15,5 @@ public sealed class GetPaginatedBudgetCategoriesQueryValidator : PaginatedQueryV
     {
         RuleFor(q => q.BudgetId)
             .NotEmpty().WithMessage("Budget ID cannot be empty.");
-
-        RuleFor(q => q.Category)
-            .NotEmpty().WithMessage("Category cannot be empty.");
     }
 }

@@ -18,7 +18,7 @@ internal class RedisFeature : IAppFeature
 
         services.AddStackExchangeRedisCache(options =>
         {
-            options.Configuration = configuration.GetConnectionString("RedisConnection");
+            options.Configuration = configuration.GetConnectionString("Redis");
         });
 
         services.AddHybridCache(options =>

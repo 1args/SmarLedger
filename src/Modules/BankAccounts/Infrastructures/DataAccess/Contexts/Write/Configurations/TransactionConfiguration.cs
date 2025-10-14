@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Configurators;
 using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 using SmartLedger.Modules.BankAccounts.Domain.Entities;
+using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 
 namespace SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write.Configurations;
 
@@ -19,39 +21,39 @@ public sealed class TransactionConfiguration : IEntityTypeConfiguration<Transact
         builder.HasKey(t => t.Id);
 
         builder.Property(t => t.Id)
-            .IsGuid()
-            .ValueGeneratedOnAdd();
+            .HasConversion(id => id.Value, value => TransactionId.Create(value))
+            .ValueGeneratedNever();
 
         builder.Property(t => t.AccountId)
+            .HasConversion(id => id.Value, value => AccountId.Create(value))
+            .IsRequired();
+
+        builder.Property(t => t.Amount)
+            .HasColumnName("Amount")
+            .HasConversion(amount => amount.Value, value => Money.Create(value))
+            .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(t => t.Type)
+            .HasColumnName("Type")
             .HasConversion<int>()
             .IsRequired();
 
         builder.Property(t => t.Category)
+            .HasColumnName("Category")
             .HasConversion<int>()
             .IsRequired();
 
-        builder.Property(t => t.CreatedAt)
-            .IsDateTime()
+        builder.Property(t => t.Notes)
+            .HasColumnName("Notes")
+            .HasConversion(notes => notes.Value, value => TransactionDescription.Create(value))
+            .HasMaxLength(TransactionDescription.MaxLength)
             .IsRequired();
 
-        builder.OwnsOne(t => t.Amount, amount =>
-        {
-            amount.Property(m => m.Value)
-                .HasColumnName("Amount")
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
-        });
-
-        builder.OwnsOne(t => t.Notes, notes =>
-        {
-            notes.Property(n => n.Value)
-                .HasColumnName("Notes")
-                .HasMaxLength(500)
-                .IsRequired();
-        });
+        builder.Property(t => t.CreatedAt)
+            .HasColumnName("CreatedAt")
+            .HasConversion(date => date.Value, value => CreationDate.Create(value))
+            .IsRequired();
 
         builder.HasOne<Account>()
             .WithMany(a => a.Transactions)

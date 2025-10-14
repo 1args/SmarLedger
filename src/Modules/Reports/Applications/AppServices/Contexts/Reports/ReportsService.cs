@@ -19,7 +19,7 @@ namespace SmartLedger.Modules.Reports.Applications.AppServices.Contexts.Reports;
 public sealed class ReportsService(
     Lazy<IAuthorizationData> authorizationData,
     IMinioFileStorage minioFileStorage,
-    IRepository<ReportReadModel, ReportsReadDbContext> reportsRepository,
+    IRepository<ReportDetailsModel, ReportsDbContext> reportsRepository,
     IBackgroundJobClient backgroundJobClient,
     ILogger<ReportsService> logger) : IReportsService
 {

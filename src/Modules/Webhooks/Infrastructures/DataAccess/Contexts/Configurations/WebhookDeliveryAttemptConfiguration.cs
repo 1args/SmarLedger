@@ -22,15 +22,19 @@ public sealed class WebhookDeliveryAttemptConfiguration : IEntityTypeConfigurati
             .IsRequired();
 
         builder.Property(wda => wda.Payload)
+            .HasColumnName("Payload")
             .IsRequired();
 
         builder.Property(wda => wda.ResponseStatusCode)
+            .HasColumnName("ResponseStatusCode")
             .IsRequired();
 
         builder.Property(wda => wda.IsSuccess)
+            .HasColumnName("IsSuccess")
             .IsRequired();
 
         builder.Property(wda => wda.AttemptedAt)
+            .HasColumnName("AttemptedAt")
             .IsDateTime()
             .IsRequired();
 

@@ -12,7 +12,7 @@ internal sealed class Startup(
     ILoggerFactory loggerFactory)
 {
     /// <summary>
-    /// Executes the database migration using the provided <see cref="ReportsReadDbContext"/>.
+    /// Executes the database migration using the provided <see cref="ReportsDbContext"/>.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     public async Task StartMigrationAsync(CancellationToken cancellationToken)
@@ -20,7 +20,7 @@ internal sealed class Startup(
         var logger = loggerFactory.CreateLogger<Startup>();
 
         // Migrate ReportsReadDbContext first
-        await databaseMigrationsService.ExecuteMigrationAsync<ReportsReadDbContext>(
+        await databaseMigrationsService.ExecuteMigrationAsync<ReportsDbContext>(
             logger, cancellationToken);
     }
 }

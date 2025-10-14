@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SmartLedger.Hosts.Migrations": {
+    "SmartLedger.Hosts.Outbox.Migrations": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"

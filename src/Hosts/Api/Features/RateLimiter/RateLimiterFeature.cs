@@ -12,6 +12,6 @@ internal class RateLimiterFeature : IAppFeature
     /// <inheritdoc />
     public void UseFeature(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IRateLimiter, DefaultRateLimiter>();
+        services.AddScoped<IRateLimiter, GlobalRateLimiter>();
     }
 }

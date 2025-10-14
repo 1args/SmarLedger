@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		..\docker\config\otel-collector\config.yml = ..\docker\config\otel-collector\config.yml
 		..\docker\docker-compose.monitoring.yml = ..\docker\docker-compose.monitoring.yml
 		..\docker\docker-compose.yml = ..\docker\docker-compose.yml
+		..\docker\scripts\init-multiple-dbs.sh = ..\docker\scripts\init-multiple-dbs.sh
 		..\docker\config\loki\loki-config.yml = ..\docker\config\loki\loki-config.yml
 		..\docker\config\prometheus\prometheus.yml = ..\docker\config\prometheus\prometheus.yml
 	EndProjectSection
@@ -42,11 +43,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Common.Hosts.Mi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{D99FFD1E-E4B0-4A89-BF56-8CDE06A80594}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{D5E5D025-F9A9-44B7-A937-93730D859ECF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Outbox", "Outbox", "{D5E5D025-F9A9-44B7-A937-93730D859ECF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Hosts.Api", "Hosts\Api\SmartLedger.Hosts.Api.csproj", "{45162F20-275A-42A3-AAFF-1AA027E90B16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Hosts.Migrations", "Hosts\Migrations\SmartLedger.Hosts.Migrations.csproj", "{CDE1D1FF-011C-41CC-AA08-C3E0AC79C7F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLedger.Hosts.Outbox.Migrations", "Hosts\Migrations\SmartLedger.Hosts.Outbox.Migrations.csproj", "{CDE1D1FF-011C-41CC-AA08-C3E0AC79C7F1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Handlers", "Handlers", "{9FC7406C-D8E9-4CAF-9FD9-65E876453D89}"
 EndProject
@@ -236,6 +237,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{C76559ED-4D5F-47CE-A107-C2E64CF7A577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -430,7 +433,7 @@ Global
 		{D99FFD1E-E4B0-4A89-BF56-8CDE06A80594} = {40B26C1F-E271-4730-929C-2A2DEAFEC7D2}
 		{D5E5D025-F9A9-44B7-A937-93730D859ECF} = {40B26C1F-E271-4730-929C-2A2DEAFEC7D2}
 		{45162F20-275A-42A3-AAFF-1AA027E90B16} = {D99FFD1E-E4B0-4A89-BF56-8CDE06A80594}
-		{CDE1D1FF-011C-41CC-AA08-C3E0AC79C7F1} = {D5E5D025-F9A9-44B7-A937-93730D859ECF}
+		{CDE1D1FF-011C-41CC-AA08-C3E0AC79C7F1} = {C76559ED-4D5F-47CE-A107-C2E64CF7A577}
 		{9FC7406C-D8E9-4CAF-9FD9-65E876453D89} = {9737C126-9E2F-416D-B2E8-11B3E11E9795}
 		{8BEAEE3D-87FC-47AB-801D-18D50272D435} = {9737C126-9E2F-416D-B2E8-11B3E11E9795}
 		{633C5C5E-2107-4FC2-891B-EB821218EE5A} = {8BEAEE3D-87FC-47AB-801D-18D50272D435}
@@ -523,6 +526,7 @@ Global
 		{3DDB5652-D6A8-56B2-58C5-5AF428A8BCAF} = {8EEF4D36-198F-489E-BE93-AC3AF91E86CF}
 		{E2DF107A-69B3-5F8E-DFBF-F8AD8B291AF2} = {A7515260-FDA2-403B-9567-7AA4F841E11C}
 		{591165AE-F001-BDD1-6EF6-7031A4158736} = {D48A73C1-D45A-4A68-90D1-F208B8427A28}
+		{C76559ED-4D5F-47CE-A107-C2E64CF7A577} = {D5E5D025-F9A9-44B7-A937-93730D859ECF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28198F6E-4065-4AE6-8060-F9BC53167EE7}

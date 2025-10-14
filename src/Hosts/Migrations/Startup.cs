@@ -2,7 +2,7 @@
 using SmartLedger.Common.Hosts.Migrations.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 
-namespace SmartLedger.Hosts.Migrations;
+namespace SmartLedger.Hosts.Outbox.Migrations;
 
 /// <summary>
 /// Initiates database migrations for Outbox.
