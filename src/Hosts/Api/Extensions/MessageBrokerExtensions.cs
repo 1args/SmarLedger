@@ -6,6 +6,7 @@ using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
 using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.BudgetCreated;
+using SmartLedger.Modules.Notifications.Applications.Handlers.Contexts.Notifications.Events;
 using SmartLedger.Modules.Webhooks.Applications.Handlers.Contexts.Webhooks.Events.WebhookDispatched;
 
 namespace SmartLedger.Hosts.Api.Extensions;
@@ -45,6 +46,7 @@ public static class MessageBrokerExtensions
             cfg.AddConsumers(typeof(AccountCreatedEventConsumer).Assembly);
             cfg.AddConsumers(typeof(BudgetCreatedEventConsumer).Assembly);
             cfg.AddConsumers(typeof(WebhookDispatchedEventConsumer).Assembly);
+            cfg.AddConsumers(typeof(NotificationSentEventConsumer).Assembly);
 
             cfg.AddTelemetryListener();
 

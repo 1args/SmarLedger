@@ -14,7 +14,7 @@ public interface ITransactionManager
     /// <param name="isolationLevel">Isolation level.</param>
     /// <param name="cancellationToken">Token to cancel operation.</param>
     /// <returns></returns>
-    Task StartEffect(Func<CancellationToken, Task> action, IsolationLevel isolationLevel,
+    Task StartEffectAsync(Func<CancellationToken, Task> action, IsolationLevel isolationLevel,
         CancellationToken cancellationToken);
 
     /// <summary>
@@ -25,6 +25,6 @@ public interface ITransactionManager
     /// <param name="isolationLevel">Isolation level.</param>
     /// <param name="cancellationToken">Token to cancel operation.</param>
     /// <returns>Operation result.</returns>
-    Task<TResult> StartEffect<TResult>(Func<CancellationToken, Task<TResult>> action, IsolationLevel isolationLevel,
+    Task<TResult> StartEffectAsync<TResult>(Func<CancellationToken, Task<TResult>> action, IsolationLevel isolationLevel,
         CancellationToken cancellationToken);
 }

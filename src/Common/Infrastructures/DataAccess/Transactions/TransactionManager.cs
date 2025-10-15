@@ -16,7 +16,7 @@ public sealed class TransactionManager(DbContext dbContext) : ITransactionManage
     public DbContext DbContext { get; } = dbContext;
 
     /// <inheritdoc />
-    public async Task StartEffect(Func<CancellationToken, Task> action, IsolationLevel isolationLevel, CancellationToken cancellationToken)
+    public async Task StartEffectAsync(Func<CancellationToken, Task> action, IsolationLevel isolationLevel, CancellationToken cancellationToken)
     {
         await using var transaction = await DbContext.Database.BeginTransactionAsync(cancellationToken);
 
@@ -33,7 +33,7 @@ public sealed class TransactionManager(DbContext dbContext) : ITransactionManage
     }
 
     /// <inheritdoc />
-    public async Task<TResult> StartEffect<TResult>(Func<CancellationToken, Task<TResult>> action, IsolationLevel isolationLevel, CancellationToken cancellationToken)
+    public async Task<TResult> StartEffectAsync<TResult>(Func<CancellationToken, Task<TResult>> action, IsolationLevel isolationLevel, CancellationToken cancellationToken)
     {
         await using var transaction = await DbContext.Database.BeginTransactionAsync(cancellationToken);
 

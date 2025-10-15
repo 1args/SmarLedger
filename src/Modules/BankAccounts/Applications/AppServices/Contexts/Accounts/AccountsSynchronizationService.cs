@@ -75,7 +75,7 @@ public sealed class AccountsSynchronizationService(
             _ => account.Balance
         };
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await transactionsRepository.AddAsync(transaction, ct);
             await accountsRepository.UpdateAsync(account, ct);
@@ -110,7 +110,7 @@ public sealed class AccountsSynchronizationService(
 
         account.LastUpdatedAt = request.AccountUpdatedAt;
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await transactionsRepository.DeleteAsync(transaction, ct);
             await accountsRepository.UpdateAsync(account, ct);

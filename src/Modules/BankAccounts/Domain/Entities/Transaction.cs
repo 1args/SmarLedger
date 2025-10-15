@@ -117,14 +117,8 @@ public sealed class Transaction
     /// Updates the category of the transaction.
     /// </summary>
     /// <param name="newCategory">New category.</param>
-    /// <exception cref="DomainValidationException">Thrown when category is unknown.</exception>
     public void Categorize(FinancialCategory newCategory)
     {
-        if (newCategory == FinancialCategory.Unknown)
-        {
-            throw new DomainValidationException(nameof(newCategory), "Transaction category cannot be 'Unknown'.");
-        }
-
         if (Category == newCategory) return;
 
         Category = newCategory;

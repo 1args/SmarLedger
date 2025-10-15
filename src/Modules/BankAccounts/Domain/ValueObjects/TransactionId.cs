@@ -7,7 +7,7 @@ namespace SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 /// <summary>
 /// Represents the unique identifier of a transaction as a value object.
 /// </summary>
-public readonly struct TransactionId
+public readonly struct TransactionId : IEquatable<TransactionId>
 {
     /// <summary>Transaction ID.</summary>
     public Guid Value { get; }

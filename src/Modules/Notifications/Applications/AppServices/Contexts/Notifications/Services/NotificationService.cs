@@ -26,9 +26,16 @@ public sealed class NotificationService(
             "Sending email notification to {Email} of type {Type}",
             user.Email, request.Type.ToString());
 
+        var updated = request with
+        {
+            Data = request.Data?
+        .Append(new KeyValuePair<string, string>("UserName", user.Username))
+        .ToDictionary(kv => kv.Key, kv => kv.Value)
+        };
+
         var (message, subject) = await templateProvider.GetTemplateContentAsync(
             type: request.Type,
-            data: request.Data, 
+            data: updated.Data,
             cancellationToken: cancellationToken);
 
         if (message is null)

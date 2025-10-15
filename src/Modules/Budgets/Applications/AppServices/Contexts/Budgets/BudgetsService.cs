@@ -76,7 +76,7 @@ public sealed class BudgetsService(
 
         budget.AddCategory(category);
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await budgetItemsRepository.AddAsync(category, ct);
             await budgetsRepository.UpdateAsync(budget, ct);
@@ -102,7 +102,7 @@ public sealed class BudgetsService(
 
         budget.RemoveCategory(category);
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await budgetItemsRepository.DeleteAsync(category, ct);
             await budgetsRepository.UpdateAsync(budget, ct);
@@ -178,7 +178,7 @@ public sealed class BudgetsService(
 
         await Task.WhenAll(
             budgetsRepository.UpdateRangeAsync(budgets.ToArray(), cancellationToken),
-            NotifyAsync(budgets, cancellationToken));
+            NotifyAsync(request.UserId, budgets, cancellationToken));
 
         logger.LogInformation(
             "Spending amount updated for category {request.Category} with amount {request.Amount} for user with ID {request.UserId}",
@@ -249,10 +249,8 @@ public sealed class BudgetsService(
     }
 
 
-    private async Task NotifyAsync(List<Budget> budgets, CancellationToken cancellationToken)
+    private async Task NotifyAsync(Guid userId, List<Budget> budgets, CancellationToken cancellationToken)
     {
-        var userId = authorizationData.Value.UserId;
-
         var exceededCategories = budgets
             .SelectMany(b => b.Categories)
             .Where(c => c.Status == BudgetCategoryStatus.Exceeded);

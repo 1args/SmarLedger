@@ -12,7 +12,7 @@ namespace SmartLedger.Common.Domain.ValueObjects;
 /// <summary>
 /// Represents the unique identifier of a user as a value object.
 /// </summary>
-public readonly struct UserId
+public readonly struct UserId : IEquatable<UserId>
 {
     /// <summary>User ID.</summary>
     public Guid Value { get; }

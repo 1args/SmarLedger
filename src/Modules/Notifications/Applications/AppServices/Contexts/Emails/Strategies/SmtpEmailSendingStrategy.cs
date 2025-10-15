@@ -41,10 +41,14 @@ public sealed class SmtpEmailSendingStrategy(
             await client.ConnectAsync(
                 _options.Server,
                 _options.Port,
-                _options.UseSsl ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls,
+                _options.UseSsl,
                 cancellationToken);
 
-            await client.AuthenticateAsync(_options.Username, _options.Password, cancellationToken);
+            if (client.Capabilities.HasFlag(SmtpCapabilities.Authentication))
+            {
+                await client.AuthenticateAsync(_options.Username, _options.Password, cancellationToken);
+            }
+
             await client.SendAsync(message, cancellationToken);
             await client.DisconnectAsync(true, cancellationToken);
         }

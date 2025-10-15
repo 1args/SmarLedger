@@ -20,7 +20,7 @@ public sealed class ReportPublisher(
     {
         var filePath = string.Format(ReportPaths.ReportFilePathFormat, report.UserInfo.UserId, report.Id, report.Type);
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await reportStorage.SaveAsync(report, pdfStream, filePath, ct);
             await webhooksDispatcher.DispatchAsync(WebhookEvents.ReportGenerated, report.Id, ct);

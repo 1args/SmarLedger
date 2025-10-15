@@ -1,4 +1,5 @@
-﻿using SmartLedger.Common.Applications.Handlers.Abstractions;
+﻿using MassTransit;
+using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Modules.Notifications.Applications.AppServices.Contexts.Notifications.Services.Abstractions;
 using SmartLedger.Modules.Notifications.Contracts.Events;
 using SmartLedger.Modules.Notifications.Contracts.Requests;

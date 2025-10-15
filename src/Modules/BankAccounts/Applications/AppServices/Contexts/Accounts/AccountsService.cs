@@ -64,7 +64,7 @@ public sealed class AccountsService(
 
         account.ApplyTransaction(transaction);
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await transactionsRepository.AddAsync(transaction, ct);
             await accountsRepository.UpdateAsync(account, ct);
@@ -96,7 +96,7 @@ public sealed class AccountsService(
 
         account.RevertTransaction(transaction);
 
-        await transactionManager.StartEffect(async ct =>
+        await transactionManager.StartEffectAsync(async ct =>
         {
             await transactionsRepository.DeleteAsync(transaction, cancellationToken);
             await accountsRepository.UpdateAsync(account, cancellationToken);

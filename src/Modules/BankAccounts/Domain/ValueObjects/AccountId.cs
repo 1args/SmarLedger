@@ -7,7 +7,7 @@ namespace SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 /// <summary>
 /// Represents the unique identifier of an account as a value object.
 /// </summary>
-public readonly struct AccountId
+public readonly struct AccountId : IEquatable<AccountId>
 {
     /// <summary>Account ID.</summary>
     public Guid Value { get; }

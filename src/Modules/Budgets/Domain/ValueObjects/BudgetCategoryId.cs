@@ -7,7 +7,7 @@ namespace SmartLedger.Modules.Budgets.Domain.ValueObjects;
 /// <summary>
 /// Represents the unique identifier of an budget category as a value object.
 /// </summary>
-public readonly struct BudgetCategoryId 
+public readonly struct BudgetCategoryId : IEquatable<BudgetCategoryId>
 {
     /// <summary>Budget category ID.</summary>
     public Guid Value { get; }
