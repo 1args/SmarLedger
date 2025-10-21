@@ -6,6 +6,8 @@ using SmartLedger.Common.Domain.Enums;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.BudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.Budgets;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.BudgetCategories;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Read.Budgets;
 using SmartLedger.Modules.Budgets.Domain.Enums;
@@ -18,11 +20,12 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsSynchronizationService(
     IRepository<BudgetReadModel, BudgetsReadDbContext> budgetsRepository,
     IRepository<BudgetCategoryReadModel, BudgetsReadDbContext> budgetItemsRepository,
-    IHybridCache cache,
     ILogger<BudgetsSynchronizationService> logger): IBudgetsSynchronizationService
 {
     /// <inheritdoc />
-    public async Task SynchronizeBudgetCreationAsync(BudgetCreationSynchronizationModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeBudgetCreationAsync(
+        BudgetCreationSynchronizationModel request, 
+        CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Synchronizing budget creation with ID {BudgetId} and name {Name}",
@@ -40,7 +43,6 @@ public sealed class BudgetsSynchronizationService(
         };
 
         await budgetsRepository.AddAsync(budget, cancellationToken);
-        await cache.RemoveAsync($"budgets:user:{request.UserId}:*", cancellationToken);
 
         logger.LogInformation(
             "Budget with ID {BudgetId} was successfully synchronized after creation",
@@ -48,7 +50,24 @@ public sealed class BudgetsSynchronizationService(
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeCategoryAdditionAsync(CategoryAdditionSynchronizationModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeBudgetDeletionAsync(
+        IdOnlyModel request, 
+        CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Synchronizing budget deletion with ID `{BudgetId}", request.BudgetId);
+
+        var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
+        await budgetsRepository.DeleteAsync(budget, cancellationToken);
+
+        logger.LogInformation(
+            "Budget with ID {BudgetId} was successfully synchronized after deletion",
+            request.BudgetId);
+    }
+
+    /// <inheritdoc />
+    public async Task SynchronizeBudgetCategoryCreationAsync(
+        BudgetCategoryCreationSynchronizationModel request, 
+        CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Synchronizing category addition with ID {CategoryId} for budget with ID {BudgetId}",
@@ -74,16 +93,15 @@ public sealed class BudgetsSynchronizationService(
 
         await budgetItemsRepository.AddAsync(category, cancellationToken);
 
-        await cache.RemoveAsync($"budgetcategory:{request.CategoryId}", cancellationToken); 
-        await cache.RemoveAsync($"budgetcategories:budget:{request.BudgetId}:*", cancellationToken);
-
         logger.LogInformation(
             "Category with ID {CategoryId} for budget with ID {BudgetId} was successfully synchronized after addition",
             request.CategoryId, request.BudgetId);
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeCategoryRemovalAsync(CategoryRemovalSynchronizationModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeBudgetCategoryDeletionAsync(
+        BudgetCategoryDeletionSynchronizationModel request, 
+        CancellationToken cancellationToken)
     {
         var category = await GetCategoryAsync(request.CategoryId, cancellationToken);
 
@@ -92,9 +110,6 @@ public sealed class BudgetsSynchronizationService(
             request.CategoryId, category.BudgetId);
 
         await budgetItemsRepository.DeleteAsync(category, cancellationToken);
-
-        await cache.RemoveAsync($"budgetcategory:{request.CategoryId}", cancellationToken); 
-        await cache.RemoveAsync($"budgetcategories:budget:{category.BudgetId}:*", cancellationToken);
 
         logger.LogInformation(
             "Category with ID {CategoryId} for budget with ID {BudgetId} was successfully synchronized after removal",
@@ -121,26 +136,6 @@ public sealed class BudgetsSynchronizationService(
             request,
             cancellationToken,
             (category, r) => category.SpentAmount -= r.Amount);
-    }
-
-    /// <inheritdoc />
-    public async Task SynchronizeBudgetDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken)
-    {
-        logger.LogInformation(
-            "Synchronizing budget deletion with ID `{BudgetId}", 
-            request.BudgetId);
-
-        var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
-
-        await budgetsRepository.DeleteAsync(budget, cancellationToken);
-
-        await cache.RemoveAsync($"budget:{request.BudgetId}", cancellationToken);
-        await cache.RemoveAsync($"budgets:user:{budget.UserId}:*", cancellationToken); 
-        await cache.RemoveAsync($"budgetcategories:budget:{budget.Id}:*", cancellationToken); 
-
-        logger.LogInformation(
-            "Budget with ID {BudgetId} was successfully synchronized after deletion", 
-            request.BudgetId);
     }
 
     /// <summary>
@@ -173,12 +168,6 @@ public sealed class BudgetsSynchronizationService(
 
         await budgetItemsRepository.UpdateRangeAsync(categories.ToArray(), cancellationToken);
 
-        foreach (var category in categories)
-        {
-            await cache.RemoveAsync($"budgetcategory:{category.Id}", cancellationToken);
-            await cache.RemoveAsync($"budgetcategories:budget:{category.BudgetId}:*", cancellationToken);
-        }
-
         logger.LogInformation(
             "Spending amount for category {Category} and user with ID {UserId} was successfully synchronized after update",
             request.Category, request.UserId);
@@ -187,15 +176,16 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Retrieves all active categories for a user that match the specified category in the transaction request.
     /// </summary>
-    private async Task<List<BudgetCategoryReadModel>> GetActiveCategoriesAsync(TransactionModificationModel request, CancellationToken cancellationToken)
+    private async Task<List<BudgetCategoryReadModel>> GetActiveCategoriesAsync(
+        TransactionModificationModel request, 
+        CancellationToken cancellationToken)
     {
         var combinedSpecification = new BudgetCategoryByUserIdSpecification(request.UserId)
             .And(new ActiveBudgetCategorySpecification(request.CreatedAt))
             .And(new BudgetCategoryByCategorySpecification(request.Category.ToString()));
 
         var categories = await budgetItemsRepository
-            .AsQueryable()
-            .Where(combinedSpecification)
+            .Where(combinedSpecification.Criteria)
             .ToListAsync(cancellationToken);
 
         return categories;
@@ -204,7 +194,9 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Checks if any active categories exist and throws an exception if none are found.
     /// </summary>
-    private void CheckCategoriesExistence(List<BudgetCategoryReadModel> categories, TransactionModificationModel request)
+    private void CheckCategoriesExistence(
+        List<BudgetCategoryReadModel> categories,
+        TransactionModificationModel request)
     {
         if (categories.Count != 0) return;
 
@@ -218,7 +210,9 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Determines the updated status of a budget category.
     /// </summary>
-    private static string GetUpdatedStatus(BudgetCategoryReadModel category, TransactionModificationModel request)
+    private static string GetUpdatedStatus(
+        BudgetCategoryReadModel category,
+        TransactionModificationModel request)
     {
         if (category.StartDate > request.CreatedAt || category.EndDate < request.CreatedAt)
             return BudgetCategoryStatus.Inactive.ToString();
@@ -231,7 +225,9 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Retrieves a budget by its ID or throws if not found.
     /// </summary>
-    private async Task<BudgetReadModel> GetBudgetAsync(Guid budgetId, CancellationToken cancellationToken)
+    private async Task<BudgetReadModel> GetBudgetAsync(
+        Guid budgetId, 
+        CancellationToken cancellationToken)
     {
         var budget = await budgetsRepository
             .Where(b => b.Id == budgetId)
@@ -249,7 +245,9 @@ public sealed class BudgetsSynchronizationService(
     /// <summary>
     /// Retrieves a category by its ID or throws if not found.
     /// </summary>
-    private async Task<BudgetCategoryReadModel> GetCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+    private async Task<BudgetCategoryReadModel> GetCategoryAsync(
+        Guid categoryId, 
+        CancellationToken cancellationToken)
     {
         var category = await budgetItemsRepository
             .Where(c => c.Id == categoryId)

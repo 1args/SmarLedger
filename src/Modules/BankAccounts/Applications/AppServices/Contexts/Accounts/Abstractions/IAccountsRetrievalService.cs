@@ -25,7 +25,7 @@ public interface IAccountsRetrievalService
     /// <param name="filter">Filter.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Paginated list of accounts.</returns>
-    Task<PaginatedList<AccountListItem>> GetPaginatedAccountsAsync(GetPaginatedAccountsModel filter,
+    Task<PaginatedList<AccountListItem>> GetAccountsPageAsync(GetAccountsPageModel filter,
         CancellationToken cancellationToken);
 
     /// <summary>
@@ -42,6 +42,6 @@ public interface IAccountsRetrievalService
     /// <param name="filter">Filter.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Paginated list of transactions.</returns>
-    Task<PaginatedList<TransactionListItem>> GetPaginatedTransactionsAsync(GetPaginatedTransactionsModel filter,
+    Task<PaginatedList<TransactionListItem>> GetTransactionsPageAsync(GetTransactionsPageModel filter,
         CancellationToken cancellationToken);
 }

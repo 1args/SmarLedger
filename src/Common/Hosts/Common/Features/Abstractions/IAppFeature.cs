@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SmartLedger.Common.Hosts.Features.Abstractions;
+namespace SmartLedger.Common.Host.Features.Abstractions;
 
 /// <summary>
 /// Defines a feature of the application that can be used to extend its functionality.

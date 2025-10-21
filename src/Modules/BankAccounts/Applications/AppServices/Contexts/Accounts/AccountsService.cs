@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Common.Contracts.Exceptions;
-using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
@@ -25,7 +24,9 @@ public sealed class AccountsService(
     ILogger<AccountsService> logger): IAccountsService
 {
     /// <inheritdoc />
-    public async Task<(Guid AccountId, Guid UserId)> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken)
+    public async Task<(Guid AccountId, Guid UserId)> CreateAccountAsync(
+        AccountCreationModel request,
+        CancellationToken cancellationToken)
     {
         var userId = authorizationData.Value.UserId;
 
@@ -34,7 +35,6 @@ public sealed class AccountsService(
             request.Name, userId);
 
         var account = Account.Create(Guid.NewGuid(), request.Name, userId, request.CreatedAt);
-
         await accountsRepository.AddAsync(account, cancellationToken);
 
         logger.LogInformation(
@@ -45,7 +45,22 @@ public sealed class AccountsService(
     }
 
     /// <inheritdoc />
-    public async Task<(Guid TransactionId, Guid UserId)> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken)
+    public async Task DeleteAccountAsync(
+        IdOnlyModel request,
+        CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Deleting account with ID {AccountId}", request.AccountId);
+
+        var account = await GetAccountAsync(request.AccountId, cancellationToken);
+        await accountsRepository.DeleteAsync(account, cancellationToken);
+
+        logger.LogInformation("Account with ID {AccountId} deleted successfully", request.AccountId);
+    }
+
+    /// <inheritdoc />
+    public async Task<(Guid TransactionId, Guid UserId)> CreateTransactionAsync(
+        TransactionCreationModel request, 
+        CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Adding transaction of type {Type} with amount {Amount} to account with ID {AccountId}",
@@ -64,10 +79,10 @@ public sealed class AccountsService(
 
         account.ApplyTransaction(transaction);
 
-        await transactionManager.StartEffectAsync(async ct =>
+        await transactionManager.StartEffectAsync(async cancellationToken =>
         {
-            await transactionsRepository.AddAsync(transaction, ct);
-            await accountsRepository.UpdateAsync(account, ct);
+            await transactionsRepository.AddAsync(transaction, cancellationToken);
+            await accountsRepository.UpdateAsync(account, cancellationToken);
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
@@ -78,12 +93,14 @@ public sealed class AccountsService(
     }
 
     /// <inheritdoc />
-    public async Task RemoveTransactionAsync(TransactionRemovalModel request, CancellationToken cancellationToken)
+    public async Task DeleteTransactionAsync(
+        TransactionDeletionModel request, 
+        CancellationToken cancellationToken)
     {
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
         logger.LogInformation(
-            "Removing transaction with ID {TransactionId} from account with ID {AccountId}",
+            "Deleting transaction with ID {TransactionId} from account with ID {AccountId}",
             transaction.Id.Value, transaction.AccountId.Value);
 
         var aid = AccountId.Create(request.AccountId);
@@ -96,33 +113,23 @@ public sealed class AccountsService(
 
         account.RevertTransaction(transaction);
 
-        await transactionManager.StartEffectAsync(async ct =>
+        await transactionManager.StartEffectAsync(async cancellationToken =>
         {
             await transactionsRepository.DeleteAsync(transaction, cancellationToken);
             await accountsRepository.UpdateAsync(account, cancellationToken);
         }, IsolationLevel.Serializable, cancellationToken);
 
         logger.LogInformation(
-            "Transaction with ID {TransactionId} removed successfully from account with ID {AccountId}",
-            transaction.Id.Value,
-            account.Id.Value);
-    }
-
-    /// <inheritdoc />
-    public async Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Deleting account with ID {AccountId}", request.AccountId);
-
-        var account = await GetAccountAsync(request.AccountId, cancellationToken);
-        await accountsRepository.DeleteAsync(account, cancellationToken);
-
-        logger.LogInformation("Account with ID {AccountId} deleted successfully", request.AccountId);
+            "Transaction with ID {TransactionId} deleted successfully from account with ID {AccountId}",
+            transaction.Id.Value, account.Id.Value);
     }
 
     /// <summary>
     /// Retrieves an account by its ID or throws if not found.
     /// </summary>
-    private async Task<Account> GetAccountAsync(Guid accountId, CancellationToken cancellationToken)
+    private async Task<Account> GetAccountAsync(
+        Guid accountId, 
+        CancellationToken cancellationToken)
     {
         var aid = AccountId.Create(accountId);
 
@@ -135,7 +142,9 @@ public sealed class AccountsService(
     /// <summary>
     /// Retrieves transaction by its ID or throws if not found.
     /// </summary>
-    private async Task<Transaction> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
+    private async Task<Transaction> GetTransactionAsync(
+        Guid transactionId, 
+        CancellationToken cancellationToken)
     {
         var tid = TransactionId.Create(transactionId);
 

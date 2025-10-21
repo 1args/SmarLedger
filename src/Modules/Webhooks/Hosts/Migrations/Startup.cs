@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using SmartLedger.Common.Hosts.Migrations.Abstractions;
+using SmartLedger.Common.Host.Migrations.Abstractions;
 using SmartLedger.Modules.Webhooks.Infrastructures.DataAccess.Contexts;
 
 namespace SmartLedger.Modules.Webhooks.Hosts.Migrations;

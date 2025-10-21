@@ -2,7 +2,7 @@
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
-using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountDeleted;
+using SmartLedger.Modules.BankAccounts.Contracts.Events;
 
 namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.DeleteAccount;
 
@@ -11,14 +11,17 @@ namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accoun
 /// </summary>
 public sealed class DeleteAccountCommandHandler(
     IAccountsService accountService,
-    IEventBus eventBus) : ICommandHandler<DeleteAccountCommand>
+    IEventBus bus) : ICommandHandler<DeleteAccountCommand>
 {
     /// <inheritdoc />
     public async Task HandleAsync(DeleteAccountCommand command, CancellationToken cancellationToken)
     {
         var request = new IdOnlyModel(command.AccountId);
 
-        await accountService.DeleteAsync(request, cancellationToken);
-        await eventBus.PublishAsync(new AccountDeletedEvent(request.AccountId), cancellationToken);
+        await accountService.DeleteAccountAsync(request, cancellationToken);
+
+        await bus.PublishAsync(
+            new AccountDeletedEvent(request.AccountId), 
+            cancellationToken);
     }
 }

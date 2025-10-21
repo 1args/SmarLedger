@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartLedger.Common.Domain.ValueObjects;
-using SmartLedger.Common.Infrastructures.DataAccess.Configurators;
 using SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
 

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Options;
-using SmartLedger.Common.Hosts.RateLimiting.Abstractions;
+using SmartLedger.Common.Host.RateLimiting.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 
-namespace SmartLedger.Common.Hosts.RateLimiting;
+namespace SmartLedger.Common.Host.RateLimiting;
 
 /// <summary>
 /// Class used to represent the rate limiter.

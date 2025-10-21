@@ -17,11 +17,12 @@ public sealed class AccountsSynchronizationService(
     IRepository<AccountReadModel, BackAccountsReadDbContext> accountsRepository,
     IRepository<TransactionReadModel, BackAccountsReadDbContext> transactionsRepository,
     ITransactionManager transactionManager,
-    IHybridCache cache,
     ILogger<AccountsSynchronizationService> logger) : IAccountsSynchronizationService
 {
     /// <inheritdoc />
-    public async Task SynchronizeAccountCreationAsync(AccountCreationSynchronizationModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeAccountCreationAsync(
+        AccountCreationSynchronizationModel request,
+        CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Synchronizing account creation with ID {AccountId} and name {Name}",
@@ -38,7 +39,6 @@ public sealed class AccountsSynchronizationService(
         };
 
         await accountsRepository.AddAsync(account, cancellationToken);
-        await cache.RemoveAsync($"accounts:user:{request.UserId}:*", cancellationToken);
 
         logger.LogInformation(
             "Account with ID {AccountId} was successfully synchronized after creation",
@@ -46,7 +46,24 @@ public sealed class AccountsSynchronizationService(
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeTransactionAdditionAsync(TransactionAdditionSynchronizationModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeAccountDeletionAsync(
+        IdOnlyModel request, 
+        CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Synchronizing deletion of account with ID {AccountId}", request.AccountId);
+
+        var account = await GetAccountAsync(request.AccountId, cancellationToken);
+        await accountsRepository.DeleteAsync(account, cancellationToken);
+
+        logger.LogInformation(
+            "Account with ID {AccountId} was successfully synchronized after deletion",
+            request.AccountId);
+    }
+
+    /// <inheritdoc />
+    public async Task SynchronizeTransactionCreationAsync(
+        TransactionCreationSynchronizationModel request,
+        CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Synchronizing addition of transaction with ID {TransactionId} to account with ID {AccountId}",
@@ -68,12 +85,10 @@ public sealed class AccountsSynchronizationService(
             LastUpdatedAt = request.CreatedAt
         };
 
-        account.Balance = transaction.Type switch
-        {
-            "Income" => account.Balance + transaction.Amount,
-            "Expense" => account.Balance - transaction.Amount,
-            _ => account.Balance
-        };
+        account.Balance = ApplyTransactionToBalance(
+            account.Balance,
+            transaction.Type,
+            transaction.Amount);
 
         await transactionManager.StartEffectAsync(async ct =>
         {
@@ -81,17 +96,15 @@ public sealed class AccountsSynchronizationService(
             await accountsRepository.UpdateAsync(account, ct);
         }, IsolationLevel.Serializable, cancellationToken);
 
-        await cache.RemoveAsync($"account:{request.AccountId}", cancellationToken);
-        await cache.RemoveAsync($"accounts:user:{account.UserId}:*", cancellationToken);
-        await cache.RemoveAsync($"transactions:account:{request.AccountId}:*", cancellationToken);
-
         logger.LogInformation(
             "Transaction with ID {TransactionId} was successfully synchronized after addition to account with ID {AccountId}",
             request.TransactionId, request.AccountId);
     }
 
     /// <inheritdoc />
-    public async Task SynchronizeTransactionRemovalAsync(TransactionRemovalSynchronizationModel request, CancellationToken cancellationToken)
+    public async Task SynchronizeTransactionDeletionAsync(
+        TransactionDeletionSynchronizationModel request, 
+        CancellationToken cancellationToken)
     {
         var transaction = await GetTransactionAsync(request.TransactionId, cancellationToken);
 
@@ -101,12 +114,10 @@ public sealed class AccountsSynchronizationService(
 
         var account = await GetAccountAsync(transaction.AccountId, cancellationToken);
 
-        account.Balance = transaction.Type switch
-        {
-            "Income" => account.Balance - transaction.Amount,
-            "Expense" => account.Balance + transaction.Amount,
-            _ => account.Balance
-        };
+        account.Balance = RevertTransactionFromBalance(
+            account.Balance,
+            transaction.Type,
+            transaction.Amount);
 
         account.LastUpdatedAt = request.AccountUpdatedAt;
 
@@ -116,36 +127,49 @@ public sealed class AccountsSynchronizationService(
             await accountsRepository.UpdateAsync(account, ct);
         }, IsolationLevel.Serializable, cancellationToken);
 
-        await cache.RemoveAsync($"account:{transaction.AccountId}", cancellationToken);
-        await cache.RemoveAsync($"accounts:user:{account.UserId}:*", cancellationToken);
-        await cache.RemoveAsync($"transactions:account:{transaction.AccountId}:*", cancellationToken);
-
         logger.LogInformation(
             "Transaction with ID {TransactionId} was successfully synchronized after removal from account with ID {AccountId}",
             request.TransactionId, account.Id);
     }
 
-    /// <inheritdoc />
-    public async Task SynchronizeAccountDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken)
+    /// <summary>
+    /// Applies a balance change after creating a transaction.
+    /// </summary>
+    private static decimal ApplyTransactionToBalance(
+        decimal currentBalance,
+        string transactionType, 
+        decimal amount)
     {
-        logger.LogInformation("Synchronizing deletion of account with ID {AccountId}", request.AccountId);
+        return transactionType switch
+        {
+            "Income" => currentBalance + amount,
+            "Expense" => currentBalance - amount,
+            _ => currentBalance
+        };
+    }
 
-        var account = await GetAccountAsync(request.AccountId, cancellationToken);
-        await accountsRepository.DeleteAsync(account, cancellationToken);
-
-        await cache.RemoveAsync($"account:{request.AccountId}", cancellationToken);
-        await cache.RemoveAsync($"accounts:user:{account.UserId}:*", cancellationToken);
-        await cache.RemoveAsync($"transactions:account:{request.AccountId}:*", cancellationToken);
-
-        logger.LogInformation(
-            "Account with ID {AccountId} was successfully synchronized after deletion",
-            request.AccountId);
+    /// <summary>
+    /// Cancels the balance change after deleting the transaction.
+    /// </summary>
+    private static decimal RevertTransactionFromBalance(
+       decimal currentBalance,
+       string transactionType,
+       decimal amount)
+    {
+        return transactionType switch
+        {
+            "Income" => currentBalance - amount,
+            "Expense" => currentBalance + amount,
+            _ => currentBalance
+        };
     }
 
     /// <summary>
     /// Retrieves an account by its ID or throws if not found.
     /// </summary>
-    private async Task<AccountReadModel> GetAccountAsync(Guid accountId, CancellationToken cancellationToken)
+    private async Task<AccountReadModel> GetAccountAsync(
+        Guid accountId, 
+        CancellationToken cancellationToken)
     {
         var account = await accountsRepository
             .Where(a => a.Id == accountId)
@@ -163,7 +187,9 @@ public sealed class AccountsSynchronizationService(
     /// <summary>
     /// Retrieves transaction by its ID or throws if not found.
     /// </summary>
-    private async Task<TransactionReadModel> GetTransactionAsync(Guid transactionId, CancellationToken cancellationToken)
+    private async Task<TransactionReadModel> GetTransactionAsync(
+        Guid transactionId, 
+        CancellationToken cancellationToken)
     {
         var transaction = await transactionsRepository
             .Where(t => t.Id == transactionId)

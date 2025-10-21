@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SmartLedger.Modules.Notifications.Host.Consumers": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

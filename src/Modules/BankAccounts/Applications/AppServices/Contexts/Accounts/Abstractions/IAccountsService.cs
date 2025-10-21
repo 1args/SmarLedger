@@ -14,26 +14,26 @@ public interface IAccountsService
     /// </summary>
     /// <param name="request">Account creation model.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<(Guid AccountId, Guid UserId)> CreateAsync(AccountCreationModel request, CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Adds a transaction to an existing account.
-    /// </summary>
-    /// <param name="request">Model describing the transaction to add.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<(Guid TransactionId, Guid UserId)> AddTransactionAsync(TransactionAdditionModel request, CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Removes a transaction from an existing account.
-    /// </summary>
-    /// <param name="request">Model containing transaction ID.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task RemoveTransactionAsync(TransactionRemovalModel request, CancellationToken cancellationToken);
+    Task<(Guid AccountId, Guid UserId)> CreateAccountAsync(AccountCreationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Deletes an account by its identifier.
     /// </summary>
     /// <param name="request">Model containing account ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken);
+    Task DeleteAccountAsync(IdOnlyModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Creates a new transaction to an existing account.
+    /// </summary>
+    /// <param name="request">Model describing the transaction to add.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task<(Guid TransactionId, Guid UserId)> CreateTransactionAsync(TransactionCreationModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Deletes a transaction from an existing account.
+    /// </summary>
+    /// <param name="request">Model containing transaction ID.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task DeleteTransactionAsync(TransactionDeletionModel request, CancellationToken cancellationToken);
 }

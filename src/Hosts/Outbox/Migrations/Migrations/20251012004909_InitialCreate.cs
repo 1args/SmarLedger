@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace SmartLedger.Hosts.Migrations.Migrations
+namespace SmartLedger.Host.Migrations.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

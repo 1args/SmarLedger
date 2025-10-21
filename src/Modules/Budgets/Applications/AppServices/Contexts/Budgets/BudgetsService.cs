@@ -8,6 +8,8 @@ using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.BudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.Budgets;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.BudgetCategories;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Specifications.Write.Budgets;
 using SmartLedger.Modules.Budgets.Domain.Aggregates;
@@ -18,7 +20,6 @@ using SmartLedger.Modules.Budgets.Infrastructures.DataAccess.Contexts.Write;
 using SmartLedger.Modules.Notifications.Contracts.Common.Notifications;
 using SmartLedger.Modules.Notifications.Contracts.Enums;
 using SmartLedger.Modules.Notifications.Contracts.Events;
-using SmartLedger.Modules.Notifications.Contracts.Requests;
 using System.Data;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
@@ -33,7 +34,9 @@ public sealed class BudgetsService(
     ILogger<BudgetsService> logger) : IBudgetsService
 {
     /// <inheritdoc />
-    public async Task<(Guid BudgetId, Guid UserId)> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken)
+    public async Task<(Guid BudgetId, Guid UserId)> CreateBudgetAsync(
+        BudgetCreationModel request,
+        CancellationToken cancellationToken)
     {
         var userId = authorizationData.Value.UserId;
 
@@ -59,13 +62,31 @@ public sealed class BudgetsService(
     }
 
     /// <inheritdoc />
-    public async Task<Guid> AddCategoryAsync(CategoryAdditionModel request, CancellationToken cancellationToken)
+    public async Task DeleteBudgetAsync(
+        IdOnlyModel request, 
+        CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Deleting budget with ID {BudgetId}", request.BudgetId);
+
+        var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
+        await budgetsRepository.DeleteAsync(budget, cancellationToken);
+
+        logger.LogInformation("Budget with ID {BudgetId} deleted successfully", request.BudgetId);
+    }
+
+    /// <inheritdoc />
+    public async Task<Guid> CreateBudgetCategoryAsync(
+        BudgetCategoryCreationModel request,
+        CancellationToken cancellationToken)
     {
         logger.LogInformation(
             "Adding category {Category} with limit {Limit} to budget with ID {BudgetId}",
             request.Category, request.Limit, request.BudgetId);
 
-        var budget = await GetBudgetAsync(request.BudgetId, useInclude: true, cancellationToken : cancellationToken);
+        var budget = await GetBudgetAsync(
+            request.BudgetId, 
+            useInclude: true, 
+            cancellationToken : cancellationToken);
 
         var category = BudgetCategory.Create(
             Guid.NewGuid(),
@@ -90,7 +111,9 @@ public sealed class BudgetsService(
     }
 
     /// <inheritdoc />
-    public async Task RemoveCategoryAsync(CategoryRemovalModel request, CancellationToken cancellationToken)
+    public async Task DeleteBudgetCategoryAsync(
+        BudgetCategoryDeletionModel request, 
+        CancellationToken cancellationToken)
     {
         var category = await GetCategoryAsync(request.CategoryId, cancellationToken);
 
@@ -114,7 +137,9 @@ public sealed class BudgetsService(
     }
 
     /// <inheritdoc />
-    public async Task AddSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken)
+    public async Task AddSpendingAmountAsync(
+        TransactionModificationModel request,
+        CancellationToken cancellationToken)
     {
         if (!IsExpense(request)) return;
 
@@ -125,7 +150,9 @@ public sealed class BudgetsService(
     }
 
     /// <inheritdoc />
-    public async Task RevertSpendingAmountAsync(TransactionModificationModel request, CancellationToken cancellationToken)
+    public async Task RevertSpendingAmountAsync(
+        TransactionModificationModel request, 
+        CancellationToken cancellationToken)
     {
         if (!IsExpense(request)) return;
 
@@ -133,17 +160,6 @@ public sealed class BudgetsService(
             request,
             cancellationToken,
             (item, amount, period) => item.RevertExpense(amount, period));
-    }
-
-    /// <inheritdoc />
-    public async Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Deleting budget with ID {BudgetId}", request.BudgetId);
-
-        var budget = await GetBudgetAsync(request.BudgetId, cancellationToken);
-        await budgetsRepository.DeleteAsync(budget, cancellationToken);
-
-        logger.LogInformation("Budget with ID {BudgetId} deleted successfully", request.BudgetId);
     }
 
     /// <summary>
@@ -188,7 +204,9 @@ public sealed class BudgetsService(
     /// <summary>
     /// Retrieves all active budgets for a user that match the specified category in the transaction request.
     /// </summary>
-    private async Task<List<Budget>> GetActiveBudgetsAsync(TransactionModificationModel request, CancellationToken cancellationToken)
+    private async Task<List<Budget>> GetActiveBudgetsAsync(
+        TransactionModificationModel request, 
+        CancellationToken cancellationToken)
     {
         var uid = UserId.Create(request.UserId);
 
@@ -197,8 +215,7 @@ public sealed class BudgetsService(
             .And(new BudgetByCategorySpecification(request.Category));
 
         return await budgetsRepository
-            .AsQueryable()
-            .Where(combinedSpecification)
+            .Where(combinedSpecification.Criteria)
             .Include(b => b.Categories)
             .ToListAsync(cancellationToken);
     }
@@ -206,7 +223,9 @@ public sealed class BudgetsService(
     /// <summary>
     ///  Checks if any active budgets exist and throws an exception if none are found.
     /// </summary>
-    private void CheckBudgetsExistence(List<Budget> budgets, TransactionModificationModel request)
+    private void CheckBudgetsExistence(
+        List<Budget> budgets, 
+        TransactionModificationModel request)
     {
         if (budgets.Count != 0) return;
 
@@ -220,7 +239,10 @@ public sealed class BudgetsService(
     /// <summary>
     /// Retrieves a budget by its ID or throws if not found.
     /// </summary>
-    private async Task<Budget> GetBudgetAsync(Guid budgetId, CancellationToken cancellationToken, bool useInclude = false)
+    private async Task<Budget> GetBudgetAsync(
+        Guid budgetId, 
+        CancellationToken cancellationToken,
+        bool useInclude = false)
     {
         var bid = BudgetId.Create(budgetId);
 
@@ -238,7 +260,9 @@ public sealed class BudgetsService(
     /// <summary>
     /// Retrieves a category by its ID or throws if not found.
     /// </summary>
-    private async Task<BudgetCategory> GetCategoryAsync(Guid budgetItemId, CancellationToken cancellationToken)
+    private async Task<BudgetCategory> GetCategoryAsync(
+        Guid budgetItemId, 
+        CancellationToken cancellationToken)
     {
         var bcid = BudgetCategoryId.Create(budgetItemId);
 
@@ -247,7 +271,6 @@ public sealed class BudgetsService(
             .SingleOrDefaultAsync(cancellationToken)
             ?? throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
     }
-
 
     private async Task NotifyAsync(Guid userId, List<Budget> budgets, CancellationToken cancellationToken)
     {

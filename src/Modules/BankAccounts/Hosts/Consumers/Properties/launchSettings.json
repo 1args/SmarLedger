@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SmartLedger.Modules.BankAccounts.Host.Consumers": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

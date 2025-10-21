@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SmartLedger.Common.Hosts.Migrations;
-using SmartLedger.Common.Hosts.Migrations.Abstractions;
-using SmartLedger.Modules.BankAccounts.Hosts.Migrations;
+using SmartLedger.Common.Host.Migrations;
+using SmartLedger.Common.Host.Migrations.Abstractions;
+using SmartLedger.Modules.BankAccounts.Host.Migrations;
 using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Read;
 using SmartLedger.Modules.BankAccounts.Infrastructures.DataAccess.Contexts.Write;
 

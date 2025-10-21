@@ -5,7 +5,7 @@
 /// </summary>
 public static class TemplateSubjects
 {
-    /// <summary>Email confrimed subject. </summary>
+    /// <summary>Email confirmed subject. </summary>
     public const string EmailConfirmed = "Email Confirmed";
 
     /// <summary>Limit exceeded subject. </summary>

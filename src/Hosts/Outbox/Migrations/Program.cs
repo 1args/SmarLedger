@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SmartLedger.Common.Hosts.Migrations;
-using SmartLedger.Common.Hosts.Migrations.Abstractions;
+using SmartLedger.Common.Host.Migrations;
+using SmartLedger.Common.Host.Migrations.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Events;
 using SmartLedger.Hosts.Outbox.Migrations;
 

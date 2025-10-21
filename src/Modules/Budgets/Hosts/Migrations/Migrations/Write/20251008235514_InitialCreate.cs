@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace SmartLedger.Modules.Budgets.Hosts.Migrations.Migrations.Write
+namespace SmartLedger.Modules.Budgets.Host.Migrations.Migrations.Write
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

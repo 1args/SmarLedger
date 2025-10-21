@@ -1,5 +1,6 @@
 ﻿using SmartLedger.Common.Contracts.Pagination;
-using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.BudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.Budgets;
 using SmartLedger.Modules.Budgets.Contracts.Responses.BudgetCategories;
 using SmartLedger.Modules.Budgets.Contracts.Responses.Budgets;
 
@@ -24,7 +25,7 @@ public interface IBudgetsRetrievalService
     /// <param name="filter">Filter.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Paginated list of budgets.</returns>
-    Task<PaginatedList<BudgetListItem>> GetPaginatedBudgetsAsync(GetPaginatedBudgetsModel filter,
+    Task<PaginatedList<BudgetListItem>> GetBudgetsPageAsync(GetBudgetsPageModel filter,
         CancellationToken cancellationToken);
 
     /// <summary>
@@ -41,6 +42,6 @@ public interface IBudgetsRetrievalService
     /// <param name="filter">Filter.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Paginated list of budget categories.</returns>
-    Task<PaginatedList<BudgetCategoryListItem>> GetPaginatedBudgetCategoriesAsync(
-        GetPaginatedBudgetCategoriesModel filter, CancellationToken cancellationToken);
+    Task<PaginatedList<BudgetCategoryListItem>> GetBudgetCategoriesPageAsync(
+        GetBudgetCategoriesPageModel filter, CancellationToken cancellationToken);
 }

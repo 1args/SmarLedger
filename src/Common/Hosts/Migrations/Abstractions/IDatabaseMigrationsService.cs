@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace SmartLedger.Common.Hosts.Migrations.Abstractions;
+namespace SmartLedger.Common.Host.Migrations.Abstractions;
 
 /// <summary>
 /// Interface for executing EF Core database migrations for a specified <see cref="DbContext"/>.

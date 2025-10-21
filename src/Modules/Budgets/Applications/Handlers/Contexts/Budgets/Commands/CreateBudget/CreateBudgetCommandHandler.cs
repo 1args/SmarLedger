@@ -2,8 +2,8 @@
 using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
-using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
-using SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Events.BudgetCreated;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.Budgets;
+using SmartLedger.Modules.Budgets.Contracts.Events;
 
 namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Commands.CreateBudget;
 
@@ -12,7 +12,7 @@ namespace SmartLedger.Modules.Budgets.Applications.Handlers.Contexts.Budgets.Com
 /// </summary>
 public sealed class CreateBudgetCommandHandler(
     IBudgetsService budgetService,
-    IEventBus eventBus,
+    IEventBus bus,
     IDateTimeProvider dateTimeProvider) : ICommandHandler<CreateBudgetCommand, Guid>
 {
     /// <inheritdoc />
@@ -24,9 +24,9 @@ public sealed class CreateBudgetCommandHandler(
             command.EndDate,
             dateTimeProvider.UtcNow);
 
-        var response = await budgetService.CreateAsync(request, cancellationToken);
+        var response = await budgetService.CreateBudgetAsync(request, cancellationToken);
 
-        await eventBus.PublishAsync(
+        await bus.PublishAsync(
             new BudgetCreatedEvent(
                 response.BudgetId,
                 response.UserId,

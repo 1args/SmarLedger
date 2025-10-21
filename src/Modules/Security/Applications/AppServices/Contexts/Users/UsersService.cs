@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLedger.Common.Contracts.Authorization;
 using SmartLedger.Modules.Security.Applications.AppServices.Contexts.Users.Abstractions;
-using SmartLedger.Modules.Security.Applications.AppServices.Contexts.Users.Models;
 using SmartLedger.Modules.Security.Clients.Keycloak.Abstractions;
 using SmartLedger.Modules.Security.Contracts.Responses.Users;
 

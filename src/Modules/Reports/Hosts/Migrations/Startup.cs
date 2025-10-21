@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using SmartLedger.Common.Hosts.Migrations.Abstractions;
+using SmartLedger.Common.Host.Migrations.Abstractions;
 using SmartLedger.Modules.Reports.Infrastructures.DataAccess.Contexts.Read;
 
-namespace SmartLedger.Modules.Reports.Hosts.Migrations;
+namespace SmartLedger.Modules.Reports.Host.Migrations;
 
 /// <summary>
 /// Initiates database migrations for Transactions module.

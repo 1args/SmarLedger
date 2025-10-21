@@ -1,4 +1,6 @@
 ﻿using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.BudgetCategories;
+using SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Models.Budgets;
 
 namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets.Abstractions;
 
@@ -12,21 +14,21 @@ public interface IBudgetsService
     /// </summary>
     /// <param name="request">Model containing budget creation data.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<(Guid BudgetId, Guid UserId)> CreateAsync(BudgetCreationModel request, CancellationToken cancellationToken);
+    Task<(Guid BudgetId, Guid UserId)> CreateBudgetAsync(BudgetCreationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Adds a new category (budget item) to an existing budget.
     /// </summary>
     /// <param name="request">Model describing the category to add.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task<Guid> AddCategoryAsync(CategoryAdditionModel request, CancellationToken cancellationToken);
+    Task<Guid> CreateBudgetCategoryAsync(BudgetCategoryCreationModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Removes an existing category (budget item) from a budget.
     /// </summary>
     /// <param name="request">Model containing the category ID to remove.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task RemoveCategoryAsync(CategoryRemovalModel request, CancellationToken cancellationToken);
+    Task DeleteBudgetCategoryAsync(BudgetCategoryDeletionModel request, CancellationToken cancellationToken);
 
     /// <summary>
     /// Updates the spending amount by adding a transaction in the budget context.
@@ -48,5 +50,5 @@ public interface IBudgetsService
     /// </summary>
     /// <param name="request">Model containing budget ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task DeleteAsync(IdOnlyModel request, CancellationToken cancellationToken);
+    Task DeleteBudgetAsync(IdOnlyModel request, CancellationToken cancellationToken);
 }

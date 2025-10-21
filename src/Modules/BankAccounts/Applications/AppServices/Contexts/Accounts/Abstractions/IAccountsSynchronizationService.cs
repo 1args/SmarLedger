@@ -17,23 +17,23 @@ public interface IAccountsSynchronizationService
     Task SynchronizeAccountCreationAsync(AccountCreationSynchronizationModel request, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Synchronizes the addition of a transaction to an account.
-    /// </summary>
-    /// <param name="request">Model describing the transaction to add.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task SynchronizeTransactionAdditionAsync(TransactionAdditionSynchronizationModel request, CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Synchronizes the removal of a transaction from an account.
-    /// </summary>
-    /// <param name="request">Model containing transaction ID.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task SynchronizeTransactionRemovalAsync(TransactionRemovalSynchronizationModel request, CancellationToken cancellationToken);
-
-    /// <summary>
     /// Synchronizes the deletion of an account.
     /// </summary>
     /// <param name="request">Model containing account ID.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     Task SynchronizeAccountDeletionAsync(IdOnlyModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Synchronizes the creation of a transaction to an account.
+    /// </summary>
+    /// <param name="request">Model describing the transaction to add.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task SynchronizeTransactionCreationAsync(TransactionCreationSynchronizationModel request, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Synchronizes the deletion of a transaction from an account.
+    /// </summary>
+    /// <param name="request">Model containing transaction ID.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    Task SynchronizeTransactionDeletionAsync(TransactionDeletionSynchronizationModel request, CancellationToken cancellationToken);
 }

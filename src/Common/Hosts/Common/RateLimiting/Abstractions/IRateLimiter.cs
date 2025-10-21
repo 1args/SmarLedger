@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Common.Hosts.RateLimiting.Abstractions;
+﻿namespace SmartLedger.Common.Host.RateLimiting.Abstractions;
 
 /// <summary>
 /// Interface used to represent the rate limiter.

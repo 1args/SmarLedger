@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SmartLedger.Common.Hosts.Migrations.Abstractions;
+using SmartLedger.Common.Host.Migrations.Abstractions;
 
-namespace SmartLedger.Common.Hosts.Migrations;
+namespace SmartLedger.Common.Host.Migrations;
 
 /// <summary>
 /// Implementation of <see cref="IDatabaseMigrationsService"/> that executes EF Core migrations.

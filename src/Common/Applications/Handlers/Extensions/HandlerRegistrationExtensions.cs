@@ -25,8 +25,7 @@ public static class HandlerRegistrationExtensions
 
         services
             .AddValidatorsFromAssembly(assembly)
-            .AddCommandAndQueryHandlersFromAssembly(assembly)
-            .AddEventConsumersFromAssembly(assembly);
+            .AddCommandAndQueryHandlersFromAssembly(assembly);
 
         return services;
     }
@@ -81,39 +80,6 @@ public static class HandlerRegistrationExtensions
             {
                services.TryAddScoped(@interface, handlerType);
             }
-        }
-
-        return services;
-    }
-
-    /// <summary>
-    /// Registers all event consumers found in the given assembly.
-    /// Also registers them with MassTransit as <see cref="IConsumer{T}"/>.
-    /// </summary>
-    /// <param name="services">Service collection.</param>
-    /// <param name="assembly">Assembly to scan.</param>
-    /// <returns>Modified <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddEventConsumersFromAssembly(this IServiceCollection services, Assembly? assembly)
-    {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(assembly);
-
-        var eventConsumerInterface = typeof(IEventConsumer<>);
-
-        var eventConsumerTypes = assembly.GetTypes()
-            .Where(t => t.IsConcrete() && t.GetInterfaces()
-                .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == eventConsumerInterface));
-
-        foreach (var eventConsumerType in eventConsumerTypes)
-        {
-            var concreteInterface = eventConsumerType.GetInterfaces()
-                .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == eventConsumerInterface);
-
-            services.TryAddScoped(concreteInterface, eventConsumerType);
-
-            services.TryAddScoped(typeof(IConsumer<>).MakeGenericType(
-                concreteInterface.GetGenericArguments()[0]),
-                eventConsumerType);
         }
 
         return services;

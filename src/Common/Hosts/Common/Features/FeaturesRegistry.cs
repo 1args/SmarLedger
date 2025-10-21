@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SmartLedger.Common.Hosts.Features.Abstractions;
+using SmartLedger.Common.Host.Features.Abstractions;
 
-namespace SmartLedger.Common.Hosts.Features;
+namespace SmartLedger.Common.Host.Features;
 
 /// <summary>
 /// Registry for application features.

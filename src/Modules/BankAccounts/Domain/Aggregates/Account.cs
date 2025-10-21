@@ -1,11 +1,9 @@
 ﻿using SmartLedger.Common.Domain.Enums;
 using SmartLedger.Common.Domain.Exceptions;
-using SmartLedger.Common.Domain.Primitives;
 using SmartLedger.Common.Domain.ValueObjects;
 using SmartLedger.Modules.BankAccounts.Domain.Entities;
 using SmartLedger.Modules.BankAccounts.Domain.Exceptions;
 using SmartLedger.Modules.BankAccounts.Domain.ValueObjects;
-using System.ComponentModel;
 
 namespace SmartLedger.Modules.BankAccounts.Domain.Aggregates;
 

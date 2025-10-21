@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SmartLedger.Modules.BankAccounts.Hosts.Migrations": {
+    "SmartLedger.Modules.BankAccounts.Host.Migrations": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"

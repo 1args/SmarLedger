@@ -1,4 +1,4 @@
-﻿namespace SmartLedger.Common.Hosts.RateLimiting;
+﻿namespace SmartLedger.Common.Host.RateLimiting;
 
 /// <summary>
 /// Options for configuring rate limiting.

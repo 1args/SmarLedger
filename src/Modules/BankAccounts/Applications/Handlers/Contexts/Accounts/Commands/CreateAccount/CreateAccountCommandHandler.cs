@@ -3,7 +3,7 @@ using SmartLedger.Common.Applications.Handlers.Abstractions;
 using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Abstractions;
 using SmartLedger.Modules.BankAccounts.Applications.AppServices.Contexts.Accounts.Models.Accounts;
-using SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Events.AccountCreated;
+using SmartLedger.Modules.BankAccounts.Contracts.Events;
 
 namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accounts.Commands.CreateAccount;
 
@@ -13,7 +13,7 @@ namespace SmartLedger.Modules.BankAccounts.Applications.Handlers.Contexts.Accoun
 public sealed class CreateAccountCommandHandler(
     IAccountsService accountService,
     IDateTimeProvider dateTimeProvider,
-    IEventBus eventBus) : ICommandHandler<CreateAccountCommand, Guid>
+    IEventBus bus) : ICommandHandler<CreateAccountCommand, Guid>
 {
     /// <inheritdoc />
     public async Task<Guid> HandleAsync(CreateAccountCommand command, CancellationToken cancellationToken)
@@ -22,10 +22,14 @@ public sealed class CreateAccountCommandHandler(
             command.Name,
             dateTimeProvider.UtcNow);
 
-        var response = await accountService.CreateAsync(request, cancellationToken);
+        var response = await accountService.CreateAccountAsync(request, cancellationToken);
 
-        await eventBus.PublishAsync(
-            new AccountCreatedEvent(response.AccountId, request.Name, response.UserId, request.CreatedAt), 
+        await bus.PublishAsync(
+            new AccountCreatedEvent(
+                response.AccountId,
+                request.Name,
+                response.UserId, 
+                request.CreatedAt), 
             cancellationToken);
 
         return response.AccountId;

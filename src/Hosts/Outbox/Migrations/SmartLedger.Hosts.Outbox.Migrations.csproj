@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Hosts\Migrations\SmartLedger.Common.Hosts.Migrations.csproj" />
+    <ProjectReference Include="..\..\..\Common\Hosts\Migrations\SmartLedger.Common.Host.Migrations.csproj" />
   </ItemGroup>
 
   <ItemGroup>
