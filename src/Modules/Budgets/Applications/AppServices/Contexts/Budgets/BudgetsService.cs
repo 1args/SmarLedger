@@ -28,9 +28,9 @@ namespace SmartLedger.Modules.Budgets.Applications.AppServices.Contexts.Budgets;
 public sealed class BudgetsService(
     IRepository<Budget, BudgetsWriteDbContext> budgetsRepository,
     IRepository<BudgetCategory, BudgetsWriteDbContext> budgetItemsRepository,
-    IEventBus eventBus,
     Lazy<IAuthorizationData> authorizationData,
     ITransactionManager transactionManager,
+    IBudgetNotificationService notificationService,
     ILogger<BudgetsService> logger) : IBudgetsService
 {
     /// <inheritdoc />
@@ -194,7 +194,7 @@ public sealed class BudgetsService(
 
         await Task.WhenAll(
             budgetsRepository.UpdateRangeAsync(budgets.ToArray(), cancellationToken),
-            NotifyAsync(request.UserId, budgets, cancellationToken));
+            notificationService.NotifyLimitExceededAsync(request.UserId, budgets, cancellationToken));
 
         logger.LogInformation(
             "Spending amount updated for category {request.Category} with amount {request.Amount} for user with ID {request.UserId}",
@@ -270,27 +270,5 @@ public sealed class BudgetsService(
             .Where(bi => bi.Id == bcid)
             .SingleOrDefaultAsync(cancellationToken)
             ?? throw new NotFoundException($"Category with ID '{budgetItemId}' was not found.");
-    }
-
-    private async Task NotifyAsync(Guid userId, List<Budget> budgets, CancellationToken cancellationToken)
-    {
-        var exceededCategories = budgets
-            .SelectMany(b => b.Categories)
-            .Where(c => c.Status == BudgetCategoryStatus.Exceeded);
-
-        foreach (var category in exceededCategories)
-        {
-            var limitExceededEvent = new NotificationSentEvent(
-                NotificationType.LimitExceeded,
-                userId,
-                new Dictionary<string, string>
-                {
-                    { NotificationKeys.LimitAmount, category.Limit.Value.ToString() },
-                    { NotificationKeys.CurrentAmount, category.SpentAmount.Value.ToString() },
-                    { NotificationKeys.ExceededAmount, (category.SpentAmount.Value - category.Limit.Value).ToString() }
-                });
-
-            await eventBus.PublishAsync(limitExceededEvent, cancellationToken);
-        }
     }
 }

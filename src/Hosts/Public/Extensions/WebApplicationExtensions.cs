@@ -30,8 +30,8 @@ public static class WebApplicationExtensions
         application.UseAuthentication();
         application.UseAuthorization();
         application.UseExceptionHandler();
-        application.UseMiddleware<AuthorizationMiddleware>();
         application.UseMiddleware<RateLimitingMiddleware>();
+        application.UseMiddleware<AuthorizationMiddleware>();
         application.MapApiEndpoints();
         application.UseHangfireDashboard();
 

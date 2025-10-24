@@ -13,7 +13,7 @@ The next layer is **Infrastructures**, which contains the implementation of tech
     - **FileStorage** - responsible for storing and retrieving files from external systems (in my case, from MinIo)
     - **BackgroundJobs** - manages background task execution (in my case via Hangfire)
 - There is also an auxiliary layer called **Contracts**, which contains components for interacting with external resources or modules. In addition, it may also contain mappers, common constants, and options.
-- In **Hosts**, there is an **Api** layer, which is responsible for interacting with external resources, and there may also be a **Migrations** layer, which contains scripts that describe the structure of the database schema, which can be run through a console application, providing automation to the process
+- In **Hosts**, there is an **Public API** layer, which is responsible for interacting with external resources, and there may also be a **Migrations** layer, which contains scripts that describe the structure of the database schema, which can be run through a console application, providing automation to the process. Besides, there is also a **Consumers** layer, which contains event handlers. They are placed in separate projects so as not to use the main API threads, i.e. to have their own threads that do not affect the performance of the main API threads in any way.
 - The **Clients** layer is also used to interact with various external APIs
 
 ### Modular Monolith
@@ -60,7 +60,7 @@ The following are among the common events in the system:
 
 The division into **commands** and **queries** is used to process operations differently, those that change the state of the system and those that only return data (do not change the state of the system). The API architecture utilises the idea of storing data differently: a normalised structure is used for the **write model**, and a denormalised structure is used for the **read model** to gain speed by avoiding excessive JOIN queries. To separate the data, an approach of dividing it into separate write and read schemas within a single database is used. At the EF Core level, there are also two contexts: **write** and **read**. This is all within the **PostgreSQL** DBMS.
 
-<img width="1212" height="414" alt="cqrs" src="images/img-1-0.png"/>
+<img width="1212" height="414" alt="img-1-0" src="images/img-1-0.png"/>
 
 *[img. 1.0]*
 

@@ -1,4 +1,5 @@
-﻿using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
+﻿using System.Data;
+using SmartLedger.Common.Infrastructures.DataAccess.Abstractions;
 using SmartLedger.Modules.Reports.Contracts.Common;
 using SmartLedger.Modules.Reports.Domain.Aggregates;
 using SmartLedger.Modules.Reports.Infrastructures.BackgroundJobs.Abstractions;
@@ -24,6 +25,6 @@ public sealed class ReportPublisher(
         {
             await reportStorage.SaveAsync(report, pdfStream, filePath, ct);
             await webhooksDispatcher.DispatchAsync(WebhookEvents.ReportGenerated, report.Id, ct);
-        }, System.Data.IsolationLevel.RepeatableRead, cancellationToken);
+        }, IsolationLevel.RepeatableRead, cancellationToken);
     }
 }

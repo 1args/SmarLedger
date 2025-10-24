@@ -33,7 +33,7 @@ public sealed class DefaultRepository<TEntity, TDbContext> :
     /// <inheritdoc/>
     public IQueryable<TEntity> AsQueryable()
     {
-        return DbSet.AsQueryable();
+        return DbSet.AsQueryable<TEntity>();
     }
 
     /// <inheritdoc/>
