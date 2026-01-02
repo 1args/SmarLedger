@@ -20,7 +20,7 @@ API for tracking financial expenses and income for both individuals and small bu
     - d. [Reports](https://github.com/1args/SmartLedger/blob/development/docs/modules.md#webhooks/)
     - e. [Webhooks](https://github.com/1args/SmartLedger/blob/development/docs/modules.md#reports/)
     - f. [Notifications](https://github.com/1args/SmartLedger/blob/development/docs/modules.md#notifications/)
-- iv. [How to run](https://github.com/1args/SmartLedger/)
+- iv. [How to run](https://github.com/1args/SmartLedger/) (Not finished)
 
 ## Introduction
 
